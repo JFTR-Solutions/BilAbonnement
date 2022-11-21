@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BilAbonnementApplication {
 
-  //Test Jonathan
   public static void main(String[] args) {
     SpringApplication.run(BilAbonnementApplication.class, args);
   }
