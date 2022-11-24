@@ -14,8 +14,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
+
     UserRepository userRepository;
+
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String loginPage(HttpSession httpSession) {
@@ -63,6 +67,12 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/cookieinvalidate")
+    public String invalidateCookie(HttpSession session) {
+        System.out.println(session.getAttribute("username"));
+        session.invalidate();
+        return "redirect:/";
+    }
 
 
 }
