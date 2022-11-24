@@ -1,6 +1,6 @@
-package com.example.bilabonnement.models.cars;
+package com.example.bilabonnement.models.rentalagreements;
 
-public class Addons {
+public class Addon {
 
 
   private int addonId;
@@ -8,10 +8,10 @@ public class Addons {
   private String addonDesc;
   private int price;
 
-  public Addons() {
+  public Addon() {
   }
 
-  public Addons(int addonId, String addonName, String addonDesc, int price) {
+  public Addon(int addonId, String addonName, String addonDesc, int price) {
     this.addonId = addonId;
     this.addonName = addonName;
     this.addonDesc = addonDesc;

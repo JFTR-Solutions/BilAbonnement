@@ -1,19 +1,21 @@
 package com.example.bilabonnement.models.cars;
 
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-
-public class CarAddons{
+public class CarAddon {
 
   private int rentalAgreementId;
 
   private int AddonId;
 
-  public CarAddons() {
+  public CarAddon() {
   }
 
-  public CarAddons(int rentalAgreementId, int addonId) {
+  public CarAddon(int rentalAgreementId, int addonId) {
     this.rentalAgreementId = rentalAgreementId;
     AddonId = addonId;
   }
@@ -37,6 +39,6 @@ public class CarAddons{
   @Override
   public String toString() {
     return "RentalAgreementId= " + rentalAgreementId +
-        " | AddonId=" + AddonId;
+        " | AddonId= " + AddonId;
   }
 }

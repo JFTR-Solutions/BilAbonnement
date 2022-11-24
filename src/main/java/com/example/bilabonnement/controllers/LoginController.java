@@ -1,4 +1,4 @@
-package com.example.bilabonnement.logincontroller;
+package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
@@ -17,8 +17,12 @@ import static com.example.bilabonnement.encryption.Encryption.encrypt;
 @Controller
 public class LoginController {
 
-    @Autowired
+
     UserRepository userRepository;
+
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String loginPage(HttpSession httpSession) {
@@ -66,6 +70,12 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/cookieinvalidate")
+    public String invalidateCookie(HttpSession session) {
+        System.out.println(session.getAttribute("username"));
+        session.invalidate();
+        return "redirect:/";
+    }
 
 
 }
