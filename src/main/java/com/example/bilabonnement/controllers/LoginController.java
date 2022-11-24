@@ -1,4 +1,4 @@
-package com.example.bilabonnement.controllers.logincontroller;
+package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
