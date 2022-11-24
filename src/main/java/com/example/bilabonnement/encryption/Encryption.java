@@ -8,7 +8,7 @@ public class Encryption {
     private static final int OFFSET = 3;
 
     public static String encrypt(String password) {
-        String b64encoded = Base64.getEncoder().encode(password.getBytes(StandardCharsets.UTF_8)).toString();
+        String b64encoded = Base64.getEncoder().encodeToString(password.getBytes(StandardCharsets.UTF_8));
 
         String reverse = new StringBuffer(b64encoded).reverse().toString();
 
