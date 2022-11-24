@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EncryptionTest {
-/*
+
     //arrange
     Encryption encryption = new Encryption();
 
     @Test
     void encrypt() {
         //act
-        String encryptedPassword = encryption.encrypt("12345Thf");
+        String encryptedPassword = encryption.encrypt("1234");
 
         //assert
-        assertEquals("@\\JdXYGQ}LWP", encryptedPassword);
+        assertEquals("@@DQ}LWP", encryptedPassword);
     }
 
     @Test
@@ -25,5 +25,5 @@ class EncryptionTest {
 
         //assert
         assertEquals("12345Thf", decryptedPassword);
-    }*/
+    }
 }

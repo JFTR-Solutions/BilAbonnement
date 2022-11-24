@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.encryption.Encryption;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class LoginController {
 
 
     UserService userService;
+    Encryption e = new Encryption();
 
     public LoginController(UserService userService) {
         this.userService = userService;
@@ -33,13 +35,13 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {
-        User user = userService.getEmail(email, password);
+        User user = userService.getEmail(email, e.encrypt(password));
 
         if (user == null) {
             return "redirect:/error";
         }
         httpSession.setAttribute("email", email);
-        httpSession.setAttribute("password", password);
+        httpSession.setAttribute("password", e.encrypt(password));
 
         return "redirect:/";
     }
@@ -48,7 +50,7 @@ public class LoginController {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         if (httpSession.getAttribute("email") == null) {
             return "redirect:/";
-        } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals(httpSession.getAttribute("password"))) {
+        } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
             return "validated";
         } else return "redirect:/error";
     }

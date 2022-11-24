@@ -5,9 +5,9 @@ import java.util.Base64;
 
 public class Encryption {
 
-    private static final int OFFSET = 3;
+    private final int OFFSET = 3;
 
-    public static String encrypt(String password) {
+    public String encrypt(String password) {
         String b64encoded = Base64.getEncoder().encodeToString(password.getBytes(StandardCharsets.UTF_8));
 
         String reverse = new StringBuffer(b64encoded).reverse().toString();
@@ -19,7 +19,7 @@ public class Encryption {
         return temp.toString();
     }
 
-    public static String decrypt(String encryptedPassword) {
+    public String decrypt(String encryptedPassword) {
         StringBuilder temp = new StringBuilder();
         for (int i = 0; i < encryptedPassword.length(); i++) {
             temp.append((char) (encryptedPassword.charAt(i) - OFFSET));
