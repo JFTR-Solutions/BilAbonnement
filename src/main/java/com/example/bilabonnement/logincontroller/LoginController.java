@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+import static com.example.bilabonnement.encryption.Encryption.decrypt;
+import static com.example.bilabonnement.encryption.Encryption.encrypt;
+
 @Controller
 public class LoginController {
 
