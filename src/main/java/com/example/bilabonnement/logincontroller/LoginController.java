@@ -67,6 +67,12 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/cookieinvalidate")
+    public String invalidateCookie(HttpSession session) {
+        System.out.println(session.getAttribute("username"));
+        session.invalidate();
+        return "redirect:/";
+    }
 
 
 }
