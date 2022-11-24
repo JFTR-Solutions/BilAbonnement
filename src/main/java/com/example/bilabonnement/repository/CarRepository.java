@@ -36,7 +36,7 @@ public class CarRepository {
                 int id = resultSet.getInt(1);
                 boolean isAvailable = resultSet.getBoolean(2);
                 String colour = resultSet.getString(3);
-                int vin = resultSet.getInt(4);
+                String vin = resultSet.getString(4);
                 String regNumber = resultSet.getString(5);
                 double steelPrice = resultSet.getDouble(6);
                 double mthPrice = resultSet.getDouble(7);

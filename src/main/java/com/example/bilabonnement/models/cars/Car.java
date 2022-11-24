@@ -6,7 +6,7 @@ public class Car {
   private int carId;
   private boolean isAvailable;
   private String colour;
-  private int VIN;
+  private String VIN;
   private String regNumber;
   private double steelPrice;
   private double  mthPrice;
@@ -16,7 +16,7 @@ public class Car {
   public Car() {
   }
 
-  public Car(int carId, boolean isAvailable, String colour, int VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId) {
+  public Car(int carId, boolean isAvailable, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId) {
     this.carId = carId;
     this.isAvailable = isAvailable;
     this.colour = colour;
@@ -52,11 +52,11 @@ public class Car {
     this.colour = colour;
   }
 
-  public int getVIN() {
+  public String getVIN() {
     return VIN;
   }
 
-  public void setVIN(int VIN) {
+  public void setVIN(String VIN) {
     this.VIN = VIN;
   }
 
