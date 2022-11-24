@@ -18,8 +18,12 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping("/")
-    public String loginPage() {
-        return "index";
+    public String loginPage(HttpSession httpSession) {
+        if (!validateUser(httpSession).equals("validated")) {
+            return "index";
+        } else {
+            return "welcome";
+        }
     }
 
     @PostMapping("/login")
