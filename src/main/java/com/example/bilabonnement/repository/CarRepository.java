@@ -45,8 +45,8 @@ public class CarRepository {
         String transmission = resultSet.getString(8);
         int modelId = resultSet.getInt(9);
         carList.add(new Car(id, isAvailable, colour,vin,regNumber,steelPrice,mthPrice,transmission,modelId));
-        System.out.println("Id: " + id + ". Available: " + isAvailable + ". Vin: " + vin + ". RegNumber: " + regNumber + ". SteelPrice: "
-        + steelPrice + ". Monthly Price: " + mthPrice + ". Transmission: " + transmission + ". Model ID: " + modelId);
+       // System.out.println("Id: " + id + ". Available: " + isAvailable + ". Vin: " + vin + ". RegNumber: " + regNumber + ". SteelPrice: "
+      //  + steelPrice + ". Monthly Price: " + mthPrice + ". Transmission: " + transmission + ". Model ID: " + modelId);
       }
     } catch (SQLException e) {
       System.out.println("Can't connect to database");
