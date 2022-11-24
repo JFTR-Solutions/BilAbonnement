@@ -1,12 +1,8 @@
 package com.example.bilabonnement.models.cars;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "cars")
 public class Car {
 
-  @Id
   private int carId;
   private boolean isAvailable;
   private String colour;

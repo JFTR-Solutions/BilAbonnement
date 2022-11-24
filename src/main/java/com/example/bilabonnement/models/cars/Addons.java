@@ -1,14 +1,8 @@
 package com.example.bilabonnement.models.cars;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "addons")
 public class Addons {
 
-  @Id
+
   private int addonId;
   private String addonName;
   private String addonDesc;

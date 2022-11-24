@@ -6,13 +6,11 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "car_addons")
-@IdClass(CarAddonsId.class)
+
 public class CarAddons{
-  @Id
+
   private int rentalAgreementId;
-  @Id
+
   private int AddonId;
 
   public CarAddons() {
