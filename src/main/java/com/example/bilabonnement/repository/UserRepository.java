@@ -16,14 +16,14 @@ import java.sql.*;
  @Repository
 public class UserRepository {
 
-    @Value("${spring.datasource.url}")
-    private String db_url;
+//    @Value("${spring.datasource.url}")
+    private String db_url = "jdbc:mysql://jftrsolutions.mysql.database.azure.com/bilabonnement";
 
-    @Value("${spring.datasource.username}")
-    private String uid;
+//    @Value("${spring.datasource.username}")
+    private String uid = "JTFR";
 
-    @Value("${spring.datasource.password}")
-    private String pwd;
+//    @Value("${spring.datasource.password}")
+    private String pwd = "Jftr1234";
 
 
 /*    public User createnewUser(String email, String password, String name){
