@@ -1,7 +1,6 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.models.users.User;
-import com.example.bilabonnement.repository.UserRepository;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-
-import static com.example.bilabonnement.encryption.Encryption.decrypt;
-import static com.example.bilabonnement.encryption.Encryption.encrypt;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -42,26 +39,37 @@ public class LoginController {
         if (user == null) {
             return "redirect:/error";
         }
-
         httpSession.setAttribute("email", email);
         httpSession.setAttribute("password", password);
+
         return "redirect:/welcome";
     }
 
     public String validateUser(HttpSession httpSession) {
-        User user2 = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+        User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         if (httpSession.getAttribute("email") == null) {
             return "redirect:/";
-        } else if (user2.getEmail().equals(httpSession.getAttribute("email")) && user2.getPassword().equals(httpSession.getAttribute("password"))) {
+        } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals(httpSession.getAttribute("password"))) {
             return "validated";
         } else return "redirect:/error";
+    }
+
+    public String validateRole(HttpSession httpSession) {
+        User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+        List<String> roleList = userService.GetRoles(user.getUserId());
+        for (String role: roleList) {
+            if (role.equals("sysadmin")){
+                return "redirect:/sysadmin";
+            }
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/welcome")
     public String welcomeUser(HttpSession httpSession, Model model) {
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
-        } else if (httpSession.getAttribute("role") == "sysadmin") {
+        } else if (validateRole(httpSession).equals("redirect:/sysadmin")) {
             return "redirect:/sysadmin";
 
         } else {
@@ -69,6 +77,12 @@ public class LoginController {
             httpSession.getAttribute("username");
             return "/welcome";
         }
+    }
+
+    @GetMapping("/sysadmin")
+    public String sysadminPage(Model model){
+        model.addAttribute("userList",userService.getAll());
+        return "sysadmin";
     }
 
     @GetMapping("/cookieinvalidate")

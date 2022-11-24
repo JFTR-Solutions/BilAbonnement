@@ -8,9 +8,11 @@ public class ConnectionManager {
 
     public static Connection conn;
 
-    public static void createConnection(String db_url, String uid, String pwd) {
+    public static Connection createConnection(String db_url, String uid, String pwd) {
 
         if (conn != null) {
+            return conn;
+        }
             try {
                 conn = DriverManager.getConnection(db_url, uid, pwd);
 
@@ -18,6 +20,7 @@ public class ConnectionManager {
                 System.out.printf("Couldn't connect to db");
                 e.printStackTrace();
             }
-        }
+        return null;
     }
+
 }

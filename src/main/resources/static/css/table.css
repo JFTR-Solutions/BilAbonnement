@@ -1,0 +1,21 @@
+td {
+    font-family: sans-serif;
+    font-size: 12px;
+    border: 1px solid #000000;
+    padding: 2px;
+    text-align: center;
+}
+
+th {
+    padding: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 14px;
+    border: 1px solid #000000;
+    width: 10%;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #000000;
+}

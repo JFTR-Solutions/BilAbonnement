@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bilabonnement - sysadmin side</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
 </head>
 <body>
 <table style="width: 100%">
@@ -18,8 +19,17 @@
         <th>Telefon nummer</th>
     </tr>
 
-    <tr th:each="user:${users}"></tr>
-
+    <tr th:each="user : ${userList}">
+    <td th:text="${user.userId}">ID</td>
+    <td th:text="${user.email}">Email</td>
+    <td th:text="${user.username}">username</td>
+    <td th:text="${user.password}">password</td>
+    <td th:text="${user.firstName}">firstname</td>
+    <td th:text="${user.lastName}">lastname</td>
+    <td th:text="${user.birthdate}">birthday</td>
+    <td th:text="${user.address}">address</td>
+    <td th:text="${user.phoneNumber}">phone number</td>
+    </tr>
 
 </table>
 </body>

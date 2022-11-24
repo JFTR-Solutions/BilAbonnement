@@ -14,17 +14,16 @@ public class User {
     private String address;
     private String phoneNumber;
 
-    public User(int user_id, String username, String password, String first_name, String last_name, String email, Date birthdate, String address, String phone_number) {
-        this.userId = user_id;
+    public User(int userId, String email, String username, String password, String firstName, String lastName, Date birthdate, String address, String phoneNumber) {
+        this.userId = userId;
+        this.email = email;
         this.username = username;
         this.password = password;
-        this.firstName = first_name;
-        this.lastName = last_name;
-        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthdate = birthdate;
         this.address = address;
-        this.phoneNumber = phone_number;
-
+        this.phoneNumber = phoneNumber;
     }
 
     public User (){
@@ -37,6 +36,14 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
@@ -69,14 +76,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Date getBirthdate() {
