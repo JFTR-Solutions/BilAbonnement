@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bilabonnement - sysadmin side</title>
+</head>
+<body>
+<table style="width: 100%">
+    <tr>
+        <th>Id</th>
+        <th>Navn</th>
+        <th>Email</th>
+        <th>Brugernavn</th>
+        <th>Fornavn</th>
+        <th>Efternavn</th>
+        <th>Fødselsdagsdato</th>
+        <th>Adresse</th>
+        <th>Telefon nummer</th>
+    </tr>
+
+    <tr th:each="user:${users}"></tr>
+
+
+</table>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.bilabonnement.repository;
 
+import com.example.bilabonnement.models.users.Role;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,6 +75,22 @@ public class UserRepository {
             //execute query
             ResultSet rs = psts.executeQuery();
             while (rs.next()){
+            int user_id = rs.getInt(1);
+            String username = rs.getString(2);
+            String first_name = rs.getString(4);
+            String last_name = rs.getString(5);
+            Date date = rs.getDate(7);
+            String address = rs.getString(8);
+            String phoneNumber = rs.getString(9);
+
+            user.setUserId(user_id);
+            user.setUsername(username);
+            user.setFirstName(first_name);
+            user.setLastName(last_name);
+            user.setBirthdate(date);
+            user.setAddress(address);
+            user.setPhoneNumber(phoneNumber);
+
                 return user;
             }
 
@@ -82,8 +99,7 @@ public class UserRepository {
             throw new RuntimeException(ex);
         }
 
-
-
     }
+
 
 }

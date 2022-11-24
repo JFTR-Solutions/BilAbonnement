@@ -1,16 +1,16 @@
 package com.example.bilabonnement.models.users;
 
-public class Roles {
+public class Role {
 
     private int roleId;
     private String roleName;
 
-    public Roles(int role_id, String role_name) {
+    public Role(int role_id, String role_name) {
         this.roleId = role_id;
         this.roleName = role_name;
     }
 
-    public Roles(){
+    public Role(){
 
     }
 
@@ -30,6 +30,11 @@ public class Roles {
         this.roleName = roleName;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 }

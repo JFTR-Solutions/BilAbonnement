@@ -2,7 +2,7 @@ package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +18,10 @@ import static com.example.bilabonnement.encryption.Encryption.encrypt;
 public class LoginController {
 
 
-    UserRepository userRepository;
+    UserService userService;
 
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -36,35 +36,36 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {
-        User user = userRepository.findUserByEmail(email,password);
-        System.out.println(user);
+        User user = userService.getEmail(email, password);
+//        System.out.println(user);
 
-        if(user == null){
+        if (user == null) {
             return "redirect:/error";
         }
 
-        httpSession.setAttribute("email",email);
-        httpSession.setAttribute("password",password);
+        httpSession.setAttribute("email", email);
+        httpSession.setAttribute("password", password);
         return "redirect:/welcome";
     }
 
-    public String validateUser(HttpSession httpSession){
-        User user2 = userRepository.findUserByEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        if (httpSession.getAttribute("email") == null){
+    public String validateUser(HttpSession httpSession) {
+        User user2 = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+        if (httpSession.getAttribute("email") == null) {
             return "redirect:/";
-        }
-        else if (user2.getEmail().equals(httpSession.getAttribute("email")) && user2.getPassword().equals(httpSession.getAttribute("password"))){
+        } else if (user2.getEmail().equals(httpSession.getAttribute("email")) && user2.getPassword().equals(httpSession.getAttribute("password"))) {
             return "validated";
-        }
-        else return "redirect:/error";
+        } else return "redirect:/error";
     }
 
     @GetMapping("/welcome")
     public String welcomeUser(HttpSession httpSession, Model model) {
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
+        } else if (httpSession.getAttribute("role") == "sysadmin") {
+            return "redirect:/sysadmin";
+
         } else {
-            model.addAttribute("user", userRepository.findUserByEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
+            model.addAttribute("user", userService.getEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
             httpSession.getAttribute("username");
             return "/welcome";
         }
@@ -72,7 +73,7 @@ public class LoginController {
 
     @GetMapping("/cookieinvalidate")
     public String invalidateCookie(HttpSession session) {
-        System.out.println(session.getAttribute("username"));
+//        System.out.println(session.getAttribute("username"));
         session.invalidate();
         return "redirect:/";
     }
