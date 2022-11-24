@@ -14,8 +14,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
+
     UserRepository userRepository;
+
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String loginPage(HttpSession httpSession) {
