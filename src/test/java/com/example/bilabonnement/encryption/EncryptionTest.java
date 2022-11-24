@@ -5,25 +5,25 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EncryptionTest {
-
+/*
     //arrange
     Encryption encryption = new Encryption();
 
-/*    @Test
+    @Test
     void encrypt() {
         //act
-        String encryptedPassword = encryption.encrypt("/&wtf123");
+        String encryptedPassword = encryption.encrypt("12345Thf");
 
         //assert
-        assertEquals("", encryptedPassword);
+        assertEquals("@\\JdXYGQ}LWP", encryptedPassword);
     }
 
     @Test
     void decrypt() {
         //act
-        String decryptedPassword = encryption.decrypt("i;i:d4<9CE^");
+        String decryptedPassword = encryption.decrypt("@\\JdXYGQ}LWP");
 
         //assert
-        assertEquals("1234", decryptedPassword);
+        assertEquals("12345Thf", decryptedPassword);
     }*/
 }
