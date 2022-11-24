@@ -29,12 +29,11 @@ public class LoginController {
             return "welcome";
         }
     }
-
+//Frederik
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {
         User user = userService.getEmail(email, password);
-//        System.out.println(user);
 
         if (user == null) {
             return "redirect:/error";
@@ -42,9 +41,9 @@ public class LoginController {
         httpSession.setAttribute("email", email);
         httpSession.setAttribute("password", password);
 
-        return "redirect:/welcome";
+        return "redirect:/sign-in";
     }
-
+    //Frederik
     public String validateUser(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         if (httpSession.getAttribute("email") == null) {
@@ -53,23 +52,24 @@ public class LoginController {
             return "validated";
         } else return "redirect:/error";
     }
-
-    public String validateRole(HttpSession httpSession) {
+    //Frederik
+    public String validateRoleOnLogin(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         List<String> roleList = userService.GetRoles(user.getUserId());
         for (String role: roleList) {
             if (role.equals("sysadmin")){
+                httpSession.setAttribute("role",role);
                 return "redirect:/sysadmin";
             }
         }
         return "redirect:/";
     }
-
-    @GetMapping("/welcome")
+    //Frederik
+    @GetMapping("/sign-in")
     public String welcomeUser(HttpSession httpSession, Model model) {
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
-        } else if (validateRole(httpSession).equals("redirect:/sysadmin")) {
+        } else if (validateRoleOnLogin(httpSession).equals("redirect:/sysadmin")) {
             return "redirect:/sysadmin";
 
         } else {
@@ -79,15 +79,9 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/sysadmin")
-    public String sysadminPage(Model model){
-        model.addAttribute("userList",userService.getAll());
-        return "sysadmin";
-    }
-
+    //Frederik
     @GetMapping("/cookieinvalidate")
     public String invalidateCookie(HttpSession session) {
-//        System.out.println(session.getAttribute("username"));
         session.invalidate();
         return "redirect:/";
     }
