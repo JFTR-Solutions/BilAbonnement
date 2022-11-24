@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +12,21 @@ public class FrontdeskController {
 
     LoginController loginController;
     UserService userService;
+    CarService carService;
 
-    public FrontdeskController(LoginController loginController, UserService userService) {
+    public FrontdeskController(LoginController loginController, UserService userService, CarService carService) {
         this.loginController = loginController;
         this.userService = userService;
+        this.carService = carService;
     }
 
+    //Jonathan
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) {
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {
-
-            model.addAttribute("userList", userService.getAll());
+            model.addAttribute("carlist", carService.fetchAllCars());
             return "frontdesk";
         }
     }
