@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
 
-    private static Connection conn;
+    public static Connection conn;
 
-    public static Connection getConnection(String db_url, String uid, String pwd) {
+    public static Connection createConnection(String db_url, String uid, String pwd) {
 
         if (conn != null) {
             return conn;

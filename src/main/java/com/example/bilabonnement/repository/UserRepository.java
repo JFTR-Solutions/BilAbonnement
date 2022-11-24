@@ -16,17 +16,21 @@ import java.sql.*;
  @Repository
 public class UserRepository {
 
-//    @Value("${spring.datasource.url}")
-    private String db_url = "jdbc:mysql://jftrsolutions.mysql.database.azure.com/bilabonnement";
+     private String db_url = System.getenv("JDBCUrl");
 
-//    @Value("${spring.datasource.username}")
-    private String uid = "JTFR";
+     private String uid = System.getenv("JDBCUsername");
 
-//    @Value("${spring.datasource.password}")
-    private String pwd = "Jftr1234";
+     private String pwd = System.getenv("JDBCPassword");
 
+     public UserRepository() {
+         System.out.println(System.getenv("JDBCUrl"));
+     if (ConnectionManager.conn ==null){
+        ConnectionManager.createConnection(db_url,uid,pwd);
+     }
 
-/*    public User createnewUser(String email, String password, String name){
+     }
+
+     /*    public User createnewUser(String email, String password, String name){
 
         if (findUserByEmail(email,password) != null) {
             return null;
@@ -64,9 +68,9 @@ public class UserRepository {
         user.setPassword(password);
 
         try {
-            Connection conn = ConnectionManager.getConnection(db_url, uid, pwd);
+
             String queryCreate = "SELECT * FROM users WHERE email=? AND password=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            PreparedStatement psts = ConnectionManager.conn.prepareStatement(queryCreate);
 
             //indsæt name og price i prepared statement
             psts.setString(1, email);
