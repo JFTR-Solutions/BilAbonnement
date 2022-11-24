@@ -13,22 +13,15 @@ import java.sql.SQLException;
 
 import java.sql.*;
 
- @Repository
+@Repository
 public class UserRepository {
 
-     private String db_url = System.getenv("JDBCUrl");
+    public UserRepository() {
+        if (ConnectionManager.conn == null) {
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
+        }
 
-     private String uid = System.getenv("JDBCUsername");
-
-     private String pwd = System.getenv("JDBCPassword");
-
-     public UserRepository() {
-         System.out.println(System.getenv("JDBCUrl"));
-     if (ConnectionManager.conn ==null){
-        ConnectionManager.createConnection(db_url,uid,pwd);
-     }
-
-     }
+    }
 
      /*    public User createnewUser(String email, String password, String name){
 
@@ -68,7 +61,6 @@ public class UserRepository {
         user.setPassword(password);
 
         try {
-
             String queryCreate = "SELECT * FROM users WHERE email=? AND password=?";
             PreparedStatement psts = ConnectionManager.conn.prepareStatement(queryCreate);
 
@@ -78,22 +70,22 @@ public class UserRepository {
 
             //execute query
             ResultSet rs = psts.executeQuery();
-            while (rs.next()){
-            int user_id = rs.getInt(1);
-            String username = rs.getString(2);
-            String first_name = rs.getString(4);
-            String last_name = rs.getString(5);
-            Date date = rs.getDate(7);
-            String address = rs.getString(8);
-            String phoneNumber = rs.getString(9);
+            while (rs.next()) {
+                int user_id = rs.getInt(1);
+                String username = rs.getString(2);
+                String first_name = rs.getString(4);
+                String last_name = rs.getString(5);
+                Date date = rs.getDate(7);
+                String address = rs.getString(8);
+                String phoneNumber = rs.getString(9);
 
-            user.setUserId(user_id);
-            user.setUsername(username);
-            user.setFirstName(first_name);
-            user.setLastName(last_name);
-            user.setBirthdate(date);
-            user.setAddress(address);
-            user.setPhoneNumber(phoneNumber);
+                user.setUserId(user_id);
+                user.setUsername(username);
+                user.setFirstName(first_name);
+                user.setLastName(last_name);
+                user.setBirthdate(date);
+                user.setAddress(address);
+                user.setPhoneNumber(phoneNumber);
 
                 return user;
             }

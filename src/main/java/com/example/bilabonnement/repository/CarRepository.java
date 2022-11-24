@@ -15,15 +15,9 @@ import java.util.List;
 @Repository
 public class CarRepository {
 
-    private String db_url = System.getenv("JDBCUrl");
-
-    private String uid = System.getenv("JDBCUsername");
-
-    private String pwd = System.getenv("JDBCPassword");
-
     public CarRepository() {
         if (ConnectionManager.conn == null) {
-            ConnectionManager.createConnection(db_url, uid, pwd);
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
         }
     }
 
