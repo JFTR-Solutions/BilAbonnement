@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>JFTR SOLUTIONS | Bil oversigt</title>
 </head>
 <body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Ledig</th>
+            <th>Farve</th>
+            <th>Stelnummer</th>
+            <th>Nummerplade</th>
+            <th>Stålpris</th>
+            <th>Månedlig ydelse</th>
+            <th>Gearkasse</th>
+            <th>Model ID</th>
+        </tr>
+        <tr th:each="car:${carlist}">
+            <td th:text="${car.carId}">ID</td>
+            <td th:text="${car.available}">Ledig</td>
+            <td th:text="${car.colour}">Farve</td>
+            <td th:text="${car.VIN}">Stelnummer</td>
+            <td th:text="${car.regNumber}">Nummerplade</td>
+            <td th:text="${car.steelPrice}">Stålpris</td>
+            <td th:text="${car.mthPrice}">Månedlig ydelse</td>
+            <td th:text="${car.transmission}">Gearkasse</td>
+            <td th:text="${car.modelId}">modelId</td>
+        </tr>
+    </table>
+
+</div>
 
 </body>
 </html>
