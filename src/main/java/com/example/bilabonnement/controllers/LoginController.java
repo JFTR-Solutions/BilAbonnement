@@ -41,7 +41,7 @@ public class LoginController {
         httpSession.setAttribute("email", email);
         httpSession.setAttribute("password", password);
 
-        return "redirect:/sign-in";
+        return "redirect:/";
     }
     //Frederik
     public String validateUser(HttpSession httpSession) {
@@ -65,13 +65,12 @@ public class LoginController {
         return "redirect:/";
     }
     //Frederik
-    @GetMapping("/sign-in")
+    @GetMapping("/welcome")
     public String welcomeUser(HttpSession httpSession, Model model) {
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
         } else if (validateRoleOnLogin(httpSession).equals("redirect:/sysadmin")) {
             return "redirect:/sysadmin";
-
         } else {
             model.addAttribute("user", userService.getEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
             httpSession.getAttribute("username");
