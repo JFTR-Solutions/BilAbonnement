@@ -8,12 +8,15 @@
 </head>
 <body>
 <nav th:insert="fragments/sysadminheader"></nav>
-<table>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<input type="text" id="search" placeholder="Søg">
+<table class="sortable" id="table">
     <tr>
         <th>Id</th>
-        <th>Navn</th>
         <th>Email</th>
         <th>Brugernavn</th>
+        <th>Password</th>
         <th>Fornavn</th>
         <th>Efternavn</th>
         <th>Fødselsdagsdato</th>
@@ -21,7 +24,7 @@
         <th>Telefon nummer</th>
     </tr>
 
-    <tr th:each="user : ${userList}">
+    <tr class="item" th:each="user : ${userList}" id="inputrows">
     <td th:text="${user.userId}">ID</td>
     <td th:text="${user.email}">Email</td>
     <td th:text="${user.username}">username</td>
@@ -34,6 +37,16 @@
     </tr>
 
 </table>
-</div>
+<script>
+    var $rows = $('#table #inputrows');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
+</script>
 </body>
 </html>
