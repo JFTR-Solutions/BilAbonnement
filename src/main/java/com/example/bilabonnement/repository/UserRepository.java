@@ -108,7 +108,7 @@ public class UserRepository {
 
     }
 
-
+    //Frederik
     public User findUserByEmail(String email, String password) {
 
         User user = new User();
@@ -119,11 +119,11 @@ public class UserRepository {
             String queryCreate = "SELECT * FROM users WHERE email=? AND password=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-            //indsæt name og price i prepared statement
+            //indsæt email og password i preparedstatement.
             psts.setString(1, email);
             psts.setString(2, password);
 
-            //execute query
+            //execute query som giver svar tilbage fra databasen med information om brugeren.
             ResultSet rs = psts.executeQuery();
             while (rs.next()) {
                 int user_id = rs.getInt(1);

@@ -3,9 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Reception - Bilabonnement</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
 </head>
 <body>
-<div th:insert="fragments/sysadminheader"></div>
-<h1>Velkommen til receptionen</h1>
+<nav th:insert="fragments/sysadminheader"></nav>
+    <h1>Velkommen til receptionen</h1>
+
+<!--JONATHAN-->
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<input type="text" id="search" placeholder="Søg">
+<table class="sortable" id="table">
+    <tr>
+        <th>ID</th>
+        <th>Ledig</th>
+        <th>Farve</th>
+        <th>Stelnummer</th>
+        <th>Nummerplade</th>
+        <th>Stålpris</th>
+        <th>Månedlig ydelse</th>
+        <th>Gearkasse</th>
+        <th>Model ID</th>
+    </tr>
+    <tr class="item" th:each="car:${carlist}" id="inputrows">
+        <td th:text="${car.carId}">ID</td>
+        <td th:text="${car.available}">Ledig</td>
+        <td th:text="${car.colour}">Farve</td>
+        <td th:text="${car.VIN}">Stelnummer</td>
+        <td th:text="${car.regNumber}">Nummerplade</td>
+        <td th:text="${car.steelPrice}">Stålpris</td>
+        <td th:text="${car.mthPrice}">Månedlig ydelse</td>
+        <td th:text="${car.transmission}">Gearkasse</td>
+        <td th:text="${car.modelId}">modelId</td>
+    </tr>
+</table>
+<script>
+    var $rows = $('#table #inputrows');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
+</script>
+</div>
+</div>
 </body>
 </html>

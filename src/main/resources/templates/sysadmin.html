@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Bilabonnement - sysadmin side</title>
     <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/sidebar.css}" href="../static/css/sidebar.css">
 </head>
 <body>
-<div th:insert="fragments/sysadminheader"></div>
-<table style="width: 100%">
+<nav th:insert="fragments/sysadminheader"></nav>
+<table>
     <tr>
         <th>Id</th>
         <th>Navn</th>
@@ -33,5 +34,6 @@
     </tr>
 
 </table>
+</div>
 </body>
 </html>
