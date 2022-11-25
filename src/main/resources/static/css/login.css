@@ -1,0 +1,11 @@
+body{
+    background-color: #444858;
+}
+
+div1{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    color: #eaebdf;
+    font-size: large;
+}

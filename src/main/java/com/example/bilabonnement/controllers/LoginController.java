@@ -1,6 +1,6 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.encryption.Encryption;
+import com.example.bilabonnement.encryption.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class LoginController {
 
 
     UserService userService;
-    Encryption e = new Encryption();
+    Encrypter e = new Encrypter();
 
     public LoginController(UserService userService) {
         this.userService = userService;
