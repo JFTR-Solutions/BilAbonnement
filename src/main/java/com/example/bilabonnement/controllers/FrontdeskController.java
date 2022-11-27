@@ -23,6 +23,7 @@ public class FrontdeskController {
     //Jonathan
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) {
+        model.addAttribute("roles",loginController.validateRoles(httpSession));
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {

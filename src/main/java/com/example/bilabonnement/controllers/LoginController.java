@@ -43,7 +43,7 @@ public class LoginController {
         httpSession.setAttribute("email", email);
         httpSession.setAttribute("password", e.encrypt(password));
 
-        return "redirect:/";
+        return "redirect:/welcome";
     }
     //Frederik
     public String validateUser(HttpSession httpSession) {
@@ -55,24 +55,17 @@ public class LoginController {
         } else return "redirect:/error";
     }
     //Frederik
-    public String validateRoleOnLogin(HttpSession httpSession) {
+    public List<String> validateRoles(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        List<String> roleList = userService.GetRoles(user.getUserId());
-        for (String role: roleList) {
-            if (role.equals("sysadmin")){
-                httpSession.setAttribute("role",role);
-                return "redirect:/sysadmin";
-            }
-        }
-        return "redirect:/";
+        List<String> roleList = userService.getRoles(user.getUserId());
+        return roleList;
     }
     //Frederik
     @GetMapping("/welcome")
     public String welcomeUser(HttpSession httpSession, Model model) {
+        model.addAttribute("roles",validateRoles(httpSession));
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
-        } else if (validateRoleOnLogin(httpSession).equals("redirect:/sysadmin")) {
-            return "redirect:/sysadmin";
         } else {
             model.addAttribute("user", userService.getEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
             httpSession.getAttribute("username");

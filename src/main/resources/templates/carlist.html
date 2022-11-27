@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <title>JFTR SOLUTIONS | Bil oversigt</title>
     <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
+
 </head>
 <body>
-
+<nav>
+    <ul>
+        <div th:if="${roles.contains('sysadmin')}" th:insert="fragments/sysadminheader"></div>
+        <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader"></div>
+        <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader"></div>
+        <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>
+        <div th:insert="fragments/defaultheader"></div>
+    </ul>
+</nav>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <input type="text" id="search" placeholder="Søg">

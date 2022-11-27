@@ -10,11 +10,11 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private Date birthdate;
+    private String birthdate;
     private String address;
     private String phoneNumber;
 
-    public User(int userId, String email, String username, String password, String firstName, String lastName, Date birthdate, String address, String phoneNumber) {
+    public User(int userId, String email, String username, String password, String firstName, String lastName, String birthdate, String address, String phoneNumber) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -78,11 +78,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
