@@ -28,7 +28,7 @@ public class LoginController {
         if (!validateUser(httpSession).equals("validated")) {
             return "index";
         } else {
-            return "redirect:/welcome";
+            return "welcome";
         }
     }
 //Frederik
