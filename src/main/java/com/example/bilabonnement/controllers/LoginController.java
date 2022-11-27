@@ -69,7 +69,7 @@ public class LoginController {
         } else {
             model.addAttribute("user", userService.getEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
             httpSession.getAttribute("username");
-            return "/welcome";
+            return "welcome";
         }
     }
 
