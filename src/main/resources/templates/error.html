@@ -5,6 +5,15 @@
     <title>BilAbonnement</title>
 </head>
 <body>
+<nav>
+    <ul>
+        <div th:if="${roles.contains('sysadmin')}" th:insert="fragments/sysadminheader"></div>
+        <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader"></div>
+        <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader"></div>
+        <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>
+        <div th:insert="fragments/defaultheader"></div>
+    </ul>
+</nav>
 <h1>Invalid page please return</h1>
 <a class="a1" th:href="@{'/'}"style="color: black"><span>Gå tilbage</span></a>
 </body>
