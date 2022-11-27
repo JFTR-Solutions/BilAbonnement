@@ -14,7 +14,6 @@
     <div th:insert="fragments/defaultheader"></div>
     </ul>
 </nav>
-
-<h1>Welcome </h1><h1 th:text="${session.email}"></h1>
+<h1 th:text="'Velkommen ' + ${name}"></h1>
 </body>
 </html>

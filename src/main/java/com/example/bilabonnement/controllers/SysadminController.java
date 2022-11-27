@@ -1,25 +1,26 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.encryption.Encrypter;
+import com.example.bilabonnement.models.users.User;
+import com.example.bilabonnement.repository.UserRepository;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 @Controller
 public class SysadminController {
 
     LoginController loginController;
     UserService userService;
+    UserRepository userRepository;
 
-    public SysadminController(UserService userService, LoginController loginController) {
+    public SysadminController(UserService userService, LoginController loginController, UserRepository userRepository) {
         this.userService = userService;
         this.loginController = loginController;
+        this.userRepository = userRepository;
     }
 
     //Frederik
@@ -52,4 +53,18 @@ public class SysadminController {
         }
         return ("redirect:/error");
     }
+
+    @GetMapping("/updateuser/{id}")
+    public String updateWishlist(@PathVariable("id") int id, Model model) {
+        model.addAttribute("id", id);
+        model.addAttribute("user", userService.findUserByID(id));
+        return "updateuser";
+    }
+
+    @PostMapping("/updateuser")
+    public String saveWishlist(@ModelAttribute User user) {
+        userRepository.updateUser(user);
+        return "redirect:/sysadmin";
+    }
+
 }

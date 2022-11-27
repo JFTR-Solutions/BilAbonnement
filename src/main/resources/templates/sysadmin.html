@@ -34,6 +34,8 @@
         <th>Fødselsdagsdato</th>
         <th>Adresse</th>
         <th>Telefon nummer</th>
+        <th>Opdater</th>
+        <th>Slet</th>
     </tr>
 
     <tr class="item" th:each="user : ${userList}" id="inputrows">
@@ -45,7 +47,8 @@
         <td th:text="${user.lastName}">lastname</td>
         <td th:text="${user.birthdate}">birthday</td>
         <td th:text="${user.address}">address</td>
-        <td th:text="${user.phoneNumber}">phone number</td>
+        <td><a th:href="@{'/updateuser/' + ${user.userId}}">Update</a></td>
+        <td><a th:href="@{'/deleteuser/' + ${user.userId}}">Delete</a></td>
     </tr>
 
 </table>

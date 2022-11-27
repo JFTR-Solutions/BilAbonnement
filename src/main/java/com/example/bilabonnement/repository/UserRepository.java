@@ -26,35 +26,28 @@ public class UserRepository {
 
     }
 
-     /*    public User createnewUser(String email, String password, String name){
 
-        if (findUserByEmail(email,password) != null) {
-            return null;
-        }
-
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setName(name);
+    public void updateUser(User user){
 
         try {
-            Connection conn = ConnectionManager.getConnection(db_url, uid, pwd);
-            String queryCreate = "insert into users (email,password,name) values (?,?,?)";
+            String queryCreate = ("update users set email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? where user_id=?");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-            //indsæt name og price i prepared statement
-            psts.setString(1, user.getEmail());
-            psts.setString(2, user.getPassword());
-            psts.setString(3, user.getName());
+            psts.setString(1,user.getEmail());
+            psts.setString(2,user.getUsername());
+            psts.setString(3,user.getFirstName());
+            psts.setString(4,user.getLastName());
+            psts.setString(5,user.getBirthdate());
+            psts.setString(6,user.getAddress());
+            psts.setString(7,user.getPhoneNumber());
+            psts.setInt(8,user.getUserId());
 
             psts.executeUpdate();
 
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        System.out.println(user);
-        return user;
-    }*/
+    }
 
     public User createUser(String email, String password, String username, String first_name, String last_name, String birthdate, String address, String phonenr) {
             try {
@@ -155,9 +148,9 @@ public class UserRepository {
             ResultSet rs = psts.executeQuery();
             while (rs.next()) {
                 int user_id = rs.getInt(1);
-                String username = rs.getString(2);
-                String first_name = rs.getString(4);
-                String last_name = rs.getString(5);
+                String username = rs.getString(3);
+                String first_name = rs.getString(5);
+                String last_name = rs.getString(6);
                 String date = rs.getString(7);
                 String address = rs.getString(8);
                 String phoneNumber = rs.getString(9);
@@ -180,5 +173,43 @@ public class UserRepository {
 
     }
 
+
+    public User findUserbyID(int id) {
+        User user = new User();
+        try {
+                String queryCreate = "SELECT * FROM users WHERE user_id=?";
+                PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+                //indsæt email og password i preparedstatement.
+                psts.setInt(1, id);
+
+                //execute query som giver svar tilbage fra databasen med information om brugeren.
+                ResultSet rs = psts.executeQuery();
+                while (rs.next()) {
+                    int user_id = rs.getInt(1);
+                    String email = rs.getString(2);
+                    String username = rs.getString(3);
+                    String password = rs.getString(4);
+                    String first_name = rs.getString(5);
+                    String last_name = rs.getString(6);
+                    String date = rs.getString(7);
+                    String address = rs.getString(8);
+                    String phoneNumber = rs.getString(9);
+
+                    user.setUserId(user_id);
+                    user.setEmail(email);
+                    user.setUsername(username);
+                    user.setPassword(password);
+                    user.setFirstName(first_name);
+                    user.setLastName(last_name);
+                    user.setBirthdate(date);
+                    user.setAddress(address);
+                    user.setPhoneNumber(phoneNumber);
+                }
+                return user;
+            }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

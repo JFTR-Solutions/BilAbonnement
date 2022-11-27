@@ -23,11 +23,17 @@ public class UserService {
         return userRepository.findUserByEmail(email,password);
     }
 
+    public User findUserByID(int id){
+        return userRepository.findUserbyID(id);
+    }
+
+
     public List<String> getRoles(int id){
         return userRepository.findRoleById(id);
     }
 
-    public User createUser(String email, String password, String username, String first_name, String last_name, String birthdate, String address, String phonenr){
+    public User createUser(String email, String password, String username, String first_name, String last_name,
+                           String birthdate, String address, String phonenr){
         return userRepository.createUser(email,password,username,first_name,last_name,birthdate,address,phonenr);
     }
 

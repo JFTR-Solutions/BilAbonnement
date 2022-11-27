@@ -67,8 +67,7 @@ public class LoginController {
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
         } else {
-            model.addAttribute("user", userService.getEmail((String) httpSession.getAttribute("username"), (String) httpSession.getAttribute("username")));
-            httpSession.getAttribute("username");
+            model.addAttribute("name",userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
             return "welcome";
         }
     }
