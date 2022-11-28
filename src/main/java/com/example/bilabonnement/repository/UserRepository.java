@@ -27,6 +27,43 @@ public class UserRepository {
 
     }
 
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic){
+
+        try{
+            if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin){
+                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
+                PreparedStatement psts = conn.prepareStatement(queryCreate);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,1);
+                psts.executeUpdate();
+            }
+            else if (!findRoleById(user.getUserId()).contains("sales") && sales){
+                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
+                PreparedStatement psts = conn.prepareStatement(queryCreate);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,2);
+                psts.executeUpdate();
+            }
+            else if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk){
+                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
+                PreparedStatement psts = conn.prepareStatement(queryCreate);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,3);
+                psts.executeUpdate();
+            }
+            else if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic){
+                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
+                PreparedStatement psts = conn.prepareStatement(queryCreate);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,4);
+                psts.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void updateUser(User user){
 
@@ -42,6 +79,7 @@ public class UserRepository {
             psts.setString(6,user.getAddress());
             psts.setString(7,user.getPhoneNumber());
             psts.setInt(8,user.getUserId());
+
 
             psts.executeUpdate();
 

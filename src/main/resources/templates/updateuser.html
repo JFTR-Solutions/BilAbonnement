@@ -31,7 +31,19 @@
 
     <label for="phonenr">Telefonnummer: </label>
     <input id="phonenr" type="text"  name="phonenr" th:value="${user.phoneNumber}">
-
+    <br> <br>
+    <label for="sysadmin"> Sysadmin: </label>
+    <input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}">
+    <br> <br>
+    <label for="sales"> Sales: </label>
+    <input id="sales" type="checkbox"  name="sales" th:checked="${roles.contains('sales')}">
+    <br> <br>
+    <label for="front_desk"> Reception: </label>
+    <input id="front_desk" type="checkbox" name="front_desk"  th:checked="${roles.contains('front_desk')}">
+    <br> <br>
+    <label for="mechanic"> Mechanic: </label>
+    <input id="mechanic" type="checkbox" name="mechanic"  th:checked="${roles.contains('mechanic')}">
+    <br> <br>
     <input type="submit" name="submit" value="Opdater bruger">
 
 </form>

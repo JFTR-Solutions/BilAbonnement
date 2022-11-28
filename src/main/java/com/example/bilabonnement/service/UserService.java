@@ -37,6 +37,15 @@ public class UserService {
         return userRepository.createUser(email,password,username,first_name,last_name,birthdate,address,phonenr);
     }
 
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic){
+        userRepository.updateRoles(user, sysadmin,sales,front_desk,mechanic);
+    }
+
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+
+    }
+
  /*   public List<String> roleList(){
        return userRepository.getRoleList();
     }*/

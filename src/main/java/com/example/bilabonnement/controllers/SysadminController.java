@@ -70,13 +70,20 @@ public class SysadminController {
     @GetMapping("/updateuser/{id}")
     public String updateWishlist(@PathVariable("id") int id, Model model) {
         model.addAttribute("id", id);
+        model.addAttribute("roles",userService.getRoles(id));
         model.addAttribute("user", userService.findUserByID(id));
         return "updateuser";
     }
 
     @PostMapping("/updateuser")
-    public String saveWishlist(@ModelAttribute User user) {
-        userRepository.updateUser(user);
+    public String saveWishlist(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
+                               @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
+                               @RequestParam(defaultValue = "false") boolean mechanic) {
+        System.out.println("" + sysadmin + sales + front_desk + mechanic);
+        userService.updateUser(user);
+
+        //TODO fix role update
+//        userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
 
