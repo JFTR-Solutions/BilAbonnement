@@ -66,9 +66,9 @@ public class UserRepository {
 
 
     public void updateUser(User user){
-
+        System.out.println(user);
         try {
-            String queryCreate = ("update users set email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? where user_id=?");
+            String queryCreate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
             psts.setString(1,user.getEmail());
@@ -79,7 +79,6 @@ public class UserRepository {
             psts.setString(6,user.getAddress());
             psts.setString(7,user.getPhoneNumber());
             psts.setInt(8,user.getUserId());
-
 
             psts.executeUpdate();
 
