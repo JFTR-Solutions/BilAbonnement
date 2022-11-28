@@ -1,6 +1,7 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.encryption.Encrypter;
+import com.example.bilabonnement.models.users.Role;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
 import com.example.bilabonnement.service.UserService;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class SysadminController {
@@ -29,7 +32,12 @@ public class SysadminController {
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {
-
+        List<String> rolelist = new ArrayList<>();
+            for (int i = 0; i < userService.getAll().size(); i++) {
+                rolelist.add(userService.getRoles(userService.getAll().get(i).getUserId()).toString());
+            }
+            System.out.println(rolelist);
+            model.addAttribute("roleList",rolelist);
             model.addAttribute("userList", userService.getAll());
             return "sysadmin";
         }
@@ -54,6 +62,8 @@ public class SysadminController {
         return ("redirect:/error");
     }
 
+    //TODO fix update user
+
     @GetMapping("/updateuser/{id}")
     public String updateWishlist(@PathVariable("id") int id, Model model) {
         model.addAttribute("id", id);
@@ -67,4 +77,5 @@ public class SysadminController {
         return "redirect:/sysadmin";
     }
 
+    //TODO Delete user
 }

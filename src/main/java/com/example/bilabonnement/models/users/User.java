@@ -14,6 +14,7 @@ public class User {
     private String address;
     private String phoneNumber;
 
+
     public User(int userId, String email, String username, String password, String firstName, String lastName, String birthdate, String address, String phoneNumber) {
         this.userId = userId;
         this.email = email;
