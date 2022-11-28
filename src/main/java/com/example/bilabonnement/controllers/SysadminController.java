@@ -32,14 +32,18 @@ public class SysadminController {
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {
-        List<String> rolelist = new ArrayList<>();
-            for (int i = 0; i < userService.getAll().size(); i++) {
-                rolelist.add(userService.getRoles(userService.getAll().get(i).getUserId()).toString().substring(1,userService.getRoles(userService.getAll().get(i).getUserId()).toString().length()-1));
-            }
-            model.addAttribute("role",rolelist);
+            model.addAttribute("roleList",roleList());
             model.addAttribute("userList", userService.getAll());
             return "sysadmin";
         }
+    }
+
+    public List<String> roleList(){
+        List<String> rolelist = new ArrayList<>();
+        for (int i = 0; i < userService.getAll().size(); i++) {
+            rolelist.add(userService.getRoles(userService.getAll().get(i).getUserId()).toString().substring(1,userService.getRoles(userService.getAll().get(i).getUserId()).toString().length()-1));
+        }
+        return rolelist;
     }
 
     @GetMapping("/createuser")
