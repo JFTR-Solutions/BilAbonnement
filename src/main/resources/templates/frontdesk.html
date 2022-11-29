@@ -8,24 +8,16 @@
 </head>
 <body>
 <nav>
-    <ul>
-        <div th:if="${roles.contains('sysadmin')}" th:insert="fragments/sysadminheader"></div>
-        <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader"></div>
-        <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader"></div>
-        <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>
-        <div th:insert="fragments/defaultheader"></div>
-    </ul>
+    <div th:insert="fragments/sysadminheader"></div>
 </nav>
-
-<h1>Velkommen til receptionen</h1>
+<div class="home-section">
+    <h1>Velkommen til receptionen</h1>
 
 <!--JONATHAN & Thomas-->
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<!--<input type="text" id="search" placeholder="Søg - Alle felter">-->
-<input type="text" id="search" placeholder="Søg - Alle felter">
+<input type="text" id="search" placeholder="Søg">
 <table class="sortable" id="table">
-    <thead>
     <tr>
         <th>ID</th>
         <th>Ledig</th>
@@ -51,7 +43,7 @@
         <td th:if="${car.isAvailable == 0}" th:text="Udlejet">Udlejet</td>
         <td th:text="${car.colour}">Farve</td>
         <td th:text="${car.VIN}">Stelnummer</td>
-        <td id="regnum" th:text="${car.regNumber}">Nummerplade</td>
+        <td th:text="${car.regNumber}">Nummerplade</td>
         <td th:text="${car.steelPrice}">Stålpris</td>
         <td th:text="${car.mthPrice}">Månedlig ydelse</td>
         <td th:text="${car.transmission}">Gearkasse</td>
@@ -68,10 +60,10 @@
 <!--
 <script>
     var $rows = $('#table #inputrows');
-    $('#search').keyup(function () {
+    $('#search').keyup(function() {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-        $rows.show().filter(function () {
+        $rows.show().filter(function() {
             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
             return !~text.indexOf(val);
         }).hide();
@@ -87,6 +79,5 @@
         });
     });
 </script>
-
 </body>
 </html>

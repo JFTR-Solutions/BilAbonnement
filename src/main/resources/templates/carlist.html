@@ -14,7 +14,7 @@
         <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader"></div>
         <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader"></div>
         <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>
-        <div th:insert="fragments/defaultheader"></div>
+        <div th:insert="fragments/defaultheaderbottom"></div>
     </ul>
 </nav>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>

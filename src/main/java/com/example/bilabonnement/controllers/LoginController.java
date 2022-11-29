@@ -71,6 +71,7 @@ public class LoginController {
             return validateUser(httpSession);
         } else {
             model.addAttribute("roles", validateRoles(httpSession));
+            httpSession.setAttribute("roller",validateRoles(httpSession));
             model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
             return "welcome";
         }

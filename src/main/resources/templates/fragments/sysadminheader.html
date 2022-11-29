@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}" href="/css/sidebar.css">
-
+<link rel="stylesheet" type="text/css" th:href="@{css/mainStyle.css}" href="/css/mainStyle.css">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
 <body>
-  <li><a href="/sysadmin">Sysadmin Side</a></li>
-  <li><a href="/reception">Reception</a></li>
-  <li><a href="/mekaniker">Mekaniker</a></li>
-  <li><a href="/salg">Salg</a></li>
+<div class="sidebar">
+<div class="logo_details">
+  <a href="/">
+  <i class="bx bxs-car-garage"></i></a>
+</div>
+  <ul class="nav-list">
+  <li>
+    <a href="/sysadmin">
+  <i class="bx bx-user-circle"></i>
+    </a>
+    <span class="tooltip">System admin</span>
+  </li>
+  <li>
+    <a href="/reception">
+      <i class="bx bx-car"></i>
+    </a>
+    <span class="tooltip">Reception</span>
+  </li>
+  <li>
+    <a href="/mekaniker">
+      <i class="bx bxs-car-mechanic"></i>
+    </a>
+    <span class="tooltip">Mekaniker</span>
+  </li>
+  <li>
+    <a href="/salg">
+      <i class="bx bx-credit-card-front"></i>
+    </a>
+    <span class="tooltip">Salg</span>
+  </li>
+  <div th:insert="fragments/defaultheaderbottom" id="log_out"></div>
+</ul>
+</div>
 </body>
 </html>

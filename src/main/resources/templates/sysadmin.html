@@ -12,11 +12,11 @@
 <nav>
     <ul>
         <div th:insert="fragments/sysadminheader"></div>
-        <div th:insert="fragments/defaultheader"></div>
+        <div th:insert="fragments/defaultheaderbottom"></div>
     </ul>
 </nav>
 
-
+<div class="home-section">
 <a href="/opret-bruger">
     <button>Opret ny bruger</button>
 </a>
@@ -72,5 +72,6 @@
         }).hide();
     });
 </script>
+</div>
 </body>
 </html>

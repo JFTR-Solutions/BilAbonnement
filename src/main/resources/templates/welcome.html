@@ -7,14 +7,16 @@
 </head>
 <body>
 <nav>
-    <ul>
-        <div th:if="${roles.contains('sysadmin')}" th:insert="fragments/sysadminheader"></div>
+    <div th:insert="fragments/sysadminheader"></div>
+<!--    <div th:if="${!roles.contains('sysadmin')}" th:insert="fragments/defaultheadertop">></div>-->
+<!--        <div th:if="${roles.contains('sysadmin')}" th:insert="fragments/sysadminheader"></div>
         <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader"></div>
         <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader"></div>
-        <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>
-        <div th:insert="fragments/defaultheader"></div>
-    </ul>
+        <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader"></div>-->
+<!--        <div th:insert="fragments/defaultheaderbottom"></div>-->
 </nav>
+<div class="home-section">
 <h1 th:text="'Velkommen ' + ${name}"></h1>
+</div>
 </body>
 </html>
