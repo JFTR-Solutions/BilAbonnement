@@ -53,7 +53,7 @@
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
         <td><a th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
-        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}">Delete</a></td>
+        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}" onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Delete</a></td>
         <td  th:text="${roleList[iterStat.index]}"></td>
     </th:block>
     </tr>
