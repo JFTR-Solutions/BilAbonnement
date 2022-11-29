@@ -51,9 +51,9 @@
         <td th:text="${user.birthdate}">birthday</td>
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
-        <td><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
+        <td><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>
         <td><a class="underline" th:href="@{'/slet-bruger/' + ${user.userId}}"
-               onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Delete</a></td>
+               onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></td>
         <td th:text="${roleList[iterStat.index]}"></td>
     </tr>
 
