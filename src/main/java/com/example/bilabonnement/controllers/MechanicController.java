@@ -27,7 +27,8 @@ public class MechanicController {
         }
         if (!loginController.validateRoles(httpSession).contains("mechanic")) {
             return !isLoggedIn;
-        } else {
+        }
+        else {
             return isLoggedIn;
         }
     }
