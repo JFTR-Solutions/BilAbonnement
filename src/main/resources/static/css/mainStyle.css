@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: #ffffff;
+    background-color: #eaebdf;
     color: black;
     font-size: large;
     min-height: 100vh;
@@ -16,6 +16,14 @@ body{
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
+}
+
+div1{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    color: #eaebdf;
+    font-size: large;
 }
 
 .home-section{

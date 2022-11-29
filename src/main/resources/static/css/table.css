@@ -20,3 +20,8 @@ table {
     border-collapse: collapse;
     border: 1px solid #000000;
 }
+
+tr:hover {
+    background-color: #0a4d5b;
+    color: #ffffff;
+}

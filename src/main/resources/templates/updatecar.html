@@ -1,10 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/updateCar.css}" href="../static/css/updateCar.css">
   <title>Title</title>
 </head>
 <body>
+
+<div1>
 <form method="post" action="/opdater-bil">
 
   <input type="hidden" name="carId" th:value="${car.carId}">
@@ -66,8 +68,9 @@
     th:selected="${car.modelId == models.modelId}"></option>
   </select>
 
-  <input type="submit" name="submit" value="Opdater bil">
+  <button type="submit" name="submit" value="Opdater bil"> Opdater bil </button>
 </form>
+</div1>
 
 </body>
 </html>

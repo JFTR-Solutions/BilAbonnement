@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/updateUser.css}" href="../static/css/updateUser.css">
     <title>Title</title>
 </head>
 <body>
 <form method="post" action="/opdater-bruger">
 
     <input type="hidden" name="userId" th:value="${user.userId}">
-    1
+
     <label for="email">Email: </label>
     <input id="email" autofocus type="text" required name="email" th:value="${user.email}">
 
@@ -33,20 +33,20 @@
 
     <label for="phonenr">Telefonnummer: </label>
     <input id="phonenr" type="text" name="phoneNumber" th:value="${user.phoneNumber}">
-    <br> <br>
+
     <label for="sysadmin"> Sysadmin: </label>
-    <input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}">
-    <br> <br>
+    <input class="checkbox" id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}">
+
     <label for="sales"> Sales: </label>
-    <input id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}">
-    <br> <br>
+    <input class="checkbox" id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}">
+
     <label for="front_desk"> Reception: </label>
-    <input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}">
-    <br> <br>
+    <input class="checkbox" id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}">
+
     <label for="mechanic"> Mechanic: </label>
-    <input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}">
-    <br> <br>
-    <input type="submit" name="submit" value="Opdater bruger">
+    <input class="checkbox" id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}">
+
+    <button type="submit" name="submit" value="Opdater bruger">Opdater bruger</button>
 </form>
 
 </body>
