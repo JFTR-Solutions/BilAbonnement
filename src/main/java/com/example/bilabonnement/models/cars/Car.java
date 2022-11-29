@@ -12,6 +12,7 @@ public class Car {
   private double  mthPrice;
   private String transmission;
   private int modelId;
+  private Model carModel;
 
   public Car() {
   }
@@ -26,6 +27,19 @@ public class Car {
     this.mthPrice = mthPrice;
     this.transmission = transmission;
     this.modelId = modelId;
+  }
+
+  public Car(int carId, boolean isAvailable, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId, Model carModel) {
+    this.carId = carId;
+    this.isAvailable = isAvailable;
+    this.colour = colour;
+    this.VIN = VIN;
+    this.regNumber = regNumber;
+    this.steelPrice = steelPrice;
+    this.mthPrice = mthPrice;
+    this.transmission = transmission;
+    this.modelId = modelId;
+    this.carModel = carModel;
   }
 
   public int getCarId() {
@@ -98,6 +112,14 @@ public class Car {
 
   public void setModelId(int modelId) {
     this.modelId = modelId;
+  }
+
+  public Model getCarModel() {
+    return carModel;
+  }
+
+  public void setCarModel(Model carModel) {
+    this.carModel = carModel;
   }
 
   @Override

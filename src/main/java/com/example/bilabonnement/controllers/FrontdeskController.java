@@ -1,12 +1,10 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.servlet.http.HttpSession;
 @Controller
 public class FrontdeskController {

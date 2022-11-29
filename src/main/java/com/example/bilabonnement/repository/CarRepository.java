@@ -1,22 +1,23 @@
 package com.example.bilabonnement.repository;
 
 import com.example.bilabonnement.models.cars.Car;
+import com.example.bilabonnement.models.cars.Model;
 import com.example.bilabonnement.service.util.ConnectionManager;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.example.bilabonnement.service.util.ConnectionManager.conn;
+
 @Repository
 public class CarRepository {
 
     public CarRepository() {
-        if (ConnectionManager.conn == null) {
+        if (conn == null) {
             ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
         }
     }
@@ -27,9 +28,7 @@ public class CarRepository {
 
         try {
 
-            Connection conn = ConnectionManager.conn;
-
-            PreparedStatement psts = conn.prepareStatement("SELECT * from cars");
+            PreparedStatement psts = conn.prepareStatement("SELECT * from cars INNER JOIN model");
             ResultSet resultSet = psts.executeQuery();
 
             while (resultSet.next()) {
@@ -42,9 +41,11 @@ public class CarRepository {
                 double mthPrice = resultSet.getDouble(7);
                 String transmission = resultSet.getString(8);
                 int modelId = resultSet.getInt(9);
-                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId));
-                // System.out.println("Id: " + id + ". Available: " + isAvailable + ". Vin: " + vin + ". RegNumber: " + regNumber + ". SteelPrice: "
-                //  + steelPrice + ". Monthly Price: " + mthPrice + ". Transmission: " + transmission + ". Model ID: " + modelId);
+                String modelName = resultSet.getString(11);
+                String manufacturer = resultSet.getString(12);
+                double co2Emission = resultSet.getDouble(13);
+                String fuelType = resultSet.getString(14);
+                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName,manufacturer,co2Emission,fuelType)));
             }
         } catch (SQLException e) {
             System.out.println("Can't connect to database");
