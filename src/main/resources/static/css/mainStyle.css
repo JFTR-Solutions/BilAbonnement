@@ -19,13 +19,6 @@ body{
     box-sizing: border-box;
 }
 
-div1{
-    display: flex;
-    justify-content: center;
-    margin-top: 200px;
-    color: #eaebdf;
-    font-size: large;
-}
 
 .home-section{
     position: relative;

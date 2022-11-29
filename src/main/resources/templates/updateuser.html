@@ -34,18 +34,20 @@
     <label for="phonenr">Telefonnummer: </label>
     <input id="phonenr" type="text" name="phoneNumber" th:value="${user.phoneNumber}">
 
-    <label for="sysadmin"> Sysadmin: </label>
-    <input class="checkbox" id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}">
+    <div class="checkbox-container">
+        <div><label for="sysadmin"> Sysadmin: </label></div>
+        <div><input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}"></div>
 
-    <label for="sales"> Sales: </label>
-    <input class="checkbox" id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}">
+    <div><label for="sales"> Sales: </label></div>
+        <div><input  id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}"></div>
 
-    <label for="front_desk"> Reception: </label>
-    <input class="checkbox" id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}">
+        <div><label for="front_desk"> Reception: </label></div>
+    <div><input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}"></div>
 
-    <label for="mechanic"> Mechanic: </label>
-    <input class="checkbox" id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}">
 
+        <div><label for="mechanic"> Mechanic: </label></div>
+    <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}"></div>
+    </div>
     <button type="submit" name="submit" value="Opdater bruger">Opdater bruger</button>
 </form>
 
