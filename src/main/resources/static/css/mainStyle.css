@@ -46,3 +46,18 @@ div1{
     font-weight: 500;
     margin: 18px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+    line-height: 1;
+}
+
+h1 {
+    padding: 25px 25px;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+}

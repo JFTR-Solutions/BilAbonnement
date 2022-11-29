@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <title>Bilabonnement - sysadmin side</title>
     <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
-    <link rel="stylesheet" type="text/css" th:href="@{../css/sidebar.css}" href="../static/css/sidebar.css">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{../css/sidebar.css}" href="../static/css/sidebar.css">-->
     <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
 </head>
 <body>
 
 <nav>
-    <ul>
         <div th:insert="fragments/sysadminheader"></div>
-    </ul>
 </nav>
-
 <div class="home-section">
+    <h1>System admin dashboard</h1>
 <a href="/opret-bruger">
     <button>Opret ny bruger</button>
 </a>
@@ -53,8 +51,8 @@
         <td th:text="${user.birthdate}">birthday</td>
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
-        <td><a th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
-        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}"
+        <td><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
+        <td><a class="underline" th:href="@{'/slet-bruger/' + ${user.userId}}"
                onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Delete</a></td>
         <td th:text="${roleList[iterStat.index]}"></td>
     </tr>
