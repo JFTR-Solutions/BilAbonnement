@@ -27,11 +27,11 @@ public class FrontdeskController {
     }
 
     public Boolean validateLogin(HttpSession httpSession) {
-        boolean isLoggedIn = true;
-        if (!loginController.validateUser(httpSession).equals("validated")) {
+        boolean isLoggedIn = false;
+        if (loginController.validateUser(httpSession).equals("validated")){
             return !isLoggedIn;
-        }
-        if (!loginController.validateRoles(httpSession).contains("front_desk")) {
+        } else if(loginController.validateRoles(httpSession).contains("front_desk") ||
+                loginController.validateRoles(httpSession).contains("sysadmin")) {
             return !isLoggedIn;
         } else {
             return isLoggedIn;
@@ -60,11 +60,11 @@ public class FrontdeskController {
     @PostMapping("/opdater-bil")
     public String saveCar(@ModelAttribute Car car) {
         carService.updateCar(car);
-        return"redirect:/reception";
+        return "redirect:/reception";
     }
 
     @GetMapping("/slet-bil/{id}")
-    public String deleteCar(@PathVariable("id") int id)  {
+    public String deleteCar(@PathVariable("id") int id) {
         carService.deleteCar(id);
         return "redirect:/reception";
     }

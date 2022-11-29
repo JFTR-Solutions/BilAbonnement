@@ -21,13 +21,13 @@ public class SalesController {
     }
 
     public Boolean validateLogin(HttpSession httpSession) {
-        boolean isLoggedIn = true;
-        if (!loginController.validateUser(httpSession).equals("validated")) {
+        boolean isLoggedIn = false;
+        if (loginController.validateUser(httpSession).equals("validated")){
             return !isLoggedIn;
-        } if (!loginController.validateRoles(httpSession).contains("sales")) {
+        } else if(loginController.validateRoles(httpSession).contains("sales") ||
+                loginController.validateRoles(httpSession).contains("sysadmin")) {
             return !isLoggedIn;
-        }
-        else {
+        } else {
             return isLoggedIn;
         }
     }
