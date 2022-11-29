@@ -5,17 +5,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{../css/login.css}" href="../static/css/login.css">
     <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
     <title>Login</title>
+    <!--Stylesheet-->
 </head>
+
 <body>
-    <div1>
+    <div>
         <form method="post" th:action="@{'/login'}">
             <input type="hidden" name="id">
             <label for="email">Email: </label>
             <input id="email" autofocus type="text" required name="email">
             <label for="password">Password: </label>
             <input id="password" type="password" name="password" required>
-            <input type="submit" name="submit" value="login">
+            <button type="submit" name="submit" value="login">Login</button>
         </form>
-    </div1>
+    </div>
 </body>
 </html>
