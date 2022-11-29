@@ -29,7 +29,7 @@ div1{
 
 .home-section{
     position: relative;
-    background-color: var(--color-body);
+    background-color: var(--color-white);
     min-height: 100vh;
     top: 0;
     left: 90px;
@@ -46,6 +46,7 @@ div1{
     font-weight: 500;
     margin: 18px;
 }
+
 
 a {
     text-decoration: none;
