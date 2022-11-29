@@ -4,7 +4,7 @@ package com.example.bilabonnement.models.cars;
 public class Car {
 
   private int carId;
-  private boolean isAvailable;
+  private byte available;
   private String colour;
   private String VIN;
   private String regNumber;
@@ -17,9 +17,9 @@ public class Car {
   public Car() {
   }
 
-  public Car(int carId, boolean isAvailable, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId) {
+  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId) {
     this.carId = carId;
-    this.isAvailable = isAvailable;
+    this.available = available;
     this.colour = colour;
     this.VIN = VIN;
     this.regNumber = regNumber;
@@ -29,9 +29,9 @@ public class Car {
     this.modelId = modelId;
   }
 
-  public Car(int carId, boolean isAvailable, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId, Model carModel) {
+  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId, Model carModel) {
     this.carId = carId;
-    this.isAvailable = isAvailable;
+    this.available = available;
     this.colour = colour;
     this.VIN = VIN;
     this.regNumber = regNumber;
@@ -50,12 +50,12 @@ public class Car {
     this.carId = carId;
   }
 
-  public boolean isAvailable() {
-    return isAvailable;
+  public byte isAvailable() {
+    return available;
   }
 
-  public void setAvailable(boolean available) {
-    isAvailable = available;
+  public void setAvailable(byte available) {
+    this.available = available;
   }
 
   public String getColour() {
@@ -126,7 +126,7 @@ public class Car {
   public String toString() {
     return
         "Car id= " + carId +
-        " | Is Available= " + isAvailable +
+        " | Available= " + available +
         " | Colour= " + colour +
         " | VIN= " + VIN +
         " | Reg Number= " + regNumber +

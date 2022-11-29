@@ -8,15 +8,18 @@ public class Model {
   private double co2Emission;
   private String fuelType;
 
+  private double range;
+
   public Model() {
   }
 
-  public Model(int modelId, String modelName, String manufacturer, double co2Emission, String fuelType) {
+  public Model(int modelId, String modelName, String manufacturer, double co2Emission, String fuelType, double range) {
     this.modelId = modelId;
     this.modelName = modelName;
     this.manufacturer = manufacturer;
     this.co2Emission = co2Emission;
     this.fuelType = fuelType;
+    this.range = range;
   }
 
   public int getModelId() {
@@ -59,12 +62,21 @@ public class Model {
     this.fuelType = fuelType;
   }
 
+  public double getRange() {
+    return range;
+  }
+
+  public void setRange(double range) {
+    this.range = range;
+  }
+
   @Override
   public String toString() {
     return "Model Id= " + modelId +
         " | Model Name= " + modelName +
         " | Manufacturer= " + manufacturer +
         " | CO2 Emission= " + co2Emission +
-        " | fuelType= " + fuelType;
+        " | fuelType= " + fuelType +
+        " | range= " + range;
   }
 }

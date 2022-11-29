@@ -1,0 +1,73 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+  <title>Title</title>
+</head>
+<body>
+<form method="post" action="/opdater-bil">
+
+  <input type="hidden" name="carId" th:value="${car.carId}">
+  <input type="hidden" required name="available" th:value="${car.isAvailable}">
+
+  <label for="colour">Farve: </label>
+  <select id="colour" name="colour" th:field="*{car.colour}">
+    <option value="Hvid" th:selected="${car.colour =='Hvid'}">Hvid</option>
+    <option value="Metallic Hvid" th:selected="${car.colour =='Metallic Hvid'}">Metallic Hvid</option>
+    <option value="Sort" th:selected="${car.colour =='Sort'}">Sort</option>
+    <option value="Metallic Sort" th:selected="${car.colour =='Metallic Sort'}">Metallic Sort</option>
+    <option value="Grå" th:selected="${car.colour =='Grå'}">Grå</option>
+    <option value="Metallic Grå" th:selected="${car.colour =='Metallic Grå'}">Metallic Grå</option>
+    <option value="Sølv" th:selected="${car.colour =='Sølv'}">Sølv</option>
+    <option value="Metallic Sølv" th:selected="${car.colour =='Metallic Sølv'}">Metallic Sølv</option>
+    <option value="Blå" th:selected="${car.colour =='Blå'}">Blå</option>
+    <option value="Metallic Blå" th:selected="${car.colour =='Metallic Blå'}">Metallic Blå</option>
+    <option value="Rød" th:selected="${car.colour =='Rød'}">Rød</option>
+    <option value="Metallic Rød" th:selected="${car.colour =='Metallic Rød'}">Metallic Rød</option>
+    <option value="Brun" th:selected="${car.colour =='Brun'}">Brun</option>
+    <option value="Metallic Brun" th:selected="${car.colour =='Metallic Brun'}">Metallic Brun</option>
+    <option value="Grøn" th:selected="${car.colour =='Grøn'}">Grøn</option>
+    <option value="Metallic Grøn" th:selected="${car.colour =='Metallic Grøn'}">Metallic Grøn</option>
+    <option value="Orange" th:selected="${car.colour =='Orange'}">Orange</option>
+    <option value="Metallic Orange" th:selected="${car.colour =='Metallic Orange'}">Metallic Orange</option>
+    <option value="Lilla" th:selected="${car.colour =='Lilla'}">Lilla</option>
+    <option value="Metallic Lilla" th:selected="${car.colour =='Metallic Lilla'}">Metallic Lilla</option>
+    <option value="Beige" th:selected="${car.colour =='Beige'}">Beige</option>
+    <option value="Metallic Beige" th:selected="${car.colour =='Metallic Beige'}">Metallic Beige</option>
+    <option value="Guld" th:selected="${car.colour =='Guld'}">Guld</option>
+    <option value="Metallic Guld" th:selected="${car.colour =='Metallic Guld'}">Metallic Guld</option>
+    <option value="Gul" th:selected="${car.colour =='Gul'}">Gul</option>
+    <option value="Metallic Gul" th:selected="${car.colour =='Metallic Gul'}">Metallic Gul</option>
+  </select>
+
+  <label for="vin">Stelnummer: </label>
+  <input id="vin" type="text" required name="VIN" th:value="${car.VIN}">
+
+  <label for="regnumber">Nummerplade: </label>
+  <input id="regnumber" type="text"  name="regNumber" th:value="${car.regNumber}">
+
+  <label for="steelprice">Stålpris: </label>
+  <input id="steelprice" type="number"  name="steelPrice" th:value="${car.steelPrice}">
+
+  <label for="mthprice">Månedlig ydelse: </label>
+  <input id="mthprice" type="number"  name="mthPrice" required th:value="${car.mthPrice}">
+
+  <label for="transmission">Gearkasse: </label>
+  <select id="transmission" name="transmission" th:field="*{car.transmission}">
+    <option value="Automatgear" th:selected="${car.transmission =='Automatgear'}">Automatgear</option>
+    <option value="Manuelgear" th:selected="${car.transmission =='Manuelgear'}">Manuelgear</option>
+  </select>
+
+  <label for="modelid">Model: </label>
+  <select id="modelid" name="modelId" th:field="*{car.modelId}">
+    <option th:each="models : ${modellist}"
+            th:text="${models.manufacturer + ' ' + models.modelName + ', C02-Emission: ' + models.co2Emission + ', Drivmiddel: ' + models.fuelType + ', Rækkevidde: ' + models.range}"
+            th:value="${models.modelId}"
+    th:selected="${car.modelId == models.modelId}"></option>
+  </select>
+
+  <input type="submit" name="submit" value="Opdater bil">
+</form>
+
+</body>
+</html>
