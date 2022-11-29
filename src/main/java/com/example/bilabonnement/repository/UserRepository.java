@@ -30,35 +30,59 @@ public class UserRepository {
 
     public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic){
 
+        String insert = ("insert into roles_users (role_id,user_id) values (?,?)");
+        String delete = ("delete from roles_users where role_id=? and user_id=?");
         try{
             if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin){
-                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
-                PreparedStatement psts = conn.prepareStatement(queryCreate);
+                PreparedStatement psts = conn.prepareStatement(insert);
                 psts.setInt(2,user.getUserId());
                 psts.setInt(1,1);
                 psts.executeUpdate();
             }
-            else if (!findRoleById(user.getUserId()).contains("sales") && sales){
-                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
-                PreparedStatement psts = conn.prepareStatement(queryCreate);
+            if (findRoleById(user.getUserId()).contains("sysadmin") && !sysadmin){
+                PreparedStatement psts = conn.prepareStatement(delete);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,1);
+                System.out.println(psts.executeUpdate());
+                psts.executeUpdate();
+            }
+            if (!findRoleById(user.getUserId()).contains("sales") && sales){
+                PreparedStatement psts = conn.prepareStatement(insert);
                 psts.setInt(2,user.getUserId());
                 psts.setInt(1,2);
                 psts.executeUpdate();
             }
-            else if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk){
-                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
-                PreparedStatement psts = conn.prepareStatement(queryCreate);
+            if (findRoleById(user.getUserId()).contains("sales") && !sales){
+                PreparedStatement psts = conn.prepareStatement(delete);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,2);
+                psts.executeUpdate();
+            }
+            if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk){
+                PreparedStatement psts = conn.prepareStatement(insert);
                 psts.setInt(2,user.getUserId());
                 psts.setInt(1,3);
                 psts.executeUpdate();
             }
-            else if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic){
-                String queryCreate = ("insert into roles_users (role_id,user_id) values (?,?)");
-                PreparedStatement psts = conn.prepareStatement(queryCreate);
+            if (findRoleById(user.getUserId()).contains("front_desk") && !front_desk){
+                PreparedStatement psts = conn.prepareStatement(delete);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,3);
+                psts.executeUpdate();
+            }
+            if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic){
+                PreparedStatement psts = conn.prepareStatement(insert);
                 psts.setInt(2,user.getUserId());
                 psts.setInt(1,4);
                 psts.executeUpdate();
             }
+            if (findRoleById(user.getUserId()).contains("mechanic") && !mechanic){
+                PreparedStatement psts = conn.prepareStatement(delete);
+                psts.setInt(2,user.getUserId());
+                psts.setInt(1,4);
+                psts.executeUpdate();
+            }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
