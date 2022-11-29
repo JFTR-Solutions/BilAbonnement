@@ -10,6 +10,7 @@ body{
     color: black;
     font-size: large;
     min-height: 100vh;
+    font-family: 'Poppins',sans-serif;
 }
 
 *{
