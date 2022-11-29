@@ -32,7 +32,7 @@ public class LoginController {
             return "redirect:/welcome";
         }
     }
-//Frederik
+    //Frederik + Thomas
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {

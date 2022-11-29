@@ -14,18 +14,18 @@ class EncrypterTest {
     @Test
     void encrypt() {
         //act
-        String encryptedPassword = encrypter.encrypt("1234");
+        String encryptedPassword = encrypter.encrypt("ÆÅØ!/#¤%&/()=?`´^¨*+~{[]}|\\:;<>@£$€¥¢§½¬");
 
         //assert
-        assertEquals("@@jQ4j}Q", encryptedPassword);
+        assertEquals("y7FuFOJxFW5TE4FO}rVNrN;M}XFqGq7zNRPvFK7zuNvsFqtzzNr7rftzHMHT27G\\DNfjFK5[2Mrz", encryptedPassword);
     }
 
     @Test
     void decrypt() {
         //act
-        String decryptedPassword = encrypter.decrypt("@@jQ4j}Q");
+        String decryptedPassword = encrypter.decrypt("y7FuFOJxFW5TE4FO}rVNrN;M}XFqGq7zNRPvFK7zuNvsFqtzzNr7rftzHMHT27G\\DNfjFK5[2Mrz");
 
         //assert
-        assertEquals("1234", decryptedPassword);
+        assertEquals("ÆÅØ!/#¤%&/()=?`´^¨*+~{[]}|\\:;<>@£$€¥¢§½¬", decryptedPassword);
     }
 }
