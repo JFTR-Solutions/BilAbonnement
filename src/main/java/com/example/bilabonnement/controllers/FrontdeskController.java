@@ -6,7 +6,9 @@ import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.servlet.http.HttpSession;
+
 @Controller
 public class FrontdeskController {
 
@@ -20,18 +22,26 @@ public class FrontdeskController {
         this.carService = carService;
     }
 
+    public Boolean validateLogin(HttpSession httpSession) {
+        boolean isLoggedIn = true;
+        if (!loginController.validateUser(httpSession).equals("validated")) {
+            return !isLoggedIn;
+        }
+        if (!loginController.validateRoles(httpSession).contains("front_desk")) {
+            return !isLoggedIn;
+        } else {
+            return isLoggedIn;
+        }
+    }
+
     //Jonathan
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) {
-        model.addAttribute("roles",loginController.validateRoles(httpSession));
-        if (!loginController.validateRoles(httpSession).contains("front_desk") && !loginController.validateRoles(httpSession).contains("sysadmin")){
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
-        if (!loginController.validateUser(httpSession).equals("validated")) {
-            return loginController.validateUser(httpSession);
-        } else {
-            model.addAttribute("carlist", carService.fetchAllCars());
-            return "frontdesk";
-        }
+        model.addAttribute("carlist", carService.fetchAllCars());
+        return "frontdesk";
     }
 }

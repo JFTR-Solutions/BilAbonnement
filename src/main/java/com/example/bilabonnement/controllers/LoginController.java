@@ -50,7 +50,7 @@ public class LoginController {
     //Frederik
     public String validateUser(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        if (httpSession.getAttribute("email") == null) {
+        if (httpSession.getAttribute("email") == null || httpSession.getAttribute("password") == null) {
             return "redirect:/";
         } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
             return "validated";
@@ -67,10 +67,10 @@ public class LoginController {
     //Frederik
     @GetMapping("/velkommen")
     public String welcomeUser(HttpSession httpSession, Model model)  {
-        model.addAttribute("roles", validateRoles(httpSession));
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
         } else {
+            model.addAttribute("roles", validateRoles(httpSession));
             model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
             return "welcome";
         }

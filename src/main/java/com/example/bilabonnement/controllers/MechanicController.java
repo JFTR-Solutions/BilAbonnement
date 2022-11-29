@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+
 @Controller
 public class MechanicController {
 
@@ -19,17 +20,25 @@ public class MechanicController {
         this.userService = userService;
     }
 
+    public Boolean validateLogin(HttpSession httpSession) {
+        boolean isLoggedIn = true;
+        if (!loginController.validateUser(httpSession).equals("validated")) {
+            return !isLoggedIn;
+        }
+        if (!loginController.validateRoles(httpSession).contains("mechanic")) {
+            return !isLoggedIn;
+        } else {
+            return isLoggedIn;
+        }
+    }
+
     @GetMapping("/mekaniker")
     public String frontdeskPage(Model model, HttpSession httpSession) {
-        model.addAttribute("roles",loginController.validateRoles(httpSession));
-        if ((!loginController.validateRoles(httpSession).contains("sysadmin")) && !loginController.validateRoles(httpSession).contains("mechanic")){
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
-        if (!loginController.validateUser(httpSession).equals("validated")) {
-            return loginController.validateUser(httpSession);
-        } else {
-            model.addAttribute("userList", userService.getAll());
-            return "mechanic";
-        }
+        model.addAttribute("userList", userService.getAll());
+        return "mechanic";
     }
 }

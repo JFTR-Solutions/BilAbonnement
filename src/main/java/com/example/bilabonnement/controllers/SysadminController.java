@@ -21,6 +21,18 @@ public class SysadminController {
     UserService userService;
     UserRepository userRepository;
 
+    public Boolean validateLogin(HttpSession httpSession) {
+        boolean isLoggedIn = true;
+        if (!loginController.validateUser(httpSession).equals("validated")) {
+            return !isLoggedIn;
+        }
+        if (!loginController.validateRoles(httpSession).contains("sysadmin")) {
+            return !isLoggedIn;
+        } else {
+            return isLoggedIn;
+        }
+    }
+
     public SysadminController(UserService userService, LoginController loginController, UserRepository userRepository) {
         this.userService = userService;
         this.loginController = loginController;
@@ -30,16 +42,12 @@ public class SysadminController {
     //Frederik
     @GetMapping("/sysadmin")
     public String sysadminPage(Model model, HttpSession httpSession) {
-        if (!loginController.validateRoles(httpSession).contains("sysadmin")) {
+        if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
-        if (!loginController.validateUser(httpSession).equals("validated")) {
-            return loginController.validateUser(httpSession);
-        } else {
-            model.addAttribute("roleList", roleList());
-            model.addAttribute("userList", userService.getAll());
-            return "sysadmin";
-        }
+        model.addAttribute("roleList", roleList());
+        model.addAttribute("userList", userService.getAll());
+        return "sysadmin";
     }
 
     public List<String> roleList() {
@@ -51,7 +59,10 @@ public class SysadminController {
     }
 
     @GetMapping("/opret-bruger")
-    public String createUserPage() {
+    public String createUserPage(HttpSession httpSession) {
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
         return "createuser";
     }
 
@@ -70,7 +81,10 @@ public class SysadminController {
     }
 
     @GetMapping("/opdater-bruger/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
+    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) {
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
         model.addAttribute("id", id);
         model.addAttribute("roles", userService.getRoles(id));
         model.addAttribute("user", userService.findUserByID(id));
@@ -87,7 +101,10 @@ public class SysadminController {
     }
 
     @GetMapping("/slet-bruger/{id}")
-    public String DeleteUser(@PathVariable("id") int id) {
+    public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) {
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
         userService.deleteUser(id);
         return "redirect:/sysadmin";
     }
