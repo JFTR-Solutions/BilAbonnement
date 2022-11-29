@@ -32,6 +32,7 @@ public class LoginController {
             return "redirect:/velkommen";
         }
     }
+
     //Frederik + Thomas
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
@@ -45,29 +46,32 @@ public class LoginController {
 
         return "redirect:/velkommen";
     }
+
     //Frederik
     public String validateUser(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        if (httpSession.getAttribute("email") == null ) {
+        if (httpSession.getAttribute("email") == null) {
             return "redirect:/";
         } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
             return "validated";
         } else return "redirect:/error";
     }
+
     //Frederik
     public List<String> validateRoles(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         List<String> roleList = userService.getRoles(user.getUserId());
         return roleList;
     }
+
     //Frederik
     @GetMapping("/velkommen")
     public String welcomeUser(HttpSession httpSession, Model model) {
-        model.addAttribute("roles",validateRoles(httpSession));
+        model.addAttribute("roles", validateRoles(httpSession));
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);
         } else {
-            model.addAttribute("name",userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
+            model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
             return "welcome";
         }
     }

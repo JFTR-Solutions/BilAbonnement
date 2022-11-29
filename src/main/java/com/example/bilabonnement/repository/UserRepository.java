@@ -278,16 +278,16 @@ public class UserRepository {
         try {
             String deleteQuery = ("DELETE FROM roles_users where user_id=?");
             PreparedStatement psts = conn.prepareStatement(deleteQuery);
-            psts.setInt(1,id);
+            psts.setInt(1, id);
             psts.executeUpdate();
 
             String deleteuser = ("DELETE FROM users where user_id=?");
             psts = conn.prepareStatement(deleteuser);
-            psts.setInt(1,id);
+            psts.setInt(1, id);
             psts.executeUpdate();
 
 
-        } catch (SQLException exception){
+        } catch (SQLException exception) {
             System.out.println(exception);
         }
     }

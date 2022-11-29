@@ -9,7 +9,7 @@
 <form method="post" action="/opdater-bruger">
 
     <input type="hidden" name="userId" th:value="${user.userId}">
-1
+    1
     <label for="email">Email: </label>
     <input id="email" autofocus type="text" required name="email" th:value="${user.email}">
 
@@ -20,31 +20,31 @@
     <input id="username" type="text" required name="username" th:value="${user.username}">
 
     <label for="firstname">Fornavn: </label>
-    <input id="firstname" type="text"  name="firstName" th:value="${user.firstName}">
+    <input id="firstname" type="text" name="firstName" th:value="${user.firstName}">
 
     <label for="lastname">Efternavn: </label>
-    <input id="lastname" type="text"  name="lastName" th:value="${user.lastName}">
+    <input id="lastname" type="text" name="lastName" th:value="${user.lastName}">
 
     <label for="birthdate">Fødselsdag: </label>
-    <input id="birthdate" type="date"  name="birthdate" required th:value="${user.birthdate}">
+    <input id="birthdate" type="date" name="birthdate" required th:value="${user.birthdate}">
 
     <label for="address">Adresse: </label>
-    <input id="address" type="text"  name="address" th:value="${user.address}">
+    <input id="address" type="text" name="address" th:value="${user.address}">
 
     <label for="phonenr">Telefonnummer: </label>
-    <input id="phonenr" type="text"  name="phoneNumber" th:value="${user.phoneNumber}">
+    <input id="phonenr" type="text" name="phoneNumber" th:value="${user.phoneNumber}">
     <br> <br>
     <label for="sysadmin"> Sysadmin: </label>
     <input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}">
     <br> <br>
     <label for="sales"> Sales: </label>
-    <input id="sales" type="checkbox"  name="sales" th:checked="${roles.contains('sales')}">
+    <input id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}">
     <br> <br>
     <label for="front_desk"> Reception: </label>
-    <input id="front_desk" type="checkbox" name="front_desk"  th:checked="${roles.contains('front_desk')}">
+    <input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}">
     <br> <br>
     <label for="mechanic"> Mechanic: </label>
-    <input id="mechanic" type="checkbox" name="mechanic"  th:checked="${roles.contains('mechanic')}">
+    <input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}">
     <br> <br>
     <input type="submit" name="submit" value="Opdater bruger">
 </form>

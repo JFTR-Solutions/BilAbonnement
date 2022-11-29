@@ -17,7 +17,9 @@
 </nav>
 
 
-<a href="/opret-bruger"><button>Opret ny bruger</button></a>
+<a href="/opret-bruger">
+    <button>Opret ny bruger</button>
+</a>
 <br>
 <br>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -41,7 +43,7 @@
     </tr>
 
 
-<!--Itererer over begge lister og tager indekset af userlist med IterStat-->
+    <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
     <tr class="item" th:each="user,iterStat : ${userList}" id="inputrows">
         <td th:text="${user.userId}">ID</td>
         <td th:text="${user.email}">Email</td>
@@ -53,8 +55,9 @@
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
         <td><a th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
-        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}" onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Delete</a></td>
-        <td  th:text="${roleList[iterStat.index]}"></td>
+        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}"
+               onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Delete</a></td>
+        <td th:text="${roleList[iterStat.index]}"></td>
     </tr>
 
 </table>

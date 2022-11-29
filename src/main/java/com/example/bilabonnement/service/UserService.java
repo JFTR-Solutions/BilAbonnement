@@ -15,30 +15,30 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userRepository.getAll();
     }
 
-    public User getEmail(String email, String password){
-        return userRepository.findUserByEmail(email,password);
+    public User getEmail(String email, String password) {
+        return userRepository.findUserByEmail(email, password);
     }
 
-    public User findUserByID(int id){
+    public User findUserByID(int id) {
         return userRepository.findUserbyID(id);
     }
 
 
-    public List<String> getRoles(int id){
+    public List<String> getRoles(int id) {
         return userRepository.findRoleById(id);
     }
 
     public User createUser(String email, String password, String username, String first_name, String last_name,
-                           String birthdate, String address, String phonenr){
-        return userRepository.createUser(email,password,username,first_name,last_name,birthdate,address,phonenr);
+                           String birthdate, String address, String phonenr) {
+        return userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
-    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic){
-        userRepository.updateRoles(user, sysadmin,sales,front_desk,mechanic);
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) {
+        userRepository.updateRoles(user, sysadmin, sales, front_desk, mechanic);
     }
 
     public void updateUser(User user) {
@@ -46,7 +46,7 @@ public class UserService {
 
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(int id) {
         userRepository.deleteUser(id);
     }
 

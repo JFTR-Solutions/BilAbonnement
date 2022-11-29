@@ -10,7 +10,7 @@ public class Role {
         this.roleName = role_name;
     }
 
-    public Role(){
+    public Role() {
 
     }
 

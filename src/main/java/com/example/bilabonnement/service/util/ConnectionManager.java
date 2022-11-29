@@ -13,13 +13,13 @@ public class ConnectionManager {
         if (conn != null) {
             return conn;
         }
-            try {
-                conn = DriverManager.getConnection(db_url, uid, pwd);
+        try {
+            conn = DriverManager.getConnection(db_url, uid, pwd);
 
-            } catch (SQLException e) {
-                System.out.printf("Couldn't connect to db");
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            System.out.printf("Couldn't connect to db");
+            e.printStackTrace();
+        }
         return null;
     }
 

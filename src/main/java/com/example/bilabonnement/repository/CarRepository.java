@@ -45,7 +45,7 @@ public class CarRepository {
                 String manufacturer = resultSet.getString(12);
                 double co2Emission = resultSet.getDouble(13);
                 String fuelType = resultSet.getString(14);
-                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName,manufacturer,co2Emission,fuelType)));
+                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName, manufacturer, co2Emission, fuelType)));
             }
         } catch (SQLException e) {
             System.out.println("Can't connect to database");
