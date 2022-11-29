@@ -57,5 +57,19 @@ public class Encrypter {
         }
         return temp2.toString();
     }
+
+
+    public static void main(String[] args) {
+        String b64encoded1 = Base64.getEncoder().encodeToString("ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".getBytes(StandardCharsets.UTF_8));
+        String b64encoded2 = Base64.getEncoder().encodeToString("abcdefghijklmnopqrstuvwxyzæøå".getBytes(StandardCharsets.UTF_8));
+        String b64encoded3 = Base64.getEncoder().encodeToString("0123456789".getBytes(StandardCharsets.UTF_8));
+        String b64encoded4 = Base64.getEncoder().encodeToString("!#¤%&/()=?`^*><½§".getBytes(StandardCharsets.UTF_8));
+
+
+        System.out.println(b64encoded1);
+        System.out.println(b64encoded2);
+        System.out.println(b64encoded3);
+        System.out.println(b64encoded4);
+    }
 }
 
