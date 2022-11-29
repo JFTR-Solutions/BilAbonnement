@@ -19,7 +19,7 @@
 
     <h1>Velkommen til receptionen</h1>
 
-<!--JONATHAN-->
+<!--JONATHAN & Thomas-->
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <input type="text" id="search" placeholder="Søg">
@@ -37,7 +37,8 @@
     </tr>
     <tr class="item" th:each="car:${carlist}" id="inputrows">
         <td th:text="${car.carId}">ID</td>
-        <td th:text="${car.available}">Ledig</td>
+        <td th:if="${#bools.isTrue(car.available)}" th:text="Ledig">Ledig</td>
+        <td th:if="${#bools.isFalse(car.available)}" th:text="X">Ledig</td>
         <td th:text="${car.colour}">Farve</td>
         <td th:text="${car.VIN}">Stelnummer</td>
         <td th:text="${car.regNumber}">Nummerplade</td>
