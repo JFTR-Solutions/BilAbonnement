@@ -29,7 +29,7 @@ public class LoginController {
         if (!validateUser(httpSession).equals("validated")) {
             return "index";
         } else {
-            return "redirect:/welcome";
+            return "redirect:/velkommen";
         }
     }
     //Frederik + Thomas
@@ -43,7 +43,7 @@ public class LoginController {
         httpSession.setAttribute("email", email);
         httpSession.setAttribute("password", e.encrypt(password));
 
-        return "redirect:/welcome";
+        return "redirect:/velkommen";
     }
     //Frederik
     public String validateUser(HttpSession httpSession) {
@@ -61,7 +61,7 @@ public class LoginController {
         return roleList;
     }
     //Frederik
-    @GetMapping("/welcome")
+    @GetMapping("/velkommen")
     public String welcomeUser(HttpSession httpSession, Model model) {
         model.addAttribute("roles",validateRoles(httpSession));
         if (!validateUser(httpSession).equals("validated")) {
@@ -73,7 +73,7 @@ public class LoginController {
     }
 
     //Frederik
-    @GetMapping("/cookieinvalidate")
+    @GetMapping("/invalider-cookie")
     public String invalidateCookie(HttpSession session) {
         session.invalidate();
         return "redirect:/";

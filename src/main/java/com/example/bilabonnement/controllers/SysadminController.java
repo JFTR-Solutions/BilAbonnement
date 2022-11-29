@@ -49,12 +49,12 @@ public class SysadminController {
         return rolelist;
     }
 
-    @GetMapping("/createuser")
+    @GetMapping("/opret-bruger")
     public String createUserPage(){
         return "createuser";
     }
 
-    @PostMapping("/createuser")
+    @PostMapping("/opret-bruger")
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") String birthdate,
@@ -68,7 +68,7 @@ public class SysadminController {
         return ("redirect:/error");
     }
 
-    @GetMapping("/updateuser/{id}")
+    @GetMapping("/opdater-bruger/{id}")
     public String updateWishlist(@PathVariable("id") int id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("roles",userService.getRoles(id));
@@ -76,7 +76,7 @@ public class SysadminController {
         return "updateuser";
     }
 
-    @PostMapping("/updateuser")
+    @PostMapping("/opdater-bruger")
     public String saveWishlist(@ModelAttribute User user,@RequestParam(defaultValue = "false") boolean sysadmin,
                                @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
                                @RequestParam(defaultValue = "false") boolean mechanic) {
@@ -89,5 +89,12 @@ public class SysadminController {
         return "redirect:/sysadmin";
     }
 
-    //TODO Delete user
+    @GetMapping("/slet-bruger/{id}")
+    public String deleteWishList(@PathVariable("id") int id) {
+        userService.deleteUser(id);
+        return "redirect:/sysadmin";
+    }
+
+
+
 }

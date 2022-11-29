@@ -17,7 +17,7 @@
 </nav>
 
 
-<a href="/createuser"><button>Opret ny bruger</button></a>
+<a href="/opret-bruger"><button>Opret ny bruger</button></a>
 <br>
 <br>
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -52,8 +52,8 @@
         <td th:text="${user.birthdate}">birthday</td>
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
-        <td><a th:href="@{'/updateuser/' + ${user.userId}}">Update</a></td>
-        <td><a th:href="@{'/deleteuser/' + ${user.userId}}">Delete</a></td>
+        <td><a th:href="@{'/opdater-bruger/' + ${user.userId}}">Update</a></td>
+        <td><a th:href="@{'/slet-bruger/' + ${user.userId}}">Delete</a></td>
         <td  th:text="${roleList[iterStat.index]}"></td>
     </th:block>
     </tr>

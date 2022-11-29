@@ -46,8 +46,8 @@ public class UserService {
 
     }
 
- /*   public List<String> roleList(){
-       return userRepository.getRoleList();
-    }*/
+    public void deleteUser(int id){
+        userRepository.deleteUser(id);
+    }
 
 }
