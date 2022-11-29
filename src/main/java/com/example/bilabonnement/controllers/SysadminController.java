@@ -80,11 +80,7 @@ public class SysadminController {
     public String saveWishlist(@ModelAttribute User user,@RequestParam(defaultValue = "false") boolean sysadmin,
                                @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
                                @RequestParam(defaultValue = "false") boolean mechanic) {
-        System.out.println("" + sysadmin + sales + front_desk + mechanic);
-        System.out.println(user);
-        System.out.println(user.getUserId());
         userService.updateUser(user);
-
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
