@@ -69,7 +69,7 @@ public class SysadminController {
     }
 
     @GetMapping("/opdater-bruger/{id}")
-    public String updateWishlist(@PathVariable("id") int id, Model model) {
+    public String updateUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("roles",userService.getRoles(id));
         model.addAttribute("user", userService.findUserByID(id));
@@ -77,7 +77,7 @@ public class SysadminController {
     }
 
     @PostMapping("/opdater-bruger")
-    public String saveWishlist(@ModelAttribute User user,@RequestParam(defaultValue = "false") boolean sysadmin,
+    public String saveUser(@ModelAttribute User user,@RequestParam(defaultValue = "false") boolean sysadmin,
                                @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
                                @RequestParam(defaultValue = "false") boolean mechanic) {
         userService.updateUser(user);
@@ -86,7 +86,7 @@ public class SysadminController {
     }
 
     @GetMapping("/slet-bruger/{id}")
-    public String deleteWishList(@PathVariable("id") int id) {
+    public String DeleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/sysadmin";
     }
