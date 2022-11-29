@@ -34,6 +34,10 @@
         <th>Månedlig ydelse</th>
         <th>Gearkasse</th>
         <th>Model ID</th>
+        <th>Producent</th>
+        <th>Model Navn</th>
+        <th>C02 Emission</th>
+        <th>Brændstoftype</th>
     </tr>
     <tr class="item" th:each="car:${carlist}" id="inputrows">
         <td th:text="${car.carId}">ID</td>
@@ -45,6 +49,10 @@
         <td th:text="${car.mthPrice}">Månedlig ydelse</td>
         <td th:text="${car.transmission}">Gearkasse</td>
         <td th:text="${car.modelId}">modelId</td>
+        <td th:text="${car.carModel.getManufacturer}">Producent</td>
+        <td th:text="${car.carModel.getModelName}">Model Navn</td>
+        <td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>
+        <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
     </tr>
 </table>
 <script>
