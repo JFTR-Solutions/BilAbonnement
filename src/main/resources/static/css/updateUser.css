@@ -81,8 +81,8 @@ button{
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 20px;
 }
 
 select{
