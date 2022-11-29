@@ -62,7 +62,7 @@ public class SysadminController {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);
         if (userService.getEmail(email,encryptedPassword)==null) {
-            userService.createUser(email, encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
+            userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
             return "redirect:/sysadmin";
         }
         return ("redirect:/error");
