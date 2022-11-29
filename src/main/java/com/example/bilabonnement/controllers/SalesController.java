@@ -21,7 +21,7 @@ public class SalesController {
     }
 
     @GetMapping("/salg")
-    public String salesPage(Model model, HttpSession httpSession) {
+    public String salesPage(Model model, HttpSession httpSession)  {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);

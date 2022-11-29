@@ -36,7 +36,7 @@ public class LoginController {
     //Frederik + Thomas
     @PostMapping("/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
-                        HttpSession httpSession) {
+                        HttpSession httpSession)  {
         User user = userService.getEmail(email, e.encrypt(password));
         if (user == null) {
             return "redirect:/error";
@@ -66,7 +66,7 @@ public class LoginController {
 
     //Frederik
     @GetMapping("/velkommen")
-    public String welcomeUser(HttpSession httpSession, Model model) {
+    public String welcomeUser(HttpSession httpSession, Model model)  {
         model.addAttribute("roles", validateRoles(httpSession));
         if (!validateUser(httpSession).equals("validated")) {
             return validateUser(httpSession);

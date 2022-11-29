@@ -1,19 +1,15 @@
 package com.example.bilabonnement.repository;
 
 import com.example.bilabonnement.Exceptions.UserNotFoundException;
-import com.example.bilabonnement.models.users.Role;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.example.bilabonnement.service.util.ConnectionManager.conn;
@@ -30,54 +26,54 @@ public class UserRepository {
 
     public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) {
 
-        String insert = ("insert into roles_users (role_id,user_id) values (?,?)");
-        String delete = ("delete from roles_users where role_id=? and user_id=?");
+        String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+        String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
         try {
             if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin) {
-                PreparedStatement psts = conn.prepareStatement(insert);
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 1);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("sysadmin") && !sysadmin) {
-                PreparedStatement psts = conn.prepareStatement(delete);
+                PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 1);
                 System.out.println(psts.executeUpdate());
                 psts.executeUpdate();
             }
             if (!findRoleById(user.getUserId()).contains("sales") && sales) {
-                PreparedStatement psts = conn.prepareStatement(insert);
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 2);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("sales") && !sales) {
-                PreparedStatement psts = conn.prepareStatement(delete);
+                PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 2);
                 psts.executeUpdate();
             }
             if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk) {
-                PreparedStatement psts = conn.prepareStatement(insert);
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 3);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("front_desk") && !front_desk) {
-                PreparedStatement psts = conn.prepareStatement(delete);
+                PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 3);
                 psts.executeUpdate();
             }
             if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic) {
-                PreparedStatement psts = conn.prepareStatement(insert);
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 4);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("mechanic") && !mechanic) {
-                PreparedStatement psts = conn.prepareStatement(delete);
+                PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 4);
                 psts.executeUpdate();
@@ -92,8 +88,8 @@ public class UserRepository {
     public void updateUser(User user) {
         System.out.println(user);
         try {
-            String queryCreate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
+            PreparedStatement psts = conn.prepareStatement(queryUpdate);
 
             psts.setString(1, user.getEmail());
             psts.setString(2, user.getUsername());
@@ -140,8 +136,8 @@ public class UserRepository {
         List<User> userList = new ArrayList<>();
 
         try {
-            String queryCreate = ("SELECT * from users");
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            String queryGetAll = ("SELECT * from users");
+            PreparedStatement psts = conn.prepareStatement(queryGetAll);
             ResultSet rs = psts.executeQuery();
 
             while (rs.next()) {
@@ -170,10 +166,10 @@ public class UserRepository {
         List<String> roleList = new ArrayList<>();
 
         try {
-            String queryCreate = "SELECT role_name FROM roles_users AS ru INNER JOIN users " +
+            String queryFindRole = "SELECT role_name FROM roles_users AS ru INNER JOIN users " +
                     "ON ru.user_id=users.user_id INNER JOIN roles ON ru.role_id=roles.role_id " +
                     "WHERE users.user_id=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            PreparedStatement psts = conn.prepareStatement(queryFindRole);
             psts.setInt(1, id);
 
             ResultSet rs = psts.executeQuery();
@@ -199,8 +195,8 @@ public class UserRepository {
         user.setPassword(password);
 
         try {
-            String queryCreate = "SELECT * FROM users WHERE email=? AND password=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            String queryFindUser = "SELECT * FROM users WHERE email=? AND password=?";
+            PreparedStatement psts = conn.prepareStatement(queryFindUser);
 
             //indsæt email og password i preparedstatement.
             psts.setString(1, email);

@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.encryption.Encrypter;
 import com.example.bilabonnement.models.users.Role;
 import com.example.bilabonnement.models.users.User;
@@ -58,7 +59,7 @@ public class SysadminController {
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") String birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) {
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws UserNotFoundException {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);
         if (userService.getEmail(email, encryptedPassword) == null) {

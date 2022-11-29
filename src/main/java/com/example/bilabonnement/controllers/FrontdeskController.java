@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class FrontdeskController {
 
     //Jonathan
     @GetMapping("/reception")
-    public String frontdeskPage(Model model, HttpSession httpSession){
+    public String frontdeskPage(Model model, HttpSession httpSession) {
         model.addAttribute("roles",loginController.validateRoles(httpSession));
         if (!loginController.validateRoles(httpSession).contains("front_desk") && !loginController.validateRoles(httpSession).contains("sysadmin")){
             return "redirect:/";

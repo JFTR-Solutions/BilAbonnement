@@ -1,5 +1,6 @@
 package com.example.bilabonnement.service;
 
+import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UserService {
         return userRepository.getAll();
     }
 
-    public User getEmail(String email, String password) {
+    public User getEmail(String email, String password)  {
         return userRepository.findUserByEmail(email, password);
     }
 
