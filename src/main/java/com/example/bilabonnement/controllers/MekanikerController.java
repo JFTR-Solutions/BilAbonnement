@@ -21,6 +21,9 @@ public class MekanikerController {
     @GetMapping("/mekaniker")
     public String frontdeskPage(Model model, HttpSession httpSession) {
         model.addAttribute("roles",loginController.validateRoles(httpSession));
+        if ((!loginController.validateRoles(httpSession).contains("sysadmin")) && !loginController.validateRoles(httpSession).contains("mechanic")){
+            return "redirect:/";
+        }
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {

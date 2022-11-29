@@ -48,7 +48,7 @@ public class LoginController {
     //Frederik
     public String validateUser(HttpSession httpSession) {
         User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        if (httpSession.getAttribute("email") == null) {
+        if (httpSession.getAttribute("email") == null ) {
             return "redirect:/";
         } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
             return "validated";

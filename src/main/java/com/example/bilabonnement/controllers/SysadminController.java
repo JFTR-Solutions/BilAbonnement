@@ -29,6 +29,9 @@ public class SysadminController {
     //Frederik
     @GetMapping("/sysadmin")
     public String sysadminPage(Model model, HttpSession httpSession) {
+        if (!loginController.validateRoles(httpSession).contains("sysadmin")){
+            return "redirect:/";
+        }
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {

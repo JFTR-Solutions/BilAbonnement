@@ -24,6 +24,9 @@ public class FrontdeskController {
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) {
         model.addAttribute("roles",loginController.validateRoles(httpSession));
+        if (!loginController.validateRoles(httpSession).contains("front_desk") && !loginController.validateRoles(httpSession).contains("sysadmin")){
+            return "redirect:/";
+        }
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return loginController.validateUser(httpSession);
         } else {
