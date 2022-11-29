@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.encryption.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.UserService;
@@ -36,7 +37,6 @@ public class LoginController {
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {
         User user = userService.getEmail(email, e.encrypt(password));
-
         if (user == null) {
             return "redirect:/error";
         }

@@ -68,6 +68,8 @@ public class SysadminController {
         return ("redirect:/error");
     }
 
+    //TODO fix update user
+
     @GetMapping("/updateuser/{id}")
     public String updateWishlist(@PathVariable("id") int id, Model model) {
         model.addAttribute("id", id);
@@ -87,6 +89,7 @@ public class SysadminController {
         System.out.println(user.getUserId());
         userService.updateUser(user);
 
+        //TODO fix role update
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }

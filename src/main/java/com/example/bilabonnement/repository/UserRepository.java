@@ -1,5 +1,6 @@
 package com.example.bilabonnement.repository;
 
+import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.models.users.Role;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
