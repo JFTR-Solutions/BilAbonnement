@@ -13,7 +13,7 @@
 <div class="home-section">
     <h1>Velkommen til receptionen</h1>
     <div class="button-grid">
-<div><a href="/opret-bil">
+<div style="margin-left: 20%"><a href="/opret-bil">
     <button>Opret ny bil</button>
 </a></div>
         <div><a href="/opret-bilmodel">
@@ -22,13 +22,14 @@
 
 
     </div>
-<div class="search-grid">
+
+<div class="search-grid" style="margin-left: 10%">
     <!--JONATHAN & Thomas-->
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <input type="text" class="searchbar" id="search" placeholder="Søg">
 </div>
-    <table class="sortable" id="table">
+    <table class="sortable, styled-table" id="table" style="margin-left: 10%">
         <thead>
         <tr>
             <th>ID</th>
@@ -62,13 +63,13 @@
             <td th:text="${car.transmission}">Gearkasse</td>
             <td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>
             <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
-            <td><a th:href="@{'/opdater-bil/' + ${car.carId}}">Opdater</a></td>
-            <td><a th:href="@{'/slet-bil/' + ${car.carId}}"
+            <td style="background-color: green"><a th:href="@{'/opdater-bil/' + ${car.carId}}">Opdater</a></td>
+            <td style="background-color: red"><a th:href="@{'/slet-bil/' + ${car.carId}}"
                    onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</a></td>
         </tr>
         </tbody>
     </table>
-</div>
+    </div>
     <script>
         $(document).ready(function () {
             $("#search").on("keyup", function () {

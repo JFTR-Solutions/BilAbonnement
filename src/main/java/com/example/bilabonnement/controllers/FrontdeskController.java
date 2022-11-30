@@ -45,6 +45,7 @@ public class FrontdeskController {
         return "frontdesk";
     }
 
+    //Jonathan
     @GetMapping("/opdater-bil/{id}")
     public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
@@ -57,12 +58,14 @@ public class FrontdeskController {
         return "updatecar";
     }
 
+    //Jonathan
     @PostMapping("/opdater-bil")
     public String saveCar(@ModelAttribute Car car) {
         carService.updateCar(car);
         return "redirect:/reception";
     }
 
+    //Jonathan
     @GetMapping("/slet-bil/{id}")
     public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
@@ -73,6 +76,7 @@ public class FrontdeskController {
         return "redirect:/reception";
     }
 
+    //Thomas
     @PostMapping("/opret-bilmodel")
     public String createCarModel(@RequestParam("modelName") String modelName,
                             @RequestParam("manufacturer") String manufacturer, @RequestParam("co2") String co2,
@@ -81,6 +85,7 @@ public class FrontdeskController {
         return "redirect:/opret-bil";
     }
 
+    //Thomas
     @GetMapping("/opret-bilmodel")
     public String showCreateCarModel(HttpSession httpSession){
         if (!validateLogin(httpSession)) {
@@ -89,6 +94,7 @@ public class FrontdeskController {
         return "createmodel";
     }
 
+    //Rami
     @PostMapping("/opret-bil")
     public String createCar(@RequestParam("modelId") int modelId, @RequestParam("available") byte available,
                             @RequestParam("colour") String colour, @RequestParam("vin") String vin,
@@ -100,6 +106,7 @@ public class FrontdeskController {
         return "redirect:/reception";
     }
 
+    //Rami
     @GetMapping("/opret-bil")
     public String showCreateCar(HttpSession httpSession, Model model){
         if (!validateLogin(httpSession)) {

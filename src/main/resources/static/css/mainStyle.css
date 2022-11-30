@@ -13,6 +13,7 @@ body{
     font-family: 'Poppins',sans-serif;
 }
 
+
 .home-section{
     position: relative;
     background-color: var(--color-white);
@@ -32,6 +33,7 @@ body{
     font-weight: 500;
     margin: 18px;
 }
+
 
 a {
     text-decoration: none;
@@ -87,4 +89,5 @@ button:active {
 
 button:hover {
     opacity: 0.6;
+
 }
