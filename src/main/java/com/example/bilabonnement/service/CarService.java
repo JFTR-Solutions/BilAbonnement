@@ -36,5 +36,10 @@ public class CarService {
 
   public void addCarModel(String modelName, String manufacturer, String co2, String fuelType, double range){
     carRepository.addModel(modelName, manufacturer, co2, fuelType, range);
+
   }
+  public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelprice, double mthPrice, String transmission){
+    carRepository.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
+  }
+
 }

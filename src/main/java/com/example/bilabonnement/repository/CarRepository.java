@@ -172,4 +172,29 @@ public class CarRepository {
       throw new RuntimeException(e);
     }
   }
+
+  public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelPrice, double mthPrice, String transmission){
+    try{
+      String queryCreate = "INSERT INTO cars (car_id, available, colour, vin,reg_number,steel_price,mth_price,transmission,model_id)"+
+              "VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
+    PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+    psts.setByte(1, available);
+    psts.setString(2, colour);
+    psts.setString(3, vin);
+    psts.setString(4, regNumber);
+    psts.setDouble(5, steelPrice);
+    psts.setDouble(6, mthPrice);
+    psts.setString(7, transmission);
+    psts.setInt(8, modelId);
+
+
+    psts.executeUpdate();
+
+  } catch (SQLException e) {
+    throw new RuntimeException(e);
+  }
+
+
+  }
 }

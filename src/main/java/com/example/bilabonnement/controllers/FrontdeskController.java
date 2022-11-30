@@ -95,7 +95,19 @@ public class FrontdeskController {
                             @RequestParam("regNumber") String regNumber, @RequestParam("steelPrice") double steelprice,
                             @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission){
 
+        carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
+
         return "redirect:/reception";
     }
+
+    @GetMapping("/opret-bil")
+    public String showCreateCar(HttpSession httpSession, Model model){
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
+        model.addAttribute("modellist", carService.getAllModels());
+        return "createcar";
+    }
+
 
 }
