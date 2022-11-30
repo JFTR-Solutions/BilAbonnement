@@ -22,6 +22,40 @@
 
         <input type="hidden" name="carId" th:value="${car.carId}">
         <input type="hidden" required name="available" th:value="${car.isAvailable}">
+
+        <div>
+            <label for="car_colour">Skriv farve og vælg fra listen:</label>
+            <input id="car_colour" placeholder="Skriv farve her..." list="car_colours" th:field="*{car.colour}">
+            <datalist id="car_colours" name="colour" th:field="*{car.colour}" style="width: 300px">
+                <option value="Hvid" >Hvid</option>
+                <option value="Metallic Hvid">Metallic Hvid</option>
+                <option value="Sort">Sort</option>
+                <option value="Metallic Sort">Metallic Sort</option>
+                <option value="Grå">Grå</option>
+                <option value="Metallic Grå">Metallic Grå</option>
+                <option value="Sølv">Sølv</option>
+                <option value="Metallic Sølv">Metallic Sølv</option>
+                <option value="Blå">Blå</option>
+                <option value="Metallic Blå">Metallic Blå</option>
+                <option value="Rød">Rød</option>
+                <option value="Metallic Rød">Metallic Rød</option>
+                <option value="Brun">Brun</option>
+                <option value="Metallic Brun">Metallic Brun</option>
+                <option value="Grøn">Grøn</option>
+                <option value="Metallic Grøn">Metallic Grøn</option>
+                <option value="Orange">Orange</option>
+                <option value="Metallic Orange">Metallic Orange</option>
+                <option value="Lilla">Lilla</option>
+                <option value="Metallic Lilla">Metallic Lilla</option>
+                <option value="Beige">Beige</option>
+                <option value="Metallic Beige">Metallic Beige</option>
+                <option value="Guld">Guld</option>
+                <option value="Metallic Guld">Metallic Guld</option>
+                <option value="Gul">Gul</option>
+                <option value="Metallic Gul">Metallic Gul</option>
+            </datalist>
+        </div>
+        <!--
 <div style="font-size: 15px">
         <label for="colour">Farve: </label>
         <select id="colour" name="colour" th:field="*{car.colour}" style="width: 300px">
@@ -53,6 +87,7 @@
             <option value="Metallic Gul" th:selected="${car.colour =='Metallic Gul'}">Metallic Gul</option>
         </select>
 </div>
+-->
 
         <label for="vin">Stelnummer: </label>
         <input id="vin" type="text" required name="VIN" th:value="${car.VIN}">
@@ -80,7 +115,9 @@
                     th:selected="${car.modelId == models.modelId}"></option>
         </select>
 
-        <button type="submit" name="submit" value="Opdater bil"> Opdater bil</button>
+
+        <button type="submit" name="submit" value="Opdater bil">Opdater bil</button>
+        <button type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
     </form>
 </div1>
 

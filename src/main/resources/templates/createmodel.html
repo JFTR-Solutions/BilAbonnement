@@ -18,11 +18,19 @@
     <label for="co2">Co2 Emission: </label>
     <input id="co2" type="number"  name="co2" required>
 
+    <label for="fuelType">Drivmiddel: </label>
+    <select id="fuelType" name="fuelType" required>
+      <option value="Benzin">Benzin</option>
+      <option value="Diesel">Diesel</option>
+      <option value="El">El</option>
+    </select>
+<!--
     <label for="fuelType">Brændstoftype : </label>
     <input id="fuelType" type="text"  name="fuelType" required>
+    -->
 
     <label for="range">Rækkevide: </label>
-    <input id="range" type="number"  name="range" required>
+    <input id="range" type="number"  name="range" required step="any">
 
     <button type="submit" name="submit" value="create"> Opret ny model </button>
   </form>

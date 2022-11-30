@@ -30,7 +30,7 @@
     <input type="text" class="searchbar" id="search" placeholder="Søg">
 </div>
     <table class="sortable, styled-table" id="table">
-        <thead>
+        <thead style="position: sticky; top: 0">
         <tr>
             <th>ID</th>
             <th>Ledig</th>
@@ -43,7 +43,8 @@
             <th>Månedlig ydelse</th>
             <th>Gearkasse</th>
             <th>C02 Emission</th>
-            <th>Brændstoftype</th>
+            <th>Drivmiddel</th>
+            <th>Rækkevidde</th>
             <th>Opdater</th>
             <th>Slet</th>
         </tr>
@@ -63,6 +64,8 @@
             <td th:text="${car.transmission}">Gearkasse</td>
             <td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>
             <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
+            <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM'">Rækkevidde</td>
+            <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM/L'">Rækkevidde</td>
             <td style="background-color: #548f54"><a th:href="@{'/opdater-bil/' + ${car.carId}}">Opdater</a></td>
             <td style="background-color: #b23030"><a th:href="@{'/slet-bil/' + ${car.carId}}"
                                                      onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</a></td>

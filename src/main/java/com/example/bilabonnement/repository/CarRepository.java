@@ -156,7 +156,7 @@ public class CarRepository {
 
     try{
       String addModel = "INSERT INTO model (model_id, model_name, manufacturer, co2_emission, fuel_type, car_range)" +
-              " VALUES (DEFAULT,?,?,?,?,?)";
+          " VALUES (DEFAULT,?,?,?,?,?)";
 
       PreparedStatement psts = conn.prepareStatement(addModel);
 
@@ -176,24 +176,24 @@ public class CarRepository {
   public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelPrice, double mthPrice, String transmission){
     try{
       String queryCreate = "INSERT INTO cars (car_id, available, colour, vin,reg_number,steel_price,mth_price,transmission,model_id)"+
-              "VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
-    PreparedStatement psts = conn.prepareStatement(queryCreate);
+          "VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
+      PreparedStatement psts = conn.prepareStatement(queryCreate);
 
-    psts.setByte(1, available);
-    psts.setString(2, colour);
-    psts.setString(3, vin);
-    psts.setString(4, regNumber);
-    psts.setDouble(5, steelPrice);
-    psts.setDouble(6, mthPrice);
-    psts.setString(7, transmission);
-    psts.setInt(8, modelId);
+      psts.setByte(1, available);
+      psts.setString(2, colour);
+      psts.setString(3, vin);
+      psts.setString(4, regNumber);
+      psts.setDouble(5, steelPrice);
+      psts.setDouble(6, mthPrice);
+      psts.setString(7, transmission);
+      psts.setInt(8, modelId);
 
 
-    psts.executeUpdate();
+      psts.executeUpdate();
 
-  } catch (SQLException e) {
-    throw new RuntimeException(e);
-  }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
 
 
   }
