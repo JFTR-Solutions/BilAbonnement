@@ -21,6 +21,7 @@ public class SysadminController {
     UserService userService;
     UserRepository userRepository;
 
+    //Frederik
     public Boolean validateLogin(HttpSession httpSession) {
         boolean isLoggedIn = true;
         if (!loginController.validateUser(httpSession).equals("validated")) {
@@ -57,7 +58,7 @@ public class SysadminController {
         }
         return rolelist;
     }
-
+    //Frederik
     @GetMapping("/opret-bruger")
     public String createUserPage(HttpSession httpSession) {
         if (!validateLogin(httpSession)) {
@@ -65,7 +66,7 @@ public class SysadminController {
         }
         return "createuser";
     }
-
+    //Frederik
     @PostMapping("/opret-bruger")
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
@@ -79,7 +80,7 @@ public class SysadminController {
         }
         return ("redirect:/error");
     }
-
+    //Frederik
     @GetMapping("/opdater-bruger/{id}")
     public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) {
         if (!validateLogin(httpSession)) {
@@ -90,7 +91,7 @@ public class SysadminController {
         model.addAttribute("user", userService.findUserByID(id));
         return "updateuser";
     }
-
+    //Frederik
     @PostMapping("/opdater-bruger")
     public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
                            @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
@@ -99,7 +100,7 @@ public class SysadminController {
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
-
+    //Frederik
     @GetMapping("/slet-bruger/{id}")
     public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) {
         if (!validateLogin(httpSession)) {
