@@ -13,7 +13,6 @@ body{
     font-family: 'Poppins',sans-serif;
 }
 
-
 .home-section{
     position: relative;
     background-color: var(--color-white);
@@ -34,7 +33,6 @@ body{
     margin: 18px;
 }
 
-
 a {
     text-decoration: none;
     color: inherit;
@@ -48,4 +46,45 @@ h1 {
     line-height: 42px;
     text-align: center;
     font-family: 'Poppins',sans-serif;
+}
+
+.searchbar {
+    display: block;
+    height: 30px;
+    width: 20%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.button-grid{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: 30%;
+}
+
+.search-grid{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button{
+    background-color: #0a4d5b;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    font-size: 100%;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 5px 11px;
+
+}
+button:active {
+    background-color: #062d35;
+}
+
+button:hover {
+    background-color: #0a4d5b;
 }

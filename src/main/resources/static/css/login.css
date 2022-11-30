@@ -2,6 +2,7 @@ body{
     font-family: 'Poppins',sans-serif;
     background-image: linear-gradient(to bottom, #062d35, #0a4d5b);
 }
+
 form h3{
     font-size: 32px;
     font-weight: 500;
@@ -49,7 +50,7 @@ input{
     font-weight: 300;
 }
 
-button{
+.button-index{
     margin-top: 50px;
     width: 100%;
     background-color: #ffffff;
