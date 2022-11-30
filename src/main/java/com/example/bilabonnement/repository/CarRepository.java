@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -90,7 +89,6 @@ public class CarRepository {
       while (resultSet.next()) {
         int id = resultSet.getInt(1);
         byte available = resultSet.getByte(2);
-        System.out.println(available);
         String colour = resultSet.getString(3);
         String vin = resultSet.getString(4);
         String regNumber = resultSet.getString(5);

@@ -24,6 +24,7 @@
 <input type="text" id="search" placeholder="Søg">
 <br>
 <table class="sortable" id="table">
+    <thead>
     <tr>
         <th>Id</th>
         <th>Email</th>
@@ -38,10 +39,11 @@
         <th>Slet</th>
         <th>Roller</th>
     </tr>
-
+    </thead>
 
     <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
-    <tr class="item" th:each="user,iterStat : ${userList}" id="inputrows">
+    <tbody id="inputrows">
+    <tr class="item" th:each="user,iterStat : ${userList}" >
         <td th:text="${user.userId}">ID</td>
         <td th:text="${user.email}">Email</td>
         <td th:text="${user.username}">username</td>
@@ -56,8 +58,9 @@
                onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></td>
         <td th:text="${roleList[iterStat.index]}"></td>
     </tr>
+    </tbody>
 
-</table>
+</table> <!--
 <script>
     var $rows = $('#table #inputrows');
     $('#search').keyup(function () {
@@ -68,7 +71,17 @@
             return !~text.indexOf(val);
         }).hide();
     });
-</script>
+</script>-->
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#inputrows tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 </div>
 </body>
 </html>

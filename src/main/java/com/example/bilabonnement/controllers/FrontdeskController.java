@@ -1,6 +1,5 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.Exceptions.UserNotFoundException;
 import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
@@ -47,7 +46,11 @@ public class FrontdeskController {
     }
 
     @GetMapping("/opdater-bil/{id}")
-    public String updateCar(@PathVariable("id") int id, Model model) {
+    public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) {
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
         model.addAttribute("id", id);
         model.addAttribute("car", carService.findCarById(id));
         model.addAttribute("modellist", carService.getAllModels());
@@ -61,7 +64,11 @@ public class FrontdeskController {
     }
 
     @GetMapping("/slet-bil/{id}")
-    public String deleteCar(@PathVariable("id") int id) {
+    public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) {
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
         carService.deleteCar(id);
         return "redirect:/reception";
     }
