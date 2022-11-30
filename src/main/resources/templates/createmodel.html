@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/updateCar.css}" href="../static/css/updateCar.css">
+    <title>Title</title>
+</head>
+<body>
+<div1>
+  <form method="post" th:action="@{'/opret-bilmodel'}">
+
+    <label for="modelName">Model Navn: </label>
+    <input id="modelName" type="text"  name="modelName" required>
+
+    <label for="manufacturer">Producent: </label>
+    <input id="manufacturer" type="text"  name="manufacturer" required>
+
+    <label for="co2">Co2 Emission: </label>
+    <input id="co2" type="number"  name="co2" required>
+
+    <label for="fuelType">Brændstoftype : </label>
+    <input id="fuelType" type="text"  name="fuelType" required>
+
+    <label for="range">Rækkevide: </label>
+    <input id="range" type="number"  name="range" required>
+
+    <button type="submit" name="submit" value="create"> Opret ny model </button>
+  </form>
+</div1>
+
+</body>
+</html>

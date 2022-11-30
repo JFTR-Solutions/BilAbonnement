@@ -152,4 +152,26 @@ public class CarRepository {
     }
     return modelsList;
   }
+
+
+  public void addModel(String modelName, String manufacturer, String co2, String fuelType, double range){
+
+    try{
+      String addModel = "INSERT INTO model (model_id, model_name, manufacturer, co2_emission, fuel_type, car_range)" +
+              " VALUES (DEFAULT,?,?,?,?,?)";
+
+      PreparedStatement psts = conn.prepareStatement(addModel);
+
+      psts.setString(1, modelName);
+      psts.setString(2, manufacturer);
+      psts.setString(3, co2);
+      psts.setString(4, fuelType);
+      psts.setDouble(5, range);
+
+      psts.executeUpdate();
+
+    } catch(SQLException e){
+      throw new RuntimeException(e);
+    }
+  }
 }

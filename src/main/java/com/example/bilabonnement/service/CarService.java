@@ -24,10 +24,7 @@ public class CarService {
     carRepository.updateCar(car);
   }
 
-  public Car findCarById(int id) {
-
-    return carRepository.findCarById(id);
-  }
+  public Car findCarById(int id) { return carRepository.findCarById(id); }
 
   public void deleteCar(int id) {
     carRepository.deleteCar(id);
@@ -35,5 +32,9 @@ public class CarService {
 
   public List<Model> getAllModels() {
     return carRepository.getAllModels();
+  }
+
+  public void addCarModel(String modelName, String manufacturer, String co2, String fuelType, double range){
+    carRepository.addModel(modelName, manufacturer, co2, fuelType, range);
   }
 }

@@ -33,9 +33,9 @@ public class UserService {
         return userRepository.findRoleById(id);
     }
 
-    public User createUser(String email, String password, String username, String first_name, String last_name,
+    public void createUser(String email, String password, String username, String first_name, String last_name,
                            String birthdate, String address, String phonenr) {
-        return userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
+        userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
     public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) {

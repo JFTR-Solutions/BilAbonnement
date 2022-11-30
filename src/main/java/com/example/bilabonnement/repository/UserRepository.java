@@ -106,7 +106,7 @@ public class UserRepository {
         }
     }
 
-    public User createUser(String email, String password, String username, String first_name, String last_name, String birthdate, String address, String phonenr) {
+    public void createUser(String email, String password, String username, String first_name, String last_name, String birthdate, String address, String phonenr) {
         try {
             String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
@@ -123,8 +123,6 @@ public class UserRepository {
 
             psts.executeUpdate();
 
-            User user = new User(2, email, password, username, first_name, last_name, birthdate, address, phonenr);
-            return user;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

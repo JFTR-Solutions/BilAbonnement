@@ -6,10 +6,7 @@ import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -68,4 +65,30 @@ public class FrontdeskController {
         carService.deleteCar(id);
         return "redirect:/reception";
     }
+
+    @PostMapping("/opret-bilmodel")
+    public String createCarModel(@RequestParam("modelName") String modelName,
+                            @RequestParam("manufacturer") String manufacturer, @RequestParam("co2") String co2,
+                            @RequestParam("fuelType") String fuelType, @RequestParam("range") double range) {
+        carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
+        return "redirect:/opret-bil";
+    }
+
+    @GetMapping("/opret-bilmodel")
+    public String showCreateCarModel(HttpSession httpSession){
+        if (!validateLogin(httpSession)) {
+            return "redirect:/";
+        }
+        return "createmodel";
+    }
+
+    @PostMapping("/opret-bil")
+    public String createCar(@RequestParam("modelId") int modelId, @RequestParam("available") byte available,
+                            @RequestParam("colour") String colour, @RequestParam("vin") String vin,
+                            @RequestParam("regNumber") String regNumber, @RequestParam("steelPrice") double steelprice,
+                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission){
+
+        return "redirect:/reception";
+    }
+
 }

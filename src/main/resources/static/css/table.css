@@ -16,12 +16,29 @@ th {
 }
 
 table {
-
     border-collapse: collapse;
     border: 1px solid #000000;
+    background-color: #ffffff;
 }
 
 tr:hover {
     background-color: #0a4d5b;
     color: #ffffff;
+}
+
+.tableBox{
+    margin: 0 auto;
+    width: 100%;
+    border: 1px solid #000000;
+    height: 750px;
+    width: 70%;
+    background-color: rgba(10,77,91,0.9);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 35%;
+    left: 50%;
+    border-radius: 25px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 25px 35px;
 }
