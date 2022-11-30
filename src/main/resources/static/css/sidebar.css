@@ -105,10 +105,10 @@
     color: var(--color-default);
 }
 
-/*Laver transition tilbage til normalt*/
+/*Color transition back to */
 .sidebar li a:hover .link_name,
 .sidebar li a:hover i{
-    transition: all 0.8s ease;
+    transition: all 0.5s ease;
     color: var(--color-default);
 }
 
