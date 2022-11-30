@@ -114,8 +114,7 @@
 
 /*Moves logout bottom down*/
 #log_out{
-    margin-top: 65vh;
-
+    margin-top: calc(100vh - 34vh);
 }
 
 

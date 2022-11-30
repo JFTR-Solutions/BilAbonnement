@@ -84,7 +84,6 @@ public class UserRepository {
         }
     }
 
-
     public void updateUser(User user) {
         try {
             String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
