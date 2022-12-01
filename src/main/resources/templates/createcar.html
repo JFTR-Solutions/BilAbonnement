@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{../css/updateCar.css}" href="../static/css/updateCar.css">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/createCar.css}" href="../static/css/createCar.css">
     <title>Opret bil</title>
 </head>
 <body>
@@ -11,68 +11,82 @@
 
         <input type="hidden" required name="available" value="1">
 
-        <label for="colour">Skriv farve og vælg fra listen:</label>
-        <input id="colour" name="colour" placeholder="Skriv farve her..." list="car_colours">
-        <datalist id="car_colours" style="width: 300px">
-            <option value="Hvid" >Hvid</option>
-            <option value="Metallic Hvid">Metallic Hvid</option>
-            <option value="Sort">Sort</option>
-            <option value="Metallic Sort">Metallic Sort</option>
-            <option value="Grå">Grå</option>
-            <option value="Metallic Grå">Metallic Grå</option>
-            <option value="Sølv">Sølv</option>
-            <option value="Metallic Sølv">Metallic Sølv</option>
-            <option value="Blå">Blå</option>
-            <option value="Metallic Blå">Metallic Blå</option>
-            <option value="Rød">Rød</option>
-            <option value="Metallic Rød">Metallic Rød</option>
-            <option value="Brun">Brun</option>
-            <option value="Metallic Brun">Metallic Brun</option>
-            <option value="Grøn">Grøn</option>
-            <option value="Metallic Grøn">Metallic Grøn</option>
-            <option value="Orange">Orange</option>
-            <option value="Metallic Orange">Metallic Orange</option>
-            <option value="Lilla">Lilla</option>
-            <option value="Metallic Lilla">Metallic Lilla</option>
-            <option value="Beige">Beige</option>
-            <option value="Metallic Beige">Metallic Beige</option>
-            <option value="Guld">Guld</option>
-            <option value="Metallic Guld">Metallic Guld</option>
-            <option value="Gul">Gul</option>
-            <option value="Metallic Gul">Metallic Gul</option>
-        </datalist>
-<!--
-        <label for="colour">Farve: </label>
-        <select id="colour" name="colour">
-            <option value="Hvid" >Hvid</option>
-            <option value="Metallic Hvid">Metallic Hvid</option>
-            <option value="Sort">Sort</option>
-            <option value="Metallic Sort">Metallic Sort</option>
-            <option value="Grå">Grå</option>
-            <option value="Metallic Grå">Metallic Grå</option>
-            <option value="Sølv">Sølv</option>
-            <option value="Metallic Sølv">Metallic Sølv</option>
-            <option value="Blå">Blå</option>
-            <option value="Metallic Blå">Metallic Blå</option>
-            <option value="Rød">Rød</option>
-            <option value="Metallic Rød">Metallic Rød</option>
-            <option value="Brun">Brun</option>
-            <option value="Metallic Brun">Metallic Brun</option>
-            <option value="Grøn">Grøn</option>
-            <option value="Metallic Grøn">Metallic Grøn</option>
-            <option value="Orange">Orange</option>
-            <option value="Metallic Orange">Metallic Orange</option>
-            <option value="Lilla">Lilla</option>
-            <option value="Metallic Lilla">Metallic Lilla</option>
-            <option value="Beige">Beige</option>
-            <option value="Metallic Beige">Metallic Beige</option>
-            <option value="Guld">Guld</option>
-            <option value="Metallic Guld">Metallic Guld</option>
-            <option value="Gul">Gul</option>
-            <option value="Metallic Gul">Metallic Gul</option>
+        <label for="modelid">Model: </label>
+         <select id="modelid" name="modelId">
+            <option th:each="models : ${modellist}"
+                    th:text="${models.manufacturer + ' ' + models.modelName + ', C02-Emission: ' + models.co2Emission + ', Drivmiddel: ' + models.fuelType + ', Rækkevidde: ' + models.range}"
+                    th:value="${models.modelId}"></option>
         </select>
 
-        -->
+
+ <label for="colour">Farve:</label>
+ <input id="colour" name="colour" placeholder="Skriv farve her..." list="car_colours">
+ <datalist id="car_colours" style="width: 300px">
+     <option value="Hvid" >Hvid</option>
+     <option value="Metallic Hvid">Metallic Hvid</option>
+     <option value="Sort">Sort</option>
+     <option value="Metallic Sort">Metallic Sort</option>
+     <option value="Grå">Grå</option>
+     <option value="Metallic Grå">Metallic Grå</option>
+     <option value="Sølv">Sølv</option>
+     <option value="Metallic Sølv">Metallic Sølv</option>
+     <option value="Blå">Blå</option>
+     <option value="Metallic Blå">Metallic Blå</option>
+     <option value="Rød">Rød</option>
+     <option value="Metallic Rød">Metallic Rød</option>
+     <option value="Brun">Brun</option>
+     <option value="Metallic Brun">Metallic Brun</option>
+     <option value="Grøn">Grøn</option>
+     <option value="Metallic Grøn">Metallic Grøn</option>
+     <option value="Orange">Orange</option>
+     <option value="Metallic Orange">Metallic Orange</option>
+     <option value="Lilla">Lilla</option>
+     <option value="Metallic Lilla">Metallic Lilla</option>
+     <option value="Beige">Beige</option>
+     <option value="Metallic Beige">Metallic Beige</option>
+     <option value="Guld">Guld</option>
+     <option value="Metallic Guld">Metallic Guld</option>
+     <option value="Gul">Gul</option>
+     <option value="Metallic Gul">Metallic Gul</option>
+ </datalist>
+<!--
+ <label for="colour">Farve: </label>
+ <select id="colour" name="colour">
+     <option value="Hvid" >Hvid</option>
+     <option value="Metallic Hvid">Metallic Hvid</option>
+     <option value="Sort">Sort</option>
+     <option value="Metallic Sort">Metallic Sort</option>
+     <option value="Grå">Grå</option>
+     <option value="Metallic Grå">Metallic Grå</option>
+     <option value="Sølv">Sølv</option>
+     <option value="Metallic Sølv">Metallic Sølv</option>
+     <option value="Blå">Blå</option>
+     <option value="Metallic Blå">Metallic Blå</option>
+     <option value="Rød">Rød</option>
+     <option value="Metallic Rød">Metallic Rød</option>
+     <option value="Brun">Brun</option>
+     <option value="Metallic Brun">Metallic Brun</option>
+     <option value="Grøn">Grøn</option>
+     <option value="Metallic Grøn">Metallic Grøn</option>
+     <option value="Orange">Orange</option>
+     <option value="Metallic Orange">Metallic Orange</option>
+     <option value="Lilla">Lilla</option>
+     <option value="Metallic Lilla">Metallic Lilla</option>
+     <option value="Beige">Beige</option>
+     <option value="Metallic Beige">Metallic Beige</option>
+     <option value="Guld">Guld</option>
+     <option value="Metallic Guld">Metallic Guld</option>
+     <option value="Gul">Gul</option>
+     <option value="Metallic Gul">Metallic Gul</option>
+ </select>
+
+ -->
+
+        <label for="transmission">Gearkasse: </label>
+        <select id="transmission" name="transmission">
+            <option value="Automatgear">Automatgear</option>
+            <option value="Manuelgear">Manuelgear</option>
+        </select>
 
         <label for="vin">Stelnummer: </label>
         <input id="vin" type="text" name="vin">
@@ -86,18 +100,7 @@
         <label for="mthprice">Månedlig ydelse: </label>
         <input id="mthprice" type="number"  name="mthPrice">
 
-        <label for="transmission">Gearkasse: </label>
-        <select id="transmission" name="transmission">
-            <option value="Automatgear">Automatgear</option>
-            <option value="Manuelgear">Manuelgear</option>
-        </select>
 
-        <label for="modelid">Model: </label>
-        <select id="modelid" name="modelId">
-            <option th:each="models : ${modellist}"
-                    th:text="${models.manufacturer + ' ' + models.modelName + ', C02-Emission: ' + models.co2Emission + ', Drivmiddel: ' + models.fuelType + ', Rækkevidde: ' + models.range}"
-                    th:value="${models.modelId}"></option>
-        </select>
 
         <button type="submit" name="submit" value="Opret bil"> Opret bil </button>
     </form>

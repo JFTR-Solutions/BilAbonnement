@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class SysadminController {
     @PostMapping("/opret-bruger")
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
-                             @RequestParam("lastname") String lastname, @RequestParam("birthdate") String birthdate,
+                             @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
                              @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws UserNotFoundException {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);

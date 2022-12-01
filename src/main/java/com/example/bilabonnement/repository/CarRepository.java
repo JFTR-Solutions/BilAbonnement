@@ -27,7 +27,7 @@ public class CarRepository {
     List<Car> carList = new LinkedList<>();
 
     try {
-      String queryCreate = "SELECT * from cars INNER JOIN model ON model.model_id=cars.model_id";
+      String queryCreate = "SELECT * from cars INNER JOIN models ON models.model_id=cars.model_id";
       PreparedStatement psts = conn.prepareStatement(queryCreate);
       ResultSet resultSet = psts.executeQuery();
 
@@ -132,7 +132,7 @@ public class CarRepository {
     List<Model> modelsList = new LinkedList<>();
 
     try {
-      String queryCreate = "SELECT * from model ORDER BY manufacturer";
+      String queryCreate = "SELECT * from models ORDER BY manufacturer";
       PreparedStatement psts = conn.prepareStatement(queryCreate);
       ResultSet resultSet = psts.executeQuery();
 
@@ -155,7 +155,7 @@ public class CarRepository {
   public void addModel(String modelName, String manufacturer, String co2, String fuelType, double range){
 
     try{
-      String addModel = "INSERT INTO model (model_id, model_name, manufacturer, co2_emission, fuel_type, car_range)" +
+      String addModel = "INSERT INTO models (model_id, model_name, manufacturer, co2_emission, fuel_type, car_range)" +
           " VALUES (DEFAULT,?,?,?,?,?)";
 
       PreparedStatement psts = conn.prepareStatement(addModel);
@@ -169,7 +169,7 @@ public class CarRepository {
       psts.executeUpdate();
 
     } catch(SQLException e){
-      throw new RuntimeException(e);
+        e.printStackTrace();
     }
   }
 

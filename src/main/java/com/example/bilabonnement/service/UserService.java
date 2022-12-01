@@ -4,6 +4,7 @@ import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -33,7 +34,7 @@ public class UserService {
     }
 
     public void createUser(String email, String password, String username, String first_name, String last_name,
-                           String birthdate, String address, String phonenr) {
+                           Date birthdate, String address, String phonenr) {
         userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 

@@ -45,7 +45,6 @@
             <th>C02 Emission</th>
             <th>Drivmiddel</th>
             <th>Rækkevidde</th>
-            <th>Slet</th>
         </tr>
         </thead>
         <tbody id="inputrows">
@@ -58,15 +57,17 @@
             <td th:text="${car.colour}">Farve</td>
             <td th:text="${car.VIN}">Stelnummer</td>
             <td th:text="${car.regNumber}">Nummerplade</td>
-            <td th:text="${car.steelPrice}">Stålpris</td>
-            <td th:text="${car.mthPrice}">Månedlig ydelse</td>
+            <!--<td th:text="$car.steelPrice}">Stålpris</td>-->
+            <td th:text="${#numbers.formatDecimal(car.steelPrice,0,0)} + ' dkk'">Stålpris</td>
+            <!--<td th:text="${car.mthPrice}">Månedlig ydelse</td>-->
+            <td th:text="${#numbers.formatDecimal(car.mthPrice,0,0)} + ' dkk'">Månedlig ydelse</td>
             <td th:text="${car.transmission}">Gearkasse</td>
-            <td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>
+            <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->
+            <td style="text-align: right" th:text="${#numbers.formatDecimal(car.carModel.getCo2Emission,0,0)} + ' g/km'">C02 Emission</td>
             <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
-            <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM'">Rækkevidde</td>
-            <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM/L'">Rækkevidde</td>
-            <td style="background-color: #b23030"><a th:href="@{'/slet-bil/' + ${car.carId}}"
-                                                     onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</a></td>
+            <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${#numbers.formatDecimal(car.carModel.getRange,0,0)} + ' km'">Rækkevidde</td>
+            <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' km/l'">Rækkevidde</td>
+
         </tr>
         </tbody>
     </table>
