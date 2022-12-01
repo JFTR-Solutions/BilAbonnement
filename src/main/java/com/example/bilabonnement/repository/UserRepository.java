@@ -5,6 +5,7 @@ import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,7 +94,7 @@ public class UserRepository {
             psts.setString(2, user.getUsername());
             psts.setString(3, user.getFirstName());
             psts.setString(4, user.getLastName());
-            psts.setString(5, user.getBirthdate());
+            psts.setDate(5, user.getBirthdate());
             psts.setString(6, user.getAddress());
             psts.setString(7, user.getPhoneNumber());
             psts.setInt(8, user.getUserId());
@@ -105,7 +106,7 @@ public class UserRepository {
         }
     }
 
-    public void createUser(String email, String password, String username, String first_name, String last_name, String birthdate, String address, String phonenr) {
+    public void createUser(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
         try {
             String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
@@ -116,7 +117,7 @@ public class UserRepository {
             psts.setString(3, password);
             psts.setString(4, first_name);
             psts.setString(5, last_name);
-            psts.setString(6, birthdate);
+            psts.setDate(6, birthdate);
             psts.setString(7, address);
             psts.setString(8, phonenr);
 
@@ -143,7 +144,7 @@ public class UserRepository {
                 String password = rs.getString(4);
                 String firstName = rs.getString(5);
                 String lastName = rs.getString(6);
-                String birthdate = rs.getString(7);
+                Date birthdate = rs.getDate(7);
                 String address = rs.getString(8);
                 String phoneNumber = rs.getString(9);
 
@@ -205,7 +206,7 @@ public class UserRepository {
                 String username = rs.getString(3);
                 String first_name = rs.getString(5);
                 String last_name = rs.getString(6);
-                String date = rs.getString(7);
+                Date date = rs.getDate(7);
                 String address = rs.getString(8);
                 String phoneNumber = rs.getString(9);
 
@@ -246,7 +247,7 @@ public class UserRepository {
                 String password = rs.getString(4);
                 String first_name = rs.getString(5);
                 String last_name = rs.getString(6);
-                String date = rs.getString(7);
+                Date date = rs.getDate(7);
                 String address = rs.getString(8);
                 String phoneNumber = rs.getString(9);
 
