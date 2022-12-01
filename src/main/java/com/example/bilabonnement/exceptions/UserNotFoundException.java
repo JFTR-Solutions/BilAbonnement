@@ -1,4 +1,4 @@
-package com.example.bilabonnement.Exceptions;
+package com.example.bilabonnement.exceptions;
 
 public class UserNotFoundException extends Exception{
 
