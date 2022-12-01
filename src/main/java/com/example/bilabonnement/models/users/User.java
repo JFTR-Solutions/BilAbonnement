@@ -27,9 +27,13 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User (){
-
+    public User (int userId, String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
     }
+
+    public User(){}
 
     public int getUserId() {
         return userId;

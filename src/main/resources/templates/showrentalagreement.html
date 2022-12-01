@@ -12,7 +12,7 @@
   <div th:insert="fragments/sysadminheader"></div>
 </nav>
 <div class="home-section">
-  <h1>System admin dashboard</h1>
+  <h1>Leasing</h1>
   <a href="/create-rentalAgreement">
     <button>Opret ny Leasing aftale</button>
   </a>
@@ -27,21 +27,25 @@
     <thead style="position: sticky; top: 0">
     <tr>
       <th>RentalId</th>
-      <th>UserId</th>
       <th>Start Dato</th>
       <th>Slut Dato</th>
-      <th>Mth Km Id</th>
-
+      <th>Mdl. Pris</th>
+      <th>Fornavn</th>
+      <th>Efternavn</th>
+      <th>Mærke</th>
+      <th>Model</th>
     </tr>
     </thead>
     <tbody id="inputrows">
-    <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${agreements.rentalId} + '\');'">
-      <td th:text="${agreement.rentalId}">rentalId</td>
-      <td th:text="${agreement.userId}">userId</td>
-      <td th:text="${agreement.startDate}">startDate</td>
-      <td th:text="${agreement.endDate}">endDate</td>
-      <td th:text="${agreement.mthKmId}">mthKmId</td>
-      <td th:text="${agreement.mthPrice}">mthPrice</td>
+     <tr class="item" th:each="agreement,iterStat : ${agreements}">
+       <td th:text="${agreement.rentalId}">rentalId</td>
+       <td th:text="${agreement.startDate}">startDate</td>
+        <td th:text="${agreement.endDate}">endDate</td>
+        <td th:text="${agreement.mthPrice}">mthPrice</td>
+        <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
+        <td th:text="${agreement.getUser().getLastName()}">LastName</td>
+       <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
+       <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
       </tr>
     </tbody>
 
@@ -49,20 +53,4 @@
 </div>
 </body>
 
-  <script>
-    $(document).ready(function () {
-      $("#search").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#inputrows tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-    });
-  </script>
-
-  <script>
-    function rowClicked(value) {
-      location.href = "/opdater-bruger/" + value;
-    }
-  </script>
 </html>

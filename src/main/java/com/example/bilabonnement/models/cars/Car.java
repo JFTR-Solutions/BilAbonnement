@@ -42,6 +42,12 @@ public class Car {
     this.carModel = carModel;
   }
 
+  public Car(int id, String vin, String regNumber){
+    this.VIN = vin;
+    this.regNumber = regNumber;
+    this.carId = id;
+  }
+
   public int getCarId() {
     return carId;
   }

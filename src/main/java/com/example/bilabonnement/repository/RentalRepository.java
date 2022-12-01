@@ -1,7 +1,10 @@
 package com.example.bilabonnement.repository;
 
+import com.example.bilabonnement.models.cars.Car;
+import com.example.bilabonnement.models.cars.Model;
 import com.example.bilabonnement.models.rentalagreements.MthKm;
 import com.example.bilabonnement.models.rentalagreements.RentalAgreement;
+import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
@@ -87,19 +90,35 @@ public class RentalRepository {
     public List<RentalAgreement> fetchAllRentalAgreements() {
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {
-            String queryCreate = "SELECT * from rental_agreements";
+            String queryCreate = "SELECT DISTINCT rental_agreements.rental_id, rental_agreements.start_date, " +
+                    "                rental_agreements.end_date, rental_agreements.mth_price, models.model_name,\n" +
+                    "                models.manufacturer, models.model_id, cars.car_id, cars.vin, cars.reg_number, " +
+                    "                users.first_name, users.last_name, users.user_id FROM rental_agreements\n" +
+                    "                INNER JOIN cars ON rental_agreements.car_id = cars.car_id\n" +
+                    "                INNER JOIN models ON cars.model_id = models.model_id\n" +
+                    "                INNER JOIN users ON rental_agreements.user_id = users.user_id\n" +
+                    "                ORDER BY rental_agreements.start_date;";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             ResultSet resultSet = psts.executeQuery();
 
             while (resultSet.next()) {
                 int rentalId = resultSet.getInt(1);
-                int userId = resultSet.getInt(2);
-                int mthKmId = resultSet.getInt(3);
-                Date endDate = resultSet.getDate(4);
-                Date startDate = resultSet.getDate(5);
-                int carId = resultSet.getInt(6);
-                double mthPrice = resultSet.getDouble(7);
-                rentalAgreementList.add(new RentalAgreement(rentalId, endDate, startDate, mthPrice, carId, mthKmId, userId));
+                Date startDate = resultSet.getDate(2);
+                Date endDate = resultSet.getDate(3);
+                double mthPrice = resultSet.getDouble(4);
+                String modelName = resultSet.getString(5);
+                String manufacturer = resultSet.getString(6);
+                int modelId = resultSet.getInt(7);
+                int carId = resultSet.getInt(8);
+                String vin = resultSet.getString(9);
+                String regNumber = resultSet.getString(10);
+                String firstName = resultSet.getString(11);
+                String lastName = resultSet.getString(12);
+                int userId = resultSet.getInt(13);
+
+                rentalAgreementList.add(new RentalAgreement(rentalId, startDate, endDate, mthPrice, carId,
+                        new Car(carId, vin, regNumber), userId, new User(userId, firstName, lastName), modelId,
+                        new Model(modelId, modelName, manufacturer)));
             }
             return rentalAgreementList;
         } catch (SQLException e) {
