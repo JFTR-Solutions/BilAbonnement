@@ -1,6 +1,6 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.exceptions.UserNotFoundException;
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.encryption.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
@@ -22,7 +22,7 @@ public class SysadminController {
     UserRepository userRepository;
 
     //Frederik
-    public Boolean validateLogin(HttpSession httpSession) {
+    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
         boolean isLoggedIn = true;
         if (!loginController.validateUser(httpSession).equals("validated")) {
             return !isLoggedIn;
@@ -42,7 +42,7 @@ public class SysadminController {
 
     //Frederik
     @GetMapping("/sysadmin")
-    public String sysadminPage(Model model, HttpSession httpSession) {
+    public String sysadminPage(Model model, HttpSession httpSession) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
@@ -51,7 +51,7 @@ public class SysadminController {
         return "sysadmin";
     }
 
-    public List<String> roleList() {
+    public List<String> roleList() throws CarLeasingException {
         List<String> rolelist = new ArrayList<>();
         for (int i = 0; i < userService.getAll().size(); i++) {
             rolelist.add(userService.getRoles(userService.getAll().get(i).getUserId()).toString().substring(1, userService.getRoles(userService.getAll().get(i).getUserId()).toString().length() - 1));
@@ -60,7 +60,7 @@ public class SysadminController {
     }
     //Frederik
     @GetMapping("/opret-bruger")
-    public String createUserPage(HttpSession httpSession) {
+    public String createUserPage(HttpSession httpSession) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
@@ -71,7 +71,7 @@ public class SysadminController {
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws UserNotFoundException {
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws CarLeasingException {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);
         if (userService.getEmail(email, encryptedPassword) == null) {
@@ -82,7 +82,7 @@ public class SysadminController {
     }
     //Frederik
     @GetMapping("/opdater-bruger/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) {
+    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
@@ -95,14 +95,14 @@ public class SysadminController {
     @PostMapping("/opdater-bruger")
     public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
                            @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
-                           @RequestParam(defaultValue = "false") boolean mechanic) {
+                           @RequestParam(defaultValue = "false") boolean mechanic) throws CarLeasingException {
         userService.updateUser(user);
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
     //Frederik
     @GetMapping("/slet-bruger/{id}")
-    public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) {
+    public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }

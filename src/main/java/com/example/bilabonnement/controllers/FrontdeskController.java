@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.UserService;
@@ -22,7 +23,7 @@ public class FrontdeskController {
         this.carService = carService;
     }
 
-    public Boolean validateLogin(HttpSession httpSession) {
+    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
         boolean isLoggedIn = false;
         if (loginController.validateUser(httpSession).equals("validated")){
             return !isLoggedIn;
@@ -36,7 +37,7 @@ public class FrontdeskController {
 
     //Jonathan
     @GetMapping("/reception")
-    public String frontdeskPage(Model model, HttpSession httpSession) {
+    public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!validateLogin(httpSession)) {
             return "redirect:/";
@@ -47,7 +48,7 @@ public class FrontdeskController {
 
     //Jonathan
     @GetMapping("/opdater-bil/{id}")
-    public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) {
+    public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!validateLogin(httpSession)) {
             return "redirect:/";
@@ -67,7 +68,7 @@ public class FrontdeskController {
 
     //Jonathan
     @GetMapping("/slet-bil/{id}")
-    public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) {
+    public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!validateLogin(httpSession)) {
             return "redirect:/";
@@ -87,7 +88,7 @@ public class FrontdeskController {
 
     //Thomas
     @GetMapping("/opret-bilmodel")
-    public String showCreateCarModel(HttpSession httpSession){
+    public String showCreateCarModel(HttpSession httpSession) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }
@@ -108,7 +109,7 @@ public class FrontdeskController {
 
     //Rami
     @GetMapping("/opret-bil")
-    public String showCreateCar(HttpSession httpSession, Model model){
+    public String showCreateCar(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!validateLogin(httpSession)) {
             return "redirect:/";
         }

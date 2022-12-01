@@ -1,5 +1,6 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class SalesController {
         this.userService = userService;
     }
 
-    public Boolean validateLogin(HttpSession httpSession) {
+    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
         boolean isLoggedIn = false;
         if (loginController.validateUser(httpSession).equals("validated")){
             return !isLoggedIn;
@@ -32,7 +33,7 @@ public class SalesController {
     }
 
     @GetMapping("/salg")
-    public String salesPage(Model model, HttpSession httpSession)  {
+    public String salesPage(Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!validateLogin(httpSession)){
             return "redirect:/";

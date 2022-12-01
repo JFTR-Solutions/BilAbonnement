@@ -1,5 +1,6 @@
 package com.example.bilabonnement.service;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAll() {
+    public List<User> getAll() throws CarLeasingException {
         return userRepository.getAll();
     }
 
-    public User getEmail(String email, String password)  {
+    public User getEmail(String email, String password) throws CarLeasingException {
         return userRepository.findUserByEmail(email, password);
     }
 
@@ -29,7 +30,7 @@ public class UserService {
     }
 
 
-    public List<String> getRoles(int id) {
+    public List<String> getRoles(int id) throws CarLeasingException {
         return userRepository.findRoleById(id);
     }
 
@@ -38,11 +39,11 @@ public class UserService {
         userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
-    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) {
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
         userRepository.updateRoles(user, sysadmin, sales, front_desk, mechanic);
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user) throws CarLeasingException {
         userRepository.updateUser(user);
 
     }

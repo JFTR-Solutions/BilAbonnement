@@ -1,5 +1,6 @@
 package com.example.bilabonnement.repository;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,7 @@ public class UserRepository {
 
     }
 
-    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) {
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
 
         String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
         String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
@@ -78,13 +79,13 @@ public class UserRepository {
                 psts.setInt(1, 4);
                 psts.executeUpdate();
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CarLeasingException("Couldn't update roles, try again");
+        } catch (SQLException | CarLeasingException e) {
+            throw new CarLeasingException(e.getMessage());
         }
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user) throws CarLeasingException {
         try {
             String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
             PreparedStatement psts = conn.prepareStatement(queryUpdate);
@@ -101,7 +102,7 @@ public class UserRepository {
             psts.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CarLeasingException(e.getMessage());
         }
     }
 
@@ -127,7 +128,7 @@ public class UserRepository {
         }
     }
 
-    public List<User> getAll() {
+    public List<User> getAll() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
 
@@ -151,14 +152,14 @@ public class UserRepository {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CarLeasingException(e.getMessage());
         }
         return userList;
     }
 
 
     //Frederik
-    public List<String> findRoleById(int id) {
+    public List<String> findRoleById(int id) throws CarLeasingException {
         List<String> roleList = new ArrayList<>();
 
         try {
@@ -175,7 +176,7 @@ public class UserRepository {
             return roleList;
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new CarLeasingException(ex.getMessage());
         }
 
     }
@@ -184,7 +185,7 @@ public class UserRepository {
     }*/
 
     //Frederik
-    public User findUserByEmail(String email, String password) {
+    public User findUserByEmail(String email, String password) throws CarLeasingException {
 
         User user = new User();
         user.setEmail(email);
@@ -219,10 +220,9 @@ public class UserRepository {
 
                 return user;
             }
-
-            return null;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new CarLeasingException("Ugyldigt brugernavn eller adgangskode");
+        } catch (CarLeasingException | SQLException ex) {
+            throw new CarLeasingException(ex.getMessage());
         }
 
     }
