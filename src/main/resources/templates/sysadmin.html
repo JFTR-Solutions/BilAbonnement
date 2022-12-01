@@ -36,15 +36,14 @@
         <th>Fødselsdagsdato</th>
         <th>Adresse</th>
         <th>Telefon nummer</th>
-        <th>Opdater</th>
+<!--        <th>Opdater</th>-->
         <th>Slet</th>
         <th>Roller</th>
     </tr>
     </thead>
-
     <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
     <tbody id="inputrows">
-    <tr class="item" th:each="user,iterStat : ${userList}" >
+    <tr class="item" th:each="user,iterStat : ${userList}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
         <td th:text="${user.userId}">ID</td>
         <td th:text="${user.email}">Email</td>
         <td th:text="${user.username}">username</td>
@@ -54,12 +53,13 @@
         <td th:text="${user.birthdate}">birthday</td>
         <td th:text="${user.address}">address</td>
         <td th:text="${user.phoneNumber}">Phone number</td>
-        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>
+<!--        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>-->
         <td style="background-color: #b23030" ><a class="underline" th:href="@{'/slet-bruger/' + ${user.userId}}"
                onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></td>
         <td th:text="${roleList[iterStat.index]}"></td>
-    </tr>
+        </a></tr>
     </tbody>
+
 
 </table> <!--
 <script>
@@ -82,6 +82,12 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        function rowClicked(value) {
+            location.href = "/opdater-bruger/" + value;
+        }
     </script>
 </div>
 </body>

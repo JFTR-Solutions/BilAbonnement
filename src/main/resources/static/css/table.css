@@ -1,3 +1,10 @@
+tr{
+    cursor: pointer;
+}
+
+tr:hover{
+    opacity: 0.7;
+}
 
 .styled-table {
     border-collapse: collapse;

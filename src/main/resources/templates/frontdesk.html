@@ -45,12 +45,11 @@
             <th>C02 Emission</th>
             <th>Drivmiddel</th>
             <th>Rækkevidde</th>
-            <th>Opdater</th>
             <th>Slet</th>
         </tr>
         </thead>
         <tbody id="inputrows">
-        <tr class="item" th:each="car:${carlist}">
+        <tr class="item" th:each="car:${carlist}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             <td th:text="${car.carId}">ID</td>
             <td th:if="${car.isAvailable == 1}" th:text="Ledig">Ledig</td>
             <td th:if="${car.isAvailable == 0}" th:text="Udlejet">Udlejet</td>
@@ -66,7 +65,6 @@
             <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
             <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM'">Rækkevidde</td>
             <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' KM/L'">Rækkevidde</td>
-            <td style="background-color: #548f54"><a th:href="@{'/opdater-bil/' + ${car.carId}}">Opdater</a></td>
             <td style="background-color: #b23030"><a th:href="@{'/slet-bil/' + ${car.carId}}"
                                                      onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</a></td>
         </tr>
@@ -83,5 +81,11 @@
             });
         });
     </script>
+
+<script>
+    function rowClicked(value) {
+        location.href = "/opdater-bil/" + value;
+    }
+</script>
 </body>
 </html>
