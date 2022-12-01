@@ -1,0 +1,52 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/createCar.css}" href="../static/css/createCar.css">
+  <title>Opret Leasing Aftale</title>
+</head>
+
+<body>
+
+<div1>
+  <form method="post" action="/create-rentalAgreement">
+
+    <label for="userId">Bruger: </label>
+    <select id="userId" name="userId">
+      <option th:each="user : ${userlist}"
+              th:text="${user.firstName + ' ' + user.lastName}"
+              th:value="${user.userId}"></option>
+    </select>
+
+    <label for="carId">Bil: </label>
+    <select id="carId" name="carId">
+      <option th:each="car : ${carlist}"
+              th:text="${car.carModel.getManufacturer() + ' ' + car.carModel.getModelName() + ', ' + car.colour + ', ' + car.regNumber}"
+              th:value="${car.carId}"></option>
+    </select>
+
+    <label for="mthKmId">Kilometer pr. måned: </label>
+     <select id="mthKmId" name="mthKmId">
+       <option th:each="mthkm : ${kmpricelist}"
+               th:text="${mthkm.km + 'km  -  ' + mthkm.price+ 'kr.'}"
+               th:value="${mthkm.kmId}"></option>
+     </select>
+
+    <label for="startDate">Start Dato: </label>
+    <input id="startDate" type="date" name="startDate">
+
+    <label for="months">Abonnementslængde: </label>
+    <select id="months" type="date" name="months">
+      <option value="3">3 måneder</option>
+      <option value="6">6 måneder</option>
+      <option value="12">12 måneder</option>
+      <option value="24">24 måneder</option>
+      <option value="36">36 måneder</option>
+    </select>
+
+
+    <button type="submit" name="submit" value="create agreement"> Opret Aftale </button>
+  </form>
+</div1>
+
+</body>
+</html>

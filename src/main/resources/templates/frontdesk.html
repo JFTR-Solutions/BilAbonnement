@@ -13,11 +13,19 @@
 <div class="home-section">
     <h1>Velkommen til receptionen</h1>
     <div class="button-grid">
-<div><a href="/opret-bil">
+<div><a href="/create-car">
     <button>Opret ny bil</button>
 </a></div>
-        <div><a href="/opret-bilmodel">
+        <div><a href="/create-carmodel">
             <button>Opret ny bil model</button>
+        </a></div>
+
+        <div><a href="/create-rentalAgreement">
+            <button>Opret ny Leasing Aftale</button>
+        </a></div>
+
+        <div><a href="/show-rentalAgreement">
+            <button>Se alle Leasing aftaler</button>
         </a></div>
 
 
@@ -85,7 +93,7 @@
 
 <script>
     function rowClicked(value) {
-        location.href = "/opdater-bil/" + value;
+        location.href = "/update-car/" + value;
     }
 </script>
 </body>

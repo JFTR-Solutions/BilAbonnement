@@ -22,6 +22,37 @@ public class CarRepository {
     }
   }
 
+
+  public List<Car> fetchAllAvailableCars(){
+    List<Car> carList = new LinkedList<>();
+    try {
+      String queryCreate = "SELECT * from cars INNER JOIN models ON models.model_id=cars.model_id WHERE available = 1 ORDER BY manufacturer, model_name";
+      PreparedStatement psts = conn.prepareStatement(queryCreate);
+      ResultSet resultSet = psts.executeQuery();
+
+      while (resultSet.next()) {
+        int id = resultSet.getInt(1);
+        byte isAvailable = resultSet.getByte(2);
+        String colour = resultSet.getString(3);
+        String vin = resultSet.getString(4);
+        String regNumber = resultSet.getString(5);
+        double steelPrice = resultSet.getDouble(6);
+        double mthPrice = resultSet.getDouble(7);
+        String transmission = resultSet.getString(8);
+        int modelId = resultSet.getInt(9);
+        String modelName = resultSet.getString(11);
+        String manufacturer = resultSet.getString(12);
+        double co2Emission = resultSet.getDouble(13);
+        String fuelType = resultSet.getString(14);
+        double range = resultSet.getDouble(15);
+        carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName, manufacturer, co2Emission, fuelType, range)));
+      }
+      return carList;
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public List<Car> findAll() {
 
     List<Car> carList = new LinkedList<>();
@@ -196,5 +227,20 @@ public class CarRepository {
     }
 
 
+  }
+
+  public void updateCarAvailability(int carId, byte b) {
+    try {
+      String queryCreate = ("UPDATE cars SET available=? WHERE car_id=?");
+      PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+      psts.setByte(1, b);
+      psts.setInt(2, carId);
+
+      psts.executeUpdate();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

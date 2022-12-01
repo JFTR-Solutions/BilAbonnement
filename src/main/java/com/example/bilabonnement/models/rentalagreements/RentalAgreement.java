@@ -1,5 +1,8 @@
 package com.example.bilabonnement.models.rentalagreements;
 
+import com.example.bilabonnement.models.cars.Car;
+import com.example.bilabonnement.models.users.User;
+
 import java.sql.Date;
 
 public class RentalAgreement {
@@ -12,6 +15,13 @@ public class RentalAgreement {
   private int mthKmId;
   private int userId;
 
+  private MthKm mthKm;
+
+  private Car car;
+
+  private User user;
+
+
   public RentalAgreement() {
   }
 
@@ -22,6 +32,20 @@ public class RentalAgreement {
     this.mthPrice = mthPrice;
     this.carId = carId;
     this.mthKmId = mthKmId;
+    this.userId = userId;
+  }
+
+  public RentalAgreement(int rentalId, Date endDate, Date startDate, double mthPrice,
+                         int carId, Car car, int mthKmId, MthKm mthKm, int userId, User user) {
+    this.rentalId = rentalId;
+    this.endDate = endDate;
+    this.startDate = startDate;
+    this.mthPrice = mthPrice;
+    this.car = car;
+    this.carId = carId;
+    this.mthKm = mthKm;
+    this.mthKmId = mthKmId;
+    this.user = user;
     this.userId = userId;
   }
 

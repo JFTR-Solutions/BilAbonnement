@@ -20,6 +20,8 @@ public class CarService {
     return carRepository.findAll();
   }
 
+  public List<Car> fetchAllAvailableCars() { return carRepository.fetchAllAvailableCars();}
+
   public void updateCar(Car car) {
     carRepository.updateCar(car);
   }
@@ -42,4 +44,7 @@ public class CarService {
     carRepository.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
   }
 
+  public void updateCarAvailability(int carId, byte b) {
+    carRepository.updateCarAvailability(carId, b);
+  }
 }
