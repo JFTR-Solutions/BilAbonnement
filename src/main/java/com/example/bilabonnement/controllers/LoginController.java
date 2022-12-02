@@ -7,6 +7,7 @@ import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +29,10 @@ public class LoginController {
 
     @GetMapping("/")
     public String loginPage(HttpSession httpSession, Model model) {
-        try {
-            if (validateUser(httpSession).equals("validated")) {
-                return "redirect:/velkommen";
-            }
-        } catch (CarLeasingException ex){
-                model.addAttribute("index",httpSession.getAttribute("error"));
-            return "index";
+        if (validateUser(httpSession).equals("validated")) {
+            return "redirect:/velkommen";
         }
+        model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         return "index";
     }
 
@@ -47,23 +44,23 @@ public class LoginController {
             userService.getEmail(email, e.encrypt(password));
             httpSession.setAttribute("email", email);
             httpSession.setAttribute("password", e.encrypt(password));
-        }catch (CarLeasingException e){
-            httpSession.setAttribute("error",e.getMessage());
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
             return "redirect:/";
         }
-
-            return "redirect:/velkommen";
-        }
+        return "redirect:/velkommen";
+    }
 
 
     //Frederik
     public String validateUser(HttpSession httpSession) throws CarLeasingException {
-        User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
-        if (httpSession.getAttribute("email") == null || httpSession.getAttribute("password") == null) {
-            return "redirect:/";
-        } else if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
-            return "validated";
-        } else return "redirect:/error";
+        if (httpSession.getAttribute("email") != null && httpSession.getAttribute("password") != null) {
+            User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+            if (user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")))) {
+                return "validated";
+            }
+        }
+        return "redirect:/";
     }
 
     //Frederik
@@ -80,7 +77,7 @@ public class LoginController {
             return validateUser(httpSession);
         } else {
             model.addAttribute("roles", validateRoles(httpSession));
-            httpSession.setAttribute("roller",validateRoles(httpSession));
+            httpSession.setAttribute("roller", validateRoles(httpSession));
             model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
             return "welcome";
         }

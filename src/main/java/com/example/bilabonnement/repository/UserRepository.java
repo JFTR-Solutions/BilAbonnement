@@ -1,6 +1,7 @@
 package com.example.bilabonnement.repository;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.exceptions.carExceptionEnum;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.util.ConnectionManager;
 import org.springframework.stereotype.Repository;
@@ -79,9 +80,9 @@ public class UserRepository {
                 psts.setInt(1, 4);
                 psts.executeUpdate();
             }
-            throw new CarLeasingException("Couldn't update roles, try again");
+            throw new CarLeasingException("Couldn't update roles, try again",carExceptionEnum.ERROR);
         } catch (SQLException | CarLeasingException e) {
-            throw new CarLeasingException(e.getMessage());
+            throw new CarLeasingException(e.getMessage(),carExceptionEnum.ERROR);
         }
     }
 
@@ -102,7 +103,7 @@ public class UserRepository {
             psts.executeUpdate();
 
         } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage());
+            throw new CarLeasingException(e.getMessage(),carExceptionEnum.INDEX);
         }
     }
 
@@ -152,7 +153,7 @@ public class UserRepository {
             }
 
         } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage());
+            throw new CarLeasingException(e.getMessage(),carExceptionEnum.INDEX);
         }
         return userList;
     }
@@ -176,7 +177,7 @@ public class UserRepository {
             return roleList;
 
         } catch (SQLException ex) {
-            throw new CarLeasingException(ex.getMessage());
+            throw new CarLeasingException(ex.getMessage(),carExceptionEnum.INDEX);
         }
 
     }
@@ -220,9 +221,9 @@ public class UserRepository {
 
                 return user;
             }
-            throw new CarLeasingException("Ugyldigt brugernavn eller adgangskode");
+            throw new CarLeasingException("Ugyldigt brugernavn eller adgangskode", carExceptionEnum.INDEX);
         } catch (CarLeasingException | SQLException ex) {
-            throw new CarLeasingException(ex.getMessage());
+            throw new CarLeasingException(ex.getMessage(),carExceptionEnum.INDEX);
         }
 
     }

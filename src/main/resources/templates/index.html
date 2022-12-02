@@ -12,7 +12,7 @@
     <div>
         <form method="post" th:action="@{'/login'}">
             <h3>Login</h3>
-            <span th:if="${!#strings.isEmpty(index)}"></span>
+            <span th:if="${errorMessage}"  th:text="${errorMessage}" style="color: red"></span>
             <input type="hidden" name="id">
             <label for="email">Email: </label>
             <input id="email" autofocus type="text" required name="email">

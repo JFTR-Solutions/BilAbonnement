@@ -18,7 +18,7 @@ public class CarLeasingExceptionHandler {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         CarException carException = new CarException(
-                e.getMessage(), badRequest, ZonedDateTime.now(ZoneId.of("Z"))
+                e.getMessage(), e.getPage(), badRequest, ZonedDateTime.now(ZoneId.of("Z"))
         );
         // 2. Return response entity
         return new ResponseEntity<>(carException, badRequest);
