@@ -53,34 +53,6 @@ public class UserRepository {
                 }
             }
 
-      /*
-        String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
-        try {
-            if (findRoleById(user.getUserId()).contains("sysadmin") && !sysadmin) {
-                PreparedStatement psts = conn.prepareStatement(queryDelete);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 1);
-                System.out.println(psts.executeUpdate());
-                psts.executeUpdate();
-            }
-            if (findRoleById(user.getUserId()).contains("sales") && !sales) {
-                PreparedStatement psts = conn.prepareStatement(queryDelete);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 2);
-                psts.executeUpdate();
-            }
-            if (findRoleById(user.getUserId()).contains("front_desk") && !front_desk) {
-                PreparedStatement psts = conn.prepareStatement(queryDelete);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 3);
-                psts.executeUpdate();
-            }
-            if (findRoleById(user.getUserId()).contains("mechanic") && !mechanic) {
-                PreparedStatement psts = conn.prepareStatement(queryDelete);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 4);
-                psts.executeUpdate();
-            }*/
 
         } catch (CarLeasingException e) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
@@ -114,36 +86,6 @@ public class UserRepository {
                         psts.executeUpdate();
                     }
             }
-/*        String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
-
-        try {
-            if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 1);
-                psts.executeUpdate();
-            }
-
-            if (!findRoleById(user.getUserId()).contains("sales") && sales) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 2);
-                psts.executeUpdate();
-            }
-
-            if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 3);
-                psts.executeUpdate();
-            }
-
-            if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 4);
-                psts.executeUpdate();
-            }*/
 
         } catch (CarLeasingException e) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
