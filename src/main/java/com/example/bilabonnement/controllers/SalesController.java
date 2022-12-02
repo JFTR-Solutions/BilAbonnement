@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class SalesController {
 
-
+    private final String role = "sales";
     LoginController loginController;
     UserService userService;
 
@@ -20,22 +20,10 @@ public class SalesController {
         this.userService = userService;
     }
 
-    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
-        boolean isLoggedIn = false;
-        if (loginController.validateUser(httpSession).equals("validated")){
-            return !isLoggedIn;
-        } else if(loginController.validateRoles(httpSession).contains("sales") ||
-                loginController.validateRoles(httpSession).contains("sysadmin")) {
-            return !isLoggedIn;
-        } else {
-            return isLoggedIn;
-        }
-    }
-
-    @GetMapping("/salg")
+    @GetMapping("/sales")
     public String salesPage(Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!validateLogin(httpSession)){
+        if (!loginController.validateLogin(httpSession,role)){
             return "redirect:/";
         }
             model.addAttribute("userList", userService.getAll());

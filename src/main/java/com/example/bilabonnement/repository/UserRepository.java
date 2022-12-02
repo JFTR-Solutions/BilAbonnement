@@ -80,7 +80,7 @@ public class UserRepository {
                 psts.setInt(1, 4);
                 psts.executeUpdate();
             }
-            throw new CarLeasingException("Couldn't update roles, try again",carExceptionEnum.ERROR);
+
         } catch (SQLException | CarLeasingException e) {
             throw new CarLeasingException(e.getMessage(),carExceptionEnum.ERROR);
         }

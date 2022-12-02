@@ -18,6 +18,15 @@
 <div class="home-section">
 <h1 th:text="'Velkommen ' + ${name}"></h1>
 
+    <div class="main_content">
+
+
+    </div>
+    <div class="alert" th:if="${errorMessage}">
+        <span class="closebtn"  th:text="${errorMessage}" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Advarsel!</strong>
+    </div>
+
 </div>
 </body>
 </html>

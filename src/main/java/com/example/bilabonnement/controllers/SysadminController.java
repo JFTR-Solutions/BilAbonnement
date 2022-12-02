@@ -23,14 +23,14 @@ public class SysadminController {
 
     //Frederik
     public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
-        boolean isLoggedIn = true;
-        if (!loginController.validateUser(httpSession).equals("validated")) {
-            return !isLoggedIn;
+
+        if (!loginController.validateUser(httpSession)) {
+            return false;
         }
         if (!loginController.validateRoles(httpSession).contains("sysadmin")) {
-            return !isLoggedIn;
+            return false;
         } else {
-            return isLoggedIn;
+            return true;
         }
     }
 

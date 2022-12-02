@@ -1,19 +1,19 @@
-:root{
-    --color-default:#062d35;
-    --color-white:#fff;
+:root {
+    --color-default: #062d35;
+    --color-white: #fff;
     --color-body: #ffffff;
 }
 
-body{
+body {
     background-color: #ffffff;
     color: black;
     font-size: large;
     min-height: 100vh;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 
-.home-section{
+.home-section {
     position: relative;
     background-color: var(--color-white);
     min-height: 100vh;
@@ -23,10 +23,11 @@ body{
     transition: all .5s ease;
     z-index: 2;
 }
-.home-section .text{
+
+.home-section .text {
     display: inline-block;
-    color:var(--color-body);
-    left:78px;
+    color: var(--color-body);
+    left: 78px;
     width: calc(100% - 90px);
     font-size: 25px;
     font-weight: 500;
@@ -46,14 +47,14 @@ h1 {
     font-weight: 500;
     line-height: 42px;
     text-align: center;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .searchbar {
     display: block;
     height: 30px;
     width: 20%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
@@ -61,7 +62,7 @@ h1 {
     font-weight: 300;
 }
 
-.button-grid{
+.button-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
     /*margin-left: 10%;*/
@@ -69,12 +70,12 @@ h1 {
     width: 900px;
 }
 
-.search-grid{
+.search-grid {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-button{
+button {
     background-color: #0a4d5b;
     box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
     font-size: 100%;
@@ -84,6 +85,7 @@ button{
     padding: 5px 11px;
 
 }
+
 button:active {
     background-color: #062d35;
 }
@@ -91,4 +93,38 @@ button:active {
 button:hover {
     opacity: 0.6;
 
+}
+
+.alert {
+    padding: 20px;
+    background-color: #ff9800;
+    color: white;
+    width: 400px;
+
+    -webkit-animation: fadein 2s;
+
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
 }

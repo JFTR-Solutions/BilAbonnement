@@ -22,6 +22,12 @@ public class FrontdeskController {
 
     RentalService rentalService;
 
+    private final String role = "front_desk";
+
+    public String getRole() {
+        return role;
+    }
+
     public FrontdeskController(LoginController loginController, UserService userService, CarService carService, RentalService rentalService) {
         this.loginController = loginController;
         this.userService = userService;
@@ -29,24 +35,29 @@ public class FrontdeskController {
         this.rentalService = rentalService;
     }
 
-    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
-        boolean isLoggedIn = false;
-        if (loginController.validateUser(httpSession).equals("validated")){
-            return !isLoggedIn;
+/*    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateUser(httpSession)){
+            return false;
         } else if(loginController.validateRoles(httpSession).contains("front_desk") ||
                 loginController.validateRoles(httpSession).contains("sysadmin")) {
-            return !isLoggedIn;
+            return false;
         } else {
-            return isLoggedIn;
+            return true;
         }
-    }
+    }*/
 
     //Jonathan
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
+
+        try {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
+        }
+        }catch (CarLeasingException e){
+            httpSession.setAttribute("error",e.getMessage());
+            return "redirect:/welcome";
         }
         model.addAttribute("carlist", carService.fetchAllCars());
         return "frontdesk";
@@ -56,7 +67,7 @@ public class FrontdeskController {
     @GetMapping("/update-car/{id}")
     public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         model.addAttribute("id", id);
@@ -76,7 +87,7 @@ public class FrontdeskController {
     @GetMapping("/delete-car/{id}")
     public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         carService.deleteCar(id);
@@ -95,7 +106,7 @@ public class FrontdeskController {
     //Thomas
     @GetMapping("/create-carmodel")
     public String showCreateCarModel(HttpSession httpSession) throws CarLeasingException {
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         return "createmodel";
@@ -116,7 +127,7 @@ public class FrontdeskController {
     //Rami
     @GetMapping("/create-car")
     public String showCreateCar(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         model.addAttribute("modellist", carService.getAllModels());
@@ -125,7 +136,7 @@ public class FrontdeskController {
 
     @GetMapping("/create-rentalAgreement")
     public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
@@ -151,7 +162,7 @@ public class FrontdeskController {
 
     @GetMapping("/show-rentalAgreement")
     public String showRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());

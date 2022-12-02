@@ -11,6 +11,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MechanicController {
 
+    private final String role = "mechanic";
+
+    public String getRole() {
+        return role;
+    }
 
     LoginController loginController;
     UserService userService;
@@ -20,22 +25,10 @@ public class MechanicController {
         this.userService = userService;
     }
 
-    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
-        boolean isLoggedIn = false;
-        if (loginController.validateUser(httpSession).equals("validated")){
-            return !isLoggedIn;
-        } else if(loginController.validateRoles(httpSession).contains("mechanic") ||
-                loginController.validateRoles(httpSession).contains("sysadmin")) {
-            return !isLoggedIn;
-        } else {
-            return isLoggedIn;
-        }
-    }
-
-    @GetMapping("/mekaniker")
+    @GetMapping("/mechanic")
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!validateLogin(httpSession)) {
+        if (!loginController.validateLogin(httpSession,role)) {
             return "redirect:/";
         }
         model.addAttribute("userList", userService.getAll());
