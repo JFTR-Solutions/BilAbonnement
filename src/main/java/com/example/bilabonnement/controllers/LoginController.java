@@ -26,6 +26,7 @@ public class LoginController {
     UserService userService;
     Encrypter e = new Encrypter();
 
+    //FREDERIK
     public LoginController(UserService userService) {
         exceptionEnums.put(carExceptionEnum.NO_LOGIN, "Du skal være logget på for at få vist denne side");
         exceptionEnums.put(carExceptionEnum.WRONG_LOGIN, "Ugyldigt brugernavn eller adgangskode");
@@ -34,7 +35,7 @@ public class LoginController {
         exceptionEnums.put(carExceptionEnum.ROLE_ERROR, "Kunne ikke opdatere rollen");
         this.userService = userService;
     }
-
+    //FREDERIK
     public Boolean validateLogin(HttpSession httpSession, String role) throws CarLeasingException {
         if (!validateUser(httpSession)) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.NO_LOGIN));
@@ -44,7 +45,7 @@ public class LoginController {
             return true;
         }
     }
-
+    //FREDERIK
     @GetMapping("/")
     public String loginPage(HttpSession httpSession, Model model) {
         try {
