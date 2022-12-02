@@ -27,28 +27,40 @@ public class UserRepository {
 
     }
 
-    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
 
-        String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+        List<Boolean> booleanList = new ArrayList<>();
+        booleanList.add(sysadmin);
+        booleanList.add(sales);
+        booleanList.add(front_desk);
+        booleanList.add(mechanic);
+
+        List<String> roles = new ArrayList<>();
+        roles.add("sysadmin");
+        roles.add("sales");
+        roles.add("front_desk");
+        roles.add("mechanic");
+
+        try {
+            List<String> roleList = findRoleById(user.getUserId());
+            String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
+            for (int i = 0; i < roles.size(); i++) {
+                if (roleList.contains(roles.get(i)) && !booleanList.get(i)) {
+                    PreparedStatement psts = conn.prepareStatement(queryDelete);
+                    psts.setInt(2, user.getUserId());
+                    psts.setInt(1, i + 1);
+                    psts.executeUpdate();
+                }
+            }
+
+      /*
         String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
         try {
-            if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 1);
-                psts.executeUpdate();
-            }
             if (findRoleById(user.getUserId()).contains("sysadmin") && !sysadmin) {
                 PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 1);
                 System.out.println(psts.executeUpdate());
-                psts.executeUpdate();
-            }
-            if (!findRoleById(user.getUserId()).contains("sales") && sales) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 2);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("sales") && !sales) {
@@ -57,22 +69,10 @@ public class UserRepository {
                 psts.setInt(1, 2);
                 psts.executeUpdate();
             }
-            if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 3);
-                psts.executeUpdate();
-            }
             if (findRoleById(user.getUserId()).contains("front_desk") && !front_desk) {
                 PreparedStatement psts = conn.prepareStatement(queryDelete);
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 3);
-                psts.executeUpdate();
-            }
-            if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic) {
-                PreparedStatement psts = conn.prepareStatement(queryInsert);
-                psts.setInt(2, user.getUserId());
-                psts.setInt(1, 4);
                 psts.executeUpdate();
             }
             if (findRoleById(user.getUserId()).contains("mechanic") && !mechanic) {
@@ -80,15 +80,78 @@ public class UserRepository {
                 psts.setInt(2, user.getUserId());
                 psts.setInt(1, 4);
                 psts.executeUpdate();
-            }
+            }*/
 
         } catch (CarLeasingException e) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
-        }
-        catch (NullPointerException | SQLException ex){
+        } catch (NullPointerException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
+
+    public void addRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+
+        List<Boolean> booleanList = new ArrayList<>();
+        booleanList.add(sysadmin);
+        booleanList.add(sales);
+        booleanList.add(front_desk);
+        booleanList.add(mechanic);
+
+        List<String> roles = new ArrayList<>();
+        roles.add("sysadmin");
+        roles.add("sales");
+        roles.add("front_desk");
+        roles.add("mechanic");
+
+        try {
+            List<String> roleList = findRoleById(user.getUserId());
+            String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+            for (int i = 0; i < roles.size(); i++) {
+                    if (!roleList.contains(roles.get(i)) && booleanList.get(i)) {
+                        PreparedStatement psts = conn.prepareStatement(queryInsert);
+                        psts.setInt(2, user.getUserId());
+                        psts.setInt(1, i + 1);
+                        psts.executeUpdate();
+                    }
+            }
+/*        String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+
+        try {
+            if (!findRoleById(user.getUserId()).contains("sysadmin") && sysadmin) {
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
+                psts.setInt(2, user.getUserId());
+                psts.setInt(1, 1);
+                psts.executeUpdate();
+            }
+
+            if (!findRoleById(user.getUserId()).contains("sales") && sales) {
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
+                psts.setInt(2, user.getUserId());
+                psts.setInt(1, 2);
+                psts.executeUpdate();
+            }
+
+            if (!findRoleById(user.getUserId()).contains("front_desk") && front_desk) {
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
+                psts.setInt(2, user.getUserId());
+                psts.setInt(1, 3);
+                psts.executeUpdate();
+            }
+
+            if (!findRoleById(user.getUserId()).contains("mechanic") && mechanic) {
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
+                psts.setInt(2, user.getUserId());
+                psts.setInt(1, 4);
+                psts.executeUpdate();
+            }*/
+
+        } catch (CarLeasingException e) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
 
     public void updateUser(User user) throws CarLeasingException {
         try {
@@ -163,7 +226,7 @@ public class UserRepository {
     }
 
     //Thomas
-    public List<User> getAllByRole(int roleId){
+    public List<User> getAllByRole(int roleId) {
         List<User> userList = new ArrayList<>();
 
         try {
@@ -208,6 +271,8 @@ public class UserRepository {
             while (rs.next()) {
                 roleList.add(rs.getString(1));
             }
+            roleList.remove("customer");
+
             return roleList;
 
         } catch (NullPointerException | SQLException ex) {
@@ -259,7 +324,7 @@ public class UserRepository {
 
     }
 
-
+    //FREDERIK
     public User findUserbyID(int id) {
         User user = new User();
         try {
@@ -298,6 +363,7 @@ public class UserRepository {
         }
     }
 
+    //FREDERIK
     public void deleteUser(int id) {
         try {
             String deleteQuery = ("DELETE FROM roles_users where user_id=?");
@@ -316,7 +382,7 @@ public class UserRepository {
         }
     }
 
-    public boolean checkIfUsernameExists(String username){
+    public boolean checkIfUsernameExists(String username) {
         try {
             String query = "SELECT * FROM users WHERE username=?";
             PreparedStatement psts = conn.prepareStatement(query);

@@ -40,7 +40,10 @@ public class UserService {
     }
 
     public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
-        userRepository.updateRoles(user, sysadmin, sales, front_desk, mechanic);
+        userRepository.addRoles(user, sysadmin, sales, front_desk, mechanic);
+    }
+    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+        userRepository.removeRoles(user, sysadmin, sales, front_desk, mechanic);
     }
 
     public void updateUser(User user) throws CarLeasingException {

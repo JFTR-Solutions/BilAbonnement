@@ -99,7 +99,8 @@ public class LoginController {
             return "redirect:/";
         }
         if (httpSession.getAttribute("error") != null && !httpSession.getAttribute("error").equals("") &&
-                (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN)))) {
+                (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN))) &&
+                (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.NO_LOGIN)))) {
             model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         }
         model.addAttribute("roles", validateRoles(httpSession));
