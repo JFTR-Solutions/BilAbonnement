@@ -64,7 +64,9 @@ h1 {
 .button-grid{
     display: grid;
     grid-template-columns: auto auto auto auto;
-    width: 30%;
+    /*margin-left: 10%;*/
+    gap: 10%;
+    width: 900px;
 }
 
 .search-grid{
