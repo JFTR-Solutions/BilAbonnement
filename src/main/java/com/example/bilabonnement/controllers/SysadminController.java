@@ -97,6 +97,7 @@ public class SysadminController {
                            @RequestParam(defaultValue = "false") boolean mechanic) throws CarLeasingException {
         userService.updateUser(user);
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
+        userService.removeRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
 
