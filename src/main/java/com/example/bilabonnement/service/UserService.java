@@ -39,6 +39,11 @@ public class UserService {
         userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
+    public void createCustomer(String email, String password, String username, String first_name, String last_name,
+                           Date birthdate, String address, String phonenr) {
+        userRepository.createCustomer(email, password, username, first_name, last_name, birthdate, address, phonenr);
+    }
+
     public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
         userRepository.addRoles(user, sysadmin, sales, front_desk, mechanic);
     }

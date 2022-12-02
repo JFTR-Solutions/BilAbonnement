@@ -138,6 +138,28 @@ public class UserRepository {
         }
     }
 
+    public void createCustomer(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
+        try {
+            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
+                    "VALUES (5,?,?,?,?,?,?,?,?)");
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+            psts.setString(1, email);
+            psts.setString(2, username);
+            psts.setString(3, password);
+            psts.setString(4, first_name);
+            psts.setString(5, last_name);
+            psts.setDate(6, birthdate);
+            psts.setString(7, address);
+            psts.setString(8, phonenr);
+
+            psts.executeUpdate();
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
     public List<User> getAll() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();

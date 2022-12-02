@@ -182,7 +182,7 @@ public class FrontdeskController {
         String username = um.makeUsername(firstname, lastname, birthdate);
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
-        userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
+        userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
 
         return ("redirect:/reception");
     }
