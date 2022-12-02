@@ -1,5 +1,7 @@
 package com.example.bilabonnement.repository;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.exceptions.carExceptionEnum;
 import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.models.cars.Model;
 import com.example.bilabonnement.models.rentalagreements.MthKm;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.example.bilabonnement.controllers.LoginController.exceptionEnums;
 import static com.example.bilabonnement.service.util.ConnectionManager.conn;
 
 @Repository
@@ -43,8 +46,8 @@ public class RentalRepository {
 
             psts.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -63,8 +66,8 @@ public class RentalRepository {
                 mthKmObject = new MthKm(mthKmId, mthKm, price);
             }
             return mthKmObject;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -82,8 +85,8 @@ public class RentalRepository {
                 mthKmList.add(new MthKm(mthKmId, mthKm, price));
             }
             return mthKmList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -121,8 +124,8 @@ public class RentalRepository {
                         new Model(modelId, modelName, manufacturer)));
             }
             return rentalAgreementList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 }

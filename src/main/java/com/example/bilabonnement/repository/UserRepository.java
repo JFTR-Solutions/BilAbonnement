@@ -85,7 +85,7 @@ public class UserRepository {
         } catch (CarLeasingException e) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
         }
-        catch (SQLException e){
+        catch (NullPointerException | SQLException ex){
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
@@ -106,8 +106,8 @@ public class UserRepository {
 
             psts.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage());
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -128,8 +128,8 @@ public class UserRepository {
 
             psts.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -156,8 +156,8 @@ public class UserRepository {
                 userList.add(new User(userId, email, username, password, firstName, lastName, birthdate, address, phoneNumber));
             }
 
-        } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage());
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return userList;
     }
@@ -180,8 +180,8 @@ public class UserRepository {
             }
             return roleList;
 
-        } catch (SQLException ex) {
-            throw new CarLeasingException(ex.getMessage());
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
 
     }
@@ -226,8 +226,8 @@ public class UserRepository {
                 return user;
             }
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN));
-        } catch (CarLeasingException | SQLException ex) {
-            throw new CarLeasingException(ex.getMessage());
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
 
     }
@@ -267,7 +267,7 @@ public class UserRepository {
             }
             return user;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -284,8 +284,8 @@ public class UserRepository {
             psts.executeUpdate();
 
 
-        } catch (SQLException exception) {
-            System.out.println(exception);
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 

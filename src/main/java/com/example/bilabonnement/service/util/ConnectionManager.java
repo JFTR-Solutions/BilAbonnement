@@ -1,5 +1,7 @@
 package com.example.bilabonnement.service.util;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,9 +18,8 @@ public class ConnectionManager {
         try {
             conn = DriverManager.getConnection(db_url, uid, pwd);
 
-        } catch (SQLException e) {
-            System.out.printf("Couldn't connect to db");
-            e.printStackTrace();
+        } catch (NullPointerException | SQLException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }

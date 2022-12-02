@@ -20,7 +20,7 @@
 
 
  <label for="colour">Farve:</label>
- <input id="colour" name="colour" placeholder="Skriv farve her..." list="car_colours">
+ <input id="colour" name="colour" placeholder="Skriv farve her..." list="car_colours" maxlength="15">
  <datalist id="car_colours" style="width: 300px">
      <option value="Hvid" >Hvid</option>
      <option value="Metallic Hvid">Metallic Hvid</option>
@@ -89,10 +89,10 @@
         </select>
 
         <label for="vin">Stelnummer: </label>
-        <input id="vin" type="text" name="vin">
+        <input id="vin" type="text" name="vin" maxlength="17">
 
         <label for="regnumber">Nummerplade: </label>
-        <input id="regnumber" type="text"  name="regNumber">
+        <input id="regnumber" type="text"  name="regNumber" maxlength="10">
 
         <label for="steelprice">Stålpris: </label>
         <input id="steelprice" type="number"  name="steelPrice">

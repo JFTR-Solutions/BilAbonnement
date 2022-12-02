@@ -30,7 +30,7 @@ public class LoginController {
         exceptionEnums.put(carExceptionEnum.NO_LOGIN, "Du skal være logget på for at få vist denne side");
         exceptionEnums.put(carExceptionEnum.WRONG_LOGIN, "Ugyldigt brugernavn eller adgangskode");
         exceptionEnums.put(carExceptionEnum.NO_PERMISSION, "Du har ikke rettigheder til at få vist denne side");
-        exceptionEnums.put(carExceptionEnum.DATABASE_ERROR, "Kunne ikke oprette forbindelse til databasen");
+        exceptionEnums.put(carExceptionEnum.DATABASE_ERROR, "Kunne ikke oprette forbindelse til databasen, prøv igen senere");
         exceptionEnums.put(carExceptionEnum.ROLE_ERROR, "Kunne ikke opdatere rollen");
         this.userService = userService;
     }

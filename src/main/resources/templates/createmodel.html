@@ -10,10 +10,10 @@
   <form method="post" th:action="@{'/create-carmodel'}">
 
     <label for="modelName">Model Navn: </label>
-    <input id="modelName" type="text"  name="modelName" required>
+    <input id="modelName" type="text"  name="modelName" required maxlength="255">
 
     <label for="manufacturer">Producent: </label>
-    <input id="manufacturer" type="text"  name="manufacturer" required>
+    <input id="manufacturer" type="text"  name="manufacturer" required maxlength="50">
 
     <label for="co2">Co2 Emission: </label>
     <input id="co2" type="number"  name="co2" required>
