@@ -13,10 +13,6 @@ public class MechanicController {
 
     private final String role = "mechanic";
 
-    public String getRole() {
-        return role;
-    }
-
     LoginController loginController;
     UserService userService;
 
@@ -27,9 +23,14 @@ public class MechanicController {
 
     @GetMapping("/mechanic")
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession,role)) {
-            return "redirect:/";
+        try {
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        }catch (CarLeasingException e){
+            httpSession.setAttribute("error",e.getMessage());
+            return "redirect:/welcome";
         }
         model.addAttribute("userList", userService.getAll());
         return "mechanic";

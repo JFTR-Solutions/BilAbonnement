@@ -22,9 +22,14 @@ public class SalesController {
 
     @GetMapping("/sales")
     public String salesPage(Model model, HttpSession httpSession) throws CarLeasingException {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession,role)){
-            return "redirect:/";
+        try {
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        }catch (CarLeasingException e){
+            httpSession.setAttribute("error",e.getMessage());
+            return "redirect:/welcome";
         }
             model.addAttribute("userList", userService.getAll());
             return "sales";

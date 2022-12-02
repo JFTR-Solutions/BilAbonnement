@@ -24,27 +24,12 @@ public class FrontdeskController {
 
     private final String role = "front_desk";
 
-    public String getRole() {
-        return role;
-    }
-
     public FrontdeskController(LoginController loginController, UserService userService, CarService carService, RentalService rentalService) {
         this.loginController = loginController;
         this.userService = userService;
         this.carService = carService;
         this.rentalService = rentalService;
     }
-
-/*    public Boolean validateLogin(HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateUser(httpSession)){
-            return false;
-        } else if(loginController.validateRoles(httpSession).contains("front_desk") ||
-                loginController.validateRoles(httpSession).contains("sysadmin")) {
-            return false;
-        } else {
-            return true;
-        }
-    }*/
 
     //Jonathan
     @GetMapping("/reception")
