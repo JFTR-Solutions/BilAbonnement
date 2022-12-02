@@ -34,7 +34,6 @@ public class FrontdeskController {
     //Jonathan
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
-
         try {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!loginController.validateLogin(httpSession, role)) {

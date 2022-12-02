@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.bilabonnement.controllers.LoginController.exceptionEnums;
 import static com.example.bilabonnement.service.util.ConnectionManager.conn;
 
 @Repository
@@ -81,8 +82,11 @@ public class UserRepository {
                 psts.executeUpdate();
             }
 
-        } catch (SQLException | CarLeasingException e) {
-            throw new CarLeasingException(e.getMessage(),carExceptionEnum.ERROR);
+        } catch (CarLeasingException e) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.ROLE_ERROR));
+        }
+        catch (SQLException e){
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
@@ -103,7 +107,7 @@ public class UserRepository {
             psts.executeUpdate();
 
         } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage(),carExceptionEnum.INDEX);
+            throw new CarLeasingException(e.getMessage());
         }
     }
 
@@ -153,7 +157,7 @@ public class UserRepository {
             }
 
         } catch (SQLException e) {
-            throw new CarLeasingException(e.getMessage(),carExceptionEnum.INDEX);
+            throw new CarLeasingException(e.getMessage());
         }
         return userList;
     }
@@ -177,7 +181,7 @@ public class UserRepository {
             return roleList;
 
         } catch (SQLException ex) {
-            throw new CarLeasingException(ex.getMessage(),carExceptionEnum.INDEX);
+            throw new CarLeasingException(ex.getMessage());
         }
 
     }
@@ -221,9 +225,9 @@ public class UserRepository {
 
                 return user;
             }
-            throw new CarLeasingException("Ugyldigt brugernavn eller adgangskode", carExceptionEnum.INDEX);
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN));
         } catch (CarLeasingException | SQLException ex) {
-            throw new CarLeasingException(ex.getMessage(),carExceptionEnum.INDEX);
+            throw new CarLeasingException(ex.getMessage());
         }
 
     }

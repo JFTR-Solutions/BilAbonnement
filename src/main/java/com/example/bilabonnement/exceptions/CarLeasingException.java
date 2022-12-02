@@ -1,15 +1,11 @@
 package com.example.bilabonnement.exceptions;
 
+import java.util.HashMap;
+
 public class CarLeasingException extends RuntimeException {
 
-    private final carExceptionEnum page;
-
-    public CarLeasingException(String message, carExceptionEnum page) {
+    public CarLeasingException(String message) {
         super(message);
-        this.page = page;
     }
 
-    public carExceptionEnum getPage() {
-        return page;
-    }
 }
