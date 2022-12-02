@@ -28,8 +28,8 @@ public class MechanicController {
             if (!loginController.validateLogin(httpSession, role)) {
                 return "redirect:/";
             }
-        }catch (CarLeasingException e){
-            httpSession.setAttribute("error",e.getMessage());
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
         model.addAttribute("userList", userService.getAll());

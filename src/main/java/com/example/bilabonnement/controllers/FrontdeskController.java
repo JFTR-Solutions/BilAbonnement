@@ -35,12 +35,12 @@ public class FrontdeskController {
     @GetMapping("/reception")
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
         try {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        }catch (CarLeasingException e){
-            httpSession.setAttribute("error",e.getMessage());
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
         model.addAttribute("carlist", carService.fetchAllCars());
@@ -51,7 +51,7 @@ public class FrontdeskController {
     @GetMapping("/update-car/{id}")
     public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("id", id);
@@ -69,9 +69,9 @@ public class FrontdeskController {
 
     //Jonathan
     @GetMapping("/delete-car/{id}")
-    public String deleteCar(@PathVariable("id") int id,Model model, HttpSession httpSession) throws CarLeasingException {
+    public String deleteCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         carService.deleteCar(id);
@@ -81,8 +81,8 @@ public class FrontdeskController {
     //Thomas
     @PostMapping("/create-carmodel")
     public String createCarModel(@RequestParam("modelName") String modelName,
-                            @RequestParam("manufacturer") String manufacturer, @RequestParam("co2") String co2,
-                            @RequestParam("fuelType") String fuelType, @RequestParam("range") double range) {
+                                 @RequestParam("manufacturer") String manufacturer, @RequestParam("co2") String co2,
+                                 @RequestParam("fuelType") String fuelType, @RequestParam("range") double range) {
         carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
         return "redirect:/create-car";
     }
@@ -90,7 +90,7 @@ public class FrontdeskController {
     //Thomas
     @GetMapping("/create-carmodel")
     public String showCreateCarModel(HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         return "createmodel";
@@ -101,7 +101,7 @@ public class FrontdeskController {
     public String createCar(@RequestParam("modelId") int modelId, @RequestParam("available") byte available,
                             @RequestParam("colour") String colour, @RequestParam("vin") String vin,
                             @RequestParam("regNumber") String regNumber, @RequestParam("steelPrice") double steelprice,
-                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission){
+                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission) {
 
         carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
 
@@ -111,7 +111,7 @@ public class FrontdeskController {
     //Rami
     @GetMapping("/create-car")
     public String showCreateCar(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("modellist", carService.getAllModels());
@@ -120,7 +120,7 @@ public class FrontdeskController {
 
     @GetMapping("/create-rentalAgreement")
     public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
@@ -132,7 +132,7 @@ public class FrontdeskController {
     @PostMapping("/create-rentalAgreement")
     public String createRentalAgreement(@RequestParam("carId") int carId, @RequestParam("userId") int userId,
                                         @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
-                                        @RequestParam("startDate") Date startDate){
+                                        @RequestParam("startDate") Date startDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(startDate);
         cal.add(Calendar.MONTH, months);
@@ -146,7 +146,7 @@ public class FrontdeskController {
 
     @GetMapping("/show-rentalAgreement")
     public String showRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());

@@ -102,10 +102,9 @@ public class LoginController {
             return "redirect:/";
         }
         if (httpSession.getAttribute("error") != null && !httpSession.getAttribute("error").equals("") &&
-        (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN)))) {
+                (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN)))) {
             model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         }
-
         model.addAttribute("roles", validateRoles(httpSession));
         httpSession.setAttribute("roller", validateRoles(httpSession));
         model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());

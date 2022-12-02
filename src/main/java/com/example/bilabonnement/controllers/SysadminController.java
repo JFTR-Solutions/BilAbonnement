@@ -37,8 +37,8 @@ public class SysadminController {
             if (!loginController.validateLogin(httpSession, role)) {
                 return "redirect:/";
             }
-        }catch (CarLeasingException e){
-            httpSession.setAttribute("error",e.getMessage());
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
         model.addAttribute("roleList", roleList());
@@ -53,14 +53,16 @@ public class SysadminController {
         }
         return rolelist;
     }
+
     //Frederik
     @GetMapping("/create-user")
     public String createUserPage(HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         return "createuser";
     }
+
     //Frederik
     @PostMapping("/create-user")
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
@@ -75,10 +77,11 @@ public class SysadminController {
         }
         return ("redirect:/error");
     }
+
     //Frederik
     @GetMapping("/update-user/{id}")
     public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("id", id);
@@ -86,6 +89,7 @@ public class SysadminController {
         model.addAttribute("user", userService.findUserByID(id));
         return "updateuser";
     }
+
     //Frederik
     @PostMapping("/update-user")
     public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
@@ -95,10 +99,11 @@ public class SysadminController {
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
+
     //Frederik
     @GetMapping("/delete-user/{id}")
     public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession,role)) {
+        if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         userService.deleteUser(id);
