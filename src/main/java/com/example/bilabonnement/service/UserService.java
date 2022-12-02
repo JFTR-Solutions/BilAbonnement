@@ -56,4 +56,7 @@ public class UserService {
         return userRepository.getAllByRole(roleId);
     }
 
+    public boolean checkIfUsernameExists(String username) {
+        return userRepository.checkIfUsernameExists(username);
+    }
 }

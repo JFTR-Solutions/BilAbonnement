@@ -1,7 +1,9 @@
 package com.example.bilabonnement.controllers;
 
+import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.cars.Car;
+import com.example.bilabonnement.security.PasswordGenerator;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.RentalService;
 import com.example.bilabonnement.service.UserService;
@@ -159,4 +161,27 @@ public class FrontdeskController {
 
         return "showrentalagreement";
     }
+
+    @GetMapping("/create-customer")
+    public String createUserPage(HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        return "createuser";
+    }
+
+    //Frederik
+    @PostMapping("/create-customer")
+    public String createUser(@RequestParam("email") String email,
+                             @RequestParam("username") String username, @RequestParam("firstname") String firstname,
+                             @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws CarLeasingException {
+        PasswordGenerator pw = new PasswordGenerator();
+        Encrypter encrypter = new Encrypter();
+        String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
+        userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
+
+        return ("redirect:/error");
+    }
+
 }

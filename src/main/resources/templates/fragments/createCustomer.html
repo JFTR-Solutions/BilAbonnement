@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/createUser.css}" href="../static/css/createUser.css">
+  <title>Opret ny bruger - Bilabonnement</title>
+</head>
+<body>
+<form method="post" th:action="@{'/create-user'}">
+  <input type="hidden" name="id">
+  <label for="email">Email: </label>
+  <input id="email" autofocus type="text" required name="email" maxlength="255">
+
+  <label for="firstname">Fornavn: </label>
+  <input id="firstname" type="text" name="firstname" maxlength="50">
+
+  <label for="lastname">Efternavn: </label>
+  <input id="lastname" type="text" name="lastname" maxlength="50">
+
+  <label for="birthdate">Fødselsdag: </label>
+  <input id="birthdate" type="date" name="birthdate">
+
+  <label for="address">Adresse: </label>
+  <input id="address" type="text" name="address" maxlength="255">
+
+  <label for="phonenr">Telefonnummer: </label>
+  <input id="phonenr" type="text" name="phonenr" maxlength="25">
+
+  <button type="submit" name="submit" value="create">Opret</button>
+
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.example.bilabonnement.encryption;
+package com.example.bilabonnement.security;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

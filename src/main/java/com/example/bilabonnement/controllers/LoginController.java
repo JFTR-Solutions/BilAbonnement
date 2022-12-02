@@ -1,17 +1,13 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.encryption.Encrypter;
-import com.example.bilabonnement.exceptions.CarException;
+import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.exceptions.carExceptionEnum;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

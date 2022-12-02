@@ -316,4 +316,20 @@ public class UserRepository {
         }
     }
 
+    public boolean checkIfUsernameExists(String username){
+        try {
+            String query = "SELECT * FROM users WHERE username=?";
+            PreparedStatement psts = conn.prepareStatement(query);
+            psts.setString(1, username);
+            ResultSet rs = psts.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+        return false;
+
+    }
+
 }

@@ -7,4 +7,5 @@ public enum carExceptionEnum {
     WRONG_LOGIN,
     DATABASE_ERROR,
     ROLE_ERROR,
+
 }

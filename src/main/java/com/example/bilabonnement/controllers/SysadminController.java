@@ -1,7 +1,7 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.encryption.Encrypter;
+import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
 import com.example.bilabonnement.service.UserService;

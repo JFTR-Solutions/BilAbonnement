@@ -1,4 +1,4 @@
-package com.example.bilabonnement.encryption;
+package com.example.bilabonnement.security;
 
 import org.junit.jupiter.api.Test;
 
