@@ -38,6 +38,10 @@
     </thead>
     <tbody id="inputrows">
      <tr class="item" th:each="agreement,iterStat : ${agreements}">
+       <!--TODO Remove comment tags and update th:ondblclick so it works with show rental agreement
+
+            <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
+            -->
        <td th:text="${agreement.rentalId}">rentalId</td>
        <td th:text="${agreement.startDate}">startDate</td>
         <td th:text="${agreement.endDate}">endDate</td>
@@ -51,6 +55,24 @@
 
   </table>
 </div>
+<script>
+  $(document).ready(function () {
+    $("#search").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#inputrows tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
+<!--TODO Remove comment tags and update href to show rental agreement site.
+<script>
+    function rowClicked(value) {
+        location.href = "/update-car/" + value;
+    }
+</script>
+-->
 </body>
 
 </html>

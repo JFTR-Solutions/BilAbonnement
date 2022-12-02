@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Reception - Bilabonnement</title>
@@ -72,7 +72,7 @@
             <td th:text="${car.transmission}">Gearkasse</td>
             <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->
             <td style="text-align: right" th:text="${#numbers.formatDecimal(car.carModel.getCo2Emission,0,0)} + ' g/km'">C02 Emission</td>
-            <td th:text="${car.carModel.getFuelType}">Brædnstoftype</td>
+            <td th:text="${car.carModel.getFuelType}">Drivmiddel</td>
             <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${#numbers.formatDecimal(car.carModel.getRange,0,0)} + ' km'">Rækkevidde</td>
             <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' km/l'">Rækkevidde</td>
 
