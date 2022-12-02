@@ -65,7 +65,7 @@ h1 {
     display: grid;
     grid-template-columns: auto auto auto auto;
     /*margin-left: 10%;*/
-    gap: 10%;
+    gap: 30px;
     width: 900px;
 }
 
