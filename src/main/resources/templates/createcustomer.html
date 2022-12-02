@@ -6,10 +6,8 @@
   <title>Opret ny bruger - Bilabonnement</title>
 </head>
 <body>
-<form method="post" th:action="@{'/create-user'}">
+<form method="post" th:action="@{'/create-customer'}">
   <input type="hidden" name="id">
-  <label for="email">Email: </label>
-  <input id="email" autofocus type="text" required name="email" maxlength="255">
 
   <label for="firstname">Fornavn: </label>
   <input id="firstname" type="text" name="firstname" maxlength="50">
@@ -19,6 +17,9 @@
 
   <label for="birthdate">Fødselsdag: </label>
   <input id="birthdate" type="date" name="birthdate">
+
+  <label for="email">Email: </label>
+  <input id="email" autofocus type="text" required name="email" maxlength="255">
 
   <label for="address">Adresse: </label>
   <input id="address" type="text" name="address" maxlength="255">

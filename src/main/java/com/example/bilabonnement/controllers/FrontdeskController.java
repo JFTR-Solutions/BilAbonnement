@@ -4,6 +4,7 @@ import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.security.PasswordGenerator;
+import com.example.bilabonnement.security.UsernameMaker;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.RentalService;
 import com.example.bilabonnement.service.UserService;
@@ -162,26 +163,28 @@ public class FrontdeskController {
         return "showrentalagreement";
     }
 
+    //Thomas
     @GetMapping("/create-customer")
     public String createUserPage(HttpSession httpSession) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
-        return "createuser";
+        return "createcustomer";
     }
 
-    //Frederik
+    //Thomas
     @PostMapping("/create-customer")
-    public String createUser(@RequestParam("email") String email,
-                             @RequestParam("username") String username, @RequestParam("firstname") String firstname,
+    public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
                              @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws CarLeasingException {
         PasswordGenerator pw = new PasswordGenerator();
+        UsernameMaker um = new UsernameMaker(userService);
+        String username = um.makeUsername(firstname, lastname, birthdate);
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
         userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
 
-        return ("redirect:/error");
+        return ("redirect:/reception");
     }
 
 }
