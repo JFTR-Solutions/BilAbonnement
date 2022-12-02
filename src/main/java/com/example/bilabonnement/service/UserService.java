@@ -52,4 +52,8 @@ public class UserService {
         userRepository.deleteUser(id);
     }
 
+    public List<User> getAllByRole(int roleId) throws CarLeasingException {
+        return userRepository.getAllByRole(roleId);
+    }
+
 }

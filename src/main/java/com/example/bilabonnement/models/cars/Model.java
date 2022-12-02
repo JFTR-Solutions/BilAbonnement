@@ -22,12 +22,6 @@ public class Model {
     this.range = range;
   }
 
-  public Model(int modelId, String modelName, String manufacturer){
-    this.modelName = modelName;
-    this.manufacturer = manufacturer;
-    this.modelId = modelId;
-  }
-
   public int getModelId() {
     return modelId;
   }

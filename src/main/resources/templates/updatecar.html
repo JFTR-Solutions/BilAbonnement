@@ -115,9 +115,9 @@
                     th:selected="${car.modelId == models.modelId}"></option>
         </select>
 
-        <button class="button2" type="button" th:href="@{'/delete-car/' + ${car.carId}}"
+        <button class="button2" type="submit" th:href="@{'/delete-car/' + ${car.carId}}"
                 onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</button>
-        <button type="submit" name="submit" value="Opdater bil">Opdater bil</button>
+        <button type="submit" name="submit" value="update car">Opdater bil</button>
         <button type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
     </form>
 </div1>

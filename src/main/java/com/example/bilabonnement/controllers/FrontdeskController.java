@@ -118,6 +118,7 @@ public class FrontdeskController {
         return "createcar";
     }
 
+    //Thomas
     @GetMapping("/create-rentalAgreement")
     public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
@@ -125,10 +126,11 @@ public class FrontdeskController {
         }
         model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
         model.addAttribute("carlist", carService.fetchAllAvailableCars());
-        model.addAttribute("userlist", userService.getAll());
+        model.addAttribute("userlist", userService.getAllByRole(5));
         return "createrentalagreement";
     }
 
+    //Thomas
     @PostMapping("/create-rentalAgreement")
     public String createRentalAgreement(@RequestParam("carId") int carId, @RequestParam("userId") int userId,
                                         @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
@@ -144,6 +146,7 @@ public class FrontdeskController {
         return "redirect:/reception";
     }
 
+    //Thomas
     @GetMapping("/show-rentalAgreement")
     public String showRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
@@ -152,21 +155,8 @@ public class FrontdeskController {
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
         model.addAttribute("carlist", carService.fetchAllCars());
         model.addAttribute("userlist", userService.getAll());
-        model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
+        //model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
 
         return "showrentalagreement";
     }
-
-
-   /*public static void main(String[] args) {
-        int months = 12;
-        //parse SQL date into Calendar
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(Date.valueOf("2020-01-01"));
-        //add months to Calendar
-        cal.add(Calendar.MONTH, months);
-        //parse Calendar back to SQL date
-        Date endDate = new Date(cal.getTimeInMillis());
-        System.out.println(endDate);
-    }*/
 }

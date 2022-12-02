@@ -17,7 +17,8 @@ public class Car {
   public Car() {
   }
 
-  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId) {
+  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice,
+             double mthPrice, String transmission, int modelId) {
     this.carId = carId;
     this.available = available;
     this.colour = colour;
@@ -29,7 +30,8 @@ public class Car {
     this.modelId = modelId;
   }
 
-  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice, double mthPrice, String transmission, int modelId, Model carModel) {
+  public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice,
+             double mthPrice, String transmission, int modelId, Model carModel) {
     this.carId = carId;
     this.available = available;
     this.colour = colour;
@@ -42,10 +44,17 @@ public class Car {
     this.carModel = carModel;
   }
 
-  public Car(int id, String vin, String regNumber){
-    this.VIN = vin;
+  public Car(int carId, String colour, String VIN, String regNumber, double steelPrice, double mthPrice,
+             String transmission, int modelId, Model carModel) {
+    this.carId = carId;
+    this.colour = colour;
+    this.VIN = VIN;
     this.regNumber = regNumber;
-    this.carId = id;
+    this.steelPrice = steelPrice;
+    this.mthPrice = mthPrice;
+    this.transmission = transmission;
+    this.modelId = modelId;
+    this.carModel = carModel;
   }
 
   public int getCarId() {

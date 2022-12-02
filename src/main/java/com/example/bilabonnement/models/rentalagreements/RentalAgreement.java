@@ -40,18 +40,20 @@ public class RentalAgreement {
     this.userId = userId;
   }
 
-  public RentalAgreement(int rentalId, Date endDate, Date startDate, double mthPrice,
-                         int carId, Car car, int userId, User user, int modelId, Model model) {
+  public RentalAgreement(int rentalId, Date endDate, Date startDate, double mthPrice, int carId, int mthKmId, int userId,
+                         int modelId, MthKm mthKm, Car car, Model model, User user) {
     this.rentalId = rentalId;
     this.endDate = endDate;
     this.startDate = startDate;
     this.mthPrice = mthPrice;
-    this.car = car;
     this.carId = carId;
-    this.user = user;
+    this.mthKmId = mthKmId;
     this.userId = userId;
-    this.model = model;
     this.modelId = modelId;
+    this.mthKm = mthKm;
+    this.car = car;
+    this.model = model;
+    this.user = user;
   }
 
   public Car getCar() {

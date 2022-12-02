@@ -27,29 +27,33 @@
     <thead style="position: sticky; top: 0">
     <tr>
       <th>RentalId</th>
+      <th>Efternavn</th>
+      <th>Fornavn</th>
       <th>Start Dato</th>
       <th>Slut Dato</th>
       <th>Mdl. Pris</th>
-      <th>Fornavn</th>
-      <th>Efternavn</th>
       <th>Mærke</th>
       <th>Model</th>
+      <th>Stelnummer</th>
+      <th>Nummerplade</th>
     </tr>
     </thead>
     <tbody id="inputrows">
-     <tr class="item" th:each="agreement,iterStat : ${agreements}">
+     <tr class="item" th:each="agreement : ${agreements}">
        <!--TODO Remove comment tags and update th:ondblclick so it works with show rental agreement
 
             <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             -->
        <td th:text="${agreement.rentalId}">rentalId</td>
+       <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
+       <td th:text="${agreement.getUser().getLastName()}">LastName</td>
        <td th:text="${agreement.startDate}">startDate</td>
         <td th:text="${agreement.endDate}">endDate</td>
         <td th:text="${agreement.mthPrice}">mthPrice</td>
-        <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
-        <td th:text="${agreement.getUser().getLastName()}">LastName</td>
        <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
        <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
+       <td th:text="${agreement.getCar().getVIN()}">VIN</td>
+       <td th:text="${agreement.getCar().getRegNumber()}">RegNumber</td>
       </tr>
     </tbody>
 

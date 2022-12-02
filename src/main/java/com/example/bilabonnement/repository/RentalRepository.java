@@ -93,35 +93,49 @@ public class RentalRepository {
     public List<RentalAgreement> fetchAllRentalAgreements() {
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {
-            String queryCreate = "SELECT DISTINCT rental_agreements.rental_id, rental_agreements.start_date, " +
-                    "                rental_agreements.end_date, rental_agreements.mth_price, models.model_name,\n" +
-                    "                models.manufacturer, models.model_id, cars.car_id, cars.vin, cars.reg_number, " +
-                    "                users.first_name, users.last_name, users.user_id FROM rental_agreements\n" +
-                    "                INNER JOIN cars ON rental_agreements.car_id = cars.car_id\n" +
-                    "                INNER JOIN models ON cars.model_id = models.model_id\n" +
-                    "                INNER JOIN users ON rental_agreements.user_id = users.user_id\n" +
-                    "                ORDER BY rental_agreements.start_date;";
+            String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.user_id " +
+                    "INNER JOIN models ON cars.model_id = models.model_id INNER JOIN users ON rental_agreements.user_id " +
+                    "= users.user_id INNER JOIN mth_km mk on rental_agreements.mth_km_id = mk.km_id " +
+                    "ORDER BY rental_agreements.start_date;";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             ResultSet resultSet = psts.executeQuery();
 
             while (resultSet.next()) {
                 int rentalId = resultSet.getInt(1);
-                Date startDate = resultSet.getDate(2);
-                Date endDate = resultSet.getDate(3);
-                double mthPrice = resultSet.getDouble(4);
-                String modelName = resultSet.getString(5);
-                String manufacturer = resultSet.getString(6);
-                int modelId = resultSet.getInt(7);
-                int carId = resultSet.getInt(8);
-                String vin = resultSet.getString(9);
-                String regNumber = resultSet.getString(10);
-                String firstName = resultSet.getString(11);
-                String lastName = resultSet.getString(12);
-                int userId = resultSet.getInt(13);
+                Date endDate = resultSet.getDate(2);
+                Date startDate = resultSet.getDate(3);
+                double rentalMthPrice = resultSet.getDouble(4);
+                int carId = resultSet.getInt(5);
+                int mthKmId = resultSet.getInt(6);
+                int userId = resultSet.getInt(7);
+                String colour = resultSet.getString(10);
+                String vin = resultSet.getString(11);
+                String regNumber = resultSet.getString(12);
+                double steelPrice = resultSet.getDouble(13);
+                double carMthPrice = resultSet.getDouble(14);
+                String transmission = resultSet.getString(15);
+                int modelId = resultSet.getInt(16);
+                String modelName = resultSet.getString(18);
+                String manufacturer = resultSet.getString(19);
+                double c02Emission = resultSet.getDouble(20);
+                String fuelType = resultSet.getString(21);
+                double carRange = resultSet.getDouble(22);
+                String email = resultSet.getString(24);
+                String username = resultSet.getString(25);
+                String firstName = resultSet.getString(27);
+                String lastName = resultSet.getString(28);
+                Date birthDate = resultSet.getDate(29);
+                String address = resultSet.getString(30);
+                String phoneNumber = resultSet.getString(31);
+                int mthKm = resultSet.getInt(33);
+                int mthKmPrice = resultSet.getInt(34);
 
-                rentalAgreementList.add(new RentalAgreement(rentalId, startDate, endDate, mthPrice, carId,
-                        new Car(carId, vin, regNumber), userId, new User(userId, firstName, lastName), modelId,
-                        new Model(modelId, modelName, manufacturer)));
+                Model carModel = new Model(modelId, modelName, manufacturer, c02Emission, fuelType, carRange);
+                rentalAgreementList.add(new RentalAgreement(rentalId, endDate, startDate, rentalMthPrice, carId, mthKmId, userId,
+                        modelId, new MthKm(mthKmId, mthKm, mthKmPrice), new Car(carId, colour, vin, regNumber,
+                        steelPrice, carMthPrice, transmission, modelId, carModel), carModel, new User(userId, email,
+                        username, firstName, lastName, birthDate, address, phoneNumber)));
+
             }
             return rentalAgreementList;
         } catch (NullPointerException | SQLException ex) {
