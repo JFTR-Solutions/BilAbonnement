@@ -67,4 +67,12 @@ public class UserService {
     public boolean checkIfUsernameExists(String username) {
         return userRepository.checkIfUsernameExists(username);
     }
+
+    public void giveCustomerRole(int id) {
+        userRepository.giveCustomerRole(id);
+    }
+
+    public int findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
 }

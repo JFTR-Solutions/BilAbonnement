@@ -116,6 +116,18 @@ public class UserRepository {
         }
     }
 
+        public void giveCustomerRole(int id) throws CarLeasingException {
+            try {
+                String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+                PreparedStatement psts = conn.prepareStatement(queryInsert);
+                psts.setInt(1, 5);
+                psts.setInt(2, id);
+                psts.executeUpdate();
+            } catch (NullPointerException | SQLException ex) {
+                throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+            }
+        }
+
     public void createUser(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
         try {
             String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
@@ -138,10 +150,26 @@ public class UserRepository {
         }
     }
 
+    public int findUserByUsername(String username) throws CarLeasingException {
+        int id = 0;
+        try {
+            String queryFind = ("SELECT user_id FROM users WHERE username=?");
+            PreparedStatement psts = conn.prepareStatement(queryFind);
+            psts.setString(1, username);
+            ResultSet rs = psts.executeQuery();
+            while(rs.next()) {
+                id = rs.getInt("user_id");
+            }
+            return id;
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
     public void createCustomer(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
         try {
             String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
-                    "VALUES (5,?,?,?,?,?,?,?,?)");
+                    "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
             psts.setString(1, email);
