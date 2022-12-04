@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{../css/updateCar.css}" href="../static/css/updateCar.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
@@ -18,8 +19,12 @@
 <body>
 
 <div1>
-    <form method="post" action="/update-car">
 
+
+    <form method="post" action="/update-car">
+        <h2>Opdater bil</h2>
+        <a th:href="@{'/delete-car/' + ${car.carId}}"onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');" style="text-decoration: underline red;">
+        <p class="delete" style="margin-left: 90%; color: red">Slet bil</p></a>
         <input type="hidden" name="carId" th:value="${car.carId}">
         <input type="hidden" required name="available" th:value="${car.isAvailable}">
 
@@ -114,9 +119,6 @@
                     th:value="${models.modelId}"
                     th:selected="${car.modelId == models.modelId}"></option>
         </select>
-
-        <button class="button2" type="submit" th:href="@{'/delete-car/' + ${car.carId}}"
-                onclick="return confirm('Er du sikker på du ønsker at slette denne bil?');">Slet</button>
         <button type="submit" name="submit" value="update car">Opdater bil</button>
         <button type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
     </form>
