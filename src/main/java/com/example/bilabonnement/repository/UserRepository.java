@@ -27,6 +27,7 @@ public class UserRepository {
 
     }
 
+//    Frederik
     public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
 
         List<Boolean> booleanList = new ArrayList<>();
@@ -61,6 +62,7 @@ public class UserRepository {
         }
     }
 
+    //Frederik
     public void addRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
 
         List<Boolean> booleanList = new ArrayList<>();
