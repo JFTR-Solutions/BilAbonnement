@@ -93,7 +93,7 @@ public class RentalRepository {
     public List<RentalAgreement> fetchAllRentalAgreements() {
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {
-            String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.user_id " +
+            String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.car_id " +
                     "INNER JOIN models ON cars.model_id = models.model_id INNER JOIN users ON rental_agreements.user_id " +
                     "= users.user_id INNER JOIN mth_km mk on rental_agreements.mth_km_id = mk.km_id " +
                     "ORDER BY rental_agreements.start_date;";

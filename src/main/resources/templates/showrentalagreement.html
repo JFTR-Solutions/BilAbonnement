@@ -44,12 +44,12 @@
 
             <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             -->
-       <td th:text="${agreement.rentalId}">rentalId</td>
+       <td th:text="${agreement.getRentalId()}">rentalId</td>
        <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
        <td th:text="${agreement.getUser().getLastName()}">LastName</td>
-       <td th:text="${agreement.startDate}">startDate</td>
-        <td th:text="${agreement.endDate}">endDate</td>
-        <td th:text="${agreement.mthPrice}">mthPrice</td>
+       <td th:text="${agreement.getStartDate()}">startDate</td>
+        <td th:text="${agreement.getEndDate}">endDate</td>
+        <td th:text="${agreement.getMthPrice()}">mthPrice</td>
        <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
        <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
        <td th:text="${agreement.getCar().getVIN()}">VIN</td>
