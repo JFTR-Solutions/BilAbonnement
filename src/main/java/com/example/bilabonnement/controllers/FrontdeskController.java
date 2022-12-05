@@ -123,7 +123,7 @@ public class FrontdeskController {
     }
 
     //Thomas
-    @GetMapping("/create-rentalAgreement")
+    @GetMapping("/create-rental-agreement")
     public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
@@ -135,7 +135,7 @@ public class FrontdeskController {
     }
 
     //Thomas
-    @PostMapping("/create-rentalAgreement")
+    @PostMapping("/create-rental-agreement")
     public String createRentalAgreement(@RequestParam("carId") int carId, @RequestParam("userId") int userId,
                                         @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
                                         @RequestParam("startDate") Date startDate) {
@@ -151,7 +151,7 @@ public class FrontdeskController {
     }
 
     //Thomas
-    @GetMapping("/show-rentalAgreement")
+    @GetMapping("/show-rental-agreement")
     public String showRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
