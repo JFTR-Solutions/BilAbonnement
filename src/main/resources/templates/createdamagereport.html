@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{../css/createCar.css}" href="../static/css/createCar.css">
@@ -26,11 +26,9 @@
     <label for="price">Anslået pris på skaden: </label>
     <input id="price" type="number" name="price">
 
-    <label for="carid">Bilnummer: </label>
-    <input id="carid" type="number" required name="carid" readonly>
+    <input type="hidden" th:value="${carid}" name="carid">
+    <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
 
-    <label for="rentalagreementid">Aftalenummer: </label>
-    <input id="rentalagreementid" type="number" required name="rentalagreementid" readonly >
 
     <button type="submit" name="submit" value="create">Opret</button>
 

@@ -39,10 +39,10 @@
         </thead>
         <tbody id="inputrows">
         <tr class="item" th:each="agreement : ${agreements}">
-            <!--TODO Remove comment tags and update th:ondblclick so it works with show rental agreement
 
-                 <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
-                 -->
+
+                 <tr class="item" th:each="agreement: ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${agreement.getCar().getCarId()} + ${agreement.getRentalId()}  '\');'">
+
             <td th:text="${agreement.getCar().getRegNumber()}">RegNumber</td>
             <td th:text="${agreement.getCar().getVIN()}">VIN</td>
             <td th:if="${agreement.getActive() == 1}" th:text="Aktiv">AktivStatus</td>
@@ -70,13 +70,14 @@
     });
 </script>
 
-<!--TODO Remove comment tags and update href to show rental agreement site.
+
 <script>
-    function rowClicked(value) {
-        location.href = "/update-car/" + value;
+    function rowClicked(value, value2) {
+        location.href = "/create-damagereport/" + value + "/" + value2;
     }
+
 </script>
--->
+
 </body>
 
 </html>

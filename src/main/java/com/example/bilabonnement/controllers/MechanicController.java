@@ -10,6 +10,7 @@ import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -58,11 +59,13 @@ public class MechanicController {
         return "mechanic";
     }
 
-    @GetMapping("/create-damagereport")
-    public String showDamageReport(HttpSession httpSession, Model model) throws CarLeasingException {
+    @GetMapping("/create-damagereport/{carid}/{rentalagreementid}")
+    public String showDamageReport(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId, HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
+        model.addAttribute("carid", carId);
+        model.addAttribute("rentalagreementid", rentalId);
         return "createdamagereport";
     }
 
