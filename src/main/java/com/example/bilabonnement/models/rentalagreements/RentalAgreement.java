@@ -16,6 +16,8 @@ public class RentalAgreement {
   private int mthKmId;
   private int userId;
 
+  private byte active;
+
   private int modelId;
 
   private MthKm mthKm;
@@ -41,7 +43,7 @@ public class RentalAgreement {
   }
 
   public RentalAgreement(int rentalId, Date endDate, Date startDate, double mthPrice, int carId, int mthKmId, int userId,
-                         int modelId, MthKm mthKm, Car car, Model model, User user) {
+                         int modelId, MthKm mthKm, Car car, Model model, User user, byte active) {
     this.rentalId = rentalId;
     this.endDate = endDate;
     this.startDate = startDate;
@@ -54,6 +56,7 @@ public class RentalAgreement {
     this.car = car;
     this.model = model;
     this.user = user;
+    this.active = active;
   }
 
   public Car getCar() {
@@ -123,6 +126,12 @@ public class RentalAgreement {
   public void setUserId(int userId) {
     this.userId = userId;
   }
+
+  public byte getActive() { return active;}
+
+  public int getModelId() { return modelId;}
+
+  public MthKm getMthKm() { return mthKm;}
 
   @Override
   public String toString() {

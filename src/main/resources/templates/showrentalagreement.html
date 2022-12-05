@@ -26,6 +26,7 @@
   <table class="sortable, styled-table" id="table">
     <thead style="position: sticky; top: 0">
     <tr>
+      <th>Status</th>
       <th>RentalId</th>
       <th>Efternavn</th>
       <th>Fornavn</th>
@@ -44,6 +45,8 @@
 
             <tr class="item" th:each="agreement,iterStat : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             -->
+       <td th:if="${agreement.getActive() == 1}" th:text="Aktiv">AktivStatus</td>
+       <td th:if="${agreement.getActive() == 0}" th:text="Afsluttet">AktiveStatus</td>
        <td th:text="${agreement.getRentalId()}">rentalId</td>
        <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
        <td th:text="${agreement.getUser().getLastName()}">LastName</td>

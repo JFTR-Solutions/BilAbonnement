@@ -135,7 +135,7 @@ public class RentalRepository {
                 rentalAgreementList.add(new RentalAgreement(rentalId, endDate, startDate, rentalMthPrice, carId, mthKmId, userId,
                         modelId, new MthKm(mthKmId, mthKm, mthKmPrice), new Car(carId, colour, vin, regNumber,
                         steelPrice, carMthPrice, transmission, modelId, carModel), carModel, new User(userId, email,
-                        username, firstName, lastName, birthDate, address, phoneNumber)));
+                        username, firstName, lastName, birthDate, address, phoneNumber), active));
 
             }
             return rentalAgreementList;
