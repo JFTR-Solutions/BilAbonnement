@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/createCar.css}" href="../static/css/createCar.css">
+    <title>Opret Skadesreport</title>
+</head>
+<body>
+<form method="post" th:action="@{'/create-damagereport'}">
+
+    <label for="placement">Placering: </label>
+    <input id="placement" type="text" name="placement" list="placement_options" maxlength="50">
+
+    <datalist id="placement_options" style="width: 300px">
+        <option value="Front" >Front</option>
+        <option value="Bagende">Bagende</option>
+        <option value="Venstre">Venstre Side</option>
+        <option value="Højre">Højre Side</option>
+
+    </datalist>
+
+    <label for="description">Beskrivelse af skaden: </label>
+    <input id="description" type="text" name="description" maxlength="200">
+
+
+    <label for="price">Anslået pris på skaden: </label>
+    <input id="price" type="number" name="price">
+
+    <label for="carId">Bilnummer: </label>
+    <input id="carId" type="number" required name="carId" >
+
+    <label for="rentalAgreementId">Aftalenummer: </label>
+    <input id="rentalAgreementId" type="number" required name="rentalAgreementId" >
+
+    <button type="submit" name="submit" value="create">Opret</button>
+
+</form>
+
+
+</body>
+</html>
