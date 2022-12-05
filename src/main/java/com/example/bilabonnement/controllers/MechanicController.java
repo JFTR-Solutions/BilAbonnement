@@ -1,8 +1,11 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.repository.MechanicRepository;
+import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.MechanicService;
+import com.example.bilabonnement.service.RentalService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +24,16 @@ public class MechanicController {
     LoginController loginController;
     UserService userService;
     MechanicService mechanicService;
+    RentalService rentalService;
+    CarService carService;
 
-    public MechanicController(LoginController loginController, UserService userService, MechanicService mechanicService) {
+    public MechanicController(LoginController loginController, UserService userService, MechanicService mechanicService,
+                              RentalService rentalService, CarService carService) {
         this.loginController = loginController;
         this.userService = userService;
         this.mechanicService = mechanicService;
+        this.rentalService = rentalService;
+        this.carService = carService;
     }
 
     @GetMapping("/mechanic")
@@ -35,11 +43,18 @@ public class MechanicController {
             if (!loginController.validateLogin(httpSession, role)) {
                 return "redirect:/";
             }
+
+
+
         } catch (CarLeasingException e) {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
-        model.addAttribute("userList", userService.getAll());
+
+        model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
+        model.addAttribute("carlist", carService.fetchAllCars());
+        model.addAttribute("userlist", userService.getAll());
+
         return "mechanic";
     }
 
