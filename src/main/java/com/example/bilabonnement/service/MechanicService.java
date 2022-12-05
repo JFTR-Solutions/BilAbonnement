@@ -8,6 +8,10 @@ public class MechanicService {
 
     MechanicRepository mechanicRepository;
 
+    public MechanicService(MechanicRepository mechanicRepository) {
+        this.mechanicRepository = mechanicRepository;
+    }
+
     public void createDamageReport(int price, String placement, String description, int carId, int rentalAgreementId){
         mechanicRepository.createDamageReport(price, placement, description, carId, rentalAgreementId);
     }

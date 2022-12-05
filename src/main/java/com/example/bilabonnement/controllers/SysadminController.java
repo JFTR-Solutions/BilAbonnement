@@ -1,9 +1,11 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.repository.MechanicRepository;
 import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
+import com.example.bilabonnement.service.MechanicService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ public class SysadminController {
     LoginController loginController;
     UserService userService;
     UserRepository userRepository;
+
     private final String role = "sysadmin";
 
 
@@ -27,6 +30,7 @@ public class SysadminController {
         this.userService = userService;
         this.loginController = loginController;
         this.userRepository = userRepository;
+
     }
 
     //Frederik

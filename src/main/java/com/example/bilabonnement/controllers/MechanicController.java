@@ -54,7 +54,7 @@ public class MechanicController {
     @PostMapping("/create-damagereport")
     public String createDamageReport(@RequestParam("price") int price, @RequestParam("placement") String placement,
                                      @RequestParam("description") String description, @RequestParam("carid") int carId,
-                                     @RequestParam("rentalagreement") int rentalAgreementId) throws CarLeasingException {
+                                     @RequestParam("rentalagreementid") int rentalAgreementId) throws CarLeasingException {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
         return ("redirect:/reception");
