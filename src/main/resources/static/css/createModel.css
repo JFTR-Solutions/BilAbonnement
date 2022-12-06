@@ -1,6 +1,7 @@
-body{
+body,html{
     font-family: 'Poppins',sans-serif;
     background-image: linear-gradient(to bottom, #062d35, #0a4d5b);
+    height: 100vh;
 }
 
 form{
