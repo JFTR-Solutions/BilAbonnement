@@ -151,13 +151,22 @@ public class FrontdeskController {
 
     //Thomas
     @GetMapping("/show-rental-agreement")
-    public String showRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
+    public String showRentalAgreementList(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
-        model.addAttribute("carlist", carService.fetchAllCars());
-        model.addAttribute("userlist", userService.getAllEmployees());
+
+        return "showrentalagreementlist";
+    }
+
+    @GetMapping("/show-rental-agreement/{rentalId}")
+    public String showRentalAgreementByID(@PathVariable("rentalId")int rentalId, HttpSession httpSession,
+                                          Model model) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
 
         return "showrentalagreement";
     }
@@ -175,7 +184,8 @@ public class FrontdeskController {
     @PostMapping("/create-customer")
     public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws CarLeasingException {
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr)
+            throws CarLeasingException {
         PasswordGenerator pw = new PasswordGenerator();
         UsernameMaker um = new UsernameMaker(userService);
         String username = um.makeUsername(firstname, lastname, birthdate);

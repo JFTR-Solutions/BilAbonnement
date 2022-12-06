@@ -90,6 +90,59 @@ public class RentalRepository {
         }
     }
 
+    public RentalAgreement findRentalAgreementById(int id){
+        RentalAgreement rentalAgreement = new RentalAgreement();
+        try {
+            String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.car_id" +
+                    "INNER JOIN models ON cars.model_id = models.model_id INNER JOIN users ON rental_agreements.user_id" +
+                    "= users.user_id INNER JOIN mth_km mk on rental_agreements.mth_km_id = mk.km_id WHERE rental_id=?";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            psts.setInt(1, id);
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                int rentalId = resultSet.getInt(1);
+                Date endDate = resultSet.getDate(2);
+                Date startDate = resultSet.getDate(3);
+                double rentalMthPrice = resultSet.getDouble(4);
+                int carId = resultSet.getInt(5);
+                int mthKmId = resultSet.getInt(6);
+                int userId = resultSet.getInt(7);
+                byte active = resultSet.getByte(8);
+                String colour = resultSet.getString(11);
+                String vin = resultSet.getString(12);
+                String regNumber = resultSet.getString(13);
+                double steelPrice = resultSet.getDouble(14);
+                double carMthPrice = resultSet.getDouble(15);
+                String transmission = resultSet.getString(16);
+                int modelId = resultSet.getInt(17);
+                String modelName = resultSet.getString(19);
+                String manufacturer = resultSet.getString(20);
+                double c02Emission = resultSet.getDouble(21);
+                String fuelType = resultSet.getString(22);
+                double carRange = resultSet.getDouble(23);
+                String email = resultSet.getString(25);
+                String username = resultSet.getString(26);
+                String firstName = resultSet.getString(28);
+                String lastName = resultSet.getString(29);
+                Date birthDate = resultSet.getDate(30);
+                String address = resultSet.getString(31);
+                String phoneNumber = resultSet.getString(32);
+                int mthKm = resultSet.getInt(34);
+                int mthKmPrice = resultSet.getInt(35);
+
+                Model carModel = new Model(modelId, modelName, manufacturer, c02Emission, fuelType, carRange);
+                rentalAgreement = new RentalAgreement(rentalId, endDate, startDate, rentalMthPrice, carId, mthKmId, userId,
+                        modelId, new MthKm(mthKmId, mthKm, mthKmPrice), new Car(carId, colour, vin, regNumber,
+                        steelPrice, carMthPrice, transmission, modelId, carModel), carModel, new User(userId, email,
+                        username, firstName, lastName, birthDate, address, phoneNumber), active);
+            }
+            return rentalAgreement;
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
     public List<RentalAgreement> fetchAllRentalAgreements() {
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {

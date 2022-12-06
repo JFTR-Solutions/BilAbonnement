@@ -348,7 +348,7 @@ public class UserRepository {
     }
 
     //FREDERIK
-    public User findUserbyID(int id) {
+    public User findUserByID(int id) {
         User user = new User();
         try {
             String queryCreate = "SELECT * FROM users WHERE user_id=?";
