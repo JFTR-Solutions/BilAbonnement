@@ -1,6 +1,5 @@
 package com.example.bilabonnement.controllers;
 
-import com.example.bilabonnement.repository.RentalRepository;
 import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.cars.Car;
@@ -158,7 +157,7 @@ public class FrontdeskController {
         }
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
         model.addAttribute("carlist", carService.fetchAllCars());
-        model.addAttribute("userlist", userService.getAll());
+        model.addAttribute("userlist", userService.getAllEmployees());
 
         return "showrentalagreement";
     }
