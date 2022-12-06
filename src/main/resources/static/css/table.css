@@ -6,6 +6,9 @@ tr:hover{
     opacity: 0.7;
 }
 
+td, th {
+    border: 1px dotted grey;
+}
 
 table {
     width: calc(100vw - 90px);
