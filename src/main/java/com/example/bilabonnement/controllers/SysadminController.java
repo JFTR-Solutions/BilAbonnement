@@ -20,7 +20,7 @@ public class SysadminController {
     LoginController loginController;
     UserService userService;
 
-    private final String role = "sysadmin";
+    private final String role = "System adminstrator";
 
 
     public SysadminController(UserService userService, LoginController loginController) {

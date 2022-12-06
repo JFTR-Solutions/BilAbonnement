@@ -6,6 +6,7 @@ tr:hover{
     opacity: 0.7;
 }
 
+
 table {
     width: calc(100vw - 90px);
 }
@@ -38,6 +39,7 @@ table {
     background-color:  #0a4d5b;
     color: #ffffff;
     text-align: center;
+
 }
 
 .styled-table th,

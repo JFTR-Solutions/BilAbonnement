@@ -20,7 +20,7 @@ public class CarController {
 
     RentalService rentalService;
 
-    private final String role = "front_desk";
+    private final String role = "Reception";
 
     public CarController(LoginController loginController, UserService userService, CarService carService, RentalService rentalService) {
         this.loginController = loginController;

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class SalesController {
 
-    private final String role = "sales";
+    private final String role = "Salg";
     LoginController loginController;
     UserService userService;
 

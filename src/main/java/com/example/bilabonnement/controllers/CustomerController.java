@@ -20,7 +20,7 @@ public class CustomerController {
     SysadminController sysadminController;
     RentalService rentalService;
 
-    private final String role = "front_desk";
+    private final String role = "Reception";
 
 
     public CustomerController(LoginController loginController, UserService userService, CarService carService,

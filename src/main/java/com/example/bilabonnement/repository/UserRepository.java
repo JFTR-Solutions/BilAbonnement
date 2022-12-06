@@ -37,10 +37,10 @@ public class UserRepository {
         booleanList.add(mechanic);
 
         List<String> roles = new ArrayList<>();
-        roles.add("sysadmin");
-        roles.add("sales");
-        roles.add("front_desk");
-        roles.add("mechanic");
+        roles.add("System adminstrator");
+        roles.add("Salg");
+        roles.add("Reception");
+        roles.add("Mekaniker");
 
         try {
             List<String> roleList = findRoleById(user.getUserId());
@@ -72,10 +72,10 @@ public class UserRepository {
         booleanList.add(mechanic);
 
         List<String> roles = new ArrayList<>();
-        roles.add("sysadmin");
-        roles.add("sales");
-        roles.add("front_desk");
-        roles.add("mechanic");
+        roles.add("System adminstrator");
+        roles.add("Salg");
+        roles.add("Reception");
+        roles.add("Mekaniker");
 
         try {
             List<String> roleList = findRoleById(user.getUserId());

@@ -35,7 +35,7 @@ public class LoginController {
     public Boolean validateLogin(HttpSession httpSession, String role) throws CarLeasingException {
         if (!validateUser(httpSession)) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.NO_LOGIN));
-        } else if (!validateRoles(httpSession).contains(role) && (!validateRoles(httpSession).contains("sysadmin"))) {
+        } else if (!validateRoles(httpSession).contains(role) && (!validateRoles(httpSession).contains("System adminstrator"))) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.NO_PERMISSION));
         } else {
             return true;

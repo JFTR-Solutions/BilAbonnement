@@ -8,6 +8,9 @@
 <body>
 <form method="post" action="/update-user">
 
+    <div style="background-color: #b23030; margin-left: 90%; " ><a class="underline" style="text-decoration: none" th:href="@{'/delete-user/' + ${user.userId}}"
+                                              onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></div>
+    <h2>Opdater bruger</h2>
     <input type="hidden" name="userId" th:value="${user.userId}">
 
     <label for="email">Email: </label>
