@@ -6,6 +6,10 @@ tr:hover{
     opacity: 0.7;
 }
 
+table {
+    width: calc(100vw - 90px);
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 20px 0;
