@@ -1,6 +1,7 @@
 package com.example.bilabonnement.models.rentalagreements;
 
 import com.example.bilabonnement.models.cars.Car;
+import com.example.bilabonnement.models.cars.Damage;
 import com.example.bilabonnement.models.cars.Model;
 import com.example.bilabonnement.models.users.User;
 
@@ -27,6 +28,8 @@ public class RentalAgreement {
   private Model model;
 
   private User user;
+
+  private Damage damage;
 
 
   public RentalAgreement() {
@@ -69,6 +72,10 @@ public class RentalAgreement {
 
   public User getUser() {
     return user;
+  }
+
+  public Damage getDamage() {
+    return damage;
   }
 
   public int getRentalId() {

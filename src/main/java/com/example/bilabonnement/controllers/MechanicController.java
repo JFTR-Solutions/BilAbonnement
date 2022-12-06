@@ -69,6 +69,7 @@ public class MechanicController {
         return "createdamagereport";
     }
 
+
     @PostMapping("/create-damagereport")
     public String createDamageReport(@RequestParam("price") int price, @RequestParam("placement") String placement,
                                      @RequestParam("description") String description, @RequestParam("carid") int carId,

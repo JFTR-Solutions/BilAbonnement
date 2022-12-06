@@ -13,7 +13,7 @@
 </nav>
 <div class="home-section">
     <h1>Mekaniker</h1>
-    <a href="/create-damagereport">
+    <a href="/create-damagereport/">
         <button>Opret Skadesrapport</button>
     </a>
     <br>
@@ -38,10 +38,13 @@
         </tr>
         </thead>
         <tbody id="inputrows">
-        <tr class="item" th:each="agreement : ${agreements}">
 
 
-                 <tr class="item" th:each="agreement: ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${agreement.getCar().getCarId()} + ${agreement.getRentalId()}  '\');'">
+
+
+
+        <tr class="item" th:each="agreement:${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${agreement.getCar().getCarId()} + '/' +  ${agreement.getRentalId()} + '\');'">
+
 
             <td th:text="${agreement.getCar().getRegNumber()}">RegNumber</td>
             <td th:text="${agreement.getCar().getVIN()}">VIN</td>
@@ -54,30 +57,41 @@
             <td th:text="${agreement.getUser().getLastName()}">LastName</td>
             <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
 
-        </tr>
-        </tbody>
 
-    </table>
-</div>
-<script>
-    $(document).ready(function () {
-        $("#search").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#inputrows tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
+            <!-- <td th:text="${agreement.getDamage().getPlacement()}">Placement</td> -->
 
 
-<script>
-    function rowClicked(value, value2) {
-        location.href = "/create-damagereport/" + value + "/" + value2;
-    }
 
-</script>
 
-</body>
 
-</html>
+
+
+
+
+
+         </tr>
+         </tbody>
+
+     </table>
+ </div>
+ <script>
+     $(document).ready(function () {
+         $("#search").on("keyup", function () {
+             var value = $(this).val().toLowerCase();
+             $("#inputrows tr").filter(function () {
+                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+             });
+         });
+     });
+ </script>
+
+
+ <script>
+     function rowClicked(value) {
+         location.href = "/create-damagereport/" + value;
+     }
+ </script>
+
+ </body>
+
+ </html>

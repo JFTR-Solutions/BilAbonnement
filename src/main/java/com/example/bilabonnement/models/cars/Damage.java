@@ -1,5 +1,7 @@
 package com.example.bilabonnement.models.cars;
 
+import com.example.bilabonnement.models.users.User;
+
 public class Damage {
 
   private int damageId;
@@ -20,6 +22,7 @@ public class Damage {
     this.carId = carId;
     this.rentalAgreementId = rentalAgreementId;
   }
+
 
   public int getDamageId() {
     return damageId;
@@ -72,11 +75,11 @@ public class Damage {
   @Override
   public String toString() {
     return
-        "Damage Id= " + damageId +
-        " | Price= " + price +
-        " | Placement= " + placement +
-        " | Description= " + description +
-        " | Car Id= " + carId +
-        " | Rental Agreement Id= " + rentalAgreementId;
+            "Damage Id= " + damageId +
+                    " | Price= " + price +
+                    " | Placement= " + placement +
+                    " | Description= " + description +
+                    " | Car Id= " + carId +
+                    " | Rental Agreement Id= " + rentalAgreementId;
   }
 }
