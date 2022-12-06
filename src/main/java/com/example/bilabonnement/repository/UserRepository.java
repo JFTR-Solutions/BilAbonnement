@@ -190,12 +190,41 @@ public class UserRepository {
         }
     }
 
-    public List<User> getAll() throws CarLeasingException {
+    public List<User> getAllEmployees() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
 
         try {
-            String queryGetAll = ("SELECT * from users");
+            String queryGetAll = ("SELECT * from users WHERE user_id IN (SELECT user_id FROM roles_users WHERE role_id!=5)");
+            PreparedStatement psts = conn.prepareStatement(queryGetAll);
+            ResultSet rs = psts.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt(1);
+                String email = rs.getString(2);
+                String username = rs.getString(3);
+                String password = rs.getString(4);
+                String firstName = rs.getString(5);
+                String lastName = rs.getString(6);
+                Date birthdate = rs.getDate(7);
+                String address = rs.getString(8);
+                String phoneNumber = rs.getString(9);
+
+                userList.add(new User(userId, email, username, password, firstName, lastName, birthdate, address, phoneNumber));
+            }
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+        return userList;
+    }
+
+    public List<User> getAllCustomers() throws CarLeasingException {
+
+        List<User> userList = new ArrayList<>();
+
+        try {
+            String queryGetAll = ("SELECT * from users WHERE user_id IN (SELECT user_id FROM roles_users WHERE role_id=5)");
             PreparedStatement psts = conn.prepareStatement(queryGetAll);
             ResultSet rs = psts.executeQuery();
 

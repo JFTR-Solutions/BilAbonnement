@@ -31,7 +31,7 @@ public class SalesController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
-        model.addAttribute("userList", userService.getAll());
+        model.addAttribute("userList", userService.getAllEmployees());
         return "sales";
     }
 }

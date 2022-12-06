@@ -14,7 +14,7 @@ form{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
-    margin-top: 100px;
+    margin-top: 5vh;
     top: 45%;
     left: 50%;
     border-radius: 25px;

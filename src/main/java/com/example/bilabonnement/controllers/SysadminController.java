@@ -1,11 +1,9 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.repository.MechanicRepository;
 import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.repository.UserRepository;
-import com.example.bilabonnement.service.MechanicService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,14 +44,14 @@ public class SysadminController {
             return "redirect:/welcome";
         }
         model.addAttribute("roleList", roleList());
-        model.addAttribute("userList", userService.getAll());
+        model.addAttribute("userList", userService.getAllEmployees());
         return "sysadmin";
     }
 
     public List<String> roleList() throws CarLeasingException {
         List<String> rolelist = new ArrayList<>();
-        for (int i = 0; i < userService.getAll().size(); i++) {
-            rolelist.add(userService.getRoles(userService.getAll().get(i).getUserId()).toString().substring(1, userService.getRoles(userService.getAll().get(i).getUserId()).toString().length() - 1));
+        for (int i = 0; i < userService.getAllEmployees().size(); i++) {
+            rolelist.add(userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().substring(1, userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().length() - 1));
         }
         return rolelist;
     }

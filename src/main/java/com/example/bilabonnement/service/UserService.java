@@ -17,9 +17,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAll() throws CarLeasingException {
-        return userRepository.getAll();
+    public List<User> getAllEmployees() throws CarLeasingException {
+        return userRepository.getAllEmployees();
     }
+
+    public List<User> getAllCustomers() throws CarLeasingException {
+        return userRepository.getAllCustomers();
+    }
+
 
     public User getEmail(String email, String password) throws CarLeasingException {
         return userRepository.findUserByEmail(email, password);

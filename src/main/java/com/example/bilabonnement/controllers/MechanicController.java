@@ -1,8 +1,6 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.models.cars.Car;
-import com.example.bilabonnement.repository.MechanicRepository;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.MechanicService;
 import com.example.bilabonnement.service.RentalService;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
 
 @Controller
 public class MechanicController {
@@ -54,7 +51,7 @@ public class MechanicController {
 
         model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
         model.addAttribute("carlist", carService.fetchAllCars());
-        model.addAttribute("userlist", userService.getAll());
+        model.addAttribute("userlist", userService.getAllEmployees());
 
         return "mechanic";
     }

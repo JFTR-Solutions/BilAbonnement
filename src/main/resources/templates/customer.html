@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bilabonnement | Kunde side</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/sidebar2.css}" href="../static/css/sidebar.css">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+</head>
+<body>
+
+<nav>
+  <div th:insert="fragments/sysadminheader"></div>
+</nav>
+<div class="home-section">
+  <h1>Kunde dashboard</h1>
+  <a href="/create-user">
+    <button>Opret ny kunde</button>
+  </a>
+  <br>
+  <br>
+  <div class="search-grid">
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <input class="searchbar" type="text" id="search" placeholder="Søg">
+  </div>
+  <table class="sortable, styled-table" id="table">
+    <thead style="position: sticky; top: 0">
+    <tr>
+      <th>Id</th>
+      <th>Email</th>
+      <th>Brugernavn</th>
+      <th>Kodeord</th>
+      <th>Fornavn</th>
+      <th>Efternavn</th>
+      <th>Fødselsdagsdato</th>
+      <th>Adresse</th>
+      <th>Telefon nummer</th>
+      <!--        <th>Opdater</th>-->
+      <th>Slet</th>
+    </tr>
+    </thead>
+    <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
+    <tbody id="inputrows">
+    <tr class="item" th:each="user : ${userList}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
+      <td th:text="${user.userId}">ID</td>
+      <td th:text="${user.email}">Email</td>
+      <td th:text="${user.username}">username</td>
+      <td th:text="${user.password}">password</td>
+      <td th:text="${user.firstName}">firstname</td>
+      <td th:text="${user.lastName}">lastname</td>
+      <td th:text="${user.birthdate}">birthday</td>
+      <td th:text="${user.address}">address</td>
+      <td th:text="${user.phoneNumber}">Phone number</td>
+      <!--        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>-->
+
+      <td style="background-color: #b23030" ><a class="underline" th:href="@{'/delete-user/' + ${user.userId}}"
+                                                onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></td>
+      </a></tr>
+    </tbody>
+
+  </table>
+
+  <script>
+    $(document).ready(function () {
+      $("#search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#inputrows tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+  <script>
+    function rowClicked(value) {
+      location.href = "/update-user/" + value;
+    }
+  </script>
+</div>
+</body>
+</html>
