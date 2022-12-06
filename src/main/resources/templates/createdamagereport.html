@@ -6,7 +6,15 @@
     <title>Bilabonnement | Opret Skadesreport</title>
 </head>
 <body>
+
 <form method="post" th:action="@{'/create-damagereport'}">
+
+
+
+    <a href="/mechanic">
+        <button type="button">Fortryd - returner til overblik</button>
+    </a>
+
 
 
     <label>Du opretter skadesrapport på bil nummer: </label>
@@ -57,7 +65,11 @@
     <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
 
 
-    <button type="submit" name="submit" value="create">Opret</button>
+    <div><a href="/end-rentalagreement">
+        <button type="button">Afslut leasing</button>
+    </a></div>
+    <button type="submit" name="submit" value="create">Opret skadesrapport</button>
+
 
 </form>
 

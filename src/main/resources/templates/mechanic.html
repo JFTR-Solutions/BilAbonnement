@@ -14,9 +14,6 @@
 </nav>
 <div class="home-section">
     <h1>Mekaniker</h1>
-    <a href="/create-damagereport/">
-
-        <button hidden>Opret Skadesrapport</button>
 
     </a>
     <br>
@@ -32,6 +29,7 @@
             <th>Nummerplade</th>
             <th>Stelnummer</th>
             <th>Status</th>
+            <th>Start Dato</th>
             <th>Slut Dato</th>
             <th>Mærke</th>
             <th>Model</th>
@@ -53,6 +51,7 @@
             <td th:text="${agreement.getCar().getVIN()}">VIN</td>
             <td th:if="${agreement.getActive() == 1}" th:text="Aktiv">AktivStatus</td>
             <td th:if="${agreement.getActive() == 0}" th:text="Afsluttet">AktiveStatus</td>
+            <td th:text="${agreement.getStartDate()}">startDate</td>
             <td th:text="${agreement.getEndDate}">endDate</td>
             <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
             <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
