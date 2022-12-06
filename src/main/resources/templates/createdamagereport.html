@@ -2,20 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/createCar.css}" href="/css/createCar.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/createDamageReport.css}" href="/css/createDamageReport.css">
     <title>Bilabonnement | Opret Skadesreport</title>
 </head>
 <body>
 <form method="post" th:action="@{'/create-damagereport'}">
 
+
+    <label>Du opretter skadesrapport på bil nummer: </label>
+    <input type="text" readonly th:value="${carid}" name="carid">
+
     <label for="placement">Placering: </label>
     <input id="placement" type="text" name="placement" list="placement_options" maxlength="50">
 
     <datalist id="placement_options" style="width: 300px">
-        <option value="Front" >Front</option>
+        <option value="Front">Front</option>
         <option value="Bagende">Bagende</option>
         <option value="Venstre">Venstre Side</option>
         <option value="Højre">Højre Side</option>
+        <option value="Tag">Tag</option>
+        <option value="Forrude">Forrude</option>
+        <option value="Bagrude">Bagrude</option>
+        <option value="Siderude, Venstre, For">Siderude, Venstre, For</option>
+        <option value="Siderude, Højre, For">Siderude, Højre, For</option>
+        <option value="Siderude, Venstre, Bag">Siderude, Venstre, Bag</option>
+        <option value="Siderude, Højre, Bag">Siderude, Højre, Bag</option>
+        <option value="Højre forlygte">Højre forlygte</option>
+        <option value="Venstre forlygte">Venstre forlygte</option>
+        <option value="Højre baglygte">Højre baglygte</option>
+        <option value="Venstre baglygte">Venstre baglygte</option>
+        <option value="Højre sidespejl">Højre sidespejl</option>
+        <option value="Venstre sidespejl">Venstre sidespejl</option>
+        <option value="Højre fordør">Højre fordør</option>
+        <option value="Venstre fordør">Venstre fordør</option>
+        <option value="Højre bagdør">Højre bagdør</option>
+        <option value="Venstre bagdør">Venstre bagdør</option>
+        <option value="Fælg, højre forhjul">Fælg, højre forhjul</option>
+        <option value="Fælg, venstre forhjul">Fælg, venstre forhjul</option>
+        <option value="Fælg, højre baghjul">Fælg, højre baghjul</option>
+        <option value="Fælg, venstre baghjul">Fælg, venstre baghjul</option>
+
+
 
     </datalist>
 

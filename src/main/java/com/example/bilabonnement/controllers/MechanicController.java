@@ -76,7 +76,7 @@ public class MechanicController {
                                      @RequestParam("rentalagreementid") int rentalAgreementId) throws CarLeasingException {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
-        return ("redirect:/reception");
+        return ("redirect:/mechanic");
     }
 
 
