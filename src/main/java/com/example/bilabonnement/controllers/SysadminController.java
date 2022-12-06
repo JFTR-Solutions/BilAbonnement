@@ -19,16 +19,13 @@ public class SysadminController {
 
     LoginController loginController;
     UserService userService;
-    UserRepository userRepository;
 
     private final String role = "sysadmin";
 
 
-    public SysadminController(UserService userService, LoginController loginController, UserRepository userRepository) {
+    public SysadminController(UserService userService, LoginController loginController) {
         this.userService = userService;
         this.loginController = loginController;
-        this.userRepository = userRepository;
-
     }
 
     //Frederik

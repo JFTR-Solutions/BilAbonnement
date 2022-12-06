@@ -118,7 +118,6 @@ public class CarRepository {
 
       psts.setInt(1, carId);
 
-
       ResultSet resultSet = psts.executeQuery();
       while (resultSet.next()) {
         int id = resultSet.getInt(1);

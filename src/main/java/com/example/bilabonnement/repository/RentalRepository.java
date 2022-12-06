@@ -94,7 +94,7 @@ public class RentalRepository {
         RentalAgreement rentalAgreement = new RentalAgreement();
         try {
             String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.car_id" +
-                    "INNER JOIN models ON cars.model_id = models.model_id INNER JOIN users ON rental_agreements.user_id" +
+                    " INNER JOIN models ON cars.model_id = models.model_id INNER JOIN users ON rental_agreements.user_id" +
                     "= users.user_id INNER JOIN mth_km mk on rental_agreements.mth_km_id = mk.km_id WHERE rental_id=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             psts.setInt(1, id);

@@ -1,7 +1,7 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.repository.MechanicRepository;
+
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.MechanicService;
 import com.example.bilabonnement.service.RentalService;
@@ -25,16 +25,15 @@ public class MechanicController {
     MechanicService mechanicService;
     RentalService rentalService;
     CarService carService;
-    MechanicRepository mechanicRepository;
+
 
     public MechanicController(LoginController loginController, UserService userService, MechanicService mechanicService,
-                              RentalService rentalService, CarService carService, MechanicRepository mechanicRepository) {
+                              RentalService rentalService, CarService carService) {
         this.loginController = loginController;
         this.userService = userService;
         this.mechanicService = mechanicService;
         this.rentalService = rentalService;
         this.carService = carService;
-        this.mechanicRepository = mechanicRepository;
     }
 
     @GetMapping("/mechanic")
@@ -60,7 +59,8 @@ public class MechanicController {
     }
 
     @GetMapping("/create-damagereport/{carid}/{rentalagreementid}")
-    public String showDamageReport(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId, HttpSession httpSession, Model model) throws CarLeasingException {
+    public String showDamageReport(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId,
+                                   HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
