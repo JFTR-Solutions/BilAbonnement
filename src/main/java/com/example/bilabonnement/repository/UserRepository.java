@@ -63,7 +63,8 @@ public class UserRepository {
     }
 
     //Frederik
-    public void addRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+    public void addRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
+            throws CarLeasingException {
 
         List<Boolean> booleanList = new ArrayList<>();
         booleanList.add(sysadmin);

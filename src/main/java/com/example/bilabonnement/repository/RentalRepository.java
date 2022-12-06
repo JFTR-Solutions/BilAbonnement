@@ -4,6 +4,7 @@ import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.exceptions.carExceptionEnum;
 import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.models.cars.Model;
+import com.example.bilabonnement.models.rentalagreements.Addon;
 import com.example.bilabonnement.models.rentalagreements.MthKm;
 import com.example.bilabonnement.models.rentalagreements.RentalAgreement;
 import com.example.bilabonnement.models.users.User;
@@ -49,6 +50,64 @@ public class RentalRepository {
         } catch (NullPointerException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
+    }
+
+    public void addCarAddon(int rentalId, int addonId) {
+        try{
+            String queryCreate = "INSERT INTO car_addons (rental_agreement_id, addon_id)"+
+                    "VALUES (?,?)";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+            psts.setInt(1, rentalId);
+            psts.setInt(2, addonId);
+
+            psts.executeUpdate();
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
+
+    public int findRentalAgreementIdByCarId(int carId){
+        int rentalId = 0;
+        try{
+            String queryCreate = "SELECT rental_id FROM rental_agreements WHERE car_id = ?";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+            psts.setInt(1, carId);
+
+            ResultSet rs = psts.executeQuery();
+
+            while (rs.next()) {
+                rentalId = rs.getInt("rental_id");
+            }
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        } return rentalId;
+    }
+
+    public List<Addon> fetchAllAddons(){
+        List<Addon> addons = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM addons";
+            PreparedStatement psts = conn.prepareStatement(query);
+            ResultSet rs = psts.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("addon_id");
+                String name = rs.getString("addon_name");
+                String shortDesc = rs.getString("addon_short_desc");
+                String desc = rs.getString("addon_desc");
+                double price = rs.getDouble("price");
+                Addon addon = new Addon(id, name, shortDesc,desc, price);
+                addons.add(addon);
+            }
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+        return addons;
     }
 
     public MthKm findMthKmById(int id){

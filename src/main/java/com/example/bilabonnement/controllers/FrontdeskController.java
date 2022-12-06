@@ -137,7 +137,14 @@ public class FrontdeskController {
     @PostMapping("/create-rental-agreement")
     public String createRentalAgreement(@RequestParam("carId") int carId, @RequestParam("userId") int userId,
                                         @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
-                                        @RequestParam("startDate") Date startDate) {
+                                        @RequestParam("startDate") Date startDate,
+                                        @RequestParam(defaultValue = "false", value="deliveryInsurance") boolean deliveryInsurance,
+                                        @RequestParam(defaultValue = "false", value="selfInsurance") boolean selfInsurance,
+                                        @RequestParam(defaultValue = "false", value="winterTires") boolean winterTires,
+                                        @RequestParam(defaultValue = "false", value="viking") boolean viking,
+                                        @RequestParam(defaultValue = "false", value="cleverNetwork") boolean cleverNetwork,
+                                        @RequestParam(defaultValue = "false", value="clever") boolean clever) throws CarLeasingException {
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(startDate);
         cal.add(Calendar.MONTH, months);
@@ -145,6 +152,22 @@ public class FrontdeskController {
         double mthPrice = carService.findCarById(carId).getMthPrice() + rentalService.findmthKmById(mthKmId).getPrice();
         rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
         carService.updateCarAvailability(carId, (byte) 0);
+
+        int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
+        if(deliveryInsurance){
+            rentalService.addCarAddon(rentalId, 1);
+        } if(selfInsurance){
+            rentalService.addCarAddon(rentalId, 2);
+        } if(winterTires){
+            rentalService.addCarAddon(rentalId, 3);
+        } if(viking){
+            rentalService.addCarAddon(rentalId, 4);
+        } if(cleverNetwork){
+            rentalService.addCarAddon(rentalId, 5);
+        } if(clever){
+            rentalService.addCarAddon(rentalId, 6);
+        }
+
 
         return "redirect:/reception";
     }

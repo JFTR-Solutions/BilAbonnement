@@ -5,18 +5,26 @@ public class Addon {
 
   private int addonId;
   private String addonName;
+  private String addonShortDesc;
   private String addonDesc;
-  private int price;
+  private double price;
 
   public Addon() {
   }
 
-  public Addon(int addonId, String addonName, String addonDesc, int price) {
+  public Addon(int addonId, String addonName, String addonShortDesc, String addonDesc, double price) {
     this.addonId = addonId;
     this.addonName = addonName;
+    this.addonShortDesc = addonShortDesc;
     this.addonDesc = addonDesc;
     this.price = price;
   }
+
+  public String getAddonShortDesc() { return addonShortDesc; }
+
+  public void setAddonShortDesc(String addonShortDesc) { this.addonShortDesc = addonShortDesc; }
+
+  public void setPrice(double price) { this.price = price; }
 
   public int getAddonId() {
     return addonId;
@@ -42,7 +50,7 @@ public class Addon {
     this.addonDesc = addonDesc;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return price;
   }
 

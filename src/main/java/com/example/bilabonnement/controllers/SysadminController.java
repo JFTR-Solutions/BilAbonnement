@@ -48,7 +48,8 @@ public class SysadminController {
     public List<String> roleList() throws CarLeasingException {
         List<String> rolelist = new ArrayList<>();
         for (int i = 0; i < userService.getAllEmployees().size(); i++) {
-            rolelist.add(userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().substring(1, userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().length() - 1));
+            rolelist.add(userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().substring(1,
+                    userService.getRoles(userService.getAllEmployees().get(i).getUserId()).toString().length() - 1));
         }
         return rolelist;
     }
@@ -67,11 +68,13 @@ public class SysadminController {
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr) throws CarLeasingException {
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr)
+                            throws CarLeasingException {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);
         if (userService.getEmail(email, encryptedPassword) == null) {
-            userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
+            userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
+                    address, phonenr);
             return "redirect:/sysadmin";
         }
         return ("redirect:/error");
@@ -92,7 +95,8 @@ public class SysadminController {
     //Frederik
     @PostMapping("/update-user")
     public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
-                           @RequestParam(defaultValue = "false") boolean sales, @RequestParam(defaultValue = "false") boolean front_desk,
+                           @RequestParam(defaultValue = "false") boolean sales,
+                           @RequestParam(defaultValue = "false") boolean front_desk,
                            @RequestParam(defaultValue = "false") boolean mechanic) throws CarLeasingException {
         userService.updateUser(user);
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);

@@ -6,6 +6,7 @@ import com.example.bilabonnement.models.cars.Model;
 import com.example.bilabonnement.models.users.User;
 
 import java.sql.Date;
+import java.util.List;
 
 public class RentalAgreement {
 
@@ -16,20 +17,14 @@ public class RentalAgreement {
   private int carId;
   private int mthKmId;
   private int userId;
-
   private byte active;
-
   private int modelId;
-
   private MthKm mthKm;
-
   private Car car;
-
   private Model model;
-
   private User user;
-
   private Damage damage;
+  private List<Addon> addons;
 
 
   public RentalAgreement() {
@@ -62,21 +57,19 @@ public class RentalAgreement {
     this.active = active;
   }
 
-  public Car getCar() {
-    return car;
-  }
+  public void setActive(byte active) { this.active = active; }
 
-  public Model getModel() {
-    return model;
-  }
+  public List<Addon> getAddons() { return addons; }
 
-  public User getUser() {
-    return user;
-  }
+  public void setAddons(List<Addon> addons) { this.addons = addons; }
 
-  public Damage getDamage() {
-    return damage;
-  }
+  public Car getCar() { return car; }
+
+  public Model getModel() { return model; }
+
+  public User getUser() { return user; }
+
+  public Damage getDamage() { return damage; }
 
   public int getRentalId() {
     return rentalId;
