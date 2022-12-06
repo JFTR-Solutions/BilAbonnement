@@ -1,6 +1,7 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.repository.MechanicRepository;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.MechanicService;
 import com.example.bilabonnement.service.RentalService;
