@@ -3,12 +3,18 @@ body{
     background-image: linear-gradient(to bottom, #062d35, #0a4d5b);
 }
 
+html, body {
+    height: 100vh;
+    overflow: hidden;
+}
+
 form{
-    height: 1000px;
+    height: 890px;
     width: 670px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
+    margin-top: 100px;
     top: 45%;
     left: 50%;
     border-radius: 25px;
@@ -45,7 +51,7 @@ input{
 
 button{
     margin-top: 50px;
-    width: 100%;
+    width: 45%;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
