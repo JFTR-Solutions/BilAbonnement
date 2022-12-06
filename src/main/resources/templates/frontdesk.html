@@ -11,7 +11,7 @@
     <div th:insert="fragments/sysadminheader"></div>
 </nav>
 <div class="home-section">
-    <h1>Velkommen til receptionen</h1>
+    <h1>Leasing</h1>
     <div class="button-grid">
 <!--<div><a href="/create-car">
     <button>Opret ny bil</button>
@@ -45,7 +45,7 @@
         <thead style="position: sticky; top: 0">
         <tr>
             <th>ID</th>
-            <th>Ledig</th>
+<!--            <th>Ledig</th>-->
             <th>Producent</th>
             <th>Model navn</th>
             <th>Farve</th>
@@ -62,8 +62,8 @@
         <tbody id="inputrows">
         <tr class="item" th:each="car:${carlist}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             <td th:text="${car.carId}">ID</td>
-            <td th:if="${car.isAvailable == 1}" th:text="Ledig">Ledig</td>
-            <td th:if="${car.isAvailable == 0}" th:text="Udlejet">Udlejet</td>
+<!--            <td th:if="${car.isAvailable == 1}" th:text="Ledig">Ledig</td>
+            <td th:if="${car.isAvailable == 0}" th:text="Udlejet">Udlejet</td>-->
             <td th:text="${car.carModel.getManufacturer}">Producent</td>
             <td th:text="${car.carModel.getModelName}">Model Navn</td>
             <td th:text="${car.colour}">Farve</td>

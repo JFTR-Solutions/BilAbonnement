@@ -47,8 +47,8 @@
         <tbody id="inputrows">
         <tr class="item" th:each="car:${carlist}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
             <td th:text="${car.carId}">ID</td>
-            <td th:if="${car.isAvailable == 1}" th:text="Ledig">Ledig</td>
-            <td th:if="${car.isAvailable == 0}" th:text="Udlejet">Udlejet</td>
+            <td class="availability" th:if="${car.isAvailable == 1}" th:text="Ledig" style="background-color: forestgreen">Ledig</td>
+            <td class="availability" th:if="${car.isAvailable == 0}" th:text="Udlejet" style="background-color: darkred">Udlejet</td>
             <td th:text="${car.carModel.getManufacturer}">Producent</td>
             <td th:text="${car.carModel.getModelName}">Model Navn</td>
             <td th:text="${car.colour}">Farve</td>
