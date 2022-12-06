@@ -17,8 +17,10 @@ form{
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 25px 35px;
 }
+
+
 form *{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins',sans-serif;*
     color: #ffffff;
     letter-spacing: 0.6px;
     outline: none;
@@ -68,4 +70,8 @@ option{
 button:hover{
     background-color: rgba(255,255,255,0.5);
     color: #ffffff;
+}
+
+.collapsed-table tr {
+    display: none;
 }

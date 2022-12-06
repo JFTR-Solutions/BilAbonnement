@@ -81,11 +81,13 @@ public class MechanicController {
     }
 
     @GetMapping("/delete-damage/{id}")
-    public String DeleteRentalAgreement(@PathVariable("id") int damageId, HttpSession httpSession) throws CarLeasingException {
+    public String deleteDamage(@PathVariable("id") int damageId, HttpSession httpSession)
+            throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         mechanicService.deleteDamageId(damageId);
+
         return "redirect:/mechanic";
     }
 
