@@ -44,7 +44,6 @@
 }
 
 
-
 /*Adjusts spacing and removed list style*/
 .sidebar li {
     position: relative;
@@ -89,7 +88,7 @@
 }
 
 /*Textbox white overlay & effect*/
-.sidebar li a::after {
+.sidebar li a::after, img:hover::after {
     content: "";
     position: absolute;
     width: 280%;

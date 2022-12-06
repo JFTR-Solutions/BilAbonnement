@@ -46,11 +46,11 @@ public class FrontdeskController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
-        model.addAttribute("carlist", carService.fetchAllCars());
+        model.addAttribute("carlist", carService.fetchAllAvailableCars());
         return "frontdesk";
     }
 
-    //Jonathan
+/*    //Jonathan
     @GetMapping("/update-car/{id}")
     public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
@@ -119,7 +119,7 @@ public class FrontdeskController {
         }
         model.addAttribute("modellist", carService.getAllModels());
         return "createcar";
-    }
+    }*/
 
     //Thomas
     @GetMapping("/create-rental-agreement")

@@ -20,6 +20,9 @@ public class CarService {
     return carRepository.findAll();
   }
 
+
+
+
   public List<Car> fetchAllAvailableCars() { return carRepository.fetchAllAvailableCars();}
 
   public void updateCar(Car car) {
