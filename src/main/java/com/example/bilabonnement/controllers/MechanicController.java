@@ -27,14 +27,16 @@ public class MechanicController {
     MechanicService mechanicService;
     RentalService rentalService;
     CarService carService;
+    MechanicRepository mechanicRepository;
 
     public MechanicController(LoginController loginController, UserService userService, MechanicService mechanicService,
-                              RentalService rentalService, CarService carService) {
+                              RentalService rentalService, CarService carService, MechanicRepository mechanicRepository) {
         this.loginController = loginController;
         this.userService = userService;
         this.mechanicService = mechanicService;
         this.rentalService = rentalService;
         this.carService = carService;
+        this.mechanicRepository = mechanicRepository;
     }
 
     @GetMapping("/mechanic")
@@ -66,6 +68,7 @@ public class MechanicController {
         }
         model.addAttribute("carid", carId);
         model.addAttribute("rentalagreementid", rentalId);
+        model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
         return "createdamagereport";
     }
 
@@ -77,6 +80,15 @@ public class MechanicController {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
         return ("redirect:/mechanic");
+    }
+
+    @GetMapping("/delete-damage/{id}")
+    public String DeleteRentalAgreement(@PathVariable("id") int damageId, HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        mechanicService.deleteDamageId(damageId);
+        return "redirect:/mechanic";
     }
 
 

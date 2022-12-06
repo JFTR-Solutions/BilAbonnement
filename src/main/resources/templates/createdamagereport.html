@@ -73,6 +73,40 @@
 
 </form>
 
+<table class="sortable, styled-table" id="table">
+    <thead style="position: sticky; top: 0">
+    <tr>
+        <th>Skades ID</th>
+        <th>Pris</th>
+        <th>Placering</th>
+        <th>Beskrivelse</th>
+        <th>Bilnummer</th>
+        <th>Aftalenummer</th>
+        <th>Slet skade</th>
+
+    </tr>
+    </thead>
+
+    <tbody id="inputrows">
+
+    <tr class="item" th:each="damage:${damages}">
+
+
+        <td th:text="${damage.getDamageId()}">Skades ID</td>
+        <td th:text="${damage.getPrice()}">Pris</td>
+        <td th:text="${damage.getPlacement()}">Placering</td>
+        <td th:text="${damage.getDescription()}">Beskrivelse</td>
+        <td th:text="${damage.getCarId()}">Bilnummer</td>
+        <td th:text="${damage.getRentalAgreementId()}">Aftalenummer</td>
+        <td style="background-color: #b23030" ><a class="underline" th:href="@{'/delete-damage/' + ${damage.getDamageId()}}"
+                                                  onclick="return confirm('Slet skade fra oversigten?');">Slet</a></td>
+
+
+
+    </tr>
+    </tbody>
+
+</table>
 
 </body>
 </html>

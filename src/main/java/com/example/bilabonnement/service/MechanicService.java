@@ -1,7 +1,10 @@
 package com.example.bilabonnement.service;
 
+import com.example.bilabonnement.models.cars.Damage;
 import com.example.bilabonnement.repository.MechanicRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MechanicService {
@@ -16,4 +19,11 @@ public class MechanicService {
         mechanicRepository.createDamageReport(price, placement, description, carId, rentalAgreementId);
     }
 
+    public List<Damage> fetchAllDamagesForRentalId(int rentalId) {
+        return mechanicRepository.fetchAllDamagesForRentalId(rentalId);
+    }
+
+    public void deleteDamageId(int damageId) {
+        mechanicRepository.deleteDamageId(damageId);
+    }
 }
