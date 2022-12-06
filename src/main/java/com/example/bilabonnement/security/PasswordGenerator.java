@@ -1,5 +1,6 @@
 package com.example.bilabonnement.security;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 public class PasswordGenerator {
@@ -15,5 +16,6 @@ public class PasswordGenerator {
         }
         return password.toString();
     }
+
 
 }

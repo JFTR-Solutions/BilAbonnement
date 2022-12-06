@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bilabonnement | Leasing Aftaler</title>
+  <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+</head>
+<body>
+
+<nav>
+  <div th:insert="fragments/sysadminheader"></div>
+</nav>
+<div class="home-section">
+  <h1>Leasing</h1>
+  <a href="/create-rental-agreement">
+    <button>Opret ny Leasing aftale</button>
+  </a>
+  <br>
+  <br>
+  <div class="search-grid">
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <input class="searchbar" type="text" id="search" placeholder="Søg">
+  </div>
+  <table class="sortable, styled-table" id="table">
+    <thead style="position: sticky; top: 0">
+    <tr>
+      <th>Status</th>
+      <th>RentalId</th>
+      <th>Efternavn</th>
+      <th>Fornavn</th>
+      <th>Start Dato</th>
+      <th>Slut Dato</th>
+      <th>Mdl. Pris</th>
+      <th>Mærke</th>
+      <th>Model</th>
+      <th>Stelnummer</th>
+      <th>Nummerplade</th>
+    </tr>
+    </thead>
+    <tbody id="inputrows">
+     <tr class="item" th:each="agreement : ${agreements}">
+     <tr class="item" th:each="agreement : ${agreements}" th:ondblclick="'javascript:rowClicked(\'' + ${agreement.getRentalId()} + '\');'">
+       <td th:if="${agreement.getActive() == 1}" th:text="Aktiv">AktivStatus</td>
+       <td th:if="${agreement.getActive() == 0}" th:text="Afsluttet">AktiveStatus</td>
+       <td th:text="${agreement.getRentalId()}">rentalId</td>
+       <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
+       <td th:text="${agreement.getUser().getLastName()}">LastName</td>
+       <td th:text="${agreement.getStartDate()}">startDate</td>
+        <td th:text="${agreement.getEndDate}">endDate</td>
+        <td th:text="${agreement.getMthPrice()}">mthPrice</td>
+       <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
+       <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
+       <td th:text="${agreement.getCar().getVIN()}">VIN</td>
+       <td th:text="${agreement.getCar().getRegNumber()}">RegNumber</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#search").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#inputrows tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
+
+<script>
+    function rowClicked(value) {
+        location.href = "/show-rental-agreement/" + value;
+    }
+</script>
+
+</body>
+
+</html>
