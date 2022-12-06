@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{../css/updateUser.css}" href="../static/css/updateUser.css">
+  <title>Bilabonnement | Opdater kunde</title>
+</head>
+<body>
+<form method="post" action="/update-customer">
+
+  <input type="hidden" name="userId" th:value="${customer.userId}">
+
+  <label for="email">Email: </label>
+  <input id="email" autofocus type="text" required name="email" th:value="${customer.email}">
+
+  <label for="password">Kodeord: </label>
+  <input id="password" type="password" name="password" th:value="${customer.password}" required>
+
+  <label for="username">Brugernavn: </label>
+  <input id="username" type="text" required name="username" th:value="${customer.username}">
+
+  <label for="firstname">Fornavn: </label>
+  <input id="firstname" type="text" name="firstName" th:value="${customer.firstName}">
+
+  <label for="lastname">Efternavn: </label>
+  <input id="lastname" type="text" name="lastName" th:value="${customer.lastName}">
+
+  <label for="birthdate">Fødselsdag: </label>
+  <input id="birthdate" type="date" name="birthdate" required th:value="${customer.birthdate}">
+
+  <label for="address">Adresse: </label>
+  <input id="address" type="text" name="address" th:value="${customer.address}">
+
+  <label for="phonenr">Telefonnummer: </label>
+  <input id="phonenr" type="text" name="phoneNumber" th:value="${customer.phoneNumber}">
+
+  <button type="submit" name="submit" value="Opdater bruger">Opdater kunde</button>
+</form>
+
+</body>
+</html>

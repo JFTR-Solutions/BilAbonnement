@@ -1,12 +1,13 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.models.users.User;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.RentalService;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,6 +46,22 @@ public class CustomerController {
 //        model.addAttribute("roleList", sysadminController.roleList());
         model.addAttribute("userList", userService.getAllCustomers());
         return "customer";
+    }
+
+    @GetMapping("/update-customer/{id}")
+    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        model.addAttribute("id", id);
+        model.addAttribute("customer", userService.findUserByID(id));
+        return "updatecustomer";
+    }
+
+    @PostMapping("/update-customer")
+    public String saveUser(@ModelAttribute User user) throws CarLeasingException {
+        userService.updateUser(user);
+        return "redirect:/customers";
     }
 
 }

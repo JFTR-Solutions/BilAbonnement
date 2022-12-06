@@ -14,7 +14,7 @@
 </nav>
 <div class="home-section">
   <h1>Kunde dashboard</h1>
-  <a href="/create-user">
+  <a href="/create-customer">
     <button>Opret ny kunde</button>
   </a>
   <br>
@@ -36,11 +36,8 @@
       <th>Fødselsdagsdato</th>
       <th>Adresse</th>
       <th>Telefon nummer</th>
-      <!--        <th>Opdater</th>-->
-      <th>Slet</th>
     </tr>
     </thead>
-    <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
     <tbody id="inputrows">
     <tr class="item" th:each="user : ${userList}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
       <td th:text="${user.userId}">ID</td>
@@ -54,8 +51,6 @@
       <td th:text="${user.phoneNumber}">Phone number</td>
       <!--        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>-->
 
-      <td style="background-color: #b23030" ><a class="underline" th:href="@{'/delete-user/' + ${user.userId}}"
-                                                onclick="return confirm('Er du sikker på du ønsker at slette denne bruger?');">Slet</a></td>
       </a></tr>
     </tbody>
 
@@ -74,7 +69,7 @@
 
   <script>
     function rowClicked(value) {
-      location.href = "/update-user/" + value;
+      location.href = "/update-customer/" + value;
     }
   </script>
 </div>

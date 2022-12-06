@@ -13,6 +13,11 @@
 
 }
 
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
 
 /*Placement and styling of the sidebar*/
 .sidebar{
