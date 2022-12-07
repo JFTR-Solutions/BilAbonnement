@@ -98,7 +98,7 @@ public class CarController {
     public String createCar(@RequestParam("modelId") int modelId, @RequestParam("available") byte available,
                             @RequestParam("colour") String colour, @RequestParam("vin") String vin,
                             @RequestParam("regNumber") String regNumber, @RequestParam("steelPrice") double steelprice,
-                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission) {
+                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission, HttpSession httpSession) {
 
         carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
 

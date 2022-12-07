@@ -8,43 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div class="sidebar">
+<nav class="sidebar" th:fragment="header">
     <div class="logo_details">
         <a href="/">
             <i><img src="https://i.imgur.com/vAI6A0d.png" style="height: 35px; width: 35px; margin-left: 9px"></i></a>
     </div>
     <ul class="nav-list">
-        <li>
+        <li th:fragment="sysadmin">
             <a href="/sysadmin">
                 <i class="bx bx-server"></i>
             </a>
             <span class="tooltip">System admin</span>
         </li>
-        <li>
+        <li th:fragment="cars">
             <a href="/cars">
                 <i class='bx bxs-car-garage'></i>
             </a>
             <span class="tooltip">Biler</span>
         </li>
-        <li>
-            <a href="/reception">
+        <li th:fragment="leasing">
+            <a href="/reception" >
                 <i class="fa fa-handshake-o"></i>
             </a>
             <span class="tooltip">Leasing</span>
         </li>
-        <li>
+        <li th:fragment="customers">
             <a href="/customers">
                 <i class="bx bx-user-circle"></i>
             </a>
             <span class="tooltip">Kunder</span>
         </li>
-        <li>
+        <li th:fragment="mechanic">
             <a href="/mechanic">
                 <i class="bx bxs-car-mechanic"></i>
             </a>
             <span class="tooltip">Mekaniker</span>
         </li>
-        <li>
+        <li th:fragment="sales">
             <a href="/sales">
                 <i class="bx bx-credit-card-front"></i>
             </a>
@@ -56,6 +56,6 @@
         </a>
         </li>
     </ul>
-</div>
+</nav>
 </body>
 </html>

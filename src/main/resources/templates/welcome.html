@@ -9,7 +9,14 @@
 </head>
 <body>
 <nav>
-    <div  th:insert="fragments/defaultheader"></div>
+    <div  th:replace="fragments/header"></div>
+        <div th:if="${roles.contains('System adminstrator')}" th:insert="fragments/defaultheader"></div>
+        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: cars"></div>
+        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: leasing"></div>
+        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: customers"></div>
+        <div th:if="${roles.contains('Mekaniker')}" th:insert="fragments/defaultheader :: mechanic"></div>
+        <div th:if="${roles.contains('Salg')}" th:insert="fragments/defaultheader :: sales"></div>
+        <div th:insert="fragments/footer"></div>
 </nav>
 
 <div class="home-section">
