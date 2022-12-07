@@ -39,17 +39,17 @@
 
     <div class="checkbox-container">
         <div><label for="sysadmin"> Sysadmin: </label></div>
-        <div><input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('sysadmin')}"></div>
+        <div><input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('System adminstrator')}"></div>
 
     <div><label for="sales"> Sales: </label></div>
-        <div><input  id="sales" type="checkbox" name="sales" th:checked="${roles.contains('sales')}"></div>
+        <div><input  id="sales" type="checkbox" name="sales" th:checked="${roles.contains('Salg')}"></div>
 
         <div><label for="front_desk"> Reception: </label></div>
-    <div><input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('front_desk')}"></div>
+    <div><input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('Reception')}"></div>
 
 
         <div><label for="mechanic"> Mechanic: </label></div>
-    <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('mechanic')}"></div>
+    <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('Mekaniker')}"></div>
     </div>
     <button type="submit" name="submit" value="Opdater bruger">Opdater bruger</button>
 </form>

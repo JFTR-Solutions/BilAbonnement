@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/welcomepage.css}" href="../static/css/welcomepage.css">
     <title>Bilabonnement</title>
 </head>
 <body>
 <nav>
-    <div  th:insert="fragments/sysadminheader"></div>
-
-<!--    <div th:if="${!roles.contains('sysadmin')}" th:insert="fragments/defaultheadertop">
-        <div th:if="${roles.contains('front_desk')}" th:insert="fragments/frontdeskheader">
-            <div th:if="${roles.contains('sales')}" th:insert="fragments/salesheader">
-                <div th:if="${roles.contains('mechanic')}" th:insert="fragments/mechanicheader">
-                    <div th:insert="fragments/defaultheaderbottom"></div>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    <div  th:insert="fragments/defaultheader"></div>
 </nav>
+
 <div class="home-section">
     <h1 th:text="'Velkommen ' + ${name}"></h1>
 
-    <div class="main_content">
+    <div class="panel-container">
+
+        <div class="panel" th:if="${roles.contains('System adminstrator')}"  th:insert="fragments/sysadminpanel"></div>
+        <div class="panel" th:if="${roles.contains('Reception')}"  th:insert="fragments/frontdeskpanel"></div>
+        <div class="panel" th:if="${roles.contains('Mekaniker')}"  th:insert="fragments/mechanicpanel"></div>
+        <div class="panel" th:if="${roles.contains('Salg')}"  th:insert="fragments/salespanel"></div>
 
 
     </div>

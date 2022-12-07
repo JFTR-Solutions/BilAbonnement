@@ -103,6 +103,7 @@ public class LoginController {
                 (!httpSession.getAttribute("error").equals(exceptionEnums.get(carExceptionEnum.NO_LOGIN)))) {
             model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         }
+        httpSession.setAttribute("error","");
         model.addAttribute("roles", validateRoles(httpSession));
         httpSession.setAttribute("roller", validateRoles(httpSession));
         model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());

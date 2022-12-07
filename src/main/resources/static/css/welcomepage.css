@@ -1,0 +1,58 @@
+.link:link, .link:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #062d35;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    gap: 40px;
+    width: 200px;
+}
+
+.link:hover, .link:active {
+    background-color: #0a4d5b;
+    color: white;
+}
+
+
+.head{
+    margin-bottom: 20px;
+
+}
+
+.panel-container{
+    display: flex;
+    /*grid-auto-columns: auto auto;*/
+    gap: 10px;
+    padding: 10px;
+    height: max-content;
+    width: calc(100vw - 100px);
+    overflow: hidden;
+}
+.grid-container > div {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.panel{
+    font-family: 'Poppins', sans-serif;
+    height: max-content;
+    width: 450px;
+    background-color: #0a4d5b;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 8px;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #ff9800;
+    color: white;
+    width: 400px;
+    margin-left: calc(100vw - 500px);
+    -webkit-animation: fadein 2s;
+
+}

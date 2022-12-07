@@ -94,10 +94,10 @@ public class SysadminController {
 
     //Frederik
     @PostMapping("/update-user")
-    public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false") boolean sysadmin,
-                           @RequestParam(defaultValue = "false") boolean sales,
-                           @RequestParam(defaultValue = "false") boolean front_desk,
-                           @RequestParam(defaultValue = "false") boolean mechanic) throws CarLeasingException {
+    public String saveUser(@ModelAttribute User user, @RequestParam(defaultValue = "false", value = "sysadmin") boolean sysadmin,
+                           @RequestParam(defaultValue = "false", value = "sales") boolean sales,
+                           @RequestParam(defaultValue = "false", value = "front_desk") boolean front_desk,
+                           @RequestParam(defaultValue = "false", value = "mechanic") boolean mechanic) throws CarLeasingException {
         userService.updateUser(user);
         userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
         userService.removeRoles(user, sysadmin, sales, front_desk, mechanic);

@@ -83,6 +83,7 @@ button {
     cursor: pointer;
     border-radius: 8px;
     padding: 5px 11px;
+    gap: 20px;
 
 }
 
@@ -95,16 +96,6 @@ button:hover {
 
 }
 
-.alert {
-    padding: 20px;
-    background-color: #ff9800;
-    color: white;
-    width: 400px;
-
-    -webkit-animation: fadein 2s;
-
-}
-
 @-webkit-keyframes fadein {
     from {
         opacity: 0;
@@ -113,6 +104,8 @@ button:hover {
         opacity: 1;
     }
 }
+
+
 
 .closebtn {
     margin-left: 15px;
