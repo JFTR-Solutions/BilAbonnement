@@ -225,7 +225,8 @@ public class UserRepository {
         List<User> userList = new ArrayList<>();
 
         try {
-            String queryGetAll = ("SELECT * from users WHERE user_id IN (SELECT user_id FROM roles_users WHERE role_id=5)");
+            String queryGetAll = ("SELECT * from users WHERE user_id IN (SELECT user_id FROM roles_users WHERE role_id=5) " +
+                    "ORDER BY last_name, first_name");
             PreparedStatement psts = conn.prepareStatement(queryGetAll);
             ResultSet rs = psts.executeQuery();
 

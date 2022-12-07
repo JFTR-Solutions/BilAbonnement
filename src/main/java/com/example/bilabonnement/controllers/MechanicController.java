@@ -77,7 +77,7 @@ public class MechanicController {
                                      @RequestParam("rentalagreementid") int rentalAgreementId) throws CarLeasingException {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
-        return ("redirect:/mechanic");
+        return ("redirect:/create-damagereport/ " + carId + "/" + rentalAgreementId);
     }
 
     @GetMapping("/delete-damage/{id}/{carid}/{rentalagreementid}")

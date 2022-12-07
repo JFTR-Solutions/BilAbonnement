@@ -59,7 +59,7 @@ public class FrontdeskController {
         }
         model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
         model.addAttribute("car", carService.findCarById(carId));
-        model.addAttribute("userlist", userService.getAllByRole(5));
+        model.addAttribute("userlist", userService.getAllCustomers());
         return "createrentalagreement";
     }
 
@@ -148,7 +148,7 @@ public class FrontdeskController {
         userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
         userService.giveCustomerRole(userService.findUserByUsername(username));
 
-        return ("redirect:/reception");
+        return ("redirect:/customers");
     }
 
 }

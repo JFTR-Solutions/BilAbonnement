@@ -69,28 +69,24 @@
 
         <button type="button" onclick="location.href='/end-rentalagreement'">Afslut leasing</button>
     <button type="submit" name="submit" value="create">Opret skade</button>
-    <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
+    <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"
+            onclick="location.href='/mechanic'">Fortryd</button>
 
     <table class="sortable, styled-table" id="table">
 
 
         <thead style="position: sticky; top: 0">
         <tr>
-
             <th>Placering</th>
             <th>Beskrivelse</th>
             <th>Pris</th>
             <th>Slet skade</th>
-
         </tr>
         </thead>
 
         <tbody id="inputrows">
 
         <tr class="item" th:each="damage:${damages}">
-
-
-
             <td th:text="${damage.getPlacement()}">Placering</td>
             <td style="text-align: left" th:text="${damage.getDescription()}">Beskrivelse</td>
             <td style="text-align: right" th:text="${damage.getPrice()} + ' kr'">Pris</td>
@@ -98,9 +94,6 @@
                 th:href="@{'/delete-damage/' + ${damage.getDamageId()} + '/' + ${carid} + '/' + ${rentalagreementid}}"
                                                       onclick="return confirm('Slet skade fra oversigten?');">Slet</a></td>
             <!---When clicking on delete-damage, get of carId and rentalId-->
-
-
-
 
         </tr>
         </tbody>
