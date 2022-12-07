@@ -5,8 +5,8 @@ body,html{
 }
 
 form{
-    height: 800px;
-    width: 680px;
+    height: max-content;
+    width: 1400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
@@ -68,4 +68,10 @@ option{
 button:hover{
     background-color: rgba(255,255,255,0.5);
     color: #ffffff;
+}
+
+
+.bottom{
+    position: absolute;
+    bottom: 0;
 }
