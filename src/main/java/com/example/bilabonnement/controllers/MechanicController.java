@@ -80,15 +80,16 @@ public class MechanicController {
         return ("redirect:/mechanic");
     }
 
-    @GetMapping("/delete-damage/{id}")
-    public String deleteDamage(@PathVariable("id") int damageId, @PathVariable("url") String url, HttpSession httpSession)
+    @GetMapping("/delete-damage/{id}/{carid}/{rentalagreementid}")
+    public String deleteDamage(@PathVariable("id") int damageId, @PathVariable("carid") int carId,
+                               @PathVariable("rentalagreementid") int rentalAgreementId, HttpSession httpSession)
             throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         mechanicService.deleteDamageId(damageId);
 
-        return "redirect:/mechanic";
+        return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
     }
 
 
