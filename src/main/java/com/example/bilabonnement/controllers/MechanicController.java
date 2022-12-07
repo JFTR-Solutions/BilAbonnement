@@ -81,7 +81,7 @@ public class MechanicController {
     }
 
     @GetMapping("/delete-damage/{id}")
-    public String deleteDamage(@PathVariable("id") int damageId, HttpSession httpSession)
+    public String deleteDamage(@PathVariable("id") int damageId, @PathVariable("url") String url, HttpSession httpSession)
             throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
