@@ -92,5 +92,17 @@ public class MechanicController {
         return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
     }
 
+    @GetMapping("/end-rental/{carid}/{rentalagreementid}")
+    public String endRental(@PathVariable("carid") int carId, @PathVariable("rentalagreementid") int rentalAgreementId,
+                            HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        carService.markCarAvailable(carId);
+        rentalService.endRental(rentalAgreementId);
+
+        return "redirect:/mechanic";
+    }
+
 
 }

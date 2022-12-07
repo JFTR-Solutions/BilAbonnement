@@ -50,4 +50,6 @@ public class CarService {
   public void updateCarAvailability(int carId, byte b) {
     carRepository.updateCarAvailability(carId, b);
   }
+
+  public void markCarAvailable(int carId) { carRepository.markCarAvailable(carId); }
 }

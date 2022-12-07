@@ -231,6 +231,20 @@ public class CarRepository {
 
   }
 
+  public void markCarAvailable(int carId){
+    try{
+      String queryCreate = "UPDATE cars SET available=1 WHERE car_id=?";
+      PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+      psts.setInt(1, carId);
+
+      psts.executeUpdate();
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+  }
+
   public void updateCarAvailability(int carId, byte b) {
     try {
       String queryCreate = ("UPDATE cars SET available=? WHERE car_id=?");

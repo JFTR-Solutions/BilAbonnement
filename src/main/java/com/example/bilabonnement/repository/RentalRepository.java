@@ -297,4 +297,15 @@ public class RentalRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
+
+    public void endRental(int rentalAgreementId) {
+        try {
+            String queryCreate = "UPDATE rental_agreements SET active=0 WHERE rental_id=?;";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            psts.setInt(1, rentalAgreementId);
+            psts.executeUpdate();
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
 }
