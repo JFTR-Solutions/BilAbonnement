@@ -28,7 +28,7 @@ form *{
 label{
     display: block;
     margin-top: 30px;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -40,7 +40,7 @@ input{
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
 }
 
