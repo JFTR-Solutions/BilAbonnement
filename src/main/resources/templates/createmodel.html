@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" th:href="@{/css/showcontent.css}" href="/css/showcontent.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar.css}" href="/css/sidebar.css">
     <title>Bilabonnement | Opret Model</title>
 </head>
 <body>
+<nav>
+  <div th:insert="fragments/defaultheader"></div>
+</nav>
+
 <div1>
   <form method="post" th:action="@{'/create-carmodel'}">
 
@@ -29,6 +34,7 @@
     <input id="range" type="number"  name="range" required step="any">
 
     <button type="submit" name="submit" value="create"> Opret ny model </button>
+    <button style="margin-left: 60px; background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
   </form>
 </div1>
 

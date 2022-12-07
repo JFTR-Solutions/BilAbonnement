@@ -6,6 +6,9 @@
     <title>Bilabonnement | Opdater bruger</title>
 </head>
 <body>
+<nav>
+    <div th:insert="fragments/defaultheader"></div>
+</nav>
 <form method="post" action="/update-user">
 
     <div style="background-color: #b23030; margin-left: 90%; " ><a class="underline" style="text-decoration: none" th:href="@{'/delete-user/' + ${user.userId}}"
@@ -51,7 +54,8 @@
         <div><label for="mechanic"> Mechanic: </label></div>
     <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('Mekaniker')}"></div>
     </div>
-    <button type="submit" name="submit" value="Opdater bruger">Opdater bruger</button>
+    <button type="submit" name="submit" value="Opdater bruger" style="background-color: forestgreen">Opdater bruger</button>
+    <button style="margin-left: 60px; background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
 </form>
 
 </body>

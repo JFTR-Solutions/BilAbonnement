@@ -11,7 +11,7 @@ td, th {
 }
 
 table {
-    width: calc(100vw - 90px);
+    width: 100%;
 }
 
 .availability{

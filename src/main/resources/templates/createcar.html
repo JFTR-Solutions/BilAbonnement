@@ -5,14 +5,16 @@
     <title>Bilabonnement | Opret bil</title>
 </head>
 <body>
-
+<nav>
+    <div th:insert="fragments/defaultheader"></div>
+</nav>
 <div1>
     <form method="post" action="/create-car">
 
         <input type="hidden" required name="available" value="1">
 
         <label for="modelid">Model: </label>
-         <select id="modelid" name="modelId">
+         <select id="modelid" name="modelId" style="width: 100%; color: white">
             <option th:each="models : ${modellist}"
                     th:text="${models.manufacturer + ' ' + models.modelName + ', C02-Emission: ' + models.co2Emission + ', Drivmiddel: ' + models.fuelType + ', Rækkevidde: ' + models.range}"
                     th:value="${models.modelId}"></option>
@@ -51,7 +53,7 @@
  </datalist>
 
         <label for="transmission">Gearkasse: </label>
-        <select id="transmission" name="transmission">
+        <select id="transmission" name="transmission" style="width: 100%; color: white">
             <option value="Automatgear">Automatgear</option>
             <option value="Manuelgear">Manuelgear</option>
         </select>
@@ -71,6 +73,7 @@
 
 
         <button type="submit" name="submit" value="Opret bil"> Opret bil </button>
+        <button style="margin-left: 60px; background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
     </form>
 </div1>
 

@@ -7,14 +7,16 @@
     <title>Bilabonnement | Opret Skadesreport</title>
 </head>
 <body>
-
+<nav>
+    <div th:insert="fragments/defaultheader"></div>
+</nav>
 <form method="post" th:action="@{'/create-damagereport'}">
 
 
 
-    <a href="/mechanic">
+<!--    <a href="/mechanic">
         <button type="button">Fortryd - returner til overblik</button>
-    </a>
+    </a>-->
 
     <label>Du opretter skadesrapport på bil nummer: </label>
     <input type="text" readonly th:value="${carid}" name="carid">
@@ -64,13 +66,11 @@
     <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
 
 
-    <div><a href="/end-rentalagreement">
-        <button type="button">Afslut leasing</button>
-    </a></div>
-    <button type="submit" name="submit" value="create">Opret skade</button>
 
-<br>
-<br>
+        <button type="button" onclick="location.href='/end-rentalagreement'">Afslut leasing</button>
+    <button type="submit" name="submit" value="create">Opret skade</button>
+    <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
+
     <table class="sortable, styled-table" id="table">
 
 

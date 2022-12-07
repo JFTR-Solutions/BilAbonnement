@@ -6,6 +6,9 @@
   <title>Bilabonnement | Opdater kunde</title>
 </head>
 <body>
+<nav>
+  <div th:insert="fragments/defaultheader"></div>
+</nav>
 <form method="post" action="/update-customer">
 
   <input type="hidden" name="userId" th:value="${customer.userId}">

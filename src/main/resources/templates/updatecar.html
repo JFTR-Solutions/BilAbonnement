@@ -17,7 +17,9 @@
     <title>Bilabonnement | Opdater bil</title>
 </head>
 <body>
-
+<nav>
+    <div th:insert="fragments/defaultheader"></div>
+</nav>
 <div1>
 
 
@@ -107,13 +109,13 @@
         <input id="mthprice" type="number" name="mthPrice" required th:value="${car.mthPrice}">
 
         <label for="transmission">Gearkasse: </label>
-        <select id="transmission" name="transmission" th:field="*{car.transmission}">
+        <select id="transmission" name="transmission" th:field="*{car.transmission}" style="width: 100%; color: white">
             <option value="Automatgear" th:selected="${car.transmission =='Automatgear'}">Automatgear</option>
             <option value="Manuelgear" th:selected="${car.transmission =='Manuelgear'}">Manuelgear</option>
         </select>
 
         <label for="modelid">Model: </label>
-        <select id="modelid" name="modelId" th:field="*{car.modelId}">
+        <select id="modelid" name="modelId" th:field="*{car.modelId}" style="width: 100%; color: white">
             <option th:each="models : ${modellist}"
                     th:text="${models.manufacturer + ' ' + models.modelName + ', C02-Emission: ' + models.co2Emission + ', Drivmiddel: ' + models.fuelType + ', Rækkevidde: ' + models.range}"
                     th:value="${models.modelId}"
