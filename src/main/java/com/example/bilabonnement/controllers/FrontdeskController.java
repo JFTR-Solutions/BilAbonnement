@@ -50,77 +50,6 @@ public class FrontdeskController {
         return "frontdesk";
     }
 
-/*    //Jonathan
-    @GetMapping("/update-car/{id}")
-    public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        model.addAttribute("id", id);
-        model.addAttribute("car", carService.findCarById(id));
-        model.addAttribute("modellist", carService.getAllModels());
-        return "updatecar";
-    }
-
-    //Jonathan
-    @PostMapping("/update-car")
-    public String saveCar(@ModelAttribute Car car) {
-        carService.updateCar(car);
-        return "redirect:/reception";
-    }
-
-    //Jonathan
-    @GetMapping("/delete-car/{id}")
-    public String deleteCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        carService.deleteCar(id);
-        return "redirect:/reception";
-    }
-
-    //Thomas
-    @PostMapping("/create-carmodel")
-    public String createCarModel(@RequestParam("modelName") String modelName,
-                                 @RequestParam("manufacturer") String manufacturer, @RequestParam("co2") String co2,
-                                 @RequestParam("fuelType") String fuelType, @RequestParam("range") double range) {
-        carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
-        return "redirect:/create-car";
-    }
-
-    //Thomas
-    @GetMapping("/create-carmodel")
-    public String showCreateCarModel(HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        return "createmodel";
-    }
-
-    //Rami
-    @PostMapping("/create-car")
-    public String createCar(@RequestParam("modelId") int modelId, @RequestParam("available") byte available,
-                            @RequestParam("colour") String colour, @RequestParam("vin") String vin,
-                            @RequestParam("regNumber") String regNumber, @RequestParam("steelPrice") double steelprice,
-                            @RequestParam("mthPrice") double mthPrice, @RequestParam("transmission") String transmission) {
-
-        carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
-
-        return "redirect:/reception";
-    }
-
-    //Rami
-    @GetMapping("/create-car")
-    public String showCreateCar(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        model.addAttribute("modellist", carService.getAllModels());
-        return "createcar";
-    }*/
-
     //Thomas
     @GetMapping("/create-rental-agreement")
     public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
@@ -190,6 +119,7 @@ public class FrontdeskController {
             return "redirect:/";
         }
         model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
+        model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
 
         return "showrentalagreement";
     }

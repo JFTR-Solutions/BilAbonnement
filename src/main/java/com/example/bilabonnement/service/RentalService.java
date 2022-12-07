@@ -23,6 +23,7 @@ public class RentalService {
     public int findRentalAgreementIdByCarId(int carId) {
         return rentalRepository.findRentalAgreementIdByCarId(carId);
     }
+
     public void addCarAddon(int rentalId, int addonId) { rentalRepository.addCarAddon(rentalId, addonId);}
 
     public List<Addon> fetchAllAddons() {return rentalRepository.fetchAllAddons();}
@@ -34,4 +35,6 @@ public class RentalService {
     public List<RentalAgreement> fetchAllRentalAgreements() { return rentalRepository.fetchAllRentalAgreements(); }
 
     public RentalAgreement findRentalAgreementById(int id){ return rentalRepository.findRentalAgreementById(id); }
+
+    public List<Addon> findCarAddonsByRentalId(int rentalId) { return rentalRepository.findCarAddonsByRentalId(rentalId); }
 }

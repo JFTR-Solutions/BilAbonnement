@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/showrentalagreement.css}" href="/css/showrentalagreement.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/showcontent.css}" href="/css/showcontent.css">
     <title>Leasing Aftale</title>
 </head>
 <body>
@@ -32,9 +32,11 @@
 
     <label>Nummerplade: </label>
     <input type="text" readonly th:value="${agreement.getCar().getRegNumber()}">
-
+    <br>
     <label>Ekstra tilkøb: </label>
     <input type="text" readonly th:value="${agreement.getMthKm().getKm()} + 'km - ' + ${agreement.getMthKm().getPrice()} + 'kr'">
+    <input type="text" readonly th:each="addon : ${addons}"
+     th:value="${addon.getAddonName()} + ' - ' + ${addon.getPrice()} + 'kr'">
 
     <button type="submit" name="submit" value="create">Opret</button>
 

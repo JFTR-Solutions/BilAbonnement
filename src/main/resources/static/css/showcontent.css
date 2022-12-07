@@ -1,26 +1,24 @@
 body,html{
     font-family: 'Poppins',sans-serif;
-    background-image: linear-gradient(to bottom, #062d35, #0a4d5b);
+    background: #062d35;
     height: 100vh;
 }
 
 form{
-    height: 800px;
+    height: max-content;
     width: 680px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
-    top: 35%;
+    top: 600px;
     left: 50%;
     border-radius: 25px;
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 25px 35px;
 }
-
-
 form *{
-    font-family: 'Poppins',sans-serif;*
+    font-family: 'Poppins',sans-serif;
     color: #ffffff;
     letter-spacing: 0.6px;
     outline: none;
@@ -29,20 +27,20 @@ form *{
 
 label{
     display: block;
-    margin-top: 30px;
-    font-size: 16px;
+    margin-top: 15px;
+    font-size: 12px;
     font-weight: 500;
 }
 
 input{
     display: block;
-    height: 50px;
+    height: 35px;
     width: 100%;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
-    padding: 0 10px;
+    padding: 0;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 300;
 }
 
@@ -70,8 +68,4 @@ option{
 button:hover{
     background-color: rgba(255,255,255,0.5);
     color: #ffffff;
-}
-
-.collapsed-table tr {
-    display: none;
 }

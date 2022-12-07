@@ -255,4 +255,46 @@ public class RentalRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
+
+    public List<Addon> findCarAddonsByRentalId(int rentalId){
+        List <Addon> addonList = new LinkedList<>();
+        try {
+            String queryCreate = "SELECT * FROM addons INNER JOIN car_addons ca on addons.addon_id = ca.addon_id " +
+                    "INNER JOIN rental_agreements ra on ca.rental_agreement_id = ra.rental_id WHERE rental_id=?;";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            psts.setInt(1, rentalId);
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                int addonId = resultSet.getInt(1);
+                String  addonName = resultSet.getString(2);
+                String addonShortDesc = resultSet.getString(4);
+                String addonDesc = resultSet.getString(5);
+                double price = resultSet.getDouble(5);
+                addonList.add(new Addon(addonId, addonName, addonShortDesc, addonDesc, price));
+            }
+            return addonList;
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
+    public List<Integer> findCarAddonsIdByRentalId(int rentalId){
+        List <Integer> addonList = new LinkedList<>();
+        try {
+            String queryCreate = "SELECT * FROM addons INNER JOIN car_addons ca on addons.addon_id = ca.addon_id " +
+                    "INNER JOIN rental_agreements ra on ca.rental_agreement_id = ra.rental_id WHERE rental_id=?;";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            psts.setInt(1, rentalId);
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                int addonId = resultSet.getInt(1);
+                addonList.add(addonId);
+            }
+            return addonList;
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
 }
