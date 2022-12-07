@@ -51,13 +51,14 @@ public class FrontdeskController {
     }
 
     //Thomas
-    @GetMapping("/create-rental-agreement")
-    public String showCreateRentalAgreement(HttpSession httpSession, Model model) throws CarLeasingException {
+    @GetMapping("/create-rental-agreement/{carId}")
+    public String showCreateRentalAgreement(@PathVariable("carId")int carId, HttpSession httpSession, Model model)
+            throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
-        model.addAttribute("carlist", carService.fetchAllAvailableCars());
+        model.addAttribute("car", carService.findCarById(carId));
         model.addAttribute("userlist", userService.getAllByRole(5));
         return "createrentalagreement";
     }

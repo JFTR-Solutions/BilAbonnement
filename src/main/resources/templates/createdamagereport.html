@@ -94,8 +94,11 @@
             <td th:text="${damage.getPlacement()}">Placering</td>
             <td style="text-align: left" th:text="${damage.getDescription()}">Beskrivelse</td>
             <td style="text-align: right" th:text="${damage.getPrice()} + ' kr'">Pris</td>
-            <td style="background-color: #b23030" ><a class="underline" th:value="${carid} + ${rentalagreementid}" th:href="@{'/delete-damage/' + ${damage.getDamageId()}}"
-                                                      onclick="return confirm('Slet skade fra oversigten?');">Slet</a></td>
+            <td style="background-color: #b23030" ><a class="underline" th:value="${carid} + ${rentalagreementid}"
+                th:href="@{'/delete-damage/' + ${damage.getDamageId()}}"
+                onclick="return confirm('Slet skade fra oversigten?');">Slet</a></td>
+            <!---When clicking on delete-damage, get of carId and rentalId-->
+
 
 
 

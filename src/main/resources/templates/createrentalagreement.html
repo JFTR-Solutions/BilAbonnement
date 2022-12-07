@@ -17,12 +17,8 @@
               th:value="${user.userId}"></option>
     </select>
 
-    <label for="carId">Bil: </label>
-    <select id="carId" name="carId">
-      <option th:each="car : ${carlist}"
-              th:text="${car.carModel.getManufacturer() + ' ' + car.carModel.getModelName() + ', ' + car.colour + ', ' + car.regNumber}"
-              th:value="${car.carId}"></option>
-    </select>
+    <label>Bil ID: </label>
+    <input readonly th:value="${car.carId}" name="carId">
 
     <label for="mthKmId">Kilometer pr. måned: </label>
      <select id="mthKmId" name="mthKmId">
