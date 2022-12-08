@@ -41,37 +41,31 @@
         </div>
     </div>
     <br>
-    <h3> Månedlig overblik for <span th:text="${year}"></span>:</h3>
-    <table class="sortable, styled-table" id="table">
-        <thead style="position: sticky; top: 0">
-        <tr>
-            <th>Månedlig overblik</th>
-            <th>Januar</th>
-            <th>Februar</th>
-            <th>Marts</th>
-            <th>April</th>
-            <th>Maj</th>
-            <th>Juni</th>
-            <th>Juli</th>
-            <th>August</th>
-            <th>September</th>
-            <th>Oktober</th>
-            <th>November</th>
-            <th>December</th>
-            <th>Total <span th:text="${year}"></span></th>
-        </tr>
-        </thead>
-        <tbody id="inputrows">
-        <tr class="item">
-            <td>Omsætning</td>
-            <td th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')} + ' dkk'"></td>
-        <tr class="item">
-            <td>Udlejede biler</td>
-            <td th:each=" carsRented : ${carsRentedOut}" th:text="${carsRented}"></td>
-
-
-        </tbody>
+    <h3> Månedlig overblik for <span th:text="${yearLast}"></span>:</h3>
+    <div th:replace="fragments/tablefragment"></div>
+    <td th:each="revenue : ${carRevenueListLastYear}" th:text="${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    </tbody>
     </table>
+    <br>    <br>
+    <h3> Månedlig overblik for <span th:text="${yearNow}"></span>:</h3>
+    <div th:replace="fragments/tablefragment"></div>
+    <td  th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
+
+    </tr>
+    </tbody>
+    </table>
+
+    <br>    <br>
+    <h3> Månedlig overblik for <span th:text="${yearNext}"></span>:</h3>
+    <div th:replace="fragments/tablefragment"></div>
+    <td th:each="revenue : ${carRevenueNextYear}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
 </div>
 
 

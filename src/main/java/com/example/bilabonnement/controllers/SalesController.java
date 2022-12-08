@@ -35,12 +35,12 @@ public class SalesController {
         this.carService = carService;
     }
 /*Thomas & Frederik*/
-    public List<Double> carRevenueEachMonth() {
+    public List<Double> carRevenueEachMonth(int month) {
         List<Double> carRevenueList = new ArrayList<>();
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
         for (int i = 1; i <= 12; i++) {
             double monthRevenue = 0;
-            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear(), i);
+            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() + month, i);
             for (int j = 0; j < rentalList.size(); j++) {
                 String startDate = rentalList.get(j).getStartDate().toString().substring(0, 7);
                 String endDate = rentalList.get(j).getEndDate().toString().substring(0, 7);
@@ -94,29 +94,6 @@ public class SalesController {
         return carRevenueList;
     }
 
-  /*  *//*Thomas & Frederik*//*
-    public int carRentedOut() {
-        int carsRented = 0;
-        List<Car> carList = carService.fetchAllCars();
-        for (Car car : carList) {
-            if (car.getAvailable() == 0) {
-                carsRented++;
-            }
-        }
-        return carsRented;
-    }
-    *//*Thomas & Frederik*//*
-    public int carRevenue() {
-        int carRevenue = 0;
-        List<RentalAgreement> rentalAgreementList = rentalService.fetchAllRentalAgreements();
-        for (RentalAgreement rentalAgreement : rentalAgreementList) {
-            if (rentalAgreement.getActive() == 1) {
-                carRevenue += rentalAgreement.getMthPrice();
-            }
-        }
-        return carRevenue;
-    }*/
-
     /*Thomas & Frederik*/
     public int carsAvailable() {
         return carService.fetchAllAvailableCars().size();
@@ -142,23 +119,32 @@ public class SalesController {
 
         model.addAttribute("carsRented", carsRentedOutEachMonth().get(month));
         model.addAttribute("carsAvailable", carsAvailable());
-        model.addAttribute("rentalRevenue", carRevenueEachMonth().get(month));
+        model.addAttribute("rentalRevenue", carRevenueEachMonth(0).get(month));
 
         LocalDate currentdate = LocalDate.now();
         String currentMonth = String.valueOf(currentdate.getMonth());
         currentMonth= currentMonth.toLowerCase();
         currentMonth = currentMonth.substring(0,1).toUpperCase() + currentMonth.substring(1);
-        String year = String.valueOf(Year.now());
-        model.addAttribute("month", currentMonth);
-        model.addAttribute("year", year);
 
-        model.addAttribute("carRevenueList", carRevenueEachMonth());
-        model.addAttribute("carsRentedOut", carsRentedOutEachMonth());
+        model.addAttribute("month", currentMonth);
+        model.addAttribute("yearNow", getYear(0));
+        model.addAttribute("yearLast", getYear(-1));
+        model.addAttribute("yearNext", getYear(1));
+
+        System.out.println(carRevenueEachMonth(0));
+        model.addAttribute("carRevenueList", carRevenueEachMonth(0));
+        model.addAttribute("carRevenueListLastYear", carRevenueEachMonth(-1));
+        model.addAttribute("carRevenueNextYear", carRevenueEachMonth(+1));
 
         model.addAttribute("userList", userService.getAllEmployees());
         return "sales";
     }
 
+
+    public int getYear(int month){
+        int year = Integer.parseInt(String.valueOf(Year.now()));
+        return year + month;
+    }
 
 }
 
