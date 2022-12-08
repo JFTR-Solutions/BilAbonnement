@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/showcontent.css}" href="/css/showcontent.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="/img/bilabonnementlogo.ico" th:href="@{/img/bilabonnementlogo.ico}">
+    <link rel="apple-touch-icon" href="/img/bilabonnementlogo.ico" th:href="@{/img/bilabonnementlogo.ico}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(function(){
+            $("#colour").select2();
+        });
+    </script>
+
+    <title>Bilabonnement | Opdater model</title>
+</head>
+<body>
+<nav>
+    <div  th:replace="fragments/header"></div>
+    <div th:insert="fragments/footer"></div>
+</nav>
+<div1>
+
+
+    <form method="post" action="/update-model">
+        <h2>Opdater bil</h2>
+        <a th:href="@{'/delete-model/' + ${car.carId}}"onclick="return confirm('Er du sikker på du ønsker at slette denne model?');" style="text-decoration: underline red;">
+        <p class="delete" style="margin-left: 90%; color: red">Slet model</p></a>
+        <input type="hidden" name="carId" th:value="${car.carId}">
+        <input type="hidden" required name="available" th:value="${car.isAvailable}">
+
+        <label for="modelName">Model Navn: </label>
+        <input id="modelName" type="text"  name="modelName" required maxlength="255">
+
+        <label for="manufacturer">Producent: </label>
+        <input id="manufacturer" type="text"  name="manufacturer" required maxlength="50">
+
+        <label for="co2">Co2 Emission: </label>
+        <input id="co2" type="number"  name="co2" required>
+
+        <label for="fuelType">Drivmiddel: </label>
+        <select id="fuelType" name="fuelType" required>
+            <option value="Benzin">Benzin</option>
+            <option value="Diesel">Diesel</option>
+            <option value="El">El</option>
+        </select>
+
+        <label for="range">Rækkevidde: </label>
+        <input id="range" type="number"  name="range" required step="any">
+        <button type="submit" name="submit" value="update model" style="background-color:forestgreen">Opdater model</button>
+        <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
+    </form>
+</div1>
+
+
+</body>
+</html>

@@ -259,4 +259,51 @@ public class CarRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
+
+    public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
+        try {
+            String queryCreate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+
+            psts.setString(1, modelName);
+            psts.setString(2, manufacturer);
+            psts.setString(3, co2);
+            psts.setString(4, fuelType);
+            psts.setDouble(5, range);
+
+            psts.executeUpdate();
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
+
+    public Model findModelById(int id) {
+        Model model = new Model();
+        try {
+            String queryCreate = "SELECT * from models WHERE model_id=?";
+            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            psts.setInt(1, id);
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()) {
+                int modelId = resultSet.getInt(1);
+                String modelName = resultSet.getString(2);
+                String manufacturer = resultSet.getString(3);
+                double co2Emission = resultSet.getDouble(4);
+                String fuelType = resultSet.getString(5);
+                double range = resultSet.getDouble(6);
+
+                model.setModelId(modelId);
+                model.setModelName(modelName);
+                model.setManufacturer(manufacturer);
+                model.setCo2Emission(co2Emission);
+                model.setFuelType(fuelType);
+                model.setRange(range);
+            }
+            return model;
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+    }
 }

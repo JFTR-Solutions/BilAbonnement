@@ -114,4 +114,17 @@ public class CarController {
         model.addAttribute("modellist", carService.getAllModels());
         return "createcar";
     }
+
+    //Rami
+  @GetMapping("/update-model/{id}")
+    public String updateModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        model.addAttribute("id", id);
+        model.addAttribute("model", carService.findModelById(id));
+        return "updatemodel";
+    }
+
 }

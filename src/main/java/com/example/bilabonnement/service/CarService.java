@@ -52,4 +52,15 @@ public class CarService {
   }
 
   public void markCarAvailable(int carId) { carRepository.markCarAvailable(carId); }
+
+
+
+  public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
+    carRepository.updateModel(modelId, modelName, manufacturer, co2, fuelType, range);
+  }
+
+  public Model findModelById(int id) {
+    return carRepository.findModelById(id);
+  }
+
 }
