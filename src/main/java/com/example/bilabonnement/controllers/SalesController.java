@@ -55,6 +55,12 @@ public class SalesController {
             }
             carRevenueList.add(monthRevenue);
         }
+        double total = 0;
+
+        for (double d: carRevenueList) {
+            total+=d;
+        }
+        carRevenueList.add(total);
         return carRevenueList;
     }
 
@@ -78,6 +84,13 @@ public class SalesController {
             }
             carRevenueList.add(monthRented);
         }
+        int total = 0;
+
+        for (int d: carRevenueList) {
+            total+=d;
+        }
+        carRevenueList.add(total);
+
         return carRevenueList;
     }
 

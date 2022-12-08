@@ -53,7 +53,7 @@ h1 {
 .searchbar {
     display: block;
     height: 30px;
-    width: 20%;
+    width: 400px;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -67,7 +67,8 @@ h1 {
     grid-template-columns: auto auto auto auto;
     /*margin-left: 10%;*/
     gap: 30px;
-    width: 900px;
+    width: fit-content;
+
 }
 
 .search-grid {

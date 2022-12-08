@@ -56,14 +56,15 @@
             <th>Oktober</th>
             <th>November</th>
             <th>December</th>
+            <th>Total <span th:text="${year}"></span></th>
         </tr>
         </thead>
         <tbody id="inputrows">
         <tr class="item">
-            <td>Omsætning pr. måned</td>
-            <td th:each="revenue : ${carRevenueList}" th:text="${revenue}"></td>
+            <td>Omsætning</td>
+            <td th:each="revenue : ${carRevenueList}" th:text="${revenue} + ' DKK'"></td>
         <tr class="item">
-            <td>Udlejede biler pr. måned</td>
+            <td>Udlejede biler</td>
             <td th:each="revenue : ${carsRentedOut}" th:text="${revenue}"></td>
 
 

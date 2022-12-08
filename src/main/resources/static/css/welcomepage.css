@@ -6,7 +6,8 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    gap: 40px;
+    /*gap: 40px;*/
+    margin-bottom: 10px;
     width: 200px;
 }
 
@@ -23,8 +24,8 @@
 
 .panel-container{
     display: flex;
-    /*grid-auto-columns: auto auto;*/
-    gap: 10px;
+    justify-content: center;
+    gap: 30px;
     padding: 10px;
     height: max-content;
     width: calc(100vw - 100px);
@@ -32,14 +33,14 @@
 }
 .grid-container > div {
     text-align: center;
-    padding: 20px 0;
+    padding: 20px 10px;
     font-size: 30px;
 }
 
 .panel{
     font-family: 'Poppins', sans-serif;
     height: max-content;
-    width: 450px;
+    width: 300px;
     background-color: #0a4d5b;
     color: white;
     text-align: center;

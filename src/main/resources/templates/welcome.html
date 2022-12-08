@@ -25,9 +25,9 @@
     <div class="panel-container">
 
         <div class="panel" th:if="${roles.contains('System adminstrator')}"  th:insert="fragments/sysadminpanel"></div>
-        <div class="panel" th:if="${roles.contains('Reception')}"  th:insert="fragments/frontdeskpanel"></div>
-        <div class="panel" th:if="${roles.contains('Mekaniker')}"  th:insert="fragments/mechanicpanel"></div>
-        <div class="panel" th:if="${roles.contains('Salg')}"  th:insert="fragments/salespanel"></div>
+        <div class="panel" th:if="${roles.contains('Reception')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/frontdeskpanel"></div>
+        <div class="panel" th:if="${roles.contains('Mekaniker')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/mechanicpanel"></div>
+        <div class="panel" th:if="${roles.contains('Salg')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/salespanel"></div>
 
 
     </div>
