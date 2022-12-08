@@ -131,7 +131,6 @@ public class SalesController {
         model.addAttribute("yearLast", getYear(-1));
         model.addAttribute("yearNext", getYear(1));
 
-        System.out.println(carRevenueEachMonth(0));
         model.addAttribute("carRevenueList", carRevenueEachMonth(0));
         model.addAttribute("carRevenueListLastYear", carRevenueEachMonth(-1));
         model.addAttribute("carRevenueNextYear", carRevenueEachMonth(+1));
