@@ -53,8 +53,10 @@
 
             <td th:text="${agreement.getCar().getRegNumber()}">RegNumber</td>
             <td th:text="${agreement.getCar().getVIN()}">VIN</td>
-            <td th:if="${agreement.getActive() == 1}" th:text="Aktiv" style="background-color: forestgreen">AktivStatus</td>
-            <td th:if="${agreement.getActive() == 0}" th:text="Afsluttet" style="background-color: darkred">AktiveStatus</td>
+            <td th:if="${agreement.getActive() == 1}" th:text="Aktiv" style="background-color: forestgreen; color:white;
+            text-align: center">AktivStatus</td>
+            <td th:if="${agreement.getActive() == 0}" th:text="Afsluttet" style="background-color: darkred; color:white;
+            text-align: center">AktiveStatus</td>
             <td th:text="${agreement.getStartDate()}">startDate</td>
             <td th:text="${agreement.getEndDate}">endDate</td>
             <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>

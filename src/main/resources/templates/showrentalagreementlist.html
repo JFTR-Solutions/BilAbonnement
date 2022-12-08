@@ -13,9 +13,6 @@
 </nav>
 <div class="home-section">
   <h1>Leasing</h1>
-  <a href="/create-rental-agreement">
-    <button>Opret ny Leasing aftale</button>
-  </a>
   <br>
   <br>
   <div class="search-grid">
@@ -49,7 +46,7 @@
        <td th:text="${agreement.getUser().getLastName()}">LastName</td>
        <td th:text="${agreement.getStartDate()}">startDate</td>
         <td th:text="${agreement.getEndDate}">endDate</td>
-        <td th:text="${agreement.getMthPrice()}">mthPrice</td>
+        <td th:text="${#numbers.formatDecimal(agreement.getMthPrice(),0,0)} + ' dkk'">mthPrice</td>
        <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
        <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
        <td th:text="${agreement.getCar().getVIN()}">VIN</td>
