@@ -21,15 +21,17 @@ public class CarService {
   }
 
 
-
-
-  public List<Car> fetchAllAvailableCars() { return carRepository.fetchAllAvailableCars();}
+  public List<Car> fetchAllAvailableCars() {
+    return carRepository.fetchAllAvailableCars();
+  }
 
   public void updateCar(Car car) {
     carRepository.updateCar(car);
   }
 
-  public Car findCarById(int id) { return carRepository.findCarById(id); }
+  public Car findCarById(int id) {
+    return carRepository.findCarById(id);
+  }
 
   public void deleteCar(int id) {
     carRepository.deleteCar(id);
@@ -39,11 +41,12 @@ public class CarService {
     return carRepository.getAllModels();
   }
 
-  public void addCarModel(String modelName, String manufacturer, String co2, String fuelType, double range){
+  public void addCarModel(String modelName, String manufacturer, String co2, String fuelType, double range) {
     carRepository.addModel(modelName, manufacturer, co2, fuelType, range);
 
   }
-  public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelprice, double mthPrice, String transmission){
+
+  public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelprice, double mthPrice, String transmission) {
     carRepository.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
   }
 
@@ -51,16 +54,15 @@ public class CarService {
     carRepository.updateCarAvailability(carId, b);
   }
 
-  public void markCarAvailable(int carId) { carRepository.markCarAvailable(carId); }
-
+  public void markCarAvailable(int carId) {
+    carRepository.markCarAvailable(carId);
+  }
 
 
   public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
     carRepository.updateModel(modelId, modelName, manufacturer, co2, fuelType, range);
   }
-
-  public Model findModelById(int id) {
-    return carRepository.findModelById(id);
-  }
-
 }
+
+
+

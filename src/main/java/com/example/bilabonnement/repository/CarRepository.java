@@ -278,32 +278,6 @@ public class CarRepository {
         }
     }
 
-    public Model findModelById(int id) {
-        Model model = new Model();
-        try {
-            String queryCreate = "SELECT * from models WHERE model_id=?";
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
-            psts.setInt(1, id);
-            ResultSet resultSet = psts.executeQuery();
 
-            while (resultSet.next()) {
-                int modelId = resultSet.getInt(1);
-                String modelName = resultSet.getString(2);
-                String manufacturer = resultSet.getString(3);
-                double co2Emission = resultSet.getDouble(4);
-                String fuelType = resultSet.getString(5);
-                double range = resultSet.getDouble(6);
 
-                model.setModelId(modelId);
-                model.setModelName(modelName);
-                model.setManufacturer(manufacturer);
-                model.setCo2Emission(co2Emission);
-                model.setFuelType(fuelType);
-                model.setRange(range);
-            }
-            return model;
-        } catch (NullPointerException | SQLException ex) {
-            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
-        }
-    }
 }

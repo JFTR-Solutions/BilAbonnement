@@ -127,4 +127,11 @@ public class CarController {
         return "updatemodel";
     }
 
+    //getmapping for update model
+    @PostMapping("/update-model")
+    public String saveModel(@ModelAttribute Car car) {
+        carService.updateModel(car);
+        return "redirect:/reception";
+    }
+
 }
