@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,8 @@ public class SalesController {
                 YearMonth startYearMonth = YearMonth.parse(startDate);
                 YearMonth endYearMonth = YearMonth.parse(endDate);
 
-                if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth)) && endYearMonth.isAfter(activeYearMonth)) {
+                if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth))
+                        && endYearMonth.isAfter(activeYearMonth)) {
                     monthRevenue += rentalList.get(j).getMthPrice();
                 }
             }
@@ -78,7 +81,7 @@ public class SalesController {
         return carRevenueList;
     }
 
-    /*Thomas & Frederik*/
+  /*  *//*Thomas & Frederik*//*
     public int carRentedOut() {
         int carsRented = 0;
         List<Car> carList = carService.fetchAllCars();
@@ -89,7 +92,7 @@ public class SalesController {
         }
         return carsRented;
     }
-    /*Thomas & Frederik*/
+    *//*Thomas & Frederik*//*
     public int carRevenue() {
         int carRevenue = 0;
         List<RentalAgreement> rentalAgreementList = rentalService.fetchAllRentalAgreements();
@@ -99,7 +102,7 @@ public class SalesController {
             }
         }
         return carRevenue;
-    }
+    }*/
 
     /*Thomas & Frederik*/
     public int carsAvailable() {
@@ -118,9 +121,15 @@ public class SalesController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
-        model.addAttribute("carsRented", carRentedOut());
+
+        java.util.Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.MONTH);
+
+        model.addAttribute("carsRented", carsRentedOutEachMonth().get(month));
         model.addAttribute("carsAvailable", carsAvailable());
-        model.addAttribute("rentalRevenue", carRevenue());
+        model.addAttribute("rentalRevenue", carRevenueEachMonth().get(month));
 
         LocalDate currentdate = LocalDate.now();
         String currentMonth = String.valueOf(currentdate.getMonth());
