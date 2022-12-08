@@ -116,7 +116,7 @@ public class CarController {
     }
 
     //Rami
-  @GetMapping("/update-model/{id}")
+ /* @GetMapping("/update-model/{id}")
     public String updateModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!loginController.validateLogin(httpSession, role)) {
@@ -133,5 +133,5 @@ public class CarController {
         carService.updateModel(car);
         return "redirect:/reception";
     }
-
+*/
 }
