@@ -37,7 +37,7 @@
         </div>
         <div class="panel">
             <h2><i style="margin-right: 20px" class="bx bxs-bank"></i>Omsætning</h2>
-            <span th:text="${rentalRevenue} + ' DKK'"> DKK</span>
+            <span th:text="${#numbers.formatDecimal(rentalRevenue, 0, 'COMMA', 2, 'POINT')} + ' kroner'"></span>
         </div>
     </div>
     <br>
@@ -64,10 +64,10 @@
         <tbody id="inputrows">
         <tr class="item">
             <td>Omsætning</td>
-            <td th:each="revenue : ${carRevenueList}" th:text="${revenue} + ' DKK'"></td>
+            <td th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')} + ' kroner'"></td>
         <tr class="item">
             <td>Udlejede biler</td>
-            <td th:each="revenue : ${carsRentedOut}" th:text="${revenue}"></td>
+            <td th:each=" carsRented : ${carsRentedOut}" th:text="${carsRented}"></td>
 
 
         </tbody>

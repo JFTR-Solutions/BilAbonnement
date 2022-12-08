@@ -15,8 +15,6 @@
 </nav>
 <div class="home-section">
   <h1>Leasing</h1>
-  <br>
-  <br>
   <div class="search-grid">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -31,7 +29,7 @@
       <th>Fornavn</th>
       <th>Start Dato</th>
       <th>Slut Dato</th>
-      <th>Mdl. Pris</th>
+      <th>Mdl. Pris DKK</th>
       <th>Mærke</th>
       <th>Model</th>
       <th>Stelnummer</th>
@@ -46,9 +44,9 @@
        <td th:text="${agreement.getRentalId()}">rentalId</td>
        <td th:text="${agreement.getUser().getFirstName()}">FirstName</td>
        <td th:text="${agreement.getUser().getLastName()}">LastName</td>
-       <td th:text="${agreement.getStartDate()}">startDate</td>
-        <td th:text="${agreement.getEndDate}">endDate</td>
-        <td th:text="${#numbers.formatDecimal(agreement.getMthPrice(),0,0)} + ' dkk'">mthPrice</td>
+       <td th:text="${agreement.getStartDate()}?${#dates.format(agreement.getStartDate, 'dd-MM-yyyy')}:''">startDate</td>
+        <td th:text="${agreement.getEndDate}?${#dates.format(agreement.getStartDate, 'dd-MM-yyyy')}:''">endDate</td>
+        <td th:text="${#numbers.formatDecimal(agreement.mthPrice, 0, 'COMMA', 2, 'POINT')}">mthPrice</td>
        <td th:text="${agreement.getModel().getManufacturer()}">Manufacturer</td>
        <td th:text="${agreement.getModel().getModelName()}">Modelname</td>
        <td th:text="${agreement.getCar().getVIN()}">VIN</td>
