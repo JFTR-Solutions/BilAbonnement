@@ -46,7 +46,6 @@ public class SalesController {
             }
             carRevenueList.add(monthRevenue);
         }
-        System.out.println(carRevenueList);
         return carRevenueList;
     }
 
@@ -66,7 +65,6 @@ public class SalesController {
             }
             carRevenueList.add(monthRented);
         }
-        System.out.println(carRevenueList);
         return carRevenueList;
     }
 
