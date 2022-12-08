@@ -65,7 +65,7 @@ public class MechanicController {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
-        model.addAttribute("carid", carId);
+        model.addAttribute("carid", carService.findCarById(carId));
         model.addAttribute("rentalagreementid", rentalId);
         model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
         return "createdamagereport";

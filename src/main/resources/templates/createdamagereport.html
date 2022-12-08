@@ -21,8 +21,8 @@
         <button type="button">Fortryd - returner til overblik</button>
     </a>-->
 
-    <label>Du opretter skadesrapport på bil nummer: </label>
-    <input type="text" readonly th:value="${carid}" name="carid">
+    <h3>Du opretter skadesrapport på bil med stelnummer: <span th:text="${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></span> </h3>
+<!--    <input type="text" readonly th:value="${carid}" name="carid">-->
 
     <label for="placement">Placering: </label>
     <input id="placement" type="text" name="placement" list="placement_options" maxlength="50" required>
@@ -74,7 +74,7 @@
             <button type="button" onclick="return confirm('Afslut leasing aftale?');">Afslut leasing</button></a>
     <button type="submit" name="submit" value="create">Opret skade</button>
     <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"
-            onclick="location.href='/mechanic'">Fortryd</button>
+            onclick="location.href='/mechanic'">Gå tilbage</button>
 
     <table class="sortable, styled-table" id="table">
 
