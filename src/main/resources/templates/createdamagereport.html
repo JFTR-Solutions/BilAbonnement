@@ -15,8 +15,7 @@
 </nav>
 <form method="post" th:action="@{'/create-damagereport'}">
 
-    <h3>Du opretter skadesrapport på bil med stelnummer: <span
-            th:text="${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></span></h3>
+    <h3 th:text="'Du opretter skadesrapport på bil med stelnummer: ' + ${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></h3>
 
     <label for="placement">Placering: </label>
     <input id="placement" type="text" name="placement" list="placement_options" maxlength="50" required>
