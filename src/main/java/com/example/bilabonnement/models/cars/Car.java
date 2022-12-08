@@ -30,6 +30,10 @@ public class Car {
     this.modelId = modelId;
   }
 
+  public byte getAvailable() {
+    return available;
+  }
+
   public Car(int carId, byte available, String colour, String VIN, String regNumber, double steelPrice,
              double mthPrice, String transmission, int modelId, Model carModel) {
     this.carId = carId;

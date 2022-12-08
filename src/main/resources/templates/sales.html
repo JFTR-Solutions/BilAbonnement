@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/table.css}" href="../static/css/table.css">
     <link rel="stylesheet" type="text/css" th:href="@{../css/mainStyle.css}" href="../static/css/mainStyle.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/welcomepage.css}" href="/css/welcomepage.css">
     <title>Bilabonnement | Salg</title>
 </head>
 <body>
 <nav>
-    <div  th:replace="fragments/header"></div>
+    <div th:replace="fragments/header"></div>
     <div th:if="${roles.contains('System adminstrator')}" th:insert="fragments/defaultheader"></div>
     <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: cars"></div>
     <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: leasing"></div>
@@ -16,8 +18,59 @@
     <div th:if="${roles.contains('Salg')}" th:insert="fragments/defaultheader :: sales"></div>
     <div th:insert="fragments/footer"></div>
 </nav>
+
+<!--Thomas & Frederik-->
 <div class="home-section">
-<h1>Velkommen til salgssiden</h1>
+    <h1>Velkommen til salgssiden</h1>
+
+    <div class="panel-container">
+
+        <div class="panel">
+            <h2><i style="margin-right: 20px" class="bx bx-list-minus"></i>Biler udlejet</h2>
+            <span th:text="${carsRented}"></span>
+        </div>
+        <div class="panel">
+            <h2><i style="margin-right: 20px" class="bx bx-list-plus"></i>Biler ledige</h2>
+            <span th:text="${carsAvailable}"></span>
+        </div>
+        <div class="panel">
+            <h2><i style="margin-right: 20px" class="bx bxs-bank"></i>Omsætning</h2>
+            <span th:text="${rentalRevenue} + ' DKK'"> DKK</span>
+        </div>
+    </div>
+
+    <table class="sortable, styled-table" id="table">
+        <thead style="position: sticky; top: 0">
+        <tr>
+            <th>Månedlig overblik</th>
+            <th>Januar</th>
+            <th>Februar</th>
+            <th>Marts</th>
+            <th>April</th>
+            <th>Maj</th>
+            <th>Juni</th>
+            <th>Juli</th>
+            <th>August</th>
+            <th>September</th>
+            <th>Oktober</th>
+            <th>November</th>
+            <th>December</th>
+        </tr>
+        </thead>
+        <tbody id="inputrows">
+        <tr class="item">
+            <td>Omsætning pr. måned</td>
+            <td th:each="revenue : ${carRevenueList}" th:text="${revenue}"></td>
+        <tr class="item">
+            <td>Udlejede biler pr. måned</td>
+            <td th:each="revenue : ${carsRentedOut}" th:text="${revenue}"></td>
+
+
+        </tbody>
+    </table>
+</div>
+
+
 </div>
 </body>
 </html>
