@@ -59,9 +59,9 @@ public class CarService {
   }
 
 
-  public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
+  /*public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
     carRepository.updateModel(modelId, modelName, manufacturer, co2, fuelType, range);
-  }
+  }*/
 }
 
 

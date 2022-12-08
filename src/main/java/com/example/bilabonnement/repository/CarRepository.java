@@ -260,7 +260,7 @@ public class CarRepository {
         }
     }
 
-    public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
+  /*  public void updateModel(int modelId, String modelName, String manufacturer, String co2, String fuelType, double range) {
         try {
             String queryCreate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
@@ -276,7 +276,7 @@ public class CarRepository {
         } catch (NullPointerException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
-    }
+    }*/
 
 
 
