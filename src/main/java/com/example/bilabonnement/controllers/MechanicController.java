@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+
 @Controller
 public class MechanicController {
 
@@ -103,6 +104,5 @@ public class MechanicController {
 
         return "redirect:/mechanic";
     }
-
 
 }
