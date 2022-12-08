@@ -10,19 +10,13 @@
 </head>
 <body>
 <nav>
-    <div  th:replace="fragments/header"></div>
+    <div th:replace="fragments/header"></div>
     <div th:insert="fragments/footer"></div>
 </nav>
 <form method="post" th:action="@{'/create-damagereport'}">
 
-
-
-<!--    <a href="/mechanic">
-        <button type="button">Fortryd - returner til overblik</button>
-    </a>-->
-
-    <h3>Du opretter skadesrapport på bil med stelnummer: <span th:text="${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></span> </h3>
-<!--    <input type="text" readonly th:value="${carid}" name="carid">-->
+    <h3>Du opretter skadesrapport på bil med stelnummer: <span
+            th:text="${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></span></h3>
 
     <label for="placement">Placering: </label>
     <input id="placement" type="text" name="placement" list="placement_options" maxlength="50" required>
@@ -55,7 +49,6 @@
         <option value="Fælg, venstre baghjul">Fælg, venstre baghjul</option>
 
 
-
     </datalist>
 
     <label for="description">Beskrivelse af skaden: </label>
@@ -66,15 +59,16 @@
     <input id="price" type="number" name="price" required>
 
     <input type="hidden" th:value="${carid}" name="carid">
-    <input type="hidden" th:value="${rentalagreementid}"  name="rentalagreementid">
+    <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
 
 
-
-        <a th:href="@{'/end-rental/' + ${carid} + '/' + ${rentalagreementid}}">
-            <button type="button" onclick="return confirm('Afslut leasing aftale?');">Afslut leasing</button></a>
+    <a th:href="@{'/end-rental/' + ${carid} + '/' + ${rentalagreementid}}">
+        <button type="button" onclick="return confirm('Afslut leasing aftale?');">Afslut leasing</button>
+    </a>
     <button type="submit" name="submit" value="create">Opret skade</button>
     <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"
-            onclick="location.href='/mechanic'">Gå tilbage</button>
+            onclick="location.href='/mechanic'">Gå tilbage
+    </button>
 
     <table class="sortable, styled-table" id="table">
 
@@ -95,23 +89,14 @@
             <td style="text-align: left" th:text="${damage.getDescription()}">Beskrivelse</td>
             <td style="text-align: right" th:text="${damage.getPrice()} + ' kr'">Pris</td>
             <td style="background-color: #b23030"><a class="underline"
-                th:href="@{'/delete-damage/' + ${damage.getDamageId()} + '/' + ${carid} + '/' + ${rentalagreementid}}"
-                                                      onclick="return confirm('Slet skade fra oversigten?');">Slet</a></td>
+                                                     th:href="@{'/delete-damage/' + ${damage.getDamageId()} + '/' + ${carid} + '/' + ${rentalagreementid}}"
+                                                     onclick="return confirm('Slet skade fra oversigten?');">Slet</a>
+            </td>
             <!---When clicking on delete-damage, get of carId and rentalId-->
 
         </tr>
         </tbody>
-
     </table>
-
 </form>
-
-
-
-
-
-
-
 </body>
-
 </html>
