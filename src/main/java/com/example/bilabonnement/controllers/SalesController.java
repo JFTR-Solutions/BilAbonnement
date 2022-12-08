@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.Year;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,15 @@ public class SalesController {
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
         for (int i = 1; i <= 12; i++) {
             double monthRevenue = 0;
-            YearMonth now = YearMonth.of(YearMonth.now().getYear() + 1, i);
+            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear(), i);
             for (int j = 0; j < rentalList.size(); j++) {
-                String date = rentalList.get(j).getEndDate().toString().substring(0, 7);
-                YearMonth second = YearMonth.parse(date);
-                if (second.isAfter(now)) {
+                String startDate = rentalList.get(j).getStartDate().toString().substring(0, 7);
+                String endDate = rentalList.get(j).getEndDate().toString().substring(0, 7);
+
+                YearMonth startYearMonth = YearMonth.parse(startDate);
+                YearMonth endYearMonth = YearMonth.parse(endDate);
+
+                if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth)) && endYearMonth.isAfter(activeYearMonth)) {
                     monthRevenue += rentalList.get(j).getMthPrice();
                 }
             }
@@ -55,11 +61,15 @@ public class SalesController {
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
         for (int i = 1; i <= 12; i++) {
             int monthRented = 0;
-            YearMonth now = YearMonth.of(YearMonth.now().getYear() + 1, i);
+            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear(), i);
             for (int j = 0; j < rentalList.size(); j++) {
-                String date = rentalList.get(j).getEndDate().toString().substring(0, 7);
-                YearMonth second = YearMonth.parse(date);
-                if (second.isAfter(now)) {
+                String startDate = rentalList.get(j).getStartDate().toString().substring(0, 7);
+                String endDate = rentalList.get(j).getEndDate().toString().substring(0, 7);
+
+                YearMonth startYearMonth = YearMonth.parse(startDate);
+                YearMonth endYearMonth = YearMonth.parse(endDate);
+
+                if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth)) && endYearMonth.isAfter(activeYearMonth)) {
                     monthRented += rentalList.get(j).getActive();
                 }
             }
@@ -112,6 +122,13 @@ public class SalesController {
         model.addAttribute("carsAvailable", carsAvailable());
         model.addAttribute("rentalRevenue", carRevenue());
 
+        LocalDate currentdate = LocalDate.now();
+        String currentMonth = String.valueOf(currentdate.getMonth());
+        currentMonth= currentMonth.toLowerCase();
+        currentMonth = currentMonth.substring(0,1).toUpperCase() + currentMonth.substring(1);
+        String year = String.valueOf(Year.now());
+        model.addAttribute("month", currentMonth);
+        model.addAttribute("year", year);
 
         model.addAttribute("carRevenueList", carRevenueEachMonth());
         model.addAttribute("carsRentedOut", carsRentedOutEachMonth());

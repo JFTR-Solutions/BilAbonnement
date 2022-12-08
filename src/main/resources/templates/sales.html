@@ -21,7 +21,7 @@
 
 <!--Thomas & Frederik-->
 <div class="home-section">
-    <h1>Velkommen til salgssiden</h1>
+    <h1>Salgs overblik for <span th:text="${month}"></span></h1>
 
     <div class="panel-container">
 
@@ -38,7 +38,8 @@
             <span th:text="${rentalRevenue} + ' DKK'"> DKK</span>
         </div>
     </div>
-
+    <br>
+    <h3> Månedlig overblik for <span th:text="${year}"></span>:</h3>
     <table class="sortable, styled-table" id="table">
         <thead style="position: sticky; top: 0">
         <tr>
