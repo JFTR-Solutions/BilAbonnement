@@ -12,7 +12,7 @@ form h3{
 }
 
 form{
-    height: 400px;
+    height: max-content;
     width: 500px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;

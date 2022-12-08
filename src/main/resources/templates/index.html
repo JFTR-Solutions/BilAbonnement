@@ -11,6 +11,7 @@
 <body>
     <div>
         <form method="post" th:action="@{'/login'}">
+            <img th:src="@{/img/bilabonnement_logo_white.png}" src="/img/bilabonnement_logo_white.png" style="width: 50%; height: 50px">
             <h3>Login</h3>
             <span th:if="${errorMessage}"  th:text="${errorMessage}" style="color: red"></span>
             <input type="hidden" name="id">
