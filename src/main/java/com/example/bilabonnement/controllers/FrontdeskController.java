@@ -25,7 +25,7 @@ public class FrontdeskController {
 
     RentalService rentalService;
 
-    private final String role = "Reception";
+    private final String role = "Dataregistrering";
 
     public FrontdeskController(LoginController loginController, UserService userService, CarService carService, RentalService rentalService) {
         this.loginController = loginController;

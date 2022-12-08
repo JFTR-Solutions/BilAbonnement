@@ -38,9 +38,9 @@ public class UserRepository {
 
         List<String> roles = new ArrayList<>();
         roles.add("System adminstrator");
-        roles.add("Salg");
-        roles.add("Reception");
-        roles.add("Mekaniker");
+        roles.add("Forretningsudvikler");
+        roles.add("Dataregistrering");
+        roles.add("Skade og udbedring");
 
         try {
             List<String> roleList = findRoleById(user.getUserId());
@@ -74,9 +74,9 @@ public class UserRepository {
 
         List<String> roles = new ArrayList<>();
         roles.add("System adminstrator");
-        roles.add("Salg");
-        roles.add("Reception");
-        roles.add("Mekaniker");
+        roles.add("Forretningsudvikler");
+        roles.add("Dataregistrering");
+        roles.add("Skade og udbedring");
 
         try {
             List<String> roleList = findRoleById(user.getUserId());

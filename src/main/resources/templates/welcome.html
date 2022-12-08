@@ -12,13 +12,13 @@
 <body>
 <nav>
     <div  th:replace="fragments/header"></div>
-        <div th:if="${roles.contains('System adminstrator')}" th:insert="fragments/defaultheader"></div>
-        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: cars"></div>
-        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: leasing"></div>
-        <div th:if="${roles.contains('Reception')}" th:insert="fragments/defaultheader :: customers"></div>
-        <div th:if="${roles.contains('Mekaniker')}" th:insert="fragments/defaultheader :: mechanic"></div>
-        <div th:if="${roles.contains('Salg')}" th:insert="fragments/defaultheader :: sales"></div>
-        <div th:insert="fragments/footer"></div>
+    <div th:if="${roles.contains('System adminstrator')}" th:insert="fragments/defaultheader"></div>
+    <div th:if="${roles.contains('Dataregistrering')}" th:insert="fragments/defaultheader :: cars"></div>
+    <div th:if="${roles.contains('Dataregistrering')}" th:insert="fragments/defaultheader :: leasing"></div>
+    <div th:if="${roles.contains('Dataregistrering')}" th:insert="fragments/defaultheader :: customers"></div>
+    <div th:if="${roles.contains('Skade og udbedring')}" th:insert="fragments/defaultheader :: mechanic"></div>
+    <div th:if="${roles.contains('Forretningsudvikler')}" th:insert="fragments/defaultheader :: sales"></div>
+    <div th:insert="fragments/footer"></div>
 </nav>
 
 <div class="home-section">
@@ -27,9 +27,9 @@
     <div class="panel-container">
 
         <div class="panel" th:if="${roles.contains('System adminstrator')}"  th:insert="fragments/sysadminpanel"></div>
-        <div class="panel" th:if="${roles.contains('Reception')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/frontdeskpanel"></div>
-        <div class="panel" th:if="${roles.contains('Mekaniker')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/mechanicpanel"></div>
-        <div class="panel" th:if="${roles.contains('Salg')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/salespanel"></div>
+        <div class="panel" th:if="${roles.contains('Dataregistrering')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/frontdeskpanel"></div>
+        <div class="panel" th:if="${roles.contains('Skade og udbedring')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/mechanicpanel"></div>
+        <div class="panel" th:if="${roles.contains('Forretningsudvikler')} OR ${roles.contains('System adminstrator')}"  th:insert="fragments/salespanel"></div>
 
 
     </div>

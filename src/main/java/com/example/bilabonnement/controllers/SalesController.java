@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 public class SalesController {
 
-    private final String role = "Salg";
+    private final String role = "Forretningsudvikler";
     LoginController loginController;
     UserService userService;
     RentalService rentalService;
