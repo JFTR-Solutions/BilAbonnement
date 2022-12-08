@@ -45,8 +45,8 @@
             <th>Farve</th>
             <th>Stelnummer</th>
             <th>Nummerplade</th>
-            <th>Stålpris</th>
-            <th>Månedlig ydelse</th>
+            <th>Stålpris DKK</th>
+            <th>Månedlig ydelse DKK</th>
             <th>Gearkasse</th>
             <th>C02 Udledning</th>
             <th>Drivmiddel</th>
@@ -64,9 +64,9 @@
             <td th:text="${car.VIN}">Stelnummer</td>
             <td th:text="${car.regNumber}">Nummerplade</td>
             <!--<td th:text="$car.steelPrice}">Stålpris</td>-->
-            <td th:text="${#numbers.formatDecimal(car.steelPrice,0,0)} + ' dkk'">Stålpris</td>
+            <td th:text="${#numbers.formatDecimal(car.steelPrice, 0, 'COMMA', 2, 'POINT')}">Stålpris</td>
             <!--<td th:text="${car.mthPrice}">Månedlig ydelse</td>-->
-            <td th:text="${#numbers.formatDecimal(car.mthPrice,0,0)} + ' dkk'">Månedlig ydelse</td>
+            <td th:text="${#numbers.formatDecimal(car.mthPrice, 0, 'COMMA', 2, 'POINT')}">Månedlig ydelse</td>
             <td th:text="${car.transmission}">Gearkasse</td>
             <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->
             <td style="text-align: right" th:text="${#numbers.formatDecimal(car.carModel.getCo2Emission,0,0)} + ' g/km'">C02 Emission</td>
