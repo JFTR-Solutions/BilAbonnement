@@ -9,39 +9,78 @@
 </head>
 <body>
 <form>
+ <table>
+         <h1>Leasing Aftale</h1>
+     <tr>
+         <td>Navn</td>
+         <td style="text-align: right" th:text="${agreement.getUser().getFirstName()}+' '+${agreement.getUser().getLastName()}">
+     </tr>
+     <tr>
+         <td>Fødselsdag</td>
+         <td style="text-align: right" th:text="${agreement.getUser().getBirthdate()}">
+     </tr>
+     <tr>
+         <td>Adresse</td>
+         <td style="text-align: right" th:text="${agreement.getUser().getAddress()}">
+     </tr>
+     <tr>
+         <td>Telefon</td>
+         <td style="text-align: right" th:text="${agreement.getUser().getPhoneNumber()}">
+     </tr>
+     <tr>
+         <td></td>
+         <td></td>
+     </tr>
+     <tr>
+         <td></td>
+         <td></td>
+     </tr>
+     <tr>
+         <td></td>
+         <td></td>
+     </tr>
+     <tr>
+         <td style="font-weight: bold" th:text="${agreement.getCar().getCarModel().getManufacturer()} +
+         ' ' + ${agreement.getCar().getCarModel().getModelName()}">
+         <td style="text-align: right; font-weight: bold"
+             th:text="${#numbers.formatDecimal(agreement.getCar().getMthPrice(),0,0)} + ' dkk/md.'">">
+     </tr>
+     <tr>
+         <td>Forsikring (Ansvar- og Kasko)</td>
+         <td style="text-align: right">Inkluderet</td>
+     </tr>
+     <tr>
+         <td>Grøn ejerafgift</td>
+         <td style="text-align: right">Inkluderet</td>
+     </tr>
+     <tr>
+         <td>Service- og garantiaftale</td>
+         <td style="text-align: right">Inkluderet</td>
+     </tr>
+     <tr>
+         <td th:text="${agreement.getMthKm().getKm()} + ' km.'">
+         <td style="text-align: right" th:if="${agreement.getMthKm().getPrice() != 0}" th:text="${#numbers.formatDecimal(agreement.getMthKm().getPrice(),0,0)} + ' dkk/md.'">
+         <td style="text-align: right" th:if="${agreement.getMthKm().getPrice() == 0}">Inkluderet</td>
+     </tr>
+     <tr th:each="addon:${addons}">
+         <td th:text="${addon.getAddonName()}">
+         <td style="text-align: right" th:text="${#numbers.formatDecimal(addon.getPrice(),0,0)} + ' dkk/md.'">
+     </tr>
+     </tr>
+     <tr>
+         <td></td>
+         <td></td>
+     </tr>
+     <tr>
+         <td></td>
+         <td></td>
+     </tr>
+     <tr>
+         <td style="font-size: 20px; color: #1892c3; font-weight: 800">Totalpris</td>
+         <td style="text-align: right; font-size: 20px; color: #1892c3; font-weight: 800" th:text="${#numbers.formatDecimal(agreement.getMthPrice(),0,0)} + ' dkk/md.'">
+     </tr>
 
-    <label>Leasing Aftale Nummer: </label>
-    <input type="text" readonly th:value="${agreement.getRentalId()}">
-
-    <label>Fornavn: </label>
-    <input type="text" readonly th:value="${agreement.getUser().getFirstName()}">
-
-    <label>Efternavn: </label>
-    <input type="text" readonly th:value="${agreement.getUser().getLastName()}">
-
-    <label>Telefon: </label>
-    <input type="text" readonly th:value="${agreement.getUser().getPhoneNumber()}">
-
-    <label>Adresse: </label>
-    <input type="text" readonly th:value="${agreement.getUser().getAddress()}">
-
-    <label>Fødselsdag: </label>
-    <input type="text" readonly th:value="${agreement.getUser().getBirthdate()}">
-    <br>
-    <label>Bil: </label>
-    <input type="text" readonly th:value="${agreement.getCar().getCarModel().getManufacturer()} +
-    ' | ' + ${agreement.getCar().getCarModel().getModelName()}">
-
-    <label>Nummerplade: </label>
-    <input type="text" readonly th:value="${agreement.getCar().getRegNumber()}">
-    <br>
-    <label>Ekstra tilkøb: </label>
-    <input type="text" readonly th:value="${agreement.getMthKm().getKm()} + 'km - ' + ${agreement.getMthKm().getPrice()} + 'kr'">
-    <input type="text" readonly th:each="addon : ${addons}"
-     th:value="${addon.getAddonName()} + ' - ' + ${addon.getPrice()} + 'kr'">
-
-    <button type="submit" name="submit" value="create">Opret</button>
-
+    </table>
     </form>
 </body>
 </html>

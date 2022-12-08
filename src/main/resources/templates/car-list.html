@@ -63,9 +63,7 @@
             <td th:text="${car.colour}">Farve</td>
             <td th:text="${car.VIN}">Stelnummer</td>
             <td th:text="${car.regNumber}">Nummerplade</td>
-            <!--<td th:text="$car.steelPrice}">Stålpris</td>-->
             <td th:text="${#numbers.formatDecimal(car.steelPrice, 0, 'COMMA', 2, 'POINT')}">Stålpris</td>
-            <!--<td th:text="${car.mthPrice}">Månedlig ydelse</td>-->
             <td th:text="${#numbers.formatDecimal(car.mthPrice, 0, 'COMMA', 2, 'POINT')}">Månedlig ydelse</td>
             <td th:text="${car.transmission}">Gearkasse</td>
             <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->

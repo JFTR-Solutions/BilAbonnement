@@ -7,7 +7,7 @@ body,html{
 form{
     height: max-content;
     width: 680px;
-    background-color: rgba(255,255,255,0.13);
+    background-color: rgba(255,255,255,0.80);
     position: absolute;
     transform: translate(-50%,-50%);
     top: 600px;
@@ -18,30 +18,11 @@ form{
     padding: 25px 35px;
 }
 form *{
-    font-family: 'Poppins',sans-serif;
-    color: #ffffff;
+    font-family: 'Montserrat',sans-serif;
+    color: #080710;
     letter-spacing: 0.6px;
     outline: none;
     border: none;
-}
-
-label{
-    display: block;
-    margin-top: 30px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-input{
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 300;
 }
 
 button{
@@ -56,16 +37,28 @@ button{
     cursor: pointer;
 }
 
-select{
-    color:#080710;
-}
-
-option{
-    color:#080710;
-
-}
 
 button:hover{
     background-color: rgba(255,255,255,0.5);
     color: #ffffff;
+}
+
+h1{
+    padding: 5px 30px;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 42px;
+    text-align: center;
+    color: #1892c3;
+    font-family: 'Montserrat', sans-serif;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table td, table th{
+    padding: 10px 3px;
 }
