@@ -64,7 +64,7 @@
         <tbody id="inputrows">
         <tr class="item">
             <td>Omsætning</td>
-            <td th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')} + ' kroner'"></td>
+            <td th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')} + ' dkk'"></td>
         <tr class="item">
             <td>Udlejede biler</td>
             <td th:each=" carsRented : ${carsRentedOut}" th:text="${carsRented}"></td>
