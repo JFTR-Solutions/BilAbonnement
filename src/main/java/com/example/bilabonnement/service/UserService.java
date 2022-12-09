@@ -21,13 +21,21 @@ public class UserService {
         return userRepository.getAllEmployees();
     }
 
+    public List<User> getEmployeeWithoutRole() throws CarLeasingException {
+        return userRepository.getEmployeesWithoutRole();
+    }
+
     public List<User> getAllCustomers() throws CarLeasingException {
         return userRepository.getAllCustomers();
     }
 
 
-    public User getEmail(String email, String password) throws CarLeasingException {
-        return userRepository.findUserByEmail(email, password);
+    public User getEmailAndPassword(String email, String password) throws CarLeasingException {
+        return userRepository.findUserByEmailAndPassword(email, password);
+    }
+
+    public User getEmail(String email) throws CarLeasingException {
+        return userRepository.findUserByEmail(email);
     }
 
     public User findUserByID(int id) {

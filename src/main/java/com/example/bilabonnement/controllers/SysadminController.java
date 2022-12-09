@@ -1,9 +1,9 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
+import com.example.bilabonnement.exceptions.carExceptionEnum;
 import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.models.users.User;
-import com.example.bilabonnement.repository.UserRepository;
 import com.example.bilabonnement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.bilabonnement.controllers.LoginController.exceptionEnums;
 
 @Controller
 public class SysadminController {
@@ -40,8 +42,11 @@ public class SysadminController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
+
+        System.out.println(userService.getEmployeeWithoutRole());
         model.addAttribute("roleList", roleList());
         model.addAttribute("userList", userService.getAllEmployees());
+        model.addAttribute("usersNoRole", userService.getEmployeeWithoutRole());
         return "sysadmin";
     }
 
@@ -56,10 +61,11 @@ public class SysadminController {
 
     //Frederik
     @GetMapping("/create-user")
-    public String createUserPage(HttpSession httpSession) throws CarLeasingException {
+    public String createUserPage(HttpSession httpSession, Model model) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
+        model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         return "createuser";
     }
 
@@ -68,17 +74,22 @@ public class SysadminController {
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr)
-                            throws CarLeasingException {
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr, HttpSession httpSession)
+            throws CarLeasingException {
         Encrypter encrypter = new Encrypter();
         String encryptedPassword = encrypter.encrypt(password);
-        if (userService.getEmail(email, encryptedPassword) == null) {
-            userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
-                    address, phonenr);
-            return "redirect:/sysadmin";
+        try {
+            userService.getEmail(email);
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
+            return "redirect:/create-user";
         }
-        return ("redirect:/error");
+        httpSession.setAttribute("error", "");
+        userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
+                address, phonenr);
+        return "redirect:/sysadmin";
     }
+
 
     //Frederik
     @GetMapping("/update-user/{id}")

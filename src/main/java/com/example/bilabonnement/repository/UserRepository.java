@@ -191,6 +191,36 @@ public class UserRepository {
         }
     }
 
+    public List<User> getEmployeesWithoutRole() throws CarLeasingException {
+
+        List<User> userList = new ArrayList<>();
+
+        try {
+            String queryGetAll = ("SELECT * FROM users LEFT JOIN roles_users ON users.user_id = roles_users.user_id" +
+                    " WHERE roles_users.user_id Is Null;");
+            PreparedStatement psts = conn.prepareStatement(queryGetAll);
+            ResultSet rs = psts.executeQuery();
+
+            while (rs.next()) {
+                int userId = rs.getInt(1);
+                String email = rs.getString(2);
+                String username = rs.getString(3);
+                String password = rs.getString(4);
+                String firstName = rs.getString(5);
+                String lastName = rs.getString(6);
+                Date birthdate = rs.getDate(7);
+                String address = rs.getString(8);
+                String phoneNumber = rs.getString(9);
+
+                userList.add(new User(userId, email, username, password, firstName, lastName, birthdate, address, phoneNumber));
+            }
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+        return userList;
+    }
+
     public List<User> getAllEmployees() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
@@ -307,7 +337,7 @@ public class UserRepository {
     }
 
     //Frederik
-    public User findUserByEmail(String email, String password) throws CarLeasingException {
+    public User findUserByEmailAndPassword(String email, String password) throws CarLeasingException {
 
         User user = new User();
         user.setEmail(email);
@@ -346,7 +376,26 @@ public class UserRepository {
         } catch (NullPointerException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
+    }
 
+    public User findUserByEmail(String email) throws CarLeasingException {
+
+        try {
+            String queryFindUser = "SELECT count(email) FROM users WHERE email=?;";
+            PreparedStatement psts = conn.prepareStatement(queryFindUser);
+
+            //indsæt email og password i preparedstatement.
+            psts.setString(1, email);
+
+            //execute query som giver svar tilbage fra databasen med information om brugeren.
+            ResultSet rs = psts.executeQuery();
+            if (rs.next()) {
+                throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.USER_EXIST));
+            }
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+        return null;
     }
 
     //FREDERIK

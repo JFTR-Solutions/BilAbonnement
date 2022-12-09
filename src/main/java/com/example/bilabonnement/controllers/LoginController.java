@@ -29,6 +29,7 @@ public class LoginController {
         exceptionEnums.put(carExceptionEnum.NO_PERMISSION, "Du har ikke rettigheder til at få vist denne side");
         exceptionEnums.put(carExceptionEnum.DATABASE_ERROR, "Kunne ikke oprette forbindelse til databasen, prøv igen senere");
         exceptionEnums.put(carExceptionEnum.ROLE_ERROR, "Kunne ikke opdatere rollen");
+        exceptionEnums.put(carExceptionEnum.USER_EXIST, "En bruger med denne email eksisterer allerede");
         this.userService = userService;
     }
     //FREDERIK
@@ -59,7 +60,7 @@ public class LoginController {
     public String login(@RequestParam("email") String email, @RequestParam("password") String password,
                         HttpSession httpSession) {
         try {
-            userService.getEmail(email, e.encrypt(password));
+            userService.getEmailAndPassword(email, e.encrypt(password));
             httpSession.setAttribute("email", email);
             httpSession.setAttribute("password", e.encrypt(password));
         } catch (CarLeasingException e) {
@@ -74,7 +75,7 @@ public class LoginController {
     public boolean validateUser(HttpSession httpSession) throws CarLeasingException {
 
         if (httpSession.getAttribute("email") != null && httpSession.getAttribute("password") != null) {
-            User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+            User user = userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
             return user.getEmail().equals(httpSession.getAttribute("email")) && user.getPassword().equals((httpSession.getAttribute("password")));
         }
         throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.NO_LOGIN));
@@ -82,7 +83,7 @@ public class LoginController {
 
     //Frederik
     public List<String> validateRoles(HttpSession httpSession) throws CarLeasingException {
-        User user = userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
+        User user = userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password"));
         List<String> roleList = userService.getRoles(user.getUserId());
         return roleList;
     }
@@ -106,7 +107,7 @@ public class LoginController {
         httpSession.setAttribute("error","");
         model.addAttribute("roles", validateRoles(httpSession));
         httpSession.setAttribute("roller", validateRoles(httpSession));
-        model.addAttribute("name", userService.getEmail((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
+        model.addAttribute("name", userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
         return "welcome";
     }
 

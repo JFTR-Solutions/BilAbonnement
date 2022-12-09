@@ -13,6 +13,11 @@
     <div th:insert="fragments/footer"></div>
 </nav>
 <form method="post" th:action="@{'/create-user'}">
+    <div class="alert" th:if="${errorMessage}"><strong>Advarsel!</strong>
+        <span class="closebtn" th:text="${errorMessage}" style="color: red"
+              onclick="this.parentElement.style.display='none';">&times;</span>
+
+    </div>
     <input type="hidden" name="id">
     <label for="email">Email: </label>
     <input id="email" autofocus type="text" required name="email" maxlength="255">
@@ -30,7 +35,7 @@
     <input id="lastname" type="text" name="lastname" maxlength="50">
 
     <label for="birthdate">Fødselsdag: </label>
-    <input id="birthdate" type="date" name="birthdate">
+    <input id="birthdate" type="date" name="birthdate" required>
 
     <label for="address">Adresse: </label>
     <input id="address" type="text" name="address" maxlength="255">
