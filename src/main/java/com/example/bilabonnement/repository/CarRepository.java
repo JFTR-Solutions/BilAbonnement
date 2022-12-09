@@ -294,17 +294,18 @@ public class CarRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
 
         }
-
+    }
  public void updateModel(Model model) {
         try {
-            String queryCreate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
-            PreparedStatement psts = conn.prepareStatement(queryCreate);
+            String queryUpdate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
+            PreparedStatement psts = conn.prepareStatement(queryUpdate);
 
-            psts.setString(1, modelName);
-            psts.setString(2, manufacturer);
-            psts.setString(3, co2);
-            psts.setString(4, fuelType);
-            psts.setDouble(5, range);
+            psts.setString(1, model.getModelName());
+            psts.setString(2, model.getManufacturer());
+            psts.setDouble(3, model.getCo2Emission());
+            psts.setString(4, model.getFuelType());
+            psts.setDouble(5, model.getRange());
+            psts.setInt(6, model.getModelId());
 
             psts.executeUpdate();
 
