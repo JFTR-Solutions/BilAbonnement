@@ -22,16 +22,10 @@
 </nav>
 
 <div class="home-section">
-    <h1>Se overblik over alle biler</h1>
-    <div class="button-grid">
-        <div><a href="/create-car">
-            <button>Opret ny bil</button>
-        </a></div>
+    <h1>Se overblik over alle bilmodeller</h1>
         <div><a href="/create-carmodel">
             <button>Opret ny bil model</button>
         </a></div></div>
-
-
 
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -39,39 +33,21 @@
     <table class="sortable, styled-table" id="table">
         <thead style="position: sticky; top: 0">
         <tr>
-            <th>ID</th>
-            <th>Ledig</th>
+            <th>Navn</th>
             <th>Producent</th>
-            <th>Model navn</th>
-            <th>Farve</th>
-            <th>Stelnummer</th>
-            <th>Nummerplade</th>
-            <th>Stålpris DKK</th>
-            <th>Månedlig ydelse DKK</th>
-            <th>Gearkasse</th>
-            <th>C02 Udledning</th>
+            <th>Co2 Emission</th>
             <th>Drivmiddel</th>
             <th>Rækkevidde</th>
+
         </tr>
         </thead>
         <tbody id="inputrows">
-        <tr class="item" th:each="car:${carlist}" th:ondblclick="'javascript:rowClicked(\'' + ${car.carId} + '\');'">
-            <td th:text="${car.carId}">ID</td>
-            <td class="availability" th:if="${car.isAvailable == 1}" th:text="Ledig" style="background-color: forestgreen">Ledig</td>
-            <td class="availability" th:if="${car.isAvailable == 0}" th:text="Udlejet" style="background-color: darkred">Udlejet</td>
-            <td th:text="${car.carModel.getManufacturer}">Producent</td>
-            <td th:text="${car.carModel.getModelName}">Model Navn</td>
-            <td th:text="${car.colour}">Farve</td>
-            <td th:text="${car.VIN}">Stelnummer</td>
-            <td th:text="${car.regNumber}">Nummerplade</td>
-            <td th:text="${#numbers.formatDecimal(car.steelPrice, 0, 'COMMA', 2, 'POINT')}">Stålpris</td>
-            <td th:text="${#numbers.formatDecimal(car.mthPrice, 0, 'COMMA', 2, 'POINT')}">Månedlig ydelse</td>
-            <td th:text="${car.transmission}">Gearkasse</td>
-            <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->
-            <td style="text-align: right" th:text="${#numbers.formatDecimal(car.carModel.getCo2Emission,0,0)} + ' g/km'">C02 Emission</td>
-            <td th:text="${car.carModel.getFuelType}">Drivmiddel</td>
-            <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${#numbers.formatDecimal(car.carModel.getRange,0,0)} + ' km'">Rækkevidde</td>
-            <td th:unless="${car.carModel.getFuelType == 'El'}" th:text="${car.carModel.getRange} + ' km/l'">Rækkevidde</td>
+        <tr class="item" th:each="model:${carlist}" th:ondblclick="'javascript:rowClic*ked(\'' + ${model.modelId} + '\');'">
+            <td th:text="${model.getModelName}">Navn</td>
+            <td th:text="${model.getManufacturer}">Producent</td>
+            <td th:text="${mdoel.getCo2Emission}">Co2 Emission</td>
+            <td th:text="${model.getFuelType}">Drivmiddel</td>
+            <td th:text="${#numbers.formatDecimal(model.getRange,0,0)}">Rækkevidde</td>
 
         </tr>
         </tbody>
@@ -90,7 +66,7 @@
 
     <script>
         function rowClicked(value) {
-            location.href = "/update-car/" + value;
+            location.href = "/update-model/" + value;
         }
     </script>
 

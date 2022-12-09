@@ -115,8 +115,23 @@ public class CarController {
         return "createcar";
     }
 
-    //Rami
- /* @GetMapping("/update-model/{id}")
+    @GetMapping("/showallmodels")
+    public String showModel(Model model, HttpSession httpSession){
+        try {
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
+            return "redirect:/welcome";
+        }
+        model.addAttribute("modellist", carService.getAllModels());
+        return "showallmodels";
+    }
+
+
+ @GetMapping("/update-model/{id}")
     public String updateModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
         if (!loginController.validateLogin(httpSession, role)) {
@@ -127,11 +142,21 @@ public class CarController {
         return "updatemodel";
     }
 
-    //getmapping for update model
     @PostMapping("/update-model")
-    public String saveModel(@ModelAttribute Car car) {
-        carService.updateModel(car);
+    public String saveModel(@ModelAttribute Model model) {
+        carService.updateModel((com.example.bilabonnement.models.cars.Model) model);
         return "redirect:/reception";
     }
-*/
+
+    @GetMapping("/delete-car/{id}")
+    public String deleteModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
+        model.addAttribute("roles", loginController.validateRoles(httpSession));
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        carService.deleteCar(id);
+        return "redirect:/reception";
+    }
+
+
 }
