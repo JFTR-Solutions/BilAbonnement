@@ -287,6 +287,7 @@ public class CarRepository {
                 model.setRange(range);
 
             }
+            System.out.println(model);
             return model;
 
 

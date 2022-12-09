@@ -115,7 +115,7 @@ public class CarController {
         return "createcar";
     }
 
-    @GetMapping("/showallmodels")
+    @GetMapping("/show-all-models")
     public String showModel(Model model, HttpSession httpSession){
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
@@ -143,8 +143,8 @@ public class CarController {
     }
 
     @PostMapping("/update-model")
-    public String saveModel(@ModelAttribute Model model) {
-        carService.updateModel((com.example.bilabonnement.models.cars.Model) model);
-        return "redirect:/showallmodels";
+    public String saveModel(@ModelAttribute com.example.bilabonnement.models.cars.Model model) {
+        carService.updateModel(model);
+        return "redirect:/show-all-models";
     }
 }
