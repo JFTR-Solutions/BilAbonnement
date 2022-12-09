@@ -27,8 +27,8 @@
 
 
     <form method="post" action="/update-model">
-        <h2>Opdater bil</h2>
-        <a th:href="@{'/delete-model/' + ${car.carId}}"onclick="return confirm('Er du sikker på du ønsker at slette denne model?');" style="text-decoration: underline red;">
+        <h2>Opdater model</h2>
+        <a th:href="@{'/delete-model/' + ${model.modelId}}"onclick="return confirm('Er du sikker på du ønsker at slette denne model?');" style="text-decoration: underline red;">
         <p class="delete" style="margin-left: 90%; color: red">Slet model</p></a>
         <input type="hidden" name="carId" th:value="${car.carId}">
         <input type="hidden" required name="available" th:value="${car.isAvailable}">
