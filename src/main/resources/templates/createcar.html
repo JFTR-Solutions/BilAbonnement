@@ -68,10 +68,22 @@
         <input id="regnumber" type="text"  name="regNumber" maxlength="10">
 
         <label for="steelprice">Stålpris: </label>
-        <input id="steelprice" type="number"  name="steelPrice">
+        <input id="steelprice" type="number"  name="steelPrice" placeholder="Skriv/vælg beløb..." list="prices">
+        <datalist id="prices" style="width: 300px">
+            <option value="100000">100000</option>
+            <option value="200000">200000</option>
+            <option value="300000">300000</option>
+        </datalist>
 
         <label for="mthprice">Månedlig ydelse: </label>
-        <input id="mthprice" type="number"  name="mthPrice">
+        <input id="mthprice" type="number"  name="mthPrice" placeholder="Skriv/vælg beløb..." list="mthprices">
+        <datalist id="mthprices" style="width: 300px">
+            <option value="2399">2399</option>
+            <option value="2799">2799</option>
+            <option value="3199">3199</option>
+            <option value="3499">3499</option>
+            <option value="3899">3899</option>
+        </datalist>
 
 
 
