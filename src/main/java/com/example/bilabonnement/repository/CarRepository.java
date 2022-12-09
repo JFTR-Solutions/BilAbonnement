@@ -295,7 +295,8 @@ public class CarRepository {
 
         }
     }
- public void updateModel(Model model) {
+
+    public void updateModel(Model model) {
         try {
             String queryUpdate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
             PreparedStatement psts = conn.prepareStatement(queryUpdate);
@@ -312,8 +313,5 @@ public class CarRepository {
         } catch (NullPointerException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
-    }
-
-
     }
 }
