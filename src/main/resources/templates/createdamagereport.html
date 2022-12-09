@@ -15,7 +15,7 @@
 </nav>
 <form method="post" th:action="@{'/create-damagereport'}">
 
-    <h3 th:text="'Du opretter skadesrapport på bil med stelnummer: ' + ${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()}"></h3>
+    <h3 th:text="'Du opretter skadesrapport på bil med stelnummer: ' + ${car.getVIN()} + ' og nummerplade: ' + ${car.getRegNumber()}"></h3>
 
     <label for="placement">Placering: </label>
     <input id="placement" type="text" name="placement" list="placement_options" maxlength="50" required>
@@ -57,8 +57,8 @@
     <label for="price">Anslået pris på skaden: </label>
     <input id="price" type="number" name="price" required>
 
-    <input type="hidden" th:value="${carid}" name="carid">
-    <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
+    <input type="hidden" th:value="${car.getCarId()}" name="carId">
+    <input type="hidden" th:value="${rentalagreementid}" name="rentalAgreementId">
 
     <button type="submit" name="submit" value="create">Opret skade</button>
     <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"

@@ -65,7 +65,7 @@ public class MechanicController {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
-        model.addAttribute("carid", carService.findCarById(carId));
+        model.addAttribute("car", carService.findCarById(carId));
         model.addAttribute("rentalagreementid", rentalId);
         model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
         return "createdamagereport";
@@ -74,8 +74,8 @@ public class MechanicController {
 
     @PostMapping("/create-damagereport")
     public String createDamageReport(@RequestParam("price") int price, @RequestParam("placement") String placement,
-                                     @RequestParam("description") String description, @RequestParam("carid") int carId,
-                                     @RequestParam("rentalagreementid") int rentalAgreementId) throws CarLeasingException {
+                                     @RequestParam("description") String description, @RequestParam("carId") int carId,
+                                     @RequestParam("rentalAgreementId") int rentalAgreementId) throws CarLeasingException {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
         return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
