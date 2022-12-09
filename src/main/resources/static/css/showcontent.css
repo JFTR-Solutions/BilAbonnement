@@ -82,9 +82,7 @@ button{
 }
 
 
-
 input[type="checkbox"] {
-    margin-left: -50px;
     margin-top: -22px;
     position: relative;
     height: 20px;
