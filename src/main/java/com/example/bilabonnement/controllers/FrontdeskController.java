@@ -75,11 +75,25 @@ public class FrontdeskController {
                                         @RequestParam(defaultValue = "false", value="cleverNetwork") boolean cleverNetwork,
                                         @RequestParam(defaultValue = "false", value="clever") boolean clever) throws CarLeasingException {
 
+        double mthPrice = carService.findCarById(carId).getMthPrice() + rentalService.findmthKmById(mthKmId).getPrice();
+        if(deliveryInsurance){
+            mthPrice += 119;
+        } if(selfInsurance){
+            mthPrice += 64;
+        } if(winterTires){
+            mthPrice += 549;
+        } if(viking){
+            mthPrice += 49;
+        } if(cleverNetwork){
+            mthPrice += 625;
+        } if(clever){
+            mthPrice += 749;
+        }
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(startDate);
         cal.add(Calendar.MONTH, months);
         Date endDate = new Date(cal.getTimeInMillis());
-        double mthPrice = carService.findCarById(carId).getMthPrice() + rentalService.findmthKmById(mthKmId).getPrice();
         rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
         carService.updateCarAvailability(carId, (byte) 0);
 
