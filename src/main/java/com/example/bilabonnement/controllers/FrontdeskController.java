@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -119,6 +120,7 @@ public class FrontdeskController {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
+
         model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
         model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
 
