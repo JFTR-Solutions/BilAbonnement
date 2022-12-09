@@ -145,18 +145,6 @@ public class CarController {
     @PostMapping("/update-model")
     public String saveModel(@ModelAttribute Model model) {
         carService.updateModel((com.example.bilabonnement.models.cars.Model) model);
-        return "redirect:/reception";
+        return "redirect:/showallmodels";
     }
-
-    @GetMapping("/delete-car/{id}")
-    public String deleteModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        model.addAttribute("roles", loginController.validateRoles(httpSession));
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        carService.deleteCar(id);
-        return "redirect:/reception";
-    }
-
-
 }
