@@ -41,16 +41,16 @@ public class SalesController {
         for (int i = 1; i <= 12; i++) {
             double monthRevenue = 0;
             YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() + month, i);
-            for (int j = 0; j < rentalList.size(); j++) {
-                String startDate = rentalList.get(j).getStartDate().toString().substring(0, 7);
-                String endDate = rentalList.get(j).getEndDate().toString().substring(0, 7);
+            for (RentalAgreement rentalAgreement : rentalList) {
+                String startDate = rentalAgreement.getStartDate().toString().substring(0, 7);
+                String endDate = rentalAgreement.getEndDate().toString().substring(0, 7);
 
                 YearMonth startYearMonth = YearMonth.parse(startDate);
                 YearMonth endYearMonth = YearMonth.parse(endDate);
 
                 if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth))
                         && endYearMonth.isAfter(activeYearMonth)) {
-                    monthRevenue += rentalList.get(j).getMthPrice();
+                    monthRevenue += rentalAgreement.getMthPrice();
                 }
             }
             carRevenueList.add(monthRevenue);
@@ -71,15 +71,15 @@ public class SalesController {
         for (int i = 1; i <= 12; i++) {
             int monthRented = 0;
             YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear(), i);
-            for (int j = 0; j < rentalList.size(); j++) {
-                String startDate = rentalList.get(j).getStartDate().toString().substring(0, 7);
-                String endDate = rentalList.get(j).getEndDate().toString().substring(0, 7);
+            for (RentalAgreement rentalAgreement : rentalList) {
+                String startDate = rentalAgreement.getStartDate().toString().substring(0, 7);
+                String endDate = rentalAgreement.getEndDate().toString().substring(0, 7);
 
                 YearMonth startYearMonth = YearMonth.parse(startDate);
                 YearMonth endYearMonth = YearMonth.parse(endDate);
 
                 if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth)) && endYearMonth.isAfter(activeYearMonth)) {
-                    monthRented += rentalList.get(j).getActive();
+                    monthRented += rentalAgreement.getActive();
                 }
             }
             carRevenueList.add(monthRented);

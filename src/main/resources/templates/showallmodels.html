@@ -47,7 +47,8 @@
             <td th:text="${model.getManufacturer}">Producent</td>
             <td th:text="${model.getCo2Emission}">Co2 Emission</td>
             <td th:text="${model.getFuelType}">Drivmiddel</td>
-            <td th:text="${#numbers.formatDecimal(model.getRange,0,0)}">Rækkevidde</td>
+            <td th:if="${model.getFuelType().equals('El')}" th:text="${model.getRange} + ' Km'">Rækkevidde</td>
+            <td th:if="${!model.getFuelType().equals('El')}" th:text="${model.getRange} + ' Km/l'">Rækkevidde</td>
 
         </tr>
         </tbody>

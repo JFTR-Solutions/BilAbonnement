@@ -28,26 +28,26 @@
 
     <form method="post" action="/update-model">
         <h2>Opdater model</h2>
-        <input type="hidden" name="carId" th:value="${model.modelId}">
+        <input type="hidden" name="modelId" th:value="${model.modelId}">
 
         <label for="modelName">Model Navn: </label>
-        <input id="modelName" type="text" name="modelName" required maxlength="255">
+        <input id="modelName" type="text" name="modelName" required maxlength="255" th:value="${model.modelName}">
 
         <label for="manufacturer">Producent: </label>
-        <input id="manufacturer" type="text" name="manufacturer" required maxlength="50">
+        <input id="manufacturer" type="text" name="manufacturer" required maxlength="50" th:value="${model.manufacturer}">
 
         <label for="co2">Co2 Emission: </label>
-        <input id="co2" type="number" name="co2" required>
+        <input id="co2" type="number" name="co2Emission" required th:value="${model.co2Emission}">
 
         <label for="fuelType">Drivmiddel: </label>
-        <select id="fuelType" name="fuelType" required>
+        <select id="fuelType" name="fuelType" required th:field="*{model.fuelType}" style="width: 100%; color: white">
             <option value="Benzin">Benzin</option>
             <option value="Diesel">Diesel</option>
             <option value="El">El</option>
         </select>
 
         <label for="range">Rækkevidde: </label>
-        <input id="range" type="number"  name="range" required step="any">
+        <input id="range" type="number"  name="range" required step="any" th:value="${model.range}">
         <button type="submit" name="submit" value="update model" style="background-color:forestgreen">Opdater model</button>
         <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
     </form>
