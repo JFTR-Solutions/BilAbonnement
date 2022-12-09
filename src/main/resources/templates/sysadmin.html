@@ -28,6 +28,43 @@
 </a>
 <br>
 <br>
+    <div th:if="${not #lists.isEmpty(usersNoRole)}">
+        <h3 style="color: red">Brugere uden rolle: </h3>
+
+        <table class="sortable, styled-table" id="table2">
+            <thead style="position: sticky; top: 0">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Brugernavn</th>
+                <th>Kodeord</th>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <th>Fødselsdagsdato</th>
+                <th>Adresse</th>
+                <th>Telefon nummer</th>
+            </tr>
+            </thead>
+            <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
+            <tbody id="inputrows2">
+            <tr class="item" th:each="user : ${usersNoRole}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
+                <td th:text="${user.userId}">ID</td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.username}">username</td>
+                <td th:text="${user.password}">password</td>
+                <td th:text="${user.firstName}">firstname</td>
+                <td th:text="${user.lastName}">lastname</td>
+                <td th:text="${user.birthdate}?${#dates.format(user.birthdate, 'dd-MM-yyyy')}:''">birthday</td>
+                <td th:text="${user.address}">address</td>
+                <td th:text="${user.phoneNumber}">Phone number</td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
 <div class="search-grid" style="">
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -89,41 +126,7 @@
         }
     </script>
 
-    <div th:if="${not #lists.isEmpty(usersNoRole)}">
-    <h3>Brugere uden rolle: </h3>
 
-    <table class="sortable, styled-table" id="table2">
-        <thead style="position: sticky; top: 0">
-        <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>Brugernavn</th>
-            <th>Kodeord</th>
-            <th>Fornavn</th>
-            <th>Efternavn</th>
-            <th>Fødselsdagsdato</th>
-            <th>Adresse</th>
-            <th>Telefon nummer</th>
-        </tr>
-        </thead>
-        <!--Itererer over begge lister og tager indekset af userlist med IterStat-->
-        <tbody id="inputrows2">
-        <tr class="item" th:each="user : ${usersNoRole}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
-            <td th:text="${user.userId}">ID</td>
-            <td th:text="${user.email}">Email</td>
-            <td th:text="${user.username}">username</td>
-            <td th:text="${user.password}">password</td>
-            <td th:text="${user.firstName}">firstname</td>
-            <td th:text="${user.lastName}">lastname</td>
-            <td th:text="${user.birthdate}?${#dates.format(user.birthdate, 'dd-MM-yyyy')}:''">birthday</td>
-            <td th:text="${user.address}">address</td>
-            <td th:text="${user.phoneNumber}">Phone number</td>
-
-        </tr>
-        </tbody>
-
-    </table>
-    </div>
 </div>
 </body>
 </html>

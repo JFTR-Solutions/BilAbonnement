@@ -381,7 +381,7 @@ public class UserRepository {
     public User findUserByEmail(String email) throws CarLeasingException {
 
         try {
-            String queryFindUser = "SELECT count(email) FROM users WHERE email=?;";
+            String queryFindUser = "SELECT * FROM users WHERE email=?";
             PreparedStatement psts = conn.prepareStatement(queryFindUser);
 
             //indsæt email og password i preparedstatement.
