@@ -43,7 +43,6 @@ public class SysadminController {
             return "redirect:/welcome";
         }
 
-        System.out.println(userService.getEmployeeWithoutRole());
         model.addAttribute("roleList", roleList());
         model.addAttribute("userList", userService.getAllEmployees());
         model.addAttribute("usersNoRole", userService.getEmployeeWithoutRole());
@@ -84,7 +83,7 @@ public class SysadminController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/create-user";
         }
-        httpSession.setAttribute("error", "");
+        httpSession.removeAttribute("error");
         userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
                 address, phonenr);
         return "redirect:/sysadmin";

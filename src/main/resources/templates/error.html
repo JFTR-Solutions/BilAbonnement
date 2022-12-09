@@ -9,13 +9,26 @@
 </head>
 <body>
 <nav>
-    <ul>
-        <div th:insert="fragments/defaultheader"></div>
-    </ul>
+    <div  th:replace="fragments/header"></div>
+    <div th:insert="fragments/footer"></div>
 </nav>
-<div class="home-section">
-<h1>404: Dette er en ugyldig side..</h1>
-<input type="button"  value="Gå tilbage" onclick="history.back()"></div>
+<div class="home-section" style="justify-content: center">
+<h1>Tillykke!! - Du har ikke vundet noget.. bare en fejlside</h1>
+<input type="button" value="Gå tilbage" onclick="history.back()" style="width: 300px; height: 30px">
+    <br>
+    <br>
+    <br>
+
+    <img src="https://media.tenor.com/x8v1oNUOmg4AAAAd/rickroll-roll.gif" style="justify-content: center">
+
+<br>
+    <audio controls autoplay style="width: 640px">
+        <source src="/audio/RickRolled.mp3" type="audio/ogg">
+        <source src="/audio/RickRolled.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+
 </div>
 </body>
 </html>
