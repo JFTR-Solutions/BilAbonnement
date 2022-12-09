@@ -37,28 +37,28 @@
   <table class="sortable, styled-table" id="table">
     <thead style="position: sticky; top: 0">
     <tr>
-      <th>Id</th>
-      <th>Email</th>
-      <th>Brugernavn</th>
-      <th>Kodeord</th>
-      <th>Fornavn</th>
       <th>Efternavn</th>
+      <th>Fornavn</th>
+      <th>Email</th>
+      <th>Telefon nummer</th>
       <th>Fødselsdagsdato</th>
       <th>Adresse</th>
-      <th>Telefon nummer</th>
+      <th>Brugernavn</th>
+      <th>Kodeord</th>
+      <th>Bruger ID</th>
     </tr>
     </thead>
     <tbody id="inputrows">
     <tr class="item" th:each="user : ${userList}" th:ondblclick="'javascript:rowClicked(\'' + ${user.userId} + '\');'">
-      <td th:text="${user.userId}">ID</td>
-      <td th:text="${user.email}">Email</td>
-      <td th:text="${user.username}">username</td>
-      <td th:text="${user.password}">password</td>
-      <td th:text="${user.firstName}">firstname</td>
       <td th:text="${user.lastName}">lastname</td>
+      <td th:text="${user.firstName}">firstname</td>
+      <td th:text="${user.email}">Email</td>
+      <td th:text="${user.phoneNumber}">Phone number</td>
       <td th:text="${user.birthdate}">birthday</td>
       <td th:text="${user.address}">address</td>
-      <td th:text="${user.phoneNumber}">Phone number</td>
+      <td th:text="${user.username}">username</td>
+      <td th:text="${user.password}">password</td>
+      <td th:text="${user.userId}">ID</td>
       <!--        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>-->
 
       </a></tr>
