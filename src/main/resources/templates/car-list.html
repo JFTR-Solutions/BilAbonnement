@@ -69,7 +69,6 @@
             <td th:text="${#numbers.formatDecimal(car.steelPrice, 0, 'COMMA', 2, 'POINT')}">Stålpris</td>
             <td th:text="${#numbers.formatDecimal(car.mthPrice, 0, 'COMMA', 2, 'POINT')}">Månedlig ydelse</td>
             <td th:text="${car.transmission}">Gearkasse</td>
-            <!--<td th:text="${car.carModel.getCo2Emission}">C02 Emission</td>-->
             <td style="text-align: right" th:text="${#numbers.formatDecimal(car.carModel.getCo2Emission,0,0)} + ' g/km'">C02 Emission</td>
             <td th:text="${car.carModel.getFuelType}">Drivmiddel</td>
             <td th:if="${car.carModel.getFuelType == 'El'}" th:text="${#numbers.formatDecimal(car.carModel.getRange,0,0)} + ' km'">Rækkevidde</td>
@@ -78,17 +77,16 @@
         </tr>
         </tbody>
     </table>
-<script>
-    var $rows = $('#table #inputrows');
-    $('#search').keyup(function() {
-        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-        $rows.show().filter(function() {
-            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-            return !~text.indexOf(val);
-        }).hide();
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#inputrows tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 
     <script>
         function rowClicked(value) {
