@@ -43,9 +43,9 @@
          <td></td>
      </tr>
      <tr>
-         <td style="font-weight: bold" th:text="${agreement.getCar().getCarModel().getManufacturer()} +
+         <td style="font-weight: bold; color: #5cdffa;" th:text="${agreement.getCar().getCarModel().getManufacturer()} +
          ' ' + ${agreement.getCar().getCarModel().getModelName()}">
-         <td style="text-align: right; font-weight: bold"
+         <td style="text-align: right; font-weight: bold; color: #5cdffa"
              th:text="${#numbers.formatDecimal(agreement.getCar().getMthPrice(),0,0)} + ' dkk/md.'">">
      </tr>
      <tr>
@@ -79,8 +79,8 @@
          <td></td>
      </tr>
      <tr>
-         <td style="font-size: 20px; color: #1892c3; font-weight: 800">Totalpris</td>
-         <td style="text-align: right; font-size: 20px; color: #1892c3; font-weight: 800" th:text="${#numbers.formatDecimal(agreement.getMthPrice(),0,0)} + ' dkk/md.'">
+         <td style="font-size: 20px; color: #5cdffa; font-weight: 800">Totalpris</td>
+         <td style="font-size: 20px; color: #5cdffa; text-align: right; font-weight: 800" th:text="${#numbers.formatDecimal(agreement.getMthPrice(),0,0)} + ' dkk/md.'">
      </tr>
 
     </table>

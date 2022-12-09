@@ -1,5 +1,5 @@
 body,html{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Montserrat',sans-serif;
     background: #062d35;
     height: 100vh;
 }
@@ -18,7 +18,7 @@ form{
     padding: 25px 35px;
 }
 form *{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Montserrat',sans-serif;
     color: #ffffff;
     letter-spacing: 0.6px;
     outline: none;

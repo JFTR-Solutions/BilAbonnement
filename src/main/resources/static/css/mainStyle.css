@@ -9,7 +9,7 @@ body {
     color: black;
     font-size: large;
     min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -47,7 +47,7 @@ h1 {
     font-weight: 500;
     line-height: 42px;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .searchbar {
