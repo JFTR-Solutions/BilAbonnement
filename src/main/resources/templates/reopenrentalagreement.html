@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/createDamageReport.css}" href="/css/createDamageReport.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/damageTable.css}" href="/static/css/damageTable.css">
+  <link rel="icon" type="image/x-icon" href="/img/bilabonnementlogo.ico" th:href="@{/img/bilabonnementlogo.ico}">
+  <link rel="apple-touch-icon" href="/img/bilabonnementlogo.ico" th:href="@{/img/bilabonnementlogo.ico}">
+    <title>Bilabonnement | Genåben Leasingaftale</title>
+</head>
+<body>
+<nav>
+  <div th:replace="fragments/header"></div>
+  <div th:insert="fragments/footer"></div>
+</nav>
+<form>
+
+  <h3 th:text="'Leasing aftale på bilen med stelnummer: ' + ${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()} + ' er lukket.'"></h3>
+
+
+  <input type="hidden" th:value="${carid}" name="carid">
+  <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
+
+  <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"
+          onclick="location.href='/mechanic'">Gå tilbage
+  </button>
+
+  <a th:href="@{'/reopen-agreement/' + ${rentalagreementid}}">
+    <button type="button" onclick="return confirm('Genåben leasing aftale?');">Genåben leasing aftale</button>
+  </a>
+
+  <table class="sortable, styled-table" id="table">
+    <thead style="position: sticky; top: 0">
+    <tr>
+      <th>Placering</th>
+      <th>Beskrivelse</th>
+      <th>Pris</th>
+    </tr>
+    </thead>
+
+    <tbody id="inputrows">
+
+    <tr class="item" th:each="damage:${damages}">
+      <td th:text="${damage.getPlacement()}">Placering</td>
+      <td style="text-align: left" th:text="${damage.getDescription()}">Beskrivelse</td>
+      <td style="text-align: right" th:text="${damage.getPrice()} + ' kr'">Pris</td>
+      <!---When clicking on delete-damage, get of carId and rentalId-->
+
+    </tr>
+    </tbody>
+  </table>
+</form>
+</body>

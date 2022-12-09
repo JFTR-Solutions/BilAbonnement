@@ -39,4 +39,8 @@ public class RentalService {
     public List<Addon> findCarAddonsByRentalId(int rentalId) { return rentalRepository.findCarAddonsByRentalId(rentalId); }
 
     public void endRental(int rentalAgreementId){ rentalRepository.endRental(rentalAgreementId); }
+
+  public void reopenRentalAgreement(int rentalAgreementId) {
+        rentalRepository.reopenRentalAgreement(rentalAgreementId);
+  }
 }

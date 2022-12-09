@@ -78,7 +78,7 @@ public class MechanicController {
                                      @RequestParam("rentalagreementid") int rentalAgreementId) throws CarLeasingException {
         mechanicService.createDamageReport(price, placement,description,carId, rentalAgreementId);
 
-        return ("redirect:/create-damagereport/ " + carId + "/" + rentalAgreementId);
+        return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
     }
 
     @GetMapping("/delete-damage/{id}/{carid}/{rentalagreementid}")
@@ -93,14 +93,36 @@ public class MechanicController {
         return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
     }
 
-    @GetMapping("/end-rental/{carid}/{rentalagreementid}")
-    public String endRental(@PathVariable("carid") int carId, @PathVariable("rentalagreementid") int rentalAgreementId,
+    @GetMapping("/end-rental/{rentalagreementid}")
+    public String endRental(@PathVariable("rentalagreementid") int rentalAgreementId,
                             HttpSession httpSession) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
-        carService.markCarAvailable(carId);
         rentalService.endRental(rentalAgreementId);
+
+        return "redirect:/mechanic";
+    }
+
+    @GetMapping("/reopen-rentalagreement/{carid}/{rentalagreementid}")
+    public String showRentalAgreementNotActive(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId,
+                                   HttpSession httpSession, Model model) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        model.addAttribute("carid", carService.findCarById(carId));
+        model.addAttribute("rentalagreementid", rentalId);
+        model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
+        return "reopenrentalagreement";
+    }
+
+    @GetMapping("/reopen-agreement/{rentalagreementid}")
+    public String reopenAgreement(@PathVariable("rentalagreementid") int rentalAgreementId,
+                            HttpSession httpSession) throws CarLeasingException {
+        if (!loginController.validateLogin(httpSession, role)) {
+            return "redirect:/";
+        }
+        rentalService.reopenRentalAgreement(rentalAgreementId);
 
         return "redirect:/mechanic";
     }

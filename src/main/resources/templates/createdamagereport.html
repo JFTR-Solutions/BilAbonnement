@@ -61,12 +61,12 @@
     <input type="hidden" th:value="${rentalagreementid}" name="rentalagreementid">
 
     <button type="submit" name="submit" value="create">Opret skade</button>
-    <a th:href="+ ${carid} + '/' + ${rentalagreementid}}">
-        <button type="button" onclick="return confirm('Afslut leasing aftale?');">Afslut leasing</button>
-    </a>
     <button style="background-color: #b23030;" type="button" name="cancel" value="Fortryd"
             onclick="location.href='/mechanic'">Gå tilbage
     </button>
+    <a th:href="@{'/end-rental/' + ${rentalagreementid}}">
+        <button type="button" onclick="return confirm('Afslut leasing aftale?');">Afslut leasing</button>
+    </a>
 
     <table class="sortable, styled-table" id="table">
 

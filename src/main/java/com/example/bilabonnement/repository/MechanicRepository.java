@@ -88,6 +88,18 @@ public class MechanicRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
+
+  public void reopenRentalAgreement(int price, String placement, String description, int carId, int rentalAgreementId) {
+        try{
+            String query = "";
+            PreparedStatement psts = conn.prepareStatement(query);
+
+
+
+        } catch (NullPointerException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        }
+  }
 }
 
 

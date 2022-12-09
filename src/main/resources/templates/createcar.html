@@ -12,7 +12,7 @@
     <div th:insert="fragments/footer"></div>
 </nav>
 <div1>
-    <form method="post" action="/create-car">
+    <form method="post" th:action="@{'/create-car'}">
 
         <input type="hidden" required name="available" value="1">
 
