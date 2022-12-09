@@ -26,4 +26,12 @@ public class MechanicService {
     public void deleteDamageId(int damageId) {
         mechanicRepository.deleteDamageId(damageId);
     }
+
+    public double fetchTotalSumDamages(int rentalId) {
+        return mechanicRepository.fetchTotalSumDamages(rentalId);
+    }
+
+    public int fetchTotalNumDamages(int rentalId) {
+        return mechanicRepository.fetchTotalNumDamages(rentalId);
+    }
 }

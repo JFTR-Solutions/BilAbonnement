@@ -15,7 +15,7 @@
 </nav>
 <form>
 
-  <h3 th:text="'Leasing aftale på bilen med stelnummer: ' + ${carid.getVIN()} + ' og nummerplade: ' + ${carid.getRegNumber()} + ' er lukket.'"></h3>
+  <h3 th:text="'Leasing aftale på bilen med stelnummer: ' + ${car.getVIN()} + ' og nummerplade: ' + ${car.getRegNumber()} + ' er lukket.'"></h3>
 
 
   <input type="hidden" th:value="${carid}" name="carid">
@@ -25,11 +25,17 @@
           onclick="location.href='/mechanic'">Gå tilbage
   </button>
 
-  <a th:href="@{'/reopen-agreement/' + ${rentalagreementid}}">
+  <a th:href="@{'/reopen-agreement/' + ${car.getCarId()} +'/'+ ${rentalagreementid}}">
     <button type="button" onclick="return confirm('Genåben leasing aftale?');">Genåben leasing aftale</button>
   </a>
 
-  <table class="sortable, styled-table" id="table">
+  <div th:if="${totalnumdamages==0}">
+  <br>
+  <br>
+  <h3 style="text-align: center" >Ingen skader registreret</h3>
+  </div>
+
+  <table class="sortable, styled-table" id="table"  th:if="${totalnumdamages > 0}">
     <thead style="position: sticky; top: 0">
     <tr>
       <th>Placering</th>
@@ -40,12 +46,28 @@
 
     <tbody id="inputrows">
 
-    <tr class="item" th:each="damage:${damages}">
+    <tr class="item" th:if="${totalnumdamages > 0}" th:each="damage:${damages}">
       <td th:text="${damage.getPlacement()}">Placering</td>
       <td style="text-align: left" th:text="${damage.getDescription()}">Beskrivelse</td>
-      <td style="text-align: right" th:text="${damage.getPrice()} + ' kr'">Pris</td>
+      <td style="text-align: right" th:text="${#numbers.formatDecimal(damage.getPrice(),0,'COMMA',0,'POINT')} + ' kr'">Pris</td>
       <!---When clicking on delete-damage, get of carId and rentalId-->
+    </tr>
+    </tbody>
+  </table>
+  <table class="sortable, styled-table" id="table2"  th:if="${totalnumdamages > 0}">
+    <thead style="position: sticky; top: 0">
+    <tr>
+      <th>Antal skader</th>
+      <th>Total pris skader</th>
+    </tr>
+    </thead>
 
+    <tbody id="inputrows2">
+
+    <tr class="item">
+      <td th:text="${totalnumdamages}">Antal</td>
+      <td style="text-align: right" th:text="${#numbers.formatDecimal(totalsumdamages,0,'COMMA',0,'POINT')} + ' kr'">Total Pris</td>
+      <!---When clicking on delete-damage, get of carId and rentalId-->
     </tr>
     </tbody>
   </table>

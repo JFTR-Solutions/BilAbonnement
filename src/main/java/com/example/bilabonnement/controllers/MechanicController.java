@@ -68,6 +68,8 @@ public class MechanicController {
         model.addAttribute("car", carService.findCarById(carId));
         model.addAttribute("rentalagreementid", rentalId);
         model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
+        model.addAttribute("totalsumdamages", mechanicService.fetchTotalSumDamages(rentalId));
+        model.addAttribute("totalnumdamages", mechanicService.fetchTotalNumDamages(rentalId));
         return "createdamagereport";
     }
 
@@ -110,21 +112,23 @@ public class MechanicController {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
-        model.addAttribute("carid", carService.findCarById(carId));
+        model.addAttribute("car", carService.findCarById(carId));
         model.addAttribute("rentalagreementid", rentalId);
         model.addAttribute("damages",mechanicService.fetchAllDamagesForRentalId(rentalId));
+        model.addAttribute("totalsumdamages", mechanicService.fetchTotalSumDamages(rentalId));
+        model.addAttribute("totalnumdamages", mechanicService.fetchTotalNumDamages(rentalId));
         return "reopenrentalagreement";
     }
 
-    @GetMapping("/reopen-agreement/{rentalagreementid}")
-    public String reopenAgreement(@PathVariable("rentalagreementid") int rentalAgreementId,
+    @GetMapping("/reopen-agreement/{carid}/{rentalagreementid}")
+    public String reopenAgreement(@PathVariable("carid")int carId,@PathVariable("rentalagreementid") int rentalAgreementId,
                             HttpSession httpSession) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {
             return "redirect:/";
         }
         rentalService.reopenRentalAgreement(rentalAgreementId);
 
-        return "redirect:/mechanic";
+        return "redirect:/create-damagereport/" + carId + "/" + rentalAgreementId;
     }
 
 }

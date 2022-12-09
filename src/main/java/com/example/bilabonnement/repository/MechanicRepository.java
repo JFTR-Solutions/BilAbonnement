@@ -89,17 +89,43 @@ public class MechanicRepository {
         }
     }
 
-  public void reopenRentalAgreement(int price, String placement, String description, int carId, int rentalAgreementId) {
+    public double fetchTotalSumDamages(int rentalId) {
+        double sum = 0;
         try{
-            String query = "";
+            String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
             PreparedStatement psts = conn.prepareStatement(query);
+            psts.setInt(1, rentalId);
+            ResultSet resultSet = psts.executeQuery();
 
+            while (resultSet.next()){
+                sum += resultSet.getInt(2);
+            }
 
-
-        } catch (NullPointerException | SQLException ex) {
-            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        } catch (NullPointerException | SQLException e) {
+            System.out.println(e.getMessage());
         }
-  }
+        System.out.println(sum);
+        return sum;
+    }
+
+    public int fetchTotalNumDamages(int rentalId) {
+        int num = 0;
+        try{
+            String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
+            PreparedStatement psts = conn.prepareStatement(query);
+            psts.setInt(1, rentalId);
+            ResultSet resultSet = psts.executeQuery();
+
+            while (resultSet.next()){
+                num ++;
+            }
+
+        } catch (NullPointerException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println(num);
+        return num;
+    }
 }
 
 
