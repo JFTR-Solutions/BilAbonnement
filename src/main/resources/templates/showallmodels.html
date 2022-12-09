@@ -42,7 +42,7 @@
         </tr>
         </thead>
         <tbody id="inputrows">
-        <tr class="item" th:each="model:${modellist}" th:ondblclick="'javascript:rowClic*ked(\'' + ${model.modelId} + '\');'">
+        <tr class="item" th:each="model:${modellist}" th:ondblclick="'javascript:rowClicked(\'' + ${model.modelId} + '\');'">
             <td th:text="${model.getModelName}">Navn</td>
             <td th:text="${model.getManufacturer}">Producent</td>
             <td th:text="${model.getCo2Emission}">Co2 Emission</td>

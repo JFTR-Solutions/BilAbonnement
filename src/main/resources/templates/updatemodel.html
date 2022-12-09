@@ -28,19 +28,16 @@
 
     <form method="post" action="/update-model">
         <h2>Opdater model</h2>
-        <a th:href="@{'/delete-model/' + ${model.modelId}}"onclick="return confirm('Er du sikker på du ønsker at slette denne model?');" style="text-decoration: underline red;">
-        <p class="delete" style="margin-left: 90%; color: red">Slet model</p></a>
-        <input type="hidden" name="carId" th:value="${car.carId}">
-        <input type="hidden" required name="available" th:value="${car.isAvailable}">
+        <input type="hidden" name="carId" th:value="${model.modelId}">
 
         <label for="modelName">Model Navn: </label>
-        <input id="modelName" type="text"  name="modelName" required maxlength="255">
+        <input id="modelName" type="text" name="modelName" required maxlength="255">
 
         <label for="manufacturer">Producent: </label>
-        <input id="manufacturer" type="text"  name="manufacturer" required maxlength="50">
+        <input id="manufacturer" type="text" name="manufacturer" required maxlength="50">
 
         <label for="co2">Co2 Emission: </label>
-        <input id="co2" type="number"  name="co2" required>
+        <input id="co2" type="number" name="co2" required>
 
         <label for="fuelType">Drivmiddel: </label>
         <select id="fuelType" name="fuelType" required>
