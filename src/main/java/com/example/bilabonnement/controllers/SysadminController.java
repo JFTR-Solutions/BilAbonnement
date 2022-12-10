@@ -73,19 +73,25 @@ public class SysadminController {
     public String createUser(@RequestParam("email") String email, @RequestParam("password") String password,
                              @RequestParam("username") String username, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr, HttpSession httpSession)
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr, @RequestParam(defaultValue = "false", value = "sysadmin") boolean sysadmin,
+                             @RequestParam(defaultValue = "false", value = "sales") boolean sales,
+                             @RequestParam(defaultValue = "false", value = "front_desk") boolean front_desk,
+                             @RequestParam(defaultValue = "false", value = "mechanic") boolean mechanic, HttpSession httpSession)
             throws CarLeasingException {
-        Encrypter encrypter = new Encrypter();
-        String encryptedPassword = encrypter.encrypt(password);
         try {
-            userService.getEmail(email);
+            if (userService.getEmail(email) != null) {
+                throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.USER_EXIST));
+            }
         } catch (CarLeasingException e) {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/create-user";
         }
+        Encrypter encrypter = new Encrypter();
+        String encryptedPassword = encrypter.encrypt(password);
         httpSession.removeAttribute("error");
         userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
                 address, phonenr);
+        userService.updateRoles(userService.getEmail(email), sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
 

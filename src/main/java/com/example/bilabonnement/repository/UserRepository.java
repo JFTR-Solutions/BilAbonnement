@@ -380,6 +380,9 @@ public class UserRepository {
 
     public User findUserByEmail(String email) throws CarLeasingException {
 
+        User user = new User();
+        user.setEmail(email);
+
         try {
             String queryFindUser = "SELECT * FROM users WHERE email=?";
             PreparedStatement psts = conn.prepareStatement(queryFindUser);
@@ -390,9 +393,25 @@ public class UserRepository {
             //execute query som giver svar tilbage fra databasen med information om brugeren.
             ResultSet rs = psts.executeQuery();
             if (rs.next()) {
-                throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.USER_EXIST));
+                int user_id = rs.getInt(1);
+                String username = rs.getString(3);
+                String first_name = rs.getString(5);
+                String last_name = rs.getString(6);
+                Date date = rs.getDate(7);
+                String address = rs.getString(8);
+                String phoneNumber = rs.getString(9);
+
+                user.setUserId(user_id);
+                user.setUsername(username);
+                user.setFirstName(first_name);
+                user.setLastName(last_name);
+                user.setBirthdate(date);
+                user.setAddress(address);
+                user.setPhoneNumber(phoneNumber);
+
+                return user;
             }
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return null;

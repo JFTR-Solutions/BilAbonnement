@@ -44,18 +44,18 @@
     <input id="phonenr" type="text" name="phoneNumber" th:value="${user.phoneNumber}">
 
     <div class="checkbox-container">
-        <div><label for="sysadmin"> Sysadmin: </label></div>
+        <div><label for="sysadmin"> System adminstrator: </label></div>
         <div><input id="sysadmin" name="sysadmin" type="checkbox" th:checked="${roles.contains('System adminstrator')}"></div>
 
-    <div><label for="sales"> Sales: </label></div>
-        <div><input  id="sales" type="checkbox" name="sales" th:checked="${roles.contains('Salg')}"></div>
+    <div><label for="sales"> Forretningsudvikler: </label></div>
+        <div><input  id="sales" type="checkbox" name="sales" th:checked="${roles.contains('Forretningsudvikler')}"></div>
 
-        <div><label for="front_desk"> Reception: </label></div>
-    <div><input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('Reception')}"></div>
+        <div><label for="front_desk"> Dataregistrering: </label></div>
+    <div><input id="front_desk" type="checkbox" name="front_desk" th:checked="${roles.contains('Dataregistrering')}"></div>
 
 
-        <div><label for="mechanic"> Mechanic: </label></div>
-    <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('Mekaniker')}"></div>
+        <div><label for="mechanic"> Skade og udbedring: </label></div>
+    <div><input id="mechanic" type="checkbox" name="mechanic" th:checked="${roles.contains('Skade og udbedring')}"></div>
     </div>
     <button type="submit" name="submit" value="Opdater bruger" style="background-color: forestgreen">Opdater bruger</button>
     <button style="margin-left: 60px; background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>

@@ -43,6 +43,21 @@
     <label for="phonenr">Telefonnummer: </label>
     <input id="phonenr" type="text" name="phonenr" maxlength="25">
 
+    <div class="checkbox-container">
+        <div><label for="sysadmin"> System adminstrator: </label></div>
+        <div><input id="sysadmin" name="sysadmin" type="checkbox"></div>
+
+        <div><label for="sales"> Forretningsudvikler: </label></div>
+        <div><input  id="sales" type="checkbox" name="sales"></div>
+
+        <div><label for="front_desk"> Dataregistrering: </label></div>
+        <div><input id="front_desk" type="checkbox" name="front_desk"></div>
+
+
+        <div><label for="mechanic"> Skade og udbedring: </label></div>
+        <div><input id="mechanic" type="checkbox" name="mechanic"></div>
+    </div>
+
     <button type="submit" name="submit" value="create">Opret</button>
     <button style="margin-left: 60px; background-color: #b23030;" type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
 
