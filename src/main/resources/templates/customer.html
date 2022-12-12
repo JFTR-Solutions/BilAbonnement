@@ -44,7 +44,7 @@
       <th>Fødselsdagsdato</th>
       <th>Adresse</th>
       <th>Brugernavn</th>
-      <th>Kodeord</th>
+      <th>Krypteret Kodeord</th>
       <th>Bruger ID</th>
     </tr>
     </thead>
@@ -59,7 +59,6 @@
       <td th:text="${user.username}">username</td>
       <td th:text="${user.password}">password</td>
       <td th:text="${user.userId}">ID</td>
-      <!--        <td style="background-color: #548f54" ><a class="underline" th:href="@{'/opdater-bruger/' + ${user.userId}}">Opdater</a></td>-->
 
       </a></tr>
     </tbody>
