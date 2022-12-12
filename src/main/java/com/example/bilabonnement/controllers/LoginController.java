@@ -113,7 +113,7 @@ public class LoginController {
 
     //Frederik
     @GetMapping("/invalidate-cookie")
-    public String invalidateCookie(HttpSession session) {
+    public String logOut(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }

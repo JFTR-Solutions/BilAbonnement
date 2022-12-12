@@ -1,7 +1,6 @@
 package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.models.rentalagreements.RentalAgreement;
 import com.example.bilabonnement.service.CarService;
 import com.example.bilabonnement.service.RentalService;
@@ -35,12 +34,12 @@ public class SalesController {
         this.carService = carService;
     }
 /*Thomas & Frederik*/
-    public List<Double> carRevenueEachMonth(int month) {
+    public List<Double> carRevenueEachMonth(int year) {
         List<Double> carRevenueList = new ArrayList<>();
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
         for (int i = 1; i <= 12; i++) {
             double monthRevenue = 0;
-            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() + month, i);
+            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() + year, i);
             for (RentalAgreement rentalAgreement : rentalList) {
                 String startDate = rentalAgreement.getStartDate().toString().substring(0, 7);
                 String endDate = rentalAgreement.getEndDate().toString().substring(0, 7);
@@ -65,12 +64,12 @@ public class SalesController {
     }
 
     /*Thomas & Frederik*/
-    public List<Integer> carsRentedOutEachMonth() {
+    public List<Integer> carsRentedOutEachMonth(int year) {
         List<Integer> carRevenueList = new ArrayList<>();
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
         for (int i = 1; i <= 12; i++) {
             int monthRented = 0;
-            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear(), i);
+            YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() +year, i);
             for (RentalAgreement rentalAgreement : rentalList) {
                 String startDate = rentalAgreement.getStartDate().toString().substring(0, 7);
                 String endDate = rentalAgreement.getEndDate().toString().substring(0, 7);
@@ -84,12 +83,12 @@ public class SalesController {
             }
             carRevenueList.add(monthRented);
         }
-        int total = 0;
+  /*      int total = 0;
 
         for (int d: carRevenueList) {
             total+=d;
         }
-        carRevenueList.add(total);
+        carRevenueList.add(total);*/
 
         return carRevenueList;
     }
@@ -117,7 +116,7 @@ public class SalesController {
         cal.setTime(date);
         int month = cal.get(Calendar.MONTH);
 
-        model.addAttribute("carsRented", carsRentedOutEachMonth().get(month));
+        model.addAttribute("carsRented", carsRentedOutEachMonth(0).get(month));
         model.addAttribute("carsAvailable", carsAvailable());
         model.addAttribute("rentalRevenue", carRevenueEachMonth(0).get(month));
 
@@ -127,13 +126,17 @@ public class SalesController {
         currentMonth = currentMonth.substring(0,1).toUpperCase() + currentMonth.substring(1);
 
         model.addAttribute("month", currentMonth);
-        model.addAttribute("yearNow", getYear(0));
         model.addAttribute("yearLast", getYear(-1));
+        model.addAttribute("yearNow", getYear(0));
         model.addAttribute("yearNext", getYear(1));
 
-        model.addAttribute("carRevenueList", carRevenueEachMonth(0));
         model.addAttribute("carRevenueListLastYear", carRevenueEachMonth(-1));
+        model.addAttribute("carRevenueListThisYear", carRevenueEachMonth(0));
         model.addAttribute("carRevenueNextYear", carRevenueEachMonth(+1));
+
+        model.addAttribute("carsRentedOutLastYear",carsRentedOutEachMonth(-1));
+        model.addAttribute("carsRentedOutThisYear",carsRentedOutEachMonth(0));
+        model.addAttribute("carsRentedOutNextYear",carsRentedOutEachMonth(+1));
 
         model.addAttribute("userList", userService.getAllEmployees());
         return "sales";

@@ -44,14 +44,21 @@
     <h3> Månedlig overblik for <span th:text="${yearLast}"></span>:</h3>
     <div th:replace="fragments/tablefragment"></div>
     <td th:each="revenue : ${carRevenueListLastYear}" th:text="${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
+
+    <tr class="item">
+        <td>Udlejede biler pr. måned</td>
+        <td th:each="value : ${carsRentedOutLastYear}" th:text="${value}"></td>
+    </tr>
     </tr>
     </tbody>
     </table>
     <br>    <br>
     <h3> Månedlig overblik for <span th:text="${yearNow}"></span>:</h3>
     <div th:replace="fragments/tablefragment"></div>
-    <td  th:each="revenue : ${carRevenueList}" th:text="${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
-
+    <td  th:each="revenue : ${carRevenueListThisYear}" th:text="${#numbers.formatDecimal(revenue, 1, 'COMMA', 2, 'POINT')}"></td>
+    <tr class="item">
+        <td>Udlejede biler pr. måned</td>
+        <td th:each="value : ${carsRentedOutThisYear}" th:text="${value}"></td>
     </tr>
     </tbody>
     </table>
@@ -60,6 +67,11 @@
     <h3> Månedlig overblik for <span th:text="${yearNext}"></span>:</h3>
     <div th:replace="fragments/tablefragment"></div>
     <td th:each="revenue : ${carRevenueNextYear}" th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 2, 'POINT')}"></td>
+
+    <tr class="item">
+        <td>Udlejede biler pr. måned</td>
+        <td th:each="value : ${carsRentedOutNextYear}" th:text="${value}"></td>
+    </tr>
     </tr>
     </tbody>
     </table>
