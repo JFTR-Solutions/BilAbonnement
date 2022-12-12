@@ -104,7 +104,6 @@ public class MechanicRepository {
         } catch (NullPointerException | SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(sum);
         return sum;
     }
 
@@ -123,7 +122,6 @@ public class MechanicRepository {
         } catch (NullPointerException | SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(num);
         return num;
     }
 }
