@@ -84,6 +84,7 @@ button{
 
 input[type="checkbox"] {
     margin-top: -22px;
+    margin-left: 80px;
     position: relative;
     height: 20px;
     align-items: center;
