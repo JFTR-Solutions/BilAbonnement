@@ -3,6 +3,7 @@ package com.example.bilabonnement.security;
 import com.example.bilabonnement.service.UserService;
 
 import java.sql.Date;
+import java.util.Random;
 
 public class UsernameMaker {
 
@@ -17,9 +18,9 @@ public class UsernameMaker {
                 dateOfBirth.toLocalDate().getYear();
 
         if(userService.checkIfUsernameExists(username)) {
-            username = username + "1";
+            Random rd = new Random();
+            username = username + (rd.nextInt(100) + 1);
         }
         return username;
     }
-
 }
