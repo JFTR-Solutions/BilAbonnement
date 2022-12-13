@@ -7,6 +7,7 @@ public class PasswordGenerator {
 
     private final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆÅØabcdefghijklmnopqrstuvwxyzæåø0123456789!#%&/()?";
 
+    //Thomas
     public String generateRandomPassword() {
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder();

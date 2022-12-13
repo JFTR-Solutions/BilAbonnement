@@ -115,6 +115,7 @@ public class CarController {
         return "createcar";
     }
 
+    //Rami
     @GetMapping("/show-all-models")
     public String showModel(Model model, HttpSession httpSession){
         try {
@@ -131,6 +132,7 @@ public class CarController {
     }
 
 
+    //Rami
  @GetMapping("/update-model/{id}")
     public String updateModel(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
         model.addAttribute("roles", loginController.validateRoles(httpSession));
@@ -142,6 +144,7 @@ public class CarController {
         return "updatemodel";
     }
 
+    //Rami
     @PostMapping("/update-model")
     public String saveModel(@ModelAttribute com.example.bilabonnement.models.cars.Model model) {
         carService.updateModel(model);

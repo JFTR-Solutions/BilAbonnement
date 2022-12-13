@@ -5,12 +5,11 @@ import java.util.Base64;
 
 public class Encrypter {
 
-    //Thomas
 
     private final int OFFSET = 3;
     private final int OFFSET2 = 4;
 
-
+    //Thomas
     public String encrypt(String password) {
 
         StringBuilder temp1 = new StringBuilder();
@@ -34,7 +33,7 @@ public class Encrypter {
         return temp2.toString();
     }
 
-
+    //Thomas
     public String decrypt(String encryptedPassword) {
 
         StringBuilder temp1 = new StringBuilder();

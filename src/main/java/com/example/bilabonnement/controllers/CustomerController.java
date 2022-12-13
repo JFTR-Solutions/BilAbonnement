@@ -43,7 +43,6 @@ public class CustomerController {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/welcome";
         }
-//        model.addAttribute("roleList", sysadminController.roleList());
         model.addAttribute("userList", userService.getAllCustomers());
         return "customer";
     }
@@ -64,6 +63,8 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+
+    //Thomas
     @GetMapping("/delete-customer/{id}")
     public String deleteUser(@PathVariable("id") int id, HttpSession httpSession) throws CarLeasingException {
         if (!loginController.validateLogin(httpSession, role)) {

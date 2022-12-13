@@ -77,6 +77,8 @@ public class FrontdeskController {
                                         @RequestParam(defaultValue = "false", value="clever") boolean clever) throws CarLeasingException {
 
         double mthPrice = carService.findCarById(carId).getMthPrice() + rentalService.findmthKmById(mthKmId).getPrice();
+        //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
+        //the rental agreement
         if(deliveryInsurance){
             mthPrice += 119;
         } if(selfInsurance){
@@ -99,6 +101,7 @@ public class FrontdeskController {
         carService.updateCarAvailability(carId, (byte) 0);
 
         int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
+        //addons choices added car_addon table with the designated rentalId
         if(deliveryInsurance){
             rentalService.addCarAddon(rentalId, 1);
         } if(selfInsurance){
@@ -128,6 +131,7 @@ public class FrontdeskController {
         return "showrentalagreementlist";
     }
 
+    //Thomas
     @GetMapping("/show-rental-agreement/{rentalId}")
     public String showRentalAgreementByID(@PathVariable("rentalId")int rentalId, HttpSession httpSession,
                                           Model model) throws CarLeasingException {
