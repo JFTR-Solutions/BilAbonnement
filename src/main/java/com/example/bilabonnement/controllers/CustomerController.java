@@ -63,15 +63,4 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-
-    //Thomas
-    @GetMapping("/delete-customer/{id}")
-    public String deleteUser(@PathVariable("id") int id, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        userService.deleteUser(id);
-        return "redirect:/customers";
-    }
-
 }
