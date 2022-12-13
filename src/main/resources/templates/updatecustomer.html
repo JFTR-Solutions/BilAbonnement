@@ -41,9 +41,7 @@
   <input id="phonenr" type="text" name="phoneNumber" th:value="${customer.phoneNumber}">
 
   <button type="submit" name="submit" value="Opdater bruger">Opdater kunde</button>
-  <a th:href="@{'/delete-customer/'+ ${customer.userId}}">
-    <button style="background-color: #b23030" type="button" onclick="return confirm('Slet kunde?');">Slet kunde</button>
-  </a>
+
   <button type="button" name="cancel" value="Fortryd" onclick="history.back()">Fortryd</button>
 </form>
 
