@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class CarController {
 
-  LoginController loginController;
-  UserService userService;
-  CarService carService;
-  RentalService rentalService;
+  private LoginController loginController;
+  private UserService userService;
+  private CarService carService;
+  private RentalService rentalService;
 
-  private final String role = "Dataregistrering";
+  private final String ROLE = "Dataregistrering";
 
   public CarController(LoginController loginController, UserService userService, CarService carService,
                        RentalService rentalService) {
@@ -34,7 +34,7 @@ public class CarController {
   public String showCars(Model model, HttpSession httpSession) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -50,7 +50,7 @@ public class CarController {
   public String updateCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -68,7 +68,7 @@ public class CarController {
   public String saveCar(@ModelAttribute Car car, Model model, HttpSession httpSession) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -84,7 +84,7 @@ public class CarController {
   public String deleteCar(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -103,7 +103,7 @@ public class CarController {
                                Model model, HttpSession httpSession) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -117,7 +117,7 @@ public class CarController {
   //Thomas
   @GetMapping("/create-carmodel")
   public String showCreateCarModel(HttpSession httpSession) throws CarLeasingException {
-    if (!loginController.validateLogin(httpSession, role)) {
+    if (!loginController.validateLogin(httpSession, ROLE)) {
       return "redirect:/";
     }
     return "createmodel";
@@ -132,7 +132,7 @@ public class CarController {
                           HttpSession httpSession, Model model) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -150,7 +150,7 @@ public class CarController {
   public String showCreateCar(HttpSession httpSession, Model model) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -166,7 +166,7 @@ public class CarController {
   public String showModel(Model model, HttpSession httpSession) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -184,7 +184,7 @@ public class CarController {
       throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -202,7 +202,7 @@ public class CarController {
                           HttpSession httpSession) {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {

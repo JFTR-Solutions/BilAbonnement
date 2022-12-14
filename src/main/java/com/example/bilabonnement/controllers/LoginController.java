@@ -19,8 +19,8 @@ import java.util.List;
 public class LoginController {
 
     public static HashMap<carExceptionEnum, String> exceptionEnums = new HashMap<>();
-    UserService userService;
-    Encrypter e = new Encrypter();
+    private UserService userService;
+    private Encrypter e = new Encrypter();
 
 
 //    The loginController constructor is used to initialize the userService and put exception messages into the static HashMap created above.

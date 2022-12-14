@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MechanicController {
 
-    private final String role = "Skade og udbedring";
+    private final String ROLE = "Skade og udbedring";
 
-    LoginController loginController;
-    UserService userService;
-    MechanicService mechanicService;
-    RentalService rentalService;
-    CarService carService;
+    private LoginController loginController;
+    private UserService userService;
+    private MechanicService mechanicService;
+    private RentalService rentalService;
+    private CarService carService;
 
 
     public MechanicController(LoginController loginController, UserService userService, MechanicService mechanicService,
@@ -41,7 +41,7 @@ public class MechanicController {
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
+            if (!loginController.validateLogin(httpSession, ROLE)) {
                 return "redirect:/";
             }
 
@@ -62,7 +62,7 @@ public class MechanicController {
     @GetMapping("/create-damagereport/{carid}/{rentalagreementid}")
     public String showDamageReport(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId,
                                    HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        if (!loginController.validateLogin(httpSession, ROLE)) {
             return "redirect:/";
         }
         model.addAttribute("car", carService.findCarById(carId));
@@ -87,7 +87,7 @@ public class MechanicController {
     public String deleteDamage(@PathVariable("id") int damageId, @PathVariable("carid") int carId,
                                @PathVariable("rentalagreementid") int rentalAgreementId, HttpSession httpSession)
             throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        if (!loginController.validateLogin(httpSession, ROLE)) {
             return "redirect:/";
         }
         mechanicService.deleteDamageId(damageId);
@@ -98,7 +98,7 @@ public class MechanicController {
     @GetMapping("/end-rental/{rentalagreementid}")
     public String endRental(@PathVariable("rentalagreementid") int rentalAgreementId,
                             HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        if (!loginController.validateLogin(httpSession, ROLE)) {
             return "redirect:/";
         }
         rentalService.endRental(rentalAgreementId);
@@ -110,7 +110,7 @@ public class MechanicController {
     @GetMapping("/reopen-rentalagreement/{carid}/{rentalagreementid}")
     public String showRentalAgreementNotActive(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId,
                                    HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        if (!loginController.validateLogin(httpSession, ROLE)) {
             return "redirect:/";
         }
         model.addAttribute("car", carService.findCarById(carId));
@@ -125,7 +125,7 @@ public class MechanicController {
     @GetMapping("/reopen-agreement/{carid}/{rentalagreementid}")
     public String reopenAgreement(@PathVariable("carid")int carId,@PathVariable("rentalagreementid") int rentalAgreementId,
                             HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        if (!loginController.validateLogin(httpSession, ROLE)) {
             return "redirect:/";
         }
         rentalService.reopenRentalAgreement(rentalAgreementId);

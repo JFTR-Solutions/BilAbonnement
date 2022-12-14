@@ -2,7 +2,6 @@ package com.example.bilabonnement.controllers;
 
 import com.example.bilabonnement.security.Encrypter;
 import com.example.bilabonnement.exceptions.CarLeasingException;
-import com.example.bilabonnement.models.cars.Car;
 import com.example.bilabonnement.security.PasswordGenerator;
 import com.example.bilabonnement.security.UsernameMaker;
 import com.example.bilabonnement.service.CarService;
@@ -13,20 +12,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.util.Calendar;
 
 @Controller
 public class FrontdeskController {
 
-  LoginController loginController;
-  UserService userService;
-  CarService carService;
+  private LoginController loginController;
+  private UserService userService;
+  private CarService carService;
+  private RentalService rentalService;
 
-  RentalService rentalService;
-
-  private final String role = "Dataregistrering";
+  private final String ROLE = "Dataregistrering";
 
   public FrontdeskController(LoginController loginController, UserService userService, CarService carService,
                              RentalService rentalService) {
@@ -41,7 +38,7 @@ public class FrontdeskController {
   public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -58,7 +55,7 @@ public class FrontdeskController {
       throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -87,7 +84,7 @@ public class FrontdeskController {
 
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -155,7 +152,7 @@ public class FrontdeskController {
   public String showRentalAgreementList(HttpSession httpSession, Model model) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -173,7 +170,7 @@ public class FrontdeskController {
                                         Model model) throws CarLeasingException {
     try {
       model.addAttribute("roles", loginController.validateRoles(httpSession));
-      if (!loginController.validateLogin(httpSession, role)) {
+      if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
     } catch (CarLeasingException e) {
@@ -189,8 +186,8 @@ public class FrontdeskController {
 
   //Thomas
   @GetMapping("/create-customer")
-  public String createUserPage(HttpSession httpSession) throws CarLeasingException {
-    if (!loginController.validateLogin(httpSession, role)) {
+  public String createCustomerPage(HttpSession httpSession) throws CarLeasingException {
+    if (!loginController.validateLogin(httpSession, ROLE)) {
       return "redirect:/";
     }
     return "createcustomer";
@@ -198,7 +195,7 @@ public class FrontdeskController {
 
   //Thomas
   @PostMapping("/create-customer")
-  public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
+  public String createCustomer(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
                            @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
                            @RequestParam("address") String address, @RequestParam("phonenr") String phonenr,
                            HttpSession httpSession)

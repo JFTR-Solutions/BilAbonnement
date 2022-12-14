@@ -14,13 +14,13 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class CustomerController {
 
-    LoginController loginController;
-    UserService userService;
-    CarService carService;
-    SysadminController sysadminController;
-    RentalService rentalService;
+    private LoginController loginController;
+    private UserService userService;
+    private CarService carService;
+    private SysadminController sysadminController;
+    private RentalService rentalService;
 
-    private final String role = "Dataregistrering";
+    private final String ROLE = "Dataregistrering";
 
 
     public CustomerController(LoginController loginController, UserService userService, CarService carService,
@@ -36,7 +36,7 @@ public class CustomerController {
     public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
+            if (!loginController.validateLogin(httpSession, ROLE)) {
                 return "redirect:/";
             }
         } catch (CarLeasingException e) {
@@ -52,7 +52,7 @@ public class CustomerController {
         throws CarLeasingException {
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
+            if (!loginController.validateLogin(httpSession, ROLE)) {
                 return "redirect:/";
             }
         } catch (CarLeasingException e) {
@@ -69,7 +69,7 @@ public class CustomerController {
         throws CarLeasingException {
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
+            if (!loginController.validateLogin(httpSession, ROLE)) {
                 return "redirect:/";
             }
         } catch (CarLeasingException e) {

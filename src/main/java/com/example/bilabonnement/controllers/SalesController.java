@@ -21,11 +21,11 @@ import java.util.List;
 @Controller
 public class SalesController {
 
-    private final String role = "Forretningsudvikler";
-    LoginController loginController;
-    UserService userService;
-    RentalService rentalService;
-    CarService carService;
+    private final String ROLE = "Forretningsudvikler";
+    private LoginController loginController;
+    private UserService userService;
+    private RentalService rentalService;
+    private CarService carService;
 
     public SalesController(LoginController loginController, UserService userService, RentalService rentalService, CarService carService) {
         this.loginController = loginController;
@@ -98,7 +98,7 @@ public class SalesController {
     public String salesPage(Model model, HttpSession httpSession) throws CarLeasingException {
         try {
             model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
+            if (!loginController.validateLogin(httpSession, ROLE)) {
                 return "redirect:/";
             }
 
