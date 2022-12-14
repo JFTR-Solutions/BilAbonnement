@@ -32,24 +32,31 @@ public class UserRepository {
     public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
             throws CarLeasingException {
 
+        // A list containing all the booleans is created in order to loop through them later.
         List<Boolean> booleanList = new ArrayList<>();
         booleanList.add(sysadmin);
         booleanList.add(sales);
         booleanList.add(front_desk);
         booleanList.add(mechanic);
 
+        //Same with the roles.
         List<String> roles = new ArrayList<>();
         roles.add("System adminstrator");
         roles.add("Forretningsudvikler");
         roles.add("Dataregistrering");
         roles.add("Skade og udbedring");
 
+/*    In below method we start by getting the rolelist based on the user ID. If a user is found, we create a query to delete the role and user from the roles_users table.
+       Next we loop through the rolelist, the roles list above and the booleanlist above. Here we check whether a role has been unchecked and if the user has this role assigned.
+       If the answer is yes, we create a preparedstatement, were we insert the role_id (i) + adjust for the list starting at index 0 and the userid to the statement and execute it
+       */
+
         try {
             List<String> roleList = findRoleById(user.getUserId());
-            String queryDelete = ("delete from roles_users where role_id=? and user_id=?");
+            String removeRolesQuery = ("delete from roles_users where role_id=? and user_id=?");
             for (int i = 0; i < roles.size(); i++) {
                 if (roleList.contains(roles.get(i)) && !booleanList.get(i)) {
-                    PreparedStatement psts = conn.prepareStatement(queryDelete);
+                    PreparedStatement psts = conn.prepareStatement(removeRolesQuery);
                     psts.setInt(2, user.getUserId());
                     psts.setInt(1, i + 1);
                     psts.executeUpdate();
@@ -62,6 +69,7 @@ public class UserRepository {
         }
     }
 
+    /*Below method acts the same as above remove method only difference is the insert query & the if statement has been switched around. */
     //Frederik
     public void addRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
             throws CarLeasingException {
@@ -80,10 +88,10 @@ public class UserRepository {
 
         try {
             List<String> roleList = findRoleById(user.getUserId());
-            String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
+            String addRolesQuery = ("insert into roles_users (role_id,user_id) values (?,?)");
             for (int i = 0; i < roles.size(); i++) {
                     if (!roleList.contains(roles.get(i)) && booleanList.get(i)) {
-                        PreparedStatement psts = conn.prepareStatement(queryInsert);
+                        PreparedStatement psts = conn.prepareStatement(addRolesQuery);
                         psts.setInt(2, user.getUserId());
                         psts.setInt(1, i + 1);
                         psts.executeUpdate();
@@ -95,7 +103,7 @@ public class UserRepository {
         }
     }
 
-
+    //FREDERIK
     public void updateUser(User user) throws CarLeasingException {
         try {
             String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?," +
@@ -117,7 +125,7 @@ public class UserRepository {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
-
+    //THOMAS
         public void giveCustomerRole(int id) throws CarLeasingException {
             try {
                 String queryInsert = ("insert into roles_users (role_id,user_id) values (?,?)");
@@ -129,12 +137,10 @@ public class UserRepository {
                 throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
             }
         }
-
-    public void createUser(String email, String password, String username, String first_name, String last_name,
-                           Date birthdate, String address, String phonenr) throws CarLeasingException{
+    //FREDERIK
+    public void createUser(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
         try {
-            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate," +
-                    "address,phone_number)" +
+            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
@@ -154,6 +160,7 @@ public class UserRepository {
         }
     }
 
+    //THOMAS
     public int findUserByUsername(String username) throws CarLeasingException {
         int id = 0;
         try {
@@ -170,8 +177,8 @@ public class UserRepository {
         }
     }
 
-    public void createCustomer(String email, String password, String username, String first_name, String last_name,
-                               Date birthdate, String address, String phonenr) throws CarLeasingException {
+    //THOMAS
+    public void createCustomer(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
         try {
             String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate," +
                     "address,phone_number)" +
@@ -194,6 +201,7 @@ public class UserRepository {
         }
     }
 
+//Frederik
     public List<User> getEmployeesWithoutRole() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
