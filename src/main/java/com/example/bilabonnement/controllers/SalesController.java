@@ -89,7 +89,7 @@ public class SalesController {
     }
 
     /*Thomas & Frederik*/
-    public int carsAvailable() {
+    public int carsAvailable() throws CarLeasingException {
         return carService.fetchAllAvailableCars().size();
     }
 

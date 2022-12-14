@@ -122,6 +122,9 @@ public class LoginController {
             if (!validateUser(httpSession)) {
                 return "redirect:/";
             }
+            model.addAttribute("roles", validateRoles(httpSession));
+            model.addAttribute("name", userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
+
         } catch (CarLeasingException e) {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/";
@@ -130,8 +133,6 @@ public class LoginController {
             model.addAttribute("errorMessage", httpSession.getAttribute("error"));
         }
         httpSession.removeAttribute("error");
-        model.addAttribute("roles", validateRoles(httpSession));
-        model.addAttribute("name", userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
         return "welcome";
     }
 

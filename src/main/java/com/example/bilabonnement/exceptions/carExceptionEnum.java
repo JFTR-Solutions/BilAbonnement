@@ -1,5 +1,6 @@
 package com.example.bilabonnement.exceptions;
 
+//FREDERIK
 public enum carExceptionEnum {
     INDEX,
     NO_PERMISSION,

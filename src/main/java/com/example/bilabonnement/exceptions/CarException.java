@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
+//FREDERIK
 public class CarException {
 
     private final String message;

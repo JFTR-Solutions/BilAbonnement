@@ -82,16 +82,16 @@ public class SysadminController {
             if (userService.getEmail(email) != null) {
                 throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.USER_EXIST));
             }
+            Encrypter encrypter = new Encrypter();
+            String encryptedPassword = encrypter.encrypt(password);
+            userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
+                    address, phonenr);
+            userService.updateRoles(userService.getEmail(email), sysadmin, sales, front_desk, mechanic);
         } catch (CarLeasingException e) {
             httpSession.setAttribute("error", e.getMessage());
             return "redirect:/create-user";
         }
-        Encrypter encrypter = new Encrypter();
-        String encryptedPassword = encrypter.encrypt(password);
         httpSession.removeAttribute("error");
-        userService.createUser(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate,
-                address, phonenr);
-        userService.updateRoles(userService.getEmail(email), sysadmin, sales, front_desk, mechanic);
         return "redirect:/sysadmin";
     }
 
@@ -99,12 +99,16 @@ public class SysadminController {
     //Frederik
     @GetMapping("/update-user/{id}")
     public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        try {
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+            model.addAttribute("id", id);
+            model.addAttribute("roles", userService.getRoles(id));
+            model.addAttribute("user", userService.findUserByID(id));
+        } catch (CarLeasingException e) {
             return "redirect:/";
         }
-        model.addAttribute("id", id);
-        model.addAttribute("roles", userService.getRoles(id));
-        model.addAttribute("user", userService.findUserByID(id));
         return "updateuser";
     }
 
@@ -114,21 +118,28 @@ public class SysadminController {
                            @RequestParam(defaultValue = "false", value = "sales") boolean sales,
                            @RequestParam(defaultValue = "false", value = "front_desk") boolean front_desk,
                            @RequestParam(defaultValue = "false", value = "mechanic") boolean mechanic) throws CarLeasingException {
-        userService.updateUser(user);
-        userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
-        userService.removeRoles(user, sysadmin, sales, front_desk, mechanic);
+        try {
+            userService.updateUser(user);
+            userService.updateRoles(user, sysadmin, sales, front_desk, mechanic);
+            userService.removeRoles(user, sysadmin, sales, front_desk, mechanic);
+        } catch (CarLeasingException e) {
+            return "redirect:/";
+        }
         return "redirect:/sysadmin";
     }
 
     //Frederik
     @GetMapping("/delete-user/{id}")
     public String DeleteUser(@PathVariable("id") int id, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+        try {
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+            userService.deleteUser(id);
+            return "redirect:/sysadmin";
+        } catch (CarLeasingException e) {
             return "redirect:/";
         }
-        userService.deleteUser(id);
-        return "redirect:/sysadmin";
+
     }
-
-
 }
