@@ -38,7 +38,7 @@ public class UserService {
         return userRepository.findUserByEmail(email);
     }
 
-    public User findUserByID(int id) {
+    public User findUserByID(int id) throws CarLeasingException {
         return userRepository.findUserByID(id);
     }
 
@@ -48,19 +48,21 @@ public class UserService {
     }
 
     public void createUser(String email, String password, String username, String first_name, String last_name,
-                           Date birthdate, String address, String phonenr) {
+                           Date birthdate, String address, String phonenr) throws CarLeasingException{
         userRepository.createUser(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
     public void createCustomer(String email, String password, String username, String first_name, String last_name,
-                           Date birthdate, String address, String phonenr) {
+                           Date birthdate, String address, String phonenr) throws CarLeasingException{
         userRepository.createCustomer(email, password, username, first_name, last_name, birthdate, address, phonenr);
     }
 
-    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+    public void updateRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
+            throws CarLeasingException {
         userRepository.addRoles(user, sysadmin, sales, front_desk, mechanic);
     }
-    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
+            throws CarLeasingException {
         userRepository.removeRoles(user, sysadmin, sales, front_desk, mechanic);
     }
 
@@ -69,7 +71,7 @@ public class UserService {
 
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(int id) throws CarLeasingException {
         userRepository.deleteUser(id);
     }
 
@@ -77,15 +79,15 @@ public class UserService {
         return userRepository.getAllByRole(roleId);
     }
 
-    public boolean checkIfUsernameExists(String username) {
+    public boolean checkIfUsernameExists(String username) throws CarLeasingException {
         return userRepository.checkIfUsernameExists(username);
     }
 
-    public void giveCustomerRole(int id) {
+    public void giveCustomerRole(int id) throws CarLeasingException {
         userRepository.giveCustomerRole(id);
     }
 
-    public int findUserByUsername(String username) {
+    public int findUserByUsername(String username) throws CarLeasingException {
         return userRepository.findUserByUsername(username);
     }
 }

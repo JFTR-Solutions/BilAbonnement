@@ -21,15 +21,17 @@ public class CarRepository {
 
     public CarRepository() {
         if (conn == null) {
-            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"),
+                    System.getenv("JDBCPassword"));
         }
     }
 
 
-    public List<Car> fetchAllAvailableCars() {
+    public List<Car> fetchAllAvailableCars() throws CarLeasingException {
         List<Car> carList = new LinkedList<>();
         try {
-            String queryCreate = "SELECT * from cars INNER JOIN models ON models.model_id=cars.model_id WHERE available = 1 ORDER BY manufacturer, model_name";
+            String queryCreate = "SELECT * from cars INNER JOIN models ON models.model_id=cars.model_id " +
+                    "WHERE available = 1 ORDER BY manufacturer, model_name";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             ResultSet resultSet = psts.executeQuery();
 
@@ -51,12 +53,12 @@ public class CarRepository {
                 carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName, manufacturer, co2Emission, fuelType, range)));
             }
             return carList;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<Car> findAll() {
+    public List<Car> findAll() throws CarLeasingException {
 
         List<Car> carList = new LinkedList<>();
 
@@ -80,17 +82,19 @@ public class CarRepository {
                 double co2Emission = resultSet.getDouble(13);
                 String fuelType = resultSet.getString(14);
                 double range = resultSet.getDouble(15);
-                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission, modelId, new Model(modelId, modelName, manufacturer, co2Emission, fuelType, range)));
+                carList.add(new Car(id, isAvailable, colour, vin, regNumber, steelPrice, mthPrice, transmission,
+                        modelId, new Model(modelId, modelName, manufacturer, co2Emission, fuelType, range)));
             }
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return carList;
     }
 
-    public void updateCar(Car car) {
+    public void updateCar(Car car) throws CarLeasingException {
         try {
-            String queryCreate = ("UPDATE cars SET available=?, colour=?, vin=?,reg_number=?,steel_price=?,mth_price=?,transmission=?,model_id=? WHERE car_id=?");
+            String queryCreate = ("UPDATE cars SET available=?, colour=?, vin=?,reg_number=?,steel_price=?,mth_price=?," +
+                    "transmission=?,model_id=? WHERE car_id=?");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
             psts.setByte(1, car.isAvailable());
@@ -105,12 +109,12 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public Car findCarById(int carId) {
+    public Car findCarById(int carId) throws CarLeasingException {
         Car car = new Car();
         try {
             String queryCreate = "SELECT * FROM cars WHERE car_id=?";
@@ -141,12 +145,12 @@ public class CarRepository {
                 car.setModelId(modelId);
             }
             return car;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void deleteCar(int id) {
+    public void deleteCar(int id) throws CarLeasingException {
         try {
             String deleteCar = ("DELETE FROM cars where car_id=?");
             PreparedStatement psts = conn.prepareStatement(deleteCar);
@@ -160,7 +164,7 @@ public class CarRepository {
         }
     }
 
-    public List<Model> getAllModels() {
+    public List<Model> getAllModels() throws CarLeasingException{
 
         List<Model> modelsList = new LinkedList<>();
 
@@ -178,14 +182,15 @@ public class CarRepository {
                 double range = resultSet.getDouble(6);
                 modelsList.add(new Model(modelId, modelName, manufacturer, co2Emission, fuelType, range));
             }
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return modelsList;
     }
 
 
-    public void addModel(String modelName, String manufacturer, String co2, String fuelType, double range) {
+    public void addModel(String modelName, String manufacturer, String co2, String fuelType, double range)
+            throws CarLeasingException{
 
         try {
             String addModel = "INSERT INTO models (model_id, model_name, manufacturer, co2_emission, fuel_type, car_range)" +
@@ -201,14 +206,16 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelPrice, double mthPrice, String transmission) {
+    public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelPrice,
+                       double mthPrice, String transmission) throws CarLeasingException{
         try {
-            String queryCreate = "INSERT INTO cars (car_id, available, colour, vin,reg_number,steel_price,mth_price,transmission,model_id)" +
+            String queryCreate = "INSERT INTO cars (car_id, available, colour, vin,reg_number,steel_price,mth_price," +
+                    "transmission,model_id)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
@@ -224,14 +231,14 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
 
 
     }
 
-    public void markCarAvailable(int carId) {
+    public void markCarAvailable(int carId) throws CarLeasingException {
         try {
             String queryCreate = "UPDATE cars SET available=1 WHERE car_id=?";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
@@ -240,12 +247,12 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void updateCarAvailability(int carId, byte b) {
+    public void updateCarAvailability(int carId, byte b) throws CarLeasingException{
         try {
             String queryCreate = ("UPDATE cars SET available=? WHERE car_id=?");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
@@ -255,12 +262,12 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public Model findModelById(int id) {
+    public Model findModelById(int id) throws CarLeasingException{
         Model model = new Model();
 
         try {
@@ -291,15 +298,16 @@ public class CarRepository {
             return model;
 
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
 
         }
     }
 
-    public void updateModel(Model model) {
+    public void updateModel(Model model) throws CarLeasingException{
         try {
-            String queryUpdate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, car_range=? WHERE model_id=?");
+            String queryUpdate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, " +
+                    "car_range=? WHERE model_id=?");
             PreparedStatement psts = conn.prepareStatement(queryUpdate);
 
             psts.setString(1, model.getModelName());
@@ -311,7 +319,7 @@ public class CarRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }

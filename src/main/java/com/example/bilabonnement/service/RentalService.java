@@ -1,5 +1,6 @@
 package com.example.bilabonnement.service;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.models.rentalagreements.Addon;
 import com.example.bilabonnement.models.rentalagreements.MthKm;
 import com.example.bilabonnement.models.rentalagreements.RentalAgreement;
@@ -17,30 +18,36 @@ public class RentalService {
 
     public RentalService(RentalRepository rentalRepository) {this.rentalRepository = rentalRepository;}
 
-    public void addRentalAgreement(int carId, int userId, int mthKmId, Date endDate, Date startDate, double mthPrice) {
+    public void addRentalAgreement(int carId, int userId, int mthKmId, Date endDate, Date startDate, double mthPrice)
+            throws CarLeasingException{
         rentalRepository.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
     }
-    public int findRentalAgreementIdByCarId(int carId) {
+    public int findRentalAgreementIdByCarId(int carId) throws CarLeasingException {
         return rentalRepository.findRentalAgreementIdByCarId(carId);
     }
 
-    public void addCarAddon(int rentalId, int addonId) { rentalRepository.addCarAddon(rentalId, addonId);}
+    public void addCarAddon(int rentalId, int addonId) throws CarLeasingException {
+        rentalRepository.addCarAddon(rentalId, addonId);}
 
-    public List<Addon> fetchAllAddons() {return rentalRepository.fetchAllAddons();}
+    public List<Addon> fetchAllAddons() throws CarLeasingException {return rentalRepository.fetchAllAddons();}
 
-    public MthKm findmthKmById(int id) { return rentalRepository.findMthKmById(id); }
+    public MthKm findmthKmById(int id) throws CarLeasingException { return rentalRepository.findMthKmById(id); }
 
-    public List<MthKm> fetchAllMthKm() { return rentalRepository.fetchAllMthKm(); }
+    public List<MthKm> fetchAllMthKm() throws CarLeasingException{ return rentalRepository.fetchAllMthKm(); }
 
-    public List<RentalAgreement> fetchAllRentalAgreements() { return rentalRepository.fetchAllRentalAgreements(); }
+    public List<RentalAgreement> fetchAllRentalAgreements() throws CarLeasingException {
+        return rentalRepository.fetchAllRentalAgreements(); }
 
-    public RentalAgreement findRentalAgreementById(int id){ return rentalRepository.findRentalAgreementById(id); }
+    public RentalAgreement findRentalAgreementById(int id) throws CarLeasingException{
+        return rentalRepository.findRentalAgreementById(id); }
 
-    public List<Addon> findCarAddonsByRentalId(int rentalId) { return rentalRepository.findCarAddonsByRentalId(rentalId); }
+    public List<Addon> findCarAddonsByRentalId(int rentalId) throws CarLeasingException {
+        return rentalRepository.findCarAddonsByRentalId(rentalId); }
 
-    public void endRental(int rentalAgreementId){ rentalRepository.endRental(rentalAgreementId); }
+    public void endRental(int rentalAgreementId) throws CarLeasingException{
+        rentalRepository.endRental(rentalAgreementId); }
 
-  public void reopenRentalAgreement(int rentalAgreementId) {
+  public void reopenRentalAgreement(int rentalAgreementId) throws CarLeasingException {
         rentalRepository.reopenRentalAgreement(rentalAgreementId);
   }
 }

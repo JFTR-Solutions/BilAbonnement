@@ -158,16 +158,22 @@ public class FrontdeskController {
     @PostMapping("/create-customer")
     public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr)
+                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr,
+                             HttpSession httpSession)
             throws CarLeasingException {
-        PasswordGenerator pw = new PasswordGenerator();
-        UsernameMaker um = new UsernameMaker(userService);
-        String username = um.makeUsername(firstname, lastname, birthdate);
-        Encrypter encrypter = new Encrypter();
-        String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
-        userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname, lastname, birthdate, address, phonenr);
-        userService.giveCustomerRole(userService.findUserByUsername(username));
-
+        try {
+            PasswordGenerator pw = new PasswordGenerator();
+            UsernameMaker um = new UsernameMaker(userService);
+            String username = um.makeUsername(firstname, lastname, birthdate);
+            Encrypter encrypter = new Encrypter();
+            String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
+            userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname,
+                    lastname, birthdate, address, phonenr);
+            userService.giveCustomerRole(userService.findUserByUsername(username));
+        }catch(CarLeasingException e){
+            httpSession.setAttribute("error", e.getMessage());
+            return "redirect:/welcome";
+        }
         return ("redirect:/customers");
     }
 

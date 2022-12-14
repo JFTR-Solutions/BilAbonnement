@@ -22,13 +22,15 @@ public class UserRepository {
 
     public UserRepository() {
         if (conn == null) {
-            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"),
+                    System.getenv("JDBCPassword"));
         }
 
     }
 
 //    Frederik
-    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic) throws CarLeasingException {
+    public void removeRoles(User user, boolean sysadmin, boolean sales, boolean front_desk, boolean mechanic)
+            throws CarLeasingException {
 
         List<Boolean> booleanList = new ArrayList<>();
         booleanList.add(sysadmin);
@@ -96,7 +98,8 @@ public class UserRepository {
 
     public void updateUser(User user) throws CarLeasingException {
         try {
-            String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?,address=?,phone_number=? WHERE user_id=?");
+            String queryUpdate = ("UPDATE users SET email=?, username=?, first_name=?, last_name=?,birthdate=?," +
+                    "address=?,phone_number=? WHERE user_id=?");
             PreparedStatement psts = conn.prepareStatement(queryUpdate);
 
             psts.setString(1, user.getEmail());
@@ -127,9 +130,11 @@ public class UserRepository {
             }
         }
 
-    public void createUser(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
+    public void createUser(String email, String password, String username, String first_name, String last_name,
+                           Date birthdate, String address, String phonenr) throws CarLeasingException{
         try {
-            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
+            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate," +
+                    "address,phone_number)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
@@ -165,9 +170,11 @@ public class UserRepository {
         }
     }
 
-    public void createCustomer(String email, String password, String username, String first_name, String last_name, Date birthdate, String address, String phonenr) {
+    public void createCustomer(String email, String password, String username, String first_name, String last_name,
+                               Date birthdate, String address, String phonenr) throws CarLeasingException {
         try {
-            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate,address,phone_number)" +
+            String queryCreate = ("INSERT INTO users (user_id,email,username,password,first_name,last_name,birthdate," +
+                    "address,phone_number)" +
                     "VALUES (DEFAULT,?,?,?,?,?,?,?,?)");
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
@@ -277,7 +284,7 @@ public class UserRepository {
     }
 
     //Thomas
-    public List<User> getAllByRole(int roleId) {
+    public List<User> getAllByRole(int roleId) throws CarLeasingException {
         List<User> userList = new ArrayList<>();
 
         try {
@@ -369,7 +376,7 @@ public class UserRepository {
                 return user;
             }
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN));
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
@@ -414,7 +421,7 @@ public class UserRepository {
     }
 
     //FREDERIK
-    public User findUserByID(int id) {
+    public User findUserByID(int id) throws CarLeasingException{
         User user = new User();
         try {
             String queryCreate = "SELECT * FROM users WHERE user_id=?";
@@ -453,7 +460,7 @@ public class UserRepository {
     }
 
     //FREDERIK
-    public void deleteUser(int id) {
+    public void deleteUser(int id) throws CarLeasingException{
         try {
             String deleteQuery = ("DELETE FROM roles_users where user_id=?");
             PreparedStatement psts = conn.prepareStatement(deleteQuery);
@@ -466,12 +473,12 @@ public class UserRepository {
             psts.executeUpdate();
 
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public boolean checkIfUsernameExists(String username) {
+    public boolean checkIfUsernameExists(String username) throws CarLeasingException{
         try {
             String query = "SELECT * FROM users WHERE username=?";
             PreparedStatement psts = conn.prepareStatement(query);

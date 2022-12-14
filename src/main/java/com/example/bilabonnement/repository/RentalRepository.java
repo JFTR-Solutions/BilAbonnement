@@ -26,13 +26,16 @@ public class RentalRepository {
 
     public RentalRepository() {
         if (conn == null) {
-            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"),
+                    System.getenv("JDBCPassword"));
         }
     }
 
-    public void addRentalAgreement(int carId, int userId, int mthKmId, Date endDate, Date startDate, double mthPrice) {
+    public void addRentalAgreement(int carId, int userId, int mthKmId, Date endDate, Date startDate, double mthPrice)
+            throws CarLeasingException {
         try{
-            String queryCreate = "INSERT INTO rental_agreements (rental_id, user_id, mth_km_id, end_date, start_date, car_id, mth_price)"+
+            String queryCreate = "INSERT INTO rental_agreements (rental_id, user_id, mth_km_id, end_date, start_date, " +
+                    "car_id, mth_price)"+
                     "VALUES (DEFAULT,?,?,?,?,?,?)";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
 
@@ -47,12 +50,12 @@ public class RentalRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void addCarAddon(int rentalId, int addonId) {
+    public void addCarAddon(int rentalId, int addonId) throws CarLeasingException {
         try{
             String queryCreate = "INSERT INTO car_addons (rental_agreement_id, addon_id)"+
                     "VALUES (?,?)";
@@ -63,13 +66,13 @@ public class RentalRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
 
-    public int findRentalAgreementIdByCarId(int carId){
+    public int findRentalAgreementIdByCarId(int carId) throws CarLeasingException{
         int rentalId = 0;
         try{
             String queryCreate = "SELECT rental_id FROM rental_agreements WHERE car_id = ?";
@@ -83,12 +86,12 @@ public class RentalRepository {
                 rentalId = rs.getInt("rental_id");
             }
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         } return rentalId;
     }
 
-    public List<Addon> fetchAllAddons(){
+    public List<Addon> fetchAllAddons() throws CarLeasingException{
         List<Addon> addons = new LinkedList<>();
         try {
             String query = "SELECT * FROM addons";
@@ -104,13 +107,13 @@ public class RentalRepository {
                 Addon addon = new Addon(id, name, shortDesc,desc, price);
                 addons.add(addon);
             }
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return addons;
     }
 
-    public MthKm findMthKmById(int id){
+    public MthKm findMthKmById(int id) throws CarLeasingException{
         MthKm mthKmObject = null;
         try {
             String queryCreate = "SELECT * from mth_km WHERE km_id=?";
@@ -125,12 +128,12 @@ public class RentalRepository {
                 mthKmObject = new MthKm(mthKmId, mthKm, price);
             }
             return mthKmObject;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<MthKm> fetchAllMthKm() {
+    public List<MthKm> fetchAllMthKm() throws CarLeasingException{
         List<MthKm> mthKmList = new LinkedList<>();
         try {
             String queryCreate = "SELECT * from mth_km";
@@ -144,12 +147,12 @@ public class RentalRepository {
                 mthKmList.add(new MthKm(mthKmId, mthKm, price));
             }
             return mthKmList;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public RentalAgreement findRentalAgreementById(int id){
+    public RentalAgreement findRentalAgreementById(int id) throws CarLeasingException{
         RentalAgreement rentalAgreement = new RentalAgreement();
         try {
             String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.car_id" +
@@ -197,12 +200,12 @@ public class RentalRepository {
                         username, firstName, lastName, birthDate, address, phoneNumber), active);
             }
             return rentalAgreement;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<RentalAgreement> fetchAllRentalAgreements() {
+    public List<RentalAgreement> fetchAllRentalAgreements() throws CarLeasingException{
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {
             String queryCreate = "SELECT * FROM rental_agreements INNER JOIN cars ON  cars.car_id = rental_agreements.car_id " +
@@ -251,12 +254,12 @@ public class RentalRepository {
 
             }
             return rentalAgreementList;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<Addon> findCarAddonsByRentalId(int rentalId){
+    public List<Addon> findCarAddonsByRentalId(int rentalId) throws CarLeasingException{
         List <Addon> addonList = new LinkedList<>();
         try {
             String queryCreate = "SELECT * FROM addons INNER JOIN car_addons ca on addons.addon_id = ca.addon_id " +
@@ -274,12 +277,12 @@ public class RentalRepository {
                 addonList.add(new Addon(addonId, addonName, addonShortDesc, addonDesc, price));
             }
             return addonList;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<Integer> findCarAddonsIdByRentalId(int rentalId){
+    public List<Integer> findCarAddonsIdByRentalId(int rentalId) throws CarLeasingException{
         List <Integer> addonList = new LinkedList<>();
         try {
             String queryCreate = "SELECT * FROM addons INNER JOIN car_addons ca on addons.addon_id = ca.addon_id " +
@@ -293,29 +296,29 @@ public class RentalRepository {
                 addonList.add(addonId);
             }
             return addonList;
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void endRental(int rentalAgreementId) {
+    public void endRental(int rentalAgreementId) throws CarLeasingException {
         try {
             String queryCreate = "UPDATE rental_agreements SET active=0 WHERE rental_id=?;";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             psts.setInt(1, rentalAgreementId);
             psts.executeUpdate();
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public void reopenRentalAgreement(int rentalAgreementId) {
+    public void reopenRentalAgreement(int rentalAgreementId) throws CarLeasingException{
         try {
             String queryCreate = "UPDATE rental_agreements SET active=1 WHERE rental_id=?;";
             PreparedStatement psts = conn.prepareStatement(queryCreate);
             psts.setInt(1, rentalAgreementId);
             psts.executeUpdate();
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }

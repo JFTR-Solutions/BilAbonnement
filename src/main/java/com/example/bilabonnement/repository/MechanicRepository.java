@@ -20,12 +20,14 @@ public class MechanicRepository {
 
     public MechanicRepository() {
         if (conn == null) {
-            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"), System.getenv("JDBCPassword"));
+            ConnectionManager.createConnection(System.getenv("JDBCUrl"), System.getenv("JDBCUsername"),
+                    System.getenv("JDBCPassword"));
         }
 
     }
 
-    public void createDamageReport(int price, String placement, String description, int carId, int rentalAgreementId) {
+    public void createDamageReport(int price, String placement, String description, int carId, int rentalAgreementId)
+            throws CarLeasingException{
         try {
             String queryCreate = "INSERT INTO damages (damage_id, price, placement, description, carscar_id, rentalAgreement_id)" +
                     "VALUES (DEFAULT,?,?,?,?,?)";
@@ -41,12 +43,12 @@ public class MechanicRepository {
 
             psts.executeUpdate();
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public List<Damage> fetchAllDamagesForRentalId(int rentalId) {
+    public List<Damage> fetchAllDamagesForRentalId(int rentalId) throws CarLeasingException {
 
         List<Damage> damageList = new LinkedList<>();
 
@@ -67,14 +69,14 @@ public class MechanicRepository {
 
                 damageList.add(new Damage(damageId, price, placement, description, carId, rentalId));
             }
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
         return damageList;
     }
 
 
-    public void deleteDamageId(int damageId) {
+    public void deleteDamageId(int damageId) throws CarLeasingException {
 
         try {
             String deleteQuery = ("DELETE FROM damages WHERE damage_id =?");
@@ -84,12 +86,12 @@ public class MechanicRepository {
             psts.executeUpdate();
 
 
-        } catch (NullPointerException | SQLException ex) {
+        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
         }
     }
 
-    public double fetchTotalSumDamages(int rentalId) {
+    public double fetchTotalSumDamages(int rentalId) throws CarLeasingException{
         double sum = 0;
         try{
             String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
@@ -101,13 +103,13 @@ public class MechanicRepository {
                 sum += resultSet.getInt(2);
             }
 
-        } catch (NullPointerException | SQLException e) {
+        } catch (CarLeasingException | SQLException e) {
             System.out.println(e.getMessage());
         }
         return sum;
     }
 
-    public int fetchTotalNumDamages(int rentalId) {
+    public int fetchTotalNumDamages(int rentalId) throws CarLeasingException{
         int num = 0;
         try{
             String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
@@ -119,7 +121,7 @@ public class MechanicRepository {
                 num ++;
             }
 
-        } catch (NullPointerException | SQLException e) {
+        } catch (CarLeasingException | SQLException e) {
             System.out.println(e.getMessage());
         }
         return num;

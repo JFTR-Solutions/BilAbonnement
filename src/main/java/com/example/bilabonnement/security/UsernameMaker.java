@@ -1,5 +1,6 @@
 package com.example.bilabonnement.security;
 
+import com.example.bilabonnement.exceptions.CarLeasingException;
 import com.example.bilabonnement.service.UserService;
 
 import java.sql.Date;
@@ -9,11 +10,13 @@ public class UsernameMaker {
 
     UserService userService;
 
+    //Thomas
+
     public UsernameMaker(UserService userService) {
         this.userService = userService;
     }
 
-    public String makeUsername(String firstName, String lastName, Date dateOfBirth) {
+    public String makeUsername(String firstName, String lastName, Date dateOfBirth) throws CarLeasingException {
         String username = firstName.substring(0, 1).toLowerCase() + "_" + lastName.toLowerCase() +
                 dateOfBirth.toLocalDate().getYear();
 

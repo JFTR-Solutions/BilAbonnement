@@ -131,7 +131,6 @@ public class LoginController {
         }
         httpSession.removeAttribute("error");
         model.addAttribute("roles", validateRoles(httpSession));
-//        httpSession.setAttribute("roller", validateRoles(httpSession));
         model.addAttribute("name", userService.getEmailAndPassword((String) httpSession.getAttribute("email"), (String) httpSession.getAttribute("password")).getFirstName());
         return "welcome";
     }
