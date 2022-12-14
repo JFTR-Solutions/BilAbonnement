@@ -58,7 +58,8 @@ public class CarRepository {
         }
     }
 
-    public List<Car> findAll() throws CarLeasingException {
+    //Jonathan - Frederik
+    public List<Car> findAll() {
 
         List<Car> carList = new LinkedList<>();
 
@@ -91,7 +92,8 @@ public class CarRepository {
         return carList;
     }
 
-    public void updateCar(Car car) throws CarLeasingException {
+    //Jonathan - Frederik
+    public void updateCar(Car car) {
         try {
             String queryCreate = ("UPDATE cars SET available=?, colour=?, vin=?,reg_number=?,steel_price=?,mth_price=?," +
                     "transmission=?,model_id=? WHERE car_id=?");
@@ -114,7 +116,8 @@ public class CarRepository {
         }
     }
 
-    public Car findCarById(int carId) throws CarLeasingException {
+    //Jonathan - Frederik
+    public Car findCarById(int carId) {
         Car car = new Car();
         try {
             String queryCreate = "SELECT * FROM cars WHERE car_id=?";
@@ -150,7 +153,8 @@ public class CarRepository {
         }
     }
 
-    public void deleteCar(int id) throws CarLeasingException {
+    //Jonathan
+    public void deleteCar(int id) {
         try {
             String deleteCar = ("DELETE FROM cars where car_id=?");
             PreparedStatement psts = conn.prepareStatement(deleteCar);
@@ -164,7 +168,8 @@ public class CarRepository {
         }
     }
 
-    public List<Model> getAllModels() throws CarLeasingException{
+    //Jonathan - Frederik
+    public List<Model> getAllModels() {
 
         List<Model> modelsList = new LinkedList<>();
 

@@ -106,6 +106,7 @@ public class MechanicController {
         return "redirect:/mechanic";
     }
 
+    //Jonathan
     @GetMapping("/reopen-rentalagreement/{carid}/{rentalagreementid}")
     public String showRentalAgreementNotActive(@PathVariable("carid")int carId, @PathVariable("rentalagreementid") int rentalId,
                                    HttpSession httpSession, Model model) throws CarLeasingException {
@@ -120,6 +121,7 @@ public class MechanicController {
         return "reopenrentalagreement";
     }
 
+    //Jonathan
     @GetMapping("/reopen-agreement/{carid}/{rentalagreementid}")
     public String reopenAgreement(@PathVariable("carid")int carId,@PathVariable("rentalagreementid") int rentalAgreementId,
                             HttpSession httpSession) throws CarLeasingException {

@@ -312,7 +312,8 @@ public class RentalRepository {
         }
     }
 
-    public void reopenRentalAgreement(int rentalAgreementId) throws CarLeasingException{
+    //Jonathan
+    public void reopenRentalAgreement(int rentalAgreementId) {
         try {
             String queryCreate = "UPDATE rental_agreements SET active=1 WHERE rental_id=?;";
             PreparedStatement psts = conn.prepareStatement(queryCreate);

@@ -91,7 +91,8 @@ public class MechanicRepository {
         }
     }
 
-    public double fetchTotalSumDamages(int rentalId) throws CarLeasingException{
+    //Jonathan
+    public double fetchTotalSumDamages(int rentalId) {
         double sum = 0;
         try{
             String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
@@ -109,7 +110,8 @@ public class MechanicRepository {
         return sum;
     }
 
-    public int fetchTotalNumDamages(int rentalId) throws CarLeasingException{
+    //Jonathan
+    public int fetchTotalNumDamages(int rentalId) {
         int num = 0;
         try{
             String query = "SELECT * FROM damages WHERE rentalAgreement_id=?";
