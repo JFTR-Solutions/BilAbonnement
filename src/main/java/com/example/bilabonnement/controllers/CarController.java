@@ -37,12 +37,13 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      model.addAttribute("carlist", carService.fetchAllCars());
+      return "car-list";
+
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("carlist", carService.fetchAllCars());
-    return "car-list";
   }
 
   //Jonathan
@@ -53,14 +54,14 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      model.addAttribute("id", id);
+      model.addAttribute("car", carService.findCarById(id));
+      model.addAttribute("modellist", carService.getAllModels());
+      return "updatecar";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("id", id);
-    model.addAttribute("car", carService.findCarById(id));
-    model.addAttribute("modellist", carService.getAllModels());
-    return "updatecar";
   }
 
   //Jonathan
@@ -71,12 +72,12 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      carService.updateCar(car);
+      return "redirect:/reception";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    carService.updateCar(car);
-    return "redirect:/reception";
   }
 
   //Jonathan
@@ -87,12 +88,12 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      carService.deleteCar(id);
+      return "redirect:/reception";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    carService.deleteCar(id);
-    return "redirect:/reception";
   }
 
   //Thomas
@@ -106,12 +107,12 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
+      return "redirect:/create-car";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
-    return "redirect:/create-car";
   }
 
   //Thomas
@@ -135,14 +136,12 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
+      return "redirect:/reception";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-
-    carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
-
-    return "redirect:/reception";
   }
 
   //Rami
@@ -153,12 +152,12 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      model.addAttribute("modellist", carService.getAllModels());
+      return "createcar";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("modellist", carService.getAllModels());
-    return "createcar";
   }
 
   //Rami
@@ -169,14 +168,13 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      model.addAttribute("modellist", carService.getAllModels());
+      return "showallmodels";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("modellist", carService.getAllModels());
-    return "showallmodels";
   }
-
 
   //Rami
   @GetMapping("/update-model/{id}")
@@ -187,13 +185,13 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      model.addAttribute("id", id);
+      model.addAttribute("model", carService.findModelById(id));
+      return "updatemodel";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("id", id);
-    model.addAttribute("model", carService.findModelById(id));
-    return "updatemodel";
   }
 
   //Rami
@@ -205,12 +203,11 @@ public class CarController {
       if (!loginController.validateLogin(httpSession, role)) {
         return "redirect:/";
       }
+      carService.updateModel(carModel);
+      return "redirect:/show-all-models";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-
-    carService.updateModel(carModel);
-    return "redirect:/show-all-models";
   }
 }
