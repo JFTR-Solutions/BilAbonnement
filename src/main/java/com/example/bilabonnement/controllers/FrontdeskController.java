@@ -20,161 +20,203 @@ import java.util.Calendar;
 @Controller
 public class FrontdeskController {
 
-    LoginController loginController;
-    UserService userService;
-    CarService carService;
+  LoginController loginController;
+  UserService userService;
+  CarService carService;
 
-    RentalService rentalService;
+  RentalService rentalService;
 
-    private final String role = "Dataregistrering";
+  private final String role = "Dataregistrering";
 
-    public FrontdeskController(LoginController loginController, UserService userService, CarService carService, RentalService rentalService) {
-        this.loginController = loginController;
-        this.userService = userService;
-        this.carService = carService;
-        this.rentalService = rentalService;
+  public FrontdeskController(LoginController loginController, UserService userService, CarService carService,
+                             RentalService rentalService) {
+    this.loginController = loginController;
+    this.userService = userService;
+    this.carService = carService;
+    this.rentalService = rentalService;
+  }
+
+  //Jonathan
+  @GetMapping("/reception")
+  public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
+    try {
+      model.addAttribute("roles", loginController.validateRoles(httpSession));
+      if (!loginController.validateLogin(httpSession, role)) {
+        return "redirect:/";
+      }
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:/";
+    }
+    model.addAttribute("carlist", carService.fetchAllAvailableCars());
+    return "frontdesk";
+  }
+
+  //Thomas
+  @GetMapping("/create-rental-agreement/{carId}")
+  public String showCreateRentalAgreement(@PathVariable("carId") int carId, HttpSession httpSession, Model model)
+      throws CarLeasingException {
+    try {
+      model.addAttribute("roles", loginController.validateRoles(httpSession));
+      if (!loginController.validateLogin(httpSession, role)) {
+        return "redirect:/";
+      }
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:/";
+    }
+    model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
+    model.addAttribute("car", carService.findCarById(carId));
+    model.addAttribute("userlist", userService.getAllCustomers());
+    return "createrentalagreement";
+  }
+
+  //Thomas
+  @PostMapping("/create-rental-agreement")
+  public String createRentalAgreement(
+      @RequestParam("carId") int carId, @RequestParam("userId") int userId,
+      @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
+      @RequestParam("startDate") Date startDate,
+      @RequestParam(defaultValue = "false", value = "deliveryInsurance") boolean deliveryInsurance,
+      @RequestParam(defaultValue = "false", value = "selfInsurance") boolean selfInsurance,
+      @RequestParam(defaultValue = "false", value = "winterTires") boolean winterTires,
+      @RequestParam(defaultValue = "false", value = "viking") boolean viking,
+      @RequestParam(defaultValue = "false", value = "cleverNetwork") boolean cleverNetwork,
+      @RequestParam(defaultValue = "false", value = "clever") boolean clever, Model model, HttpSession httpSession
+  ) throws CarLeasingException {
+
+    try {
+      model.addAttribute("roles", loginController.validateRoles(httpSession));
+      if (!loginController.validateLogin(httpSession, role)) {
+        return "redirect:/";
+      }
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:/";
     }
 
-    //Jonathan
-    @GetMapping("/reception")
-    public String frontdeskPage(Model model, HttpSession httpSession) throws CarLeasingException {
-        try {
-            model.addAttribute("roles", loginController.validateRoles(httpSession));
-            if (!loginController.validateLogin(httpSession, role)) {
-                return "redirect:/";
-            }
-        } catch (CarLeasingException e) {
-            httpSession.setAttribute("error", e.getMessage());
-            return "redirect:/welcome";
-        }
-        model.addAttribute("carlist", carService.fetchAllAvailableCars());
-        return "frontdesk";
+    double mthPrice = carService.findCarById(carId).getMthPrice()
+        + rentalService.findmthKmById(mthKmId).getPrice();
+    //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
+    //the rental agreement
+    if (deliveryInsurance) {
+      mthPrice += 119;
+    }
+    if (selfInsurance) {
+      mthPrice += 64;
+    }
+    if (winterTires) {
+      mthPrice += 549;
+    }
+    if (viking) {
+      mthPrice += 49;
+    }
+    if (cleverNetwork) {
+      mthPrice += 625;
+    }
+    if (clever) {
+      mthPrice += 749;
     }
 
-    //Thomas
-    @GetMapping("/create-rental-agreement/{carId}")
-    public String showCreateRentalAgreement(@PathVariable("carId")int carId, HttpSession httpSession, Model model)
-            throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
-        model.addAttribute("car", carService.findCarById(carId));
-        model.addAttribute("userlist", userService.getAllCustomers());
-        return "createrentalagreement";
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(startDate);
+    cal.add(Calendar.MONTH, months);
+    Date endDate = new Date(cal.getTimeInMillis());
+    rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
+    carService.updateCarAvailability(carId, (byte) 0);
+
+    int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
+    //addons choices added car_addon table with the designated rentalId
+    if (deliveryInsurance) {
+      rentalService.addCarAddon(rentalId, 1);
+    }
+    if (selfInsurance) {
+      rentalService.addCarAddon(rentalId, 2);
+    }
+    if (winterTires) {
+      rentalService.addCarAddon(rentalId, 3);
+    }
+    if (viking) {
+      rentalService.addCarAddon(rentalId, 4);
+    }
+    if (cleverNetwork) {
+      rentalService.addCarAddon(rentalId, 5);
+    }
+    if (clever) {
+      rentalService.addCarAddon(rentalId, 6);
     }
 
-    //Thomas
-    @PostMapping("/create-rental-agreement")
-    public String createRentalAgreement(@RequestParam("carId") int carId, @RequestParam("userId") int userId,
-                                        @RequestParam("mthKmId") int mthKmId, @RequestParam("months") int months,
-                                        @RequestParam("startDate") Date startDate,
-                                        @RequestParam(defaultValue = "false", value="deliveryInsurance") boolean deliveryInsurance,
-                                        @RequestParam(defaultValue = "false", value="selfInsurance") boolean selfInsurance,
-                                        @RequestParam(defaultValue = "false", value="winterTires") boolean winterTires,
-                                        @RequestParam(defaultValue = "false", value="viking") boolean viking,
-                                        @RequestParam(defaultValue = "false", value="cleverNetwork") boolean cleverNetwork,
-                                        @RequestParam(defaultValue = "false", value="clever") boolean clever) throws CarLeasingException {
 
-        double mthPrice = carService.findCarById(carId).getMthPrice() + rentalService.findmthKmById(mthKmId).getPrice();
-        //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
-        //the rental agreement
-        if(deliveryInsurance){
-            mthPrice += 119;
-        } if(selfInsurance){
-            mthPrice += 64;
-        } if(winterTires){
-            mthPrice += 549;
-        } if(viking){
-            mthPrice += 49;
-        } if(cleverNetwork){
-            mthPrice += 625;
-        } if(clever){
-            mthPrice += 749;
-        }
+    return "redirect:/reception";
+  }
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(startDate);
-        cal.add(Calendar.MONTH, months);
-        Date endDate = new Date(cal.getTimeInMillis());
-        rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
-        carService.updateCarAvailability(carId, (byte) 0);
+  //Thomas
+  @GetMapping("/show-rental-agreement")
+  public String showRentalAgreementList(HttpSession httpSession, Model model) throws CarLeasingException {
+    try {
+      model.addAttribute("roles", loginController.validateRoles(httpSession));
+      if (!loginController.validateLogin(httpSession, role)) {
+        return "redirect:/";
+      }
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:/";
+    }
+    model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
 
-        int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
-        //addons choices added car_addon table with the designated rentalId
-        if(deliveryInsurance){
-            rentalService.addCarAddon(rentalId, 1);
-        } if(selfInsurance){
-            rentalService.addCarAddon(rentalId, 2);
-        } if(winterTires){
-            rentalService.addCarAddon(rentalId, 3);
-        } if(viking){
-            rentalService.addCarAddon(rentalId, 4);
-        } if(cleverNetwork){
-            rentalService.addCarAddon(rentalId, 5);
-        } if(clever){
-            rentalService.addCarAddon(rentalId, 6);
-        }
+    return "showrentalagreementlist";
+  }
 
-
-        return "redirect:/reception";
+  //Thomas
+  @GetMapping("/show-rental-agreement/{rentalId}")
+  public String showRentalAgreementByID(@PathVariable("rentalId") int rentalId, HttpSession httpSession,
+                                        Model model) throws CarLeasingException {
+    try {
+      model.addAttribute("roles", loginController.validateRoles(httpSession));
+      if (!loginController.validateLogin(httpSession, role)) {
+        return "redirect:/";
+      }
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:/";
     }
 
-    //Thomas
-    @GetMapping("/show-rental-agreement")
-    public String showRentalAgreementList(HttpSession httpSession, Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
+    model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
+    model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
 
-        return "showrentalagreementlist";
+    return "showrentalagreement";
+  }
+
+  //Thomas
+  @GetMapping("/create-customer")
+  public String createUserPage(HttpSession httpSession) throws CarLeasingException {
+    if (!loginController.validateLogin(httpSession, role)) {
+      return "redirect:/";
     }
+    return "createcustomer";
+  }
 
-    //Thomas
-    @GetMapping("/show-rental-agreement/{rentalId}")
-    public String showRentalAgreementByID(@PathVariable("rentalId")int rentalId, HttpSession httpSession,
-                                          Model model) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
-        model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
-
-        return "showrentalagreement";
+  //Thomas
+  @PostMapping("/create-customer")
+  public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
+                           @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
+                           @RequestParam("address") String address, @RequestParam("phonenr") String phonenr,
+                           HttpSession httpSession)
+      throws CarLeasingException {
+    try {
+      PasswordGenerator pw = new PasswordGenerator();
+      UsernameMaker um = new UsernameMaker(userService);
+      String username = um.makeUsername(firstname, lastname, birthdate);
+      Encrypter encrypter = new Encrypter();
+      String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
+      userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname,
+          lastname, birthdate, address, phonenr);
+      userService.giveCustomerRole(userService.findUserByUsername(username));
+    } catch (CarLeasingException e) {
+      httpSession.setAttribute("error", e.getMessage());
+      return "redirect:";
     }
-
-    //Thomas
-    @GetMapping("/create-customer")
-    public String createUserPage(HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
-            return "redirect:/";
-        }
-        return "createcustomer";
-    }
-
-    //Thomas
-    @PostMapping("/create-customer")
-    public String createUser(@RequestParam("email") String email, @RequestParam("firstname") String firstname,
-                             @RequestParam("lastname") String lastname, @RequestParam("birthdate") Date birthdate,
-                             @RequestParam("address") String address, @RequestParam("phonenr") String phonenr,
-                             HttpSession httpSession)
-            throws CarLeasingException {
-        try {
-            PasswordGenerator pw = new PasswordGenerator();
-            UsernameMaker um = new UsernameMaker(userService);
-            String username = um.makeUsername(firstname, lastname, birthdate);
-            Encrypter encrypter = new Encrypter();
-            String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
-            userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname,
-                    lastname, birthdate, address, phonenr);
-            userService.giveCustomerRole(userService.findUserByUsername(username));
-        }catch(CarLeasingException e){
-            httpSession.setAttribute("error", e.getMessage());
-            return "redirect:/welcome";
-        }
-        return ("redirect:/customers");
-    }
+    return ("redirect:/customers");
+  }
 
 }

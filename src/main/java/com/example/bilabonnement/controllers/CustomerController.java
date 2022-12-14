@@ -41,15 +41,22 @@ public class CustomerController {
             }
         } catch (CarLeasingException e) {
             httpSession.setAttribute("error", e.getMessage());
-            return "redirect:/welcome";
+            return "redirect:/";
         }
         model.addAttribute("userList", userService.getAllCustomers());
         return "customer";
     }
 
     @GetMapping("/update-customer/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession) throws CarLeasingException {
-        if (!loginController.validateLogin(httpSession, role)) {
+    public String updateUser(@PathVariable("id") int id, Model model, HttpSession httpSession)
+        throws CarLeasingException {
+        try {
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
             return "redirect:/";
         }
         model.addAttribute("id", id);
@@ -58,7 +65,17 @@ public class CustomerController {
     }
 
     @PostMapping("/update-customer")
-    public String saveUser(@ModelAttribute User user) throws CarLeasingException {
+    public String saveUser(@ModelAttribute User user, Model model, HttpSession httpSession)
+        throws CarLeasingException {
+        try {
+            model.addAttribute("roles", loginController.validateRoles(httpSession));
+            if (!loginController.validateLogin(httpSession, role)) {
+                return "redirect:/";
+            }
+        } catch (CarLeasingException e) {
+            httpSession.setAttribute("error", e.getMessage());
+            return "redirect:/";
+        }
         userService.updateUser(user);
         return "redirect:/customers";
     }
