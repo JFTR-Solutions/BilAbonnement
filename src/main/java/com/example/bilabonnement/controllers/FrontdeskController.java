@@ -41,12 +41,12 @@ public class FrontdeskController {
       if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
+      model.addAttribute("carlist", carService.fetchAllAvailableCars());
+      return "frontdesk";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("carlist", carService.fetchAllAvailableCars());
-    return "frontdesk";
   }
 
   //Thomas
@@ -58,14 +58,14 @@ public class FrontdeskController {
       if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
+      model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
+      model.addAttribute("car", carService.findCarById(carId));
+      model.addAttribute("userlist", userService.getAllCustomers());
+      return "createrentalagreement";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("kmpricelist", rentalService.fetchAllMthKm());
-    model.addAttribute("car", carService.findCarById(carId));
-    model.addAttribute("userlist", userService.getAllCustomers());
-    return "createrentalagreement";
   }
 
   //Thomas
@@ -87,64 +87,63 @@ public class FrontdeskController {
       if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
+
+      double mthPrice = carService.findCarById(carId).getMthPrice()
+          + rentalService.findmthKmById(mthKmId).getPrice();
+      //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
+      //the rental agreement
+      if (deliveryInsurance) {
+        mthPrice += 119;
+      }
+      if (selfInsurance) {
+        mthPrice += 64;
+      }
+      if (winterTires) {
+        mthPrice += 549;
+      }
+      if (viking) {
+        mthPrice += 49;
+      }
+      if (cleverNetwork) {
+        mthPrice += 625;
+      }
+      if (clever) {
+        mthPrice += 749;
+      }
+
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(startDate);
+      cal.add(Calendar.MONTH, months);
+      Date endDate = new Date(cal.getTimeInMillis());
+      rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
+      carService.updateCarAvailability(carId, (byte) 0);
+
+      int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
+      //addons choices added car_addon table with the designated rentalId
+      if (deliveryInsurance) {
+        rentalService.addCarAddon(rentalId, 1);
+      }
+      if (selfInsurance) {
+        rentalService.addCarAddon(rentalId, 2);
+      }
+      if (winterTires) {
+        rentalService.addCarAddon(rentalId, 3);
+      }
+      if (viking) {
+        rentalService.addCarAddon(rentalId, 4);
+      }
+      if (cleverNetwork) {
+        rentalService.addCarAddon(rentalId, 5);
+      }
+      if (clever) {
+        rentalService.addCarAddon(rentalId, 6);
+      }
+
+      return "redirect:/reception";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-
-    double mthPrice = carService.findCarById(carId).getMthPrice()
-        + rentalService.findmthKmById(mthKmId).getPrice();
-    //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
-    //the rental agreement
-    if (deliveryInsurance) {
-      mthPrice += 119;
-    }
-    if (selfInsurance) {
-      mthPrice += 64;
-    }
-    if (winterTires) {
-      mthPrice += 549;
-    }
-    if (viking) {
-      mthPrice += 49;
-    }
-    if (cleverNetwork) {
-      mthPrice += 625;
-    }
-    if (clever) {
-      mthPrice += 749;
-    }
-
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(startDate);
-    cal.add(Calendar.MONTH, months);
-    Date endDate = new Date(cal.getTimeInMillis());
-    rentalService.addRentalAgreement(carId, userId, mthKmId, endDate, startDate, mthPrice);
-    carService.updateCarAvailability(carId, (byte) 0);
-
-    int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
-    //addons choices added car_addon table with the designated rentalId
-    if (deliveryInsurance) {
-      rentalService.addCarAddon(rentalId, 1);
-    }
-    if (selfInsurance) {
-      rentalService.addCarAddon(rentalId, 2);
-    }
-    if (winterTires) {
-      rentalService.addCarAddon(rentalId, 3);
-    }
-    if (viking) {
-      rentalService.addCarAddon(rentalId, 4);
-    }
-    if (cleverNetwork) {
-      rentalService.addCarAddon(rentalId, 5);
-    }
-    if (clever) {
-      rentalService.addCarAddon(rentalId, 6);
-    }
-
-
-    return "redirect:/reception";
   }
 
   //Thomas
@@ -155,13 +154,13 @@ public class FrontdeskController {
       if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
+      model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
+
+      return "showrentalagreementlist";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-    model.addAttribute("agreements", rentalService.fetchAllRentalAgreements());
-
-    return "showrentalagreementlist";
   }
 
   //Thomas
@@ -173,15 +172,14 @@ public class FrontdeskController {
       if (!loginController.validateLogin(httpSession, ROLE)) {
         return "redirect:/";
       }
+      model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
+      model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
+
+      return "showrentalagreement";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
     }
-
-    model.addAttribute("agreement", rentalService.findRentalAgreementById(rentalId));
-    model.addAttribute("addons", rentalService.findCarAddonsByRentalId(rentalId));
-
-    return "showrentalagreement";
   }
 
   //Thomas
@@ -215,5 +213,4 @@ public class FrontdeskController {
     }
     return ("redirect:/customers");
   }
-
 }
