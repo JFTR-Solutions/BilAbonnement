@@ -31,6 +31,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public void addRentalAgreement(int carId, int userId, int mthKmId, Date endDate, Date startDate, double mthPrice)
             throws CarLeasingException {
         try{
@@ -55,6 +56,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public void addCarAddon(int rentalId, int addonId) throws CarLeasingException {
         try{
             String queryCreate = "INSERT INTO car_addons (rental_agreement_id, addon_id)"+
@@ -71,7 +73,7 @@ public class RentalRepository {
         }
     }
 
-
+    //Thomas
     public int findRentalAgreementIdByCarId(int carId) throws CarLeasingException{
         int rentalId = 0;
         try{
@@ -91,6 +93,7 @@ public class RentalRepository {
         } return rentalId;
     }
 
+    //Thomas
     public List<Addon> fetchAllAddons() throws CarLeasingException{
         List<Addon> addons = new LinkedList<>();
         try {
@@ -113,6 +116,7 @@ public class RentalRepository {
         return addons;
     }
 
+    //Thomas
     public MthKm findMthKmById(int id) throws CarLeasingException{
         MthKm mthKmObject = null;
         try {
@@ -133,6 +137,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public List<MthKm> fetchAllMthKm() throws CarLeasingException{
         List<MthKm> mthKmList = new LinkedList<>();
         try {
@@ -152,6 +157,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public RentalAgreement findRentalAgreementById(int id) throws CarLeasingException{
         RentalAgreement rentalAgreement = new RentalAgreement();
         try {
@@ -205,6 +211,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public List<RentalAgreement> fetchAllRentalAgreements() throws CarLeasingException{
         List<RentalAgreement> rentalAgreementList = new LinkedList<>();
         try {
@@ -259,6 +266,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public List<Addon> findCarAddonsByRentalId(int rentalId) throws CarLeasingException{
         List <Addon> addonList = new LinkedList<>();
         try {
@@ -282,6 +290,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public List<Integer> findCarAddonsIdByRentalId(int rentalId) throws CarLeasingException{
         List <Integer> addonList = new LinkedList<>();
         try {
@@ -301,6 +310,7 @@ public class RentalRepository {
         }
     }
 
+    //Thomas
     public void endRental(int rentalAgreementId) throws CarLeasingException {
         try {
             String queryCreate = "UPDATE rental_agreements SET active=0 WHERE rental_id=?;";

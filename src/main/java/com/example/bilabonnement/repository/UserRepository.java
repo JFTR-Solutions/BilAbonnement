@@ -261,8 +261,7 @@ public class UserRepository {
         }
         return userList;
     }
-
-    //Frederik
+    //Thomas
     public List<User> getAllCustomers() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
