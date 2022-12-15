@@ -92,24 +92,12 @@ public class FrontdeskController {
           + rentalService.findmthKmById(mthKmId).getPrice();
       //addons choices added to total mthPrice depending on what checkboxes were checked at the creation of
       //the rental agreement
-      if (deliveryInsurance) {
-        mthPrice += 119;
-      }
-      if (selfInsurance) {
-        mthPrice += 64;
-      }
-      if (winterTires) {
-        mthPrice += 549;
-      }
-      if (viking) {
-        mthPrice += 49;
-      }
-      if (cleverNetwork) {
-        mthPrice += 625;
-      }
-      if (clever) {
-        mthPrice += 749;
-      }
+      if (deliveryInsurance) { mthPrice += 119;}
+      if (selfInsurance) { mthPrice += 64;}
+      if (winterTires) { mthPrice += 549;}
+      if (viking) { mthPrice += 49;}
+      if (cleverNetwork) { mthPrice += 625;}
+      if (clever) { mthPrice += 749;}
 
       Calendar cal = Calendar.getInstance();
       cal.setTime(startDate);
@@ -120,24 +108,12 @@ public class FrontdeskController {
 
       int rentalId = rentalService.findRentalAgreementIdByCarId(carId);
       //addons choices added car_addon table with the designated rentalId
-      if (deliveryInsurance) {
-        rentalService.addCarAddon(rentalId, 1);
-      }
-      if (selfInsurance) {
-        rentalService.addCarAddon(rentalId, 2);
-      }
-      if (winterTires) {
-        rentalService.addCarAddon(rentalId, 3);
-      }
-      if (viking) {
-        rentalService.addCarAddon(rentalId, 4);
-      }
-      if (cleverNetwork) {
-        rentalService.addCarAddon(rentalId, 5);
-      }
-      if (clever) {
-        rentalService.addCarAddon(rentalId, 6);
-      }
+      if (deliveryInsurance) { rentalService.addCarAddon(rentalId, 1);}
+      if (selfInsurance) { rentalService.addCarAddon(rentalId, 2);}
+      if (winterTires) { rentalService.addCarAddon(rentalId, 3);}
+      if (viking) { rentalService.addCarAddon(rentalId, 4);}
+      if (cleverNetwork) { rentalService.addCarAddon(rentalId, 5);}
+      if (clever) { rentalService.addCarAddon(rentalId, 6);}
 
       return "redirect:/reception";
     } catch (CarLeasingException e) {
@@ -199,11 +175,15 @@ public class FrontdeskController {
                            HttpSession httpSession)
       throws CarLeasingException {
     try {
+      //Generate random password and custom username
       PasswordGenerator pw = new PasswordGenerator();
       UsernameMaker um = new UsernameMaker(userService);
       String username = um.makeUsername(firstname, lastname, birthdate);
+
+      //Encrypt password before placing into database
       Encrypter encrypter = new Encrypter();
       String encryptedPassword = encrypter.encrypt(pw.generateRandomPassword());
+
       userService.createCustomer(email.toLowerCase(), encryptedPassword, username, firstname,
           lastname, birthdate, address, phonenr);
       userService.giveCustomerRole(userService.findUserByUsername(username));
