@@ -36,11 +36,20 @@ public class SalesController {
 
     /*Thomas & Frederik*/
     public List<Double> carRevenueEachMonth(int year) throws CarLeasingException {
+
+        /*This method is used to get the carRevenue for each month
+        * We start by creating a list for the revenue and then we fetch a list of all rental agreements.
+        * */
         List<Double> carRevenueList = new ArrayList<>();
         List<RentalAgreement> rentalList = rentalService.fetchAllRentalAgreements();
+
+        /*Next up we loop through all months (jan-dec) in order to get a number for each month.
+        * Also we create a double variable to store the value. We also create a YearMonth object, where we take the current year and add int year to get a different year. The month is then set by i.
+        * */
         for (int i = 1; i <= 12; i++) {
             double monthRevenue = 0;
             YearMonth activeYearMonth = YearMonth.of(YearMonth.now().getYear() + year, i);
+            /*Next is creating a loop of the rental list, where we get the year & month by using substring to remove the date so that we can parse it to a YearDate object.*/
             for (RentalAgreement rentalAgreement : rentalList) {
                 String startDate = rentalAgreement.getStartDate().toString().substring(0, 7);
                 String endDate = rentalAgreement.getEndDate().toString().substring(0, 7);
@@ -48,6 +57,11 @@ public class SalesController {
                 YearMonth startYearMonth = YearMonth.parse(startDate);
                 YearMonth endYearMonth = YearMonth.parse(endDate);
 
+                /*We then check if the start year & month is before OR equal the active yearmonth we created earlier AND if it is after the active yearMonth.
+                We use methods from the YearMonth class to check this.
+                If true, we add the monthrevenue from the rental agreement to the double we created and afterwards add this value to the list we created.
+
+                */
                 if ((startYearMonth.isBefore(activeYearMonth) || startYearMonth.equals(activeYearMonth))
                         && endYearMonth.isAfter(activeYearMonth)) {
                     monthRevenue += rentalAgreement.getMthPrice();
@@ -55,6 +69,10 @@ public class SalesController {
             }
             carRevenueList.add(monthRevenue);
         }
+
+        /*Finally we wish to create a total value to display on the table which sums all revenue. As we are now outside the nested loop,
+        we can simply create a new variable call total and then loop through the revenuelist and add the value to total.
+        At last we add the total to the carrevenue list which is then placed at the end of our list which we then return to the method that called it*/
         double total = 0;
 
         for (double d : carRevenueList) {
@@ -63,6 +81,7 @@ public class SalesController {
         carRevenueList.add(total);
         return carRevenueList;
     }
+
 
     /*Thomas & Frederik*/
     public List<Integer> carsRentedOutEachMonth(int year) throws CarLeasingException {
