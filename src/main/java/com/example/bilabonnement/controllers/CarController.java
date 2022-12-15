@@ -73,7 +73,7 @@ public class CarController {
         return "redirect:/";
       }
       carService.updateCar(car);
-      return "redirect:/reception";
+      return "redirect:/cars";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
@@ -89,7 +89,7 @@ public class CarController {
         return "redirect:/";
       }
       carService.deleteCar(id);
-      return "redirect:/reception";
+      return "redirect:/cars";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
@@ -137,7 +137,7 @@ public class CarController {
         return "redirect:/";
       }
       carService.addCar(modelId, available, colour, vin, regNumber, steelprice, mthPrice, transmission);
-      return "redirect:/reception";
+      return "redirect:/cars";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
