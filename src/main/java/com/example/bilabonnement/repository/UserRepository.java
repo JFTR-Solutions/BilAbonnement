@@ -232,6 +232,7 @@ public class UserRepository {
         return userList;
     }
 
+    //Frederik
     public List<User> getAllEmployees() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
@@ -261,6 +262,7 @@ public class UserRepository {
         return userList;
     }
 
+    //Frederik
     public List<User> getAllCustomers() throws CarLeasingException {
 
         List<User> userList = new ArrayList<>();
@@ -389,6 +391,7 @@ public class UserRepository {
         }
     }
 
+    //Frederik
     public User findUserByEmail(String email) throws CarLeasingException {
 
         User user = new User();
@@ -486,6 +489,7 @@ public class UserRepository {
         }
     }
 
+    //Thomas
     public boolean checkIfUsernameExists(String username) throws CarLeasingException{
         try {
             String query = "SELECT * FROM users WHERE username=?";

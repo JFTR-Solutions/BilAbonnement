@@ -27,6 +27,7 @@ public class CarRepository {
     }
 
 
+    //Thomas
     public List<Car> fetchAllAvailableCars() throws CarLeasingException {
         List<Car> carList = new LinkedList<>();
         try {
@@ -194,6 +195,7 @@ public class CarRepository {
     }
 
 
+    //Thomas - Frederik
     public void addModel(String modelName, String manufacturer, String co2, String fuelType, double range)
             throws CarLeasingException{
 
@@ -216,6 +218,7 @@ public class CarRepository {
         }
     }
 
+    //Rami
     public void addCar(int modelId, byte available, String colour, String vin, String regNumber, double steelPrice,
                        double mthPrice, String transmission) throws CarLeasingException{
         try {
@@ -243,6 +246,7 @@ public class CarRepository {
 
     }
 
+    //Thomas
     public void markCarAvailable(int carId) throws CarLeasingException {
         try {
             String queryCreate = "UPDATE cars SET available=1 WHERE car_id=?";
@@ -257,6 +261,7 @@ public class CarRepository {
         }
     }
 
+    //Thomas
     public void updateCarAvailability(int carId, byte b) throws CarLeasingException{
         try {
             String queryCreate = ("UPDATE cars SET available=? WHERE car_id=?");
@@ -272,6 +277,7 @@ public class CarRepository {
         }
     }
 
+    //Rami
     public Model findModelById(int id) throws CarLeasingException{
         Model model = new Model();
 
@@ -309,6 +315,7 @@ public class CarRepository {
         }
     }
 
+    //Rami
     public void updateModel(Model model) throws CarLeasingException{
         try {
             String queryUpdate = ("UPDATE models SET model_name=?, manufacturer=?, co2_emission=?, fuel_type=?, " +

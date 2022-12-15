@@ -26,6 +26,7 @@ public class MechanicRepository {
 
     }
 
+    //Rami
     public void createDamageReport(int price, String placement, String description, int carId, int rentalAgreementId)
             throws CarLeasingException{
         try {
@@ -48,6 +49,7 @@ public class MechanicRepository {
         }
     }
 
+    //Rami
     public List<Damage> fetchAllDamagesForRentalId(int rentalId) throws CarLeasingException {
 
         List<Damage> damageList = new LinkedList<>();
@@ -76,6 +78,7 @@ public class MechanicRepository {
     }
 
 
+    //Rami
     public void deleteDamageId(int damageId) throws CarLeasingException {
 
         try {
