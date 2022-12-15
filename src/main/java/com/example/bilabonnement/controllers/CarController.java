@@ -108,7 +108,7 @@ public class CarController {
         return "redirect:/";
       }
       carService.addCarModel(modelName, manufacturer, co2, fuelType, range);
-      return "redirect:/create-car";
+      return "redirect:/show-all-models";
     } catch (CarLeasingException e) {
       httpSession.setAttribute("error", e.getMessage());
       return "redirect:/";
