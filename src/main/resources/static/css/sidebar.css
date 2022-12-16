@@ -91,7 +91,7 @@
 .sidebar li a::after, img:hover::after {
     content: "";
     position: absolute;
-    width: 280%;
+    width: 240%;
     height: 70%;
     transform: scaleX(0);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);

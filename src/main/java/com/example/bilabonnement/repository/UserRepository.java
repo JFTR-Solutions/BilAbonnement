@@ -384,9 +384,9 @@ public class UserRepository {
 
                 return user;
             }
-            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN));
-        } catch (CarLeasingException | SQLException ex) {
             throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.DATABASE_ERROR));
+        } catch (CarLeasingException | SQLException ex) {
+            throw new CarLeasingException(exceptionEnums.get(carExceptionEnum.WRONG_LOGIN));
         }
     }
 
